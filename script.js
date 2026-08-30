@@ -336,19 +336,24 @@ async function getTopProcessesConsumingResources() {
 }`,
     screenshots: [
       {
-        title: 'Panel Principal de Optimización y Drip Booster',
-        desc: 'Interfaz nativa con estética Y2K, métricas en vivo de RAM, CPU y selector interactivo de unidades de disco duro/SSD.',
-        src: 'img/messi-y2k.png'
+        title: 'Dashboard Principal, Métricas en Vivo & Audio Player',
+        desc: 'Panel principal del optimizador con métricas en tiempo real de RAM, CPU y Disco, reproductor de audio retro integrado y accesos directos de optimización y análisis.',
+        src: 'img/pc-optimizer-app-dashboard.png'
       },
       {
-        title: 'Arte Temático & Rendimiento EN ESA',
-        desc: 'Visuales integrados en el dashboard principal que representan la potencia y rendimiento del motor ELUNDER.',
-        src: 'img/en-esa.png'
+        title: 'Revisión Previa de Caché & Vaciado Seguro de RAM',
+        desc: 'Ventana de confirmación de limpieza previa: vaciado de memoria RAM inactiva (Working Set Trimming), temporales de usuario (%TEMP%) y cachés masivas de navegadores y aplicaciones.',
+        src: 'img/pc-optimizer-app-cache-modal.png'
       },
       {
-        title: 'Icono Oficial de la Aplicación',
-        desc: 'Logotipo de Chrome Hearts utilizado en la barra de tareas, instalador y encabezados del software nativo.',
-        src: 'img/chrome-hearts-icon.png'
+        title: 'Analizador de Disco con Modo Seguro Activo',
+        desc: 'Escaneo profundo de unidades con blindaje de seguridad: protegido contra borrado de librerías DLL, dependencias o archivos de Windows; solo lista archivos pesados prescindibles (ISO, RAR, ZIP, instaladores antiguos, videos).',
+        src: 'img/pc-optimizer-app-disk-scanner.png'
+      },
+      {
+        title: 'Monitor de Rendimiento en Vivo (Consumo CPU & RAM)',
+        desc: 'Ventana de auditoría de procesos en tiempo real con refresco continuo automático cada 2 segundos, desglose de consumo en MB y tiempo de CPU por proceso, categorizado por impacto de potencia.',
+        src: 'img/pc-optimizer-app-performance-monitor.png'
       }
     ],
     kpis: [
