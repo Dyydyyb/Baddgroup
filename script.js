@@ -236,7 +236,7 @@ module.exports = router;`,
     icon: '🌐',
     title: 'PC Optimizer ELUNDER — Web Oficial & Landing Page',
     badge: 'HTML5 + Vanilla CSS + JavaScript + Web Audio API',
-    description: 'Portal web oficial y de distribución de PC Optimizer ELUNDER. Diseñado con una estética retro-cyberpunk/underground de alto impacto inspirada en la cultura visual de los años 2000. Incluye reproductor de música interactivo con Web Audio API, simulador de optimización en vivo, micro-animaciones al scroll y diseño 100% responsivo para celulares.',
+    description: 'Portal web oficial y de distribución de PC Optimizer ELUNDER. Diseñado con una estética underground retro de alto impacto inspirada en la cultura visual de los años 2000. Incluye reproductor de música interactivo con Web Audio API, simulador de optimización en vivo, micro-animaciones al scroll y arquitectura 100% responsiva para celulares.',
     code: `<!-- PC Optimizer ELUNDER — Landing Page & Portal Oficial -->
 <!DOCTYPE html>
 <html lang="es">
@@ -246,7 +246,7 @@ module.exports = router;`,
   <link rel="stylesheet" href="landing-style.css">
 </head>
 <body class="y2k-landing-theme">
-  <!-- Header Cyberpunk Retro -->
+  <!-- Header Retro Underground -->
   <header class="y2k-full-nav">
     <div class="y2k-nav-container">
       <span class="brand-title">PC OPTIMIZER ELUNDER</span>
@@ -265,32 +265,32 @@ module.exports = router;`,
 </html>`,
     screenshots: [
       {
-        title: 'Hero & Simulador Interactivo de Optimización',
-        desc: 'Pantalla principal con diseño underground, tipografía futurista retro, badges de rendimiento (+45% FPS) y simulador en vivo.',
-        src: 'img/el-under-header.png'
+        title: 'Hero Principal & Intranet EL UNDER',
+        desc: 'Cabecera con branding oficial, botón de descarga directa .EXE, métricas de rendimiento y widget interactivo de Intranet EL UNDER.',
+        src: 'img/pc-optimizer-web-hero.png'
       },
       {
-        title: 'Widget de Llamada Intranet EL UNDER',
-        desc: 'Componente interactivo con estética de videollamada retro cyberpunk y botones de acción rápida para optimización del sistema.',
-        src: 'img/el-under-call.png'
+        title: 'Competitividad & Reproductor de Audio Web',
+        desc: 'Sección de rendimiento sin fallos y reproductor interactivo con Web Audio API de temas exclusivos (Y EL MATT - PC Optimizer Hymn).',
+        src: 'img/pc-optimizer-web-audio.png'
       },
       {
-        title: 'Sección Salto Unknown & Competitividad',
-        desc: 'Bloque visual con arte temático Salto Unknown destacando la potencia, estabilidad y arquitectura ligera del software.',
-        src: 'img/salto-unknown.png'
+        title: 'Estamos en Esa & Guía de Instalación en 3 Pasos',
+        desc: 'Módulo de alta potencia visual con arte temático y guía paso a paso para la descarga y ejecución del optimizador en Windows 10/11.',
+        src: 'img/pc-optimizer-web-install.png'
       },
       {
-        title: 'Arte Sal y Josea & Pie de Página',
-        desc: 'Sección final con arte de fondo Sal y Josea, enlaces oficiales y descarga directa del instalador para Windows 10 y 11.',
-        src: 'img/sal-y-josea.png'
+        title: 'Guía de Seguridad SmartScreen & Footer Sal y Josea',
+        desc: 'Explicación técnica de la advertencia de Windows Defender asegurando 100% de limpieza sin virus, botón masivo de descarga y pie de página integrado.',
+        src: 'img/pc-optimizer-web-defender-footer.png'
       }
     ],
     kpis: [
-      { label: 'Repositorio', value: 'github.com/Dyydyyb/Pc-optimizer-ELUNDER', color: 'text-cyan-400' },
-      { label: 'Estilo Visual', value: 'Cyberpunk Retro 2000s', color: 'text-pink-400' },
+      { label: 'Web Desplegada', value: 'pc-optimizer-elunder-95rd.vercel.app', color: 'text-pink-400' },
+      { label: 'Estilo Visual', value: 'Retro Underground 2000s', color: 'text-cyan-400' },
       { label: 'Responsive', value: '100% Adaptado a Celulares', color: 'text-emerald-400' }
     ],
-    liveLink: 'https://github.com/Dyydyyb/Pc-optimizer-ELUNDER'
+    liveLink: 'https://pc-optimizer-elunder-95rd.vercel.app'
   },
 
   pc_optimizer_app: {
