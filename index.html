@@ -1,702 +1,1555 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Meta Tags -->
-  <title>Dylan Banegas | Analista de Sistemas - Automatización - IA Aplicada</title>
-  <meta name="description" content="Portfolio profesional de Dylan Banegas. Analista de Sistemas, estudiante de Ingeniería en Informática y cofundador de YAKAI. Automatización de procesos, Odoo ERP, Inteligencia Artificial y soluciones a medida.">
-  <meta name="keywords" content="Dylan Banegas, YAKAI, Analista de Sistemas, Automatización, IA, Odoo, ERP, n8n, Python, C#, UNAJ, Freelance, Programador">
+  <title>Dylan Banegas | Sistemas ERP/CRM · Automatización · IA</title>
+  <meta name="description" content="Portfolio de Dylan Banegas. Estudiante de Ingeniería en Informática y cofundador de YAKAI. Desarrollo de sistemas ERP/CRM, automatización de procesos con IA y sitios web accesibles.">
+  <meta name="keywords" content="Dylan Banegas, YAKAI, ERP, CRM, Sitiocel, Automatización, n8n, Zapier, IA, Rust, Supabase, C#, JavaScript, Python">
   <meta name="author" content="Dylan Banegas">
-  
-  <!-- Open Graph / Facebook -->
+
+  <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Dylan Banegas | Analista de Sistemas">
-  <meta property="og:description" content="Transformo procesos manuales en soluciones digitales eficientes utilizando IA, Automatización y desarrollo de software.">
-  <meta property="og:image" content="assets/yakai.png">
+  <meta property="og:title" content="Dylan Banegas | Desarrollo ERP/CRM & Automatización IA">
+  <meta property="og:description" content="Sistemas a medida, automatización empresarial con IA y sitios web profesionales al precio más accesible.">
+  <meta property="og:url" content="https://www.linkedin.com/in/dylan-banegas-aguilar/">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='10' fill='%238b5cf6'/%3E%3Cellipse cx='50' cy='50' rx='40' ry='12' fill='none' stroke='%238b5cf6' stroke-width='6' transform='rotate(30 50 50)'/%3E%3Cellipse cx='50' cy='50' rx='40' ry='12' fill='none' stroke='%238b5cf6' stroke-width='6' transform='rotate(90 50 50)'/%3E%3Cellipse cx='50' cy='50' rx='40' ry='12' fill='none' stroke='%238b5cf6' stroke-width='6' transform='rotate(150 50 50)'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
 
-  <!-- Devicon for Tech Logos -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <!-- Google Fonts: Inter, Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="index.css">
+  <!-- Devicon CDN for Official Tech Logos -->
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+  <!-- Chart.js for Live ERP Simulator -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- SheetJS (xlsx) for Simulator Excel Export -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              500: '#2563eb',
+              600: '#1A56B0',
+              700: '#154690',
+              800: '#1e3a8a',
+              900: '#0f172a',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            outfit: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
 
-  <!-- ==========================================================================
-       HEADER & NAVIGATION
-       ========================================================================== */ -->
-  <header class="header" id="main-header">
-    <div class="nav-container">
-      <a href="#hero" class="logo" id="nav-logo-link">
-        <span>DYLAN</span>BANEGAS
-      </a>
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 backdrop-blur-md bg-white/80 border-b border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <nav>
-        <ul class="nav-menu" id="nav-menu-list">
-          <li><a href="#sobre-mi" class="nav-link" id="link-sobre-mi">Sobre mí</a></li>
-          <li><a href="#skills" class="nav-link" id="link-skills">Skills</a></li>
-          <li><a href="#proyectos" class="nav-link" id="link-proyectos">Proyectos</a></li>
-          <li><a href="#educacion" class="nav-link" id="link-educacion">Educación</a></li>
-          <li><a href="#contacto" class="nav-link" id="link-contacto">Contacto</a></li>
-        </ul>
+      <!-- Brand Logo -->
+      <a href="#hero" class="group flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-blue-500 text-white flex items-center justify-center font-outfit font-extrabold text-lg shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+          DB
+        </div>
+        <div class="flex flex-col">
+          <span class="font-outfit font-bold text-slate-900 text-lg tracking-tight group-hover:text-blue-600 transition-colors">
+            Dylan Banegas
+          </span>
+          <span class="text-[11px] font-semibold text-emerald-600 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Disponible para proyectos
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-1 bg-slate-100/80 p-1.5 rounded-full border border-slate-200/60 shadow-inner">
+        <a href="#sobre-mi" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white transition-all">Sobre mí</a>
+        <a href="#skills" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white transition-all">Skills</a>
+        <a href="#proyectos" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white transition-all">Proyectos</a>
+        <a href="#simulador" class="nav-link px-4 py-2 rounded-full text-xs font-bold text-blue-700 bg-blue-50/70 hover:bg-blue-100 transition-all flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping"></span>
+          Simulador ERP
+        </a>
+        <a href="#educacion" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white transition-all">Educación</a>
+        <a href="#contacto" class="nav-link px-4 py-2 rounded-full text-xs font-semibold text-slate-600 hover:text-blue-600 hover:bg-white transition-all">Contacto</a>
       </nav>
 
-      <div class="nav-actions">
-        <a href="#contacto" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.85rem;" id="header-cta-btn">
-          Contactame
+      <!-- CTA Button & Mobile Toggle -->
+      <div class="flex items-center gap-3">
+        <button onclick="openIdeModal('sitiocel_app')" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm transition-all">
+          <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+          <span>Editor IDE</span>
+        </button>
+
+        <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-600/25 hover:shadow-lg hover:shadow-blue-600/35 hover:-translate-y-0.5 transition-all">
+          <span>Hablemos</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
+
+        <!-- Hamburger Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none" aria-label="Abrir menú">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="hamburger-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
       </div>
 
-      <button class="nav-toggle" id="menu-toggle-btn" aria-label="Abrir menú de navegación">
-        <i data-lucide="menu" id="menu-toggle-icon"></i>
-      </button>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-slate-200 px-6 py-5 space-y-3 shadow-xl">
+      <a href="#sobre-mi" class="mobile-nav-link block py-2 text-sm font-semibold text-slate-700 hover:text-blue-600">Sobre mí</a>
+      <a href="#skills" class="mobile-nav-link block py-2 text-sm font-semibold text-slate-700 hover:text-blue-600">Skills</a>
+      <a href="#proyectos" class="mobile-nav-link block py-2 text-sm font-semibold text-slate-700 hover:text-blue-600">Proyectos</a>
+      <a href="#simulador" class="mobile-nav-link block py-2 text-sm font-bold text-blue-700">⚡ Simulador ERP/CRM</a>
+      <a href="#educacion" class="mobile-nav-link block py-2 text-sm font-semibold text-slate-700 hover:text-blue-600">Educación</a>
+      <a href="#contacto" class="mobile-nav-link block py-2 text-sm font-semibold text-slate-700 hover:text-blue-600">Contacto</a>
+      <a href="#contacto" class="block text-center w-full py-3 mt-2 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-md">Contactar ahora</a>
     </div>
   </header>
 
-  <!-- ==========================================================================
-       HERO SECTION
-       ========================================================================== */ -->
-  <section class="hero" id="hero">
-    <canvas class="hero-canvas" id="particles-canvas"></canvas>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-tag reveal reveal-fade" id="hero-tag-badge">
-          <span class="dot"></span>
-          Disponible para proyectos freelance
+
+  <!-- ==================== 1. HERO SECTION ==================== -->
+  <section id="hero" class="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
+    
+    <!-- Animated Canvas Particle Background -->
+    <canvas id="hero-canvas" class="absolute inset-0 w-full h-full pointer-events-auto z-0"></canvas>
+
+    <!-- Gradient Orbs -->
+    <div class="absolute top-1/4 left-10 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-violet-400/15 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse" style="animation-delay: 2s;"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- Top Pill -->
+      <div class="reveal inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-200/80 text-blue-800 text-xs font-bold mb-6 shadow-sm shadow-blue-500/5">
+        <span class="flex h-2 w-2 relative">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+        </span>
+        <span>Cofundador de YAKAI · Estudiante de Ingeniería en Informática UNAJ</span>
+      </div>
+
+      <!-- Main Name -->
+      <h1 class="reveal font-outfit text-4xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6">
+        Hola, soy <span class="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-600 bg-clip-text text-transparent">Dylan Banegas</span>
+      </h1>
+
+      <!-- Title / Tagline -->
+      <p class="reveal text-lg sm:text-2xl font-bold font-outfit text-slate-800 mb-6 max-w-4xl mx-auto leading-snug">
+        Desarrollo de Sistemas ERP/CRM <span class="text-blue-600">|</span> Automatización de Procesos <span class="text-blue-600">|</span> Inteligencia Artificial Aplicada
+      </p>
+
+      <!-- Subtitle Description -->
+      <p class="reveal text-sm sm:text-base text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
+        Estudiante de Ingeniería en Informática y cofundador de <strong>YAKAI</strong>. Desarrollo sistemas de gestión a medida, automatizo procesos con IA y creo sitios web profesionales al precio más accesible para que tu negocio crezca digitalmente.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="reveal flex flex-wrap items-center justify-center gap-4 mb-14">
+        <a href="#proyectos" class="px-7 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-xl shadow-blue-600/25 hover:shadow-2xl hover:shadow-blue-600/35 hover:-translate-y-1 transition-all flex items-center gap-2">
+          <span>Ver proyectos</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+
+        <a href="#simulador" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-slate-900 to-blue-950 hover:from-slate-800 hover:to-blue-900 text-white font-bold text-sm shadow-xl shadow-slate-900/20 hover:-translate-y-1 transition-all flex items-center gap-2 border border-blue-500/30">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Simular Sistema CRM/ERP ⚡</span>
+        </a>
+
+        <a href="#contacto" class="px-7 py-3.5 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold text-sm shadow-sm hover:shadow-md hover:border-slate-300 hover:-translate-y-1 transition-all flex items-center gap-2">
+          <span>Contactame</span>
+          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </a>
+
+        <a href="https://yakai.shop" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-300/60 text-emerald-800 hover:bg-emerald-500/20 font-bold text-sm hover:-translate-y-1 transition-all flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          <span>Conocé YAKAI ↗</span>
+        </a>
+      </div>
+
+      <!-- Quick Highlights Bar -->
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto pt-6 border-t border-slate-200/80">
+        <div class="bg-white/70 backdrop-blur-sm p-3.5 rounded-2xl border border-slate-200/60 shadow-sm text-left">
+          <div class="text-blue-600 font-black text-xl font-outfit">ERP / CRM</div>
+          <div class="text-xs text-slate-500 font-medium">Sistemas nativos y gestión a medida</div>
         </div>
-        <h1 class="hero-title reveal reveal-slide-up delay-100" id="hero-title-text">
-          Dylan Banegas
-          <span>Desarrollador de Software | Automatización | IA Aplicada</span>
-        </h1>
-        <p class="hero-subtitle reveal reveal-slide-up delay-200" id="hero-subtitle-text">
-          Estudiante de Ingeniería en Informática y cofundador de YAKAI. Transformo negocios creando aplicaciones web y móviles, digitalizando procesos e integrando sistemas inteligentes.
-        </p>
-        <div class="hero-btns reveal reveal-slide-up delay-300" id="hero-cta-group">
-          <a href="#proyectos" class="btn btn-primary" id="hero-btn-projects">
-            Ver proyectos <i data-lucide="arrow-right"></i>
-          </a>
-          <a href="#contacto" class="btn btn-secondary" id="hero-btn-contact">
-            Contactame <i data-lucide="message-square"></i>
-          </a>
+        <div class="bg-white/70 backdrop-blur-sm p-3.5 rounded-2xl border border-slate-200/60 shadow-sm text-left">
+          <div class="text-indigo-600 font-black text-xl font-outfit">AI Agents</div>
+          <div class="text-xs text-slate-500 font-medium">Workflows y automatización</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm p-3.5 rounded-2xl border border-slate-200/60 shadow-sm text-left">
+          <div class="text-emerald-600 font-black text-xl font-outfit">Rust & Supabase</div>
+          <div class="text-xs text-slate-500 font-medium">Apps desktop y sync en tiempo real</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm p-3.5 rounded-2xl border border-slate-200/60 shadow-sm text-left">
+          <div class="text-amber-600 font-black text-xl font-outfit">Web Accesible</div>
+          <div class="text-xs text-slate-500 font-medium">Presencia digital al mejor precio</div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- ==========================================================================
-       SOBRE MÍ
-       ========================================================================== */ -->
-  <section class="about" id="sobre-mi">
-    <div class="container">
-      <div class="section-header reveal reveal-slide-up">
-        <span class="section-tag">Presentación</span>
-        <h2 class="section-title">Sobre Mí</h2>
-        <p class="section-subtitle">Quién soy y qué me apasiona hacer</p>
+
+  <!-- ==================== 2. SOBRE MÍ ==================== -->
+  <section id="sobre-mi" class="py-24 bg-white relative border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="reveal text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">
+          Perfil Profesional
+        </span>
+        <h2 class="font-outfit text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
+          Sobre mí y mi enfoque de trabajo
+        </h2>
+        <div class="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
       </div>
 
-      <div class="about-grid">
-        <div class="about-text reveal reveal-slide-left">
-          <p>
-            Soy estudiante de Ingeniería en Informática en la Universidad Nacional Arturo Jauretche (UNAJ) y desarrollador de software orientado a la creación de soluciones tecnológicas que optimicen procesos y resuelvan problemas reales.
-          </p>
-          <p>
-            Tengo experiencia práctica desarrollando integraciones entre sistemas empresariales, automatizando tareas y construyendo herramientas a medida para acompañar la transformación digital de pequeñas y medianas empresas. He trabajado con plataformas ERP como Odoo, implementando soluciones adaptadas a las necesidades de cada organización y desarrollando APIs para conectar distintos ecosistemas tecnológicos.
-          </p>
-          <p>
-            Manejo tecnologías como C#, JavaScript y Python, participando en proyectos que abarcan desde integraciones comerciales y automatización de procesos hasta el desarrollo de aplicaciones y sistemas de gestión personalizados.
-          </p>
-          <p>
-            Además, incorporo herramientas de desarrollo asistido por inteligencia artificial, como Google Antigravity y Claude Code, para acelerar el aprendizaje de nuevas tecnologías, optimizar flujos de trabajo y aumentar la productividad durante el diseño e implementación de soluciones de software, manteniendo siempre un enfoque crítico sobre la arquitectura y la calidad del código.
-          </p>
-          <p>
-            Actualmente continúo profundizando mis conocimientos en desarrollo backend, arquitectura de software e inteligencia artificial, con el objetivo de especializarme en la construcción de sistemas innovadores, escalables y de alto impacto.
-          </p>
-          <p>
-            Me motiva enfrentar nuevos desafíos, aprender de manera constante y transformar ideas complejas en soluciones tecnológicas que generen valor tanto para las organizaciones como para las personas.
-          </p>
-        </div>
-
-        <div class="about-yakai-promo reveal reveal-slide-right">
-          <h3 class="about-yakai-title">
-            <i data-lucide="rocket" style="color: var(--color-violet)"></i>
-            Cofundador de YAKAI
-            <span>Startup</span>
-          </h3>
-          <p class="about-yakai-desc">
-            En YAKAI desarrollamos soluciones digitales integrales de automatización e inteligencia artificial. Creamos agentes autónomos, integramos CRM/ERPs y diseñamos workflows para que los negocios crezcan exponencialmente eliminando el trabajo manual.
-          </p>
-          <a href="https://yakai.shop" target="_blank" rel="noopener" class="btn btn-accent" id="btn-visit-yakai">
-            Conocé YAKAI <i data-lucide="external-link"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SKILLS
-       ========================================================================== */ -->
-  <section class="skills" id="skills">
-    <div class="container">
-      <div class="section-header reveal reveal-slide-up">
-        <span class="section-tag">Conocimientos</span>
-        <h2 class="section-title">Mis Habilidades</h2>
-        <p class="section-subtitle">Tecnologías y herramientas que utilizo para resolver problemas</p>
-      </div>
-
-      <div class="skills-grid">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Categoría 1: Programación -->
-        <div class="skills-card reveal reveal-slide-up">
-          <h3 class="skills-category-title">
-            <i data-lucide="code-2"></i>
-            Lenguajes & Backend
-          </h3>
-          <div class="skill-badge-grid">
-            
-            <div class="skill-badge">
-              <i class="devicon-csharp-plain colored"></i>
-              <span>C#</span>
-            </div>
+        <!-- Left: Bio Text & Highlights -->
+        <div class="reveal-left lg:col-span-7 space-y-6 text-slate-600 leading-relaxed text-sm sm:text-base">
+          
+          <p class="font-medium text-slate-800 text-lg leading-relaxed">
+            Soy <strong class="text-blue-700">Dylan</strong>, desarrollo sistemas <strong>ERP/CRM a medida</strong>, aplicaciones de escritorio nativas en <strong>Rust</strong>, integro plataformas mediante <strong>APIs REST</strong> y automatizo procesos empresariales con <strong>Inteligencia Artificial</strong>.
+          </p>
 
-            <div class="skill-badge">
-              <i class="devicon-javascript-plain colored"></i>
-              <span>JavaScript</span>
-            </div>
+          <p>
+            Estudio <strong>Ingeniería en Informática en la UNAJ</strong> y soy <strong>cofundador de YAKAI</strong>, una empresa de automatización e IA para negocios. Trabajo con empresas que necesitan digitalizar su operación: <em>inventario, puntos de venta (POS), ventas, facturación, presentismo, reportes analíticos y dashboards</em>.
+          </p>
 
-            <div class="skill-badge">
-              <i class="devicon-python-plain colored"></i>
-              <span>Python</span>
-            </div>
+          <p>
+            Manejo <strong>C#</strong> y estoy en aprendizaje activo de <strong>JavaScript</strong> y <strong>Python</strong>, aplicándolos en proyectos reales con apoyo de herramientas low-code e IA.
+          </p>
 
-            <div class="skill-badge">
-              <i class="devicon-mysql-plain colored"></i>
-              <span>SQL</span>
-            </div>
+          <p class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 text-slate-700">
+            💡 Además, diseño y desarrollo <strong>sitios web profesionales al precio más accesible del mercado</strong> (como tiendas e-commerce a medida), para que cualquier negocio pueda tener presencia digital de calidad sin gastar de más.
+          </p>
 
-            <div class="skill-badge" style="position: relative;">
-              <span style="position: absolute; top: -5px; right: -5px; background: var(--color-green); color: white; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px;">En curso</span>
-              <i class="devicon-nodejs-plain-wordmark colored"></i>
-              <span>Node.js</span>
-            </div>
+          <!-- Featured Buttons -->
+          <div class="pt-4 flex flex-wrap items-center gap-4">
+            <a href="https://yakai.shop" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 text-white font-bold text-sm shadow-xl shadow-blue-700/20 hover:shadow-2xl hover:-translate-y-0.5 transition-all">
+              <span>Conocé YAKAI</span>
+              <span class="text-xs px-2 py-0.5 rounded-md bg-white/20">yakai.shop</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
 
-            <div class="skill-badge" style="position: relative;">
-              <span style="position: absolute; top: -5px; right: -5px; background: var(--color-green); color: white; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px;">En curso</span>
-              <i class="devicon-express-original" style="filter: brightness(0.2);"></i>
-              <span>Express</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Categoría 2: Automatización -->
-        <div class="skills-card reveal reveal-slide-up delay-100">
-          <h3 class="skills-category-title">
-            <i data-lucide="cpu"></i>
-            Automatización & No-code
-          </h3>
-          <div class="skill-badge-grid">
-            
-            <div class="skill-badge">
-              <img src="https://cdn.simpleicons.org/n8n/EA4E43" class="simple-icon" alt="n8n">
-              <span>n8n</span>
-            </div>
-
-            <div class="skill-badge">
-              <img src="https://cdn.simpleicons.org/zapier/FF4A00" class="simple-icon" alt="Zapier">
-              <span>Zapier</span>
-            </div>
-
-            <div class="skill-badge">
-              <i data-lucide="network" class="lucide-icon" style="color: var(--color-primary); width: 40px; height: 40px; margin-bottom: 8px;"></i>
-              <span>APIs REST</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Categoría 3: Web & ERP -->
-        <div class="skills-card reveal reveal-slide-up delay-200">
-          <h3 class="skills-category-title">
-            <i data-lucide="globe"></i>
-            Web & ERP
-          </h3>
-          <div class="skill-badge-grid">
-            
-            <div class="skill-badge">
-              <i class="devicon-wordpress-plain colored" style="color: #21759b;"></i>
-              <span>WordPress</span>
-            </div>
-
-            <div class="skill-badge">
-              <img src="https://cdn.simpleicons.org/odoo/714B67" class="simple-icon" alt="Odoo">
-              <span>Odoo ERP</span>
-            </div>
-
-            <div class="skill-badge">
-              <i class="devicon-woocommerce-plain colored"></i>
-              <span>WooCommerce</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Categoría 4: Herramientas -->
-        <div class="skills-card reveal reveal-slide-up">
-          <h3 class="skills-category-title">
-            <i data-lucide="git-branch"></i>
-            Control de Versiones & Dev
-          </h3>
-          <div class="skill-badge-grid">
-            
-            <div class="skill-badge">
-              <i class="devicon-git-plain colored"></i>
-              <span>Git</span>
-            </div>
-
-            <div class="skill-badge">
-              <i class="devicon-github-original colored"></i>
-              <span>GitHub</span>
-            </div>
-
-            <div class="skill-badge">
-              <i class="devicon-docker-plain colored"></i>
-              <span>Docker</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Categoría 5: Inteligencia Artificial -->
-        <div class="skills-card reveal reveal-slide-up delay-100">
-          <h3 class="skills-category-title">
-            <i data-lucide="brain-circuit"></i>
-            Inteligencia Artificial
-          </h3>
-          <div class="skill-badge-grid">
-            
-            <div class="skill-badge">
-              <img src="https://cdn.simpleicons.org/google/4285F4" class="simple-icon" alt="Google Antigravity">
-              <span>Google Antigravity</span>
-            </div>
-
-            <div class="skill-badge">
-              <img src="https://cdn.simpleicons.org/anthropic/D97757" class="simple-icon" alt="Claude Code">
-              <span>Claude Code</span>
-            </div>
-
-            <div class="skill-badge">
-              <i data-lucide="sparkles" class="lucide-icon" style="color: var(--text-primary); width: 40px; height: 40px; margin-bottom: 8px;"></i>
-              <span>IA Generativa</span>
-            </div>
-
-            <div class="skill-badge">
-              <i data-lucide="bot" class="lucide-icon" style="color: var(--color-violet); width: 40px; height: 40px; margin-bottom: 8px;"></i>
-              <span>AI Agents</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Categoría 6: Datos -->
-        <div class="skills-card reveal reveal-slide-up delay-200">
-          <h3 class="skills-category-title">
-            <i data-lucide="bar-chart-3"></i>
-            Datos
-          </h3>
-          <div class="skill-badge-grid">
-            
-            <div class="skill-badge">
-              <img src="https://cdn.simpleicons.org/google/4285F4" class="simple-icon" alt="Google">
-              <span>Data Analytics</span>
-            </div>
-
-            <div class="skill-badge">
-              <i class="devicon-mysql-plain colored"></i>
-              <span>MySQL / Mongo</span>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       PROYECTOS
-       ========================================================================== */ -->
-  <section class="projects" id="proyectos">
-    <div class="container">
-      <div class="section-header reveal reveal-slide-up">
-        <span class="section-tag">Portafolio</span>
-        <h2 class="section-title">Proyectos Destacados</h2>
-        <p class="section-subtitle">Casos prácticos y soluciones digitales creadas recientemente</p>
-      </div>
-
-      <!-- Tarjeta Especial YAKAI -->
-      <div class="projects-featured reveal reveal-scale-up" id="project-yakai-featured">
-        <div class="featured-card">
-          <div class="featured-tech-container yakai-tech-bg">
-            <div class="tech-stack-group">
-              <i data-lucide="sparkles" class="tech-stack-icon white-icon" style="width:48px; height:48px;"></i>
-              <img src="https://cdn.simpleicons.org/n8n/FFFFFF" class="tech-stack-icon" alt="n8n">
-              <i class="devicon-python-plain tech-stack-icon white-icon"></i>
-              <i class="devicon-react-original tech-stack-icon colored"></i>
-            </div>
-          </div>
-          <div class="featured-content">
-            <div class="featured-badge">
-              <i data-lucide="sparkles"></i> Cofundador & Desarrollador
-            </div>
-            <h3 class="featured-title">YAKAI — Automatización e IA para negocios</h3>
-            <p class="featured-desc">
-              Empresa orientada a digitalizar, optimizar y automatizar procesos empresariales complejos mediante integraciones de inteligencia artificial y desarrollo de software a medida.
-            </p>
-            <div class="featured-tags">
-              <span class="tag-badge special">IA</span>
-              <span class="tag-badge special">Automatización</span>
-              <span class="tag-badge">Software</span>
-              <span class="tag-badge">Startup</span>
-            </div>
-            <a href="https://yakai.shop" target="_blank" rel="noopener" class="btn btn-primary" style="align-self: flex-start;" id="link-featured-yakai">
-              Visitar sitio <i data-lucide="external-link"></i>
+            <a href="https://www.linkedin.com/in/dylan-banegas-aguilar/" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 text-[#0A66C2] font-bold text-sm border border-[#0A66C2]/20 transition-all">
+              <i class="devicon-linkedin-plain"></i>
+              <span>Ver LinkedIn</span>
             </a>
           </div>
-        </div>
-      </div>
 
-      <!-- Grid de Proyectos Adicionales -->
-      <div class="projects-grid">
-        
-        <!-- Proyecto: Script Prospeccion -->
-        <div class="project-card reveal reveal-slide-up" id="project-prospecting">
-          <div class="project-tech-header prospecting-tech-bg">
-            <i class="devicon-python-plain tech-stack-icon white-icon"></i>
-            <img src="https://cdn.simpleicons.org/google/FFFFFF" class="tech-stack-icon" alt="Google Antigravity">
-            <i data-lucide="bot" class="tech-stack-icon white-icon" style="width:48px; height:48px;"></i>
-          </div>
-          <div class="project-card-body">
-            <div class="project-card-tags">
-              <span class="tag-badge">Script</span>
-              <span class="tag-badge">Python</span>
-              <span class="tag-badge">Agentes IA</span>
-            </div>
-            <h4 class="project-card-title">Prospección con IA</h4>
-            <p class="project-card-desc">
-              Script desarrollado en Python que utiliza Google Antigravity para automatizar la prospección de clientes, extrayendo datos y calificando leads con Inteligencia Artificial.
-            </p>
-            <div class="project-card-tech">
-              <i data-lucide="terminal"></i>
-              <span>Python • Google Antigravity • Web Scraping</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Proyecto 1: Odoo ERP -->
-        <div class="project-card reveal reveal-slide-up" id="project-odoo-erp">
-          <div class="project-tech-header odoo-tech-bg">
-            <img src="https://cdn.simpleicons.org/odoo/FFFFFF" class="tech-stack-icon" alt="Odoo">
-            <i class="devicon-postgresql-plain tech-stack-icon white-icon"></i>
-            <i class="devicon-python-plain tech-stack-icon white-icon"></i>
-          </div>
-          <div class="project-card-body">
-            <div class="project-card-tags">
-              <span class="tag-badge">Odoo</span>
-              <span class="tag-badge">ERP</span>
-              <span class="tag-badge">Soporte funcional</span>
-            </div>
-            <h4 class="project-card-title">Implementación Odoo ERP</h4>
-            <p class="project-card-desc">
-              Configuración, parametrización de módulos y capacitación de usuarios en sistema ERP empresarial para la optimización de compras, inventario y facturación.
-            </p>
-            <div class="project-card-tech">
-              <i data-lucide="settings"></i>
-              <span>Odoo 16/17 • PostgreSQL • Capacitación</span>
-            </div>
-          </div>
         </div>
 
-        <!-- Proyecto 2: Odoo WooCommerce -->
-        <div class="project-card reveal reveal-slide-up delay-100" id="project-odoo-woo">
-          <div class="project-tech-header sync-tech-bg">
-            <img src="https://cdn.simpleicons.org/odoo/FFFFFF" class="tech-stack-icon" alt="Odoo">
-            <i data-lucide="arrow-left-right" class="tech-stack-icon white-icon" style="width:24px; height:24px; margin: 0 4px;"></i>
-            <i class="devicon-woocommerce-plain tech-stack-icon white-icon"></i>
-            <i class="devicon-python-plain tech-stack-icon white-icon" style="margin-left: 8px;"></i>
-            <i class="devicon-git-plain tech-stack-icon white-icon"></i>
-          </div>
-          <div class="project-card-body">
-            <div class="project-card-tags">
-              <span class="tag-badge">API REST</span>
-              <span class="tag-badge">Python</span>
-              <span class="tag-badge">Automatización</span>
-            </div>
-            <h4 class="project-card-title">Integración Odoo ↔ WooCommerce</h4>
-            <p class="project-card-desc">
-              Desarrollo de API REST para sincronizar stocks de productos, precios y pedidos de forma automática bidireccional entre la tienda digital y el ERP.
-            </p>
-            <div class="project-card-tech">
-              <i data-lucide="terminal"></i>
-              <span>Python • API REST • Git • Sync en tiempo real</span>
+        <!-- Right: Interactive Visual Cards / Pillars -->
+        <div class="reveal-right lg:col-span-5 space-y-4">
+          
+          <!-- Pillar 1 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-blue-300 hover:bg-blue-50/30 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-outfit font-bold text-slate-900 text-base mb-1">Sistemas ERP/CRM a Medida</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                  Control de stock, POS de cobro, facturación, seguimiento de obras, presentismo y dashboards analíticos en tiempo real con Rust y bases de datos cloud.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Proyecto 3: Automatización de Procesos -->
-        <div class="project-card reveal reveal-slide-up delay-200" id="project-automation">
-          <div class="project-tech-header auto-tech-bg">
-            <img src="https://cdn.simpleicons.org/n8n/EA4E43" class="tech-stack-icon" alt="n8n">
-            <img src="https://cdn.simpleicons.org/zapier/FF4A00" class="tech-stack-icon" alt="Zapier">
-            <i class="devicon-javascript-plain tech-stack-icon colored"></i>
-          </div>
-          <div class="project-card-body">
-            <div class="project-card-tags">
-              <span class="tag-badge">n8n</span>
-              <span class="tag-badge">Zapier</span>
-              <span class="tag-badge">Low-code</span>
-            </div>
-            <h4 class="project-card-title">Automatización de Procesos</h4>
-            <p class="project-card-desc">
-              Creación de workflows y automatizaciones de tareas repetitivas para eliminar errores manuales, coordinando notificaciones y bases de datos.
-            </p>
-            <div class="project-card-tech">
-              <i data-lucide="workflow"></i>
-              <span>n8n • Zapier • JavaScript • Webhooks</span>
+          <!-- Pillar 2 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-indigo-300 hover:bg-indigo-50/30 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <div>
+                <h3 class="font-outfit font-bold text-slate-900 text-base mb-1">Automatización e IA Empresarial</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                  Flujos automatizados en n8n y Zapier, agentes autónomos de IA, sincronización de APIs y eliminación de tareas manuales.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Proyecto 4: Control Celulares -->
-        <div class="project-card reveal reveal-slide-up" id="project-phone-lock">
-          <div class="project-tech-header lock-tech-bg">
-            <i class="devicon-android-plain tech-stack-icon white-icon"></i>
-            <i class="devicon-firebase-plain tech-stack-icon colored"></i>
-            <i class="devicon-react-original tech-stack-icon colored"></i>
-          </div>
-          <div class="project-card-body">
-            <div class="project-card-tags">
-              <span class="tag-badge">App Móvil</span>
-              <span class="tag-badge">Seguridad</span>
-              <span class="tag-badge">Cobros</span>
-            </div>
-            <h4 class="project-card-title">Control de Celulares en Cuotas</h4>
-            <p class="project-card-desc">
-              App para vendedores de dispositivos financiados. Permite gestionar cuotas y bloquea el teléfono remotamente en caso de no registrarse el pago.
-            </p>
-            <div class="project-card-tech">
-              <i data-lucide="shield-alert"></i>
-              <span>Android • React Native • Firebase • MDM</span>
+          <!-- Pillar 3 -->
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-emerald-300 hover:bg-emerald-50/30 transition-all group">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+              </div>
+              <div>
+                <h3 class="font-outfit font-bold text-slate-900 text-base mb-1">Desarrollo Web & E-Commerce Accesible</h3>
+                <p class="text-xs text-slate-500 leading-relaxed">
+                  Sitios web modernos, rápidos y 100% responsivos diseñados según la visión del cliente para maximizar ventas sin costos excesivos.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Proyecto 5: Pedidos QR -->
-        <div class="project-card reveal reveal-slide-up delay-100" id="project-qr-menu">
-          <div class="project-tech-header qr-tech-bg">
-            <i class="devicon-nodejs-plain-wordmark tech-stack-icon white-icon"></i>
-            <i class="devicon-express-original tech-stack-icon white-icon"></i>
-            <i class="devicon-react-original tech-stack-icon colored"></i>
-          </div>
-          <div class="project-card-body">
-            <div class="project-card-tags">
-              <span class="tag-badge">En Desarrollo</span>
-              <span class="tag-badge">Web App</span>
-              <span class="tag-badge">JavaScript</span>
-            </div>
-            <h4 class="project-card-title">Sistema de Pedidos QR</h4>
-            <p class="project-card-desc">
-              Sistema digital interactivo de pedidos vía QR para bares temáticos, permitiendo a los comensales pedir directamente y abonar con pasarelas integradas.
-            </p>
-            <div class="project-card-tech">
-              <i data-lucide="smartphone"></i>
-              <span>Node.js • Express • QR Generator • Pagos</span>
-            </div>
-          </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
-  <!-- ==========================================================================
-       EDUCACIÓN
-       ========================================================================== */ -->
-  <section class="education" id="educacion">
-    <div class="container">
-      <div class="section-header reveal reveal-slide-up">
-        <span class="section-tag">Estudios</span>
-        <h2 class="section-title">Formación Académica</h2>
-        <p class="section-subtitle">Mi recorrido de aprendizaje y preparación profesional</p>
+
+  <!-- ==================== 3. SKILLS ==================== -->
+  <section id="skills" class="py-24 bg-slate-50 relative border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="reveal text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">
+          Stack Tecnológico
+        </span>
+        <h2 class="font-outfit text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
+          Habilidades y Tecnologías
+        </h2>
+        <p class="text-slate-500 text-sm mt-3">
+          Herramientas y lenguajes aplicados en producción, proyectos reales y en constante aprendizaje.
+        </p>
+        <div class="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
       </div>
 
-      <div class="timeline">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- Timeline Item 1 -->
-        <div class="timeline-item reveal reveal-slide-left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content active">
-            <span class="timeline-date">2025 - Presente</span>
-            <h3 class="timeline-title">Ingeniería en Informática</h3>
-            <p class="timeline-institution">Universidad Nacional Arturo Jauretche (UNAJ)</p>
-            <p class="timeline-desc">
-              Estudios universitarios en curso enfocados en el desarrollo de software, algoritmos, arquitectura de sistemas y gestión de proyectos tecnológicos.
-            </p>
+        <!-- Category 1: Lenguajes de Programación -->
+        <div class="reveal bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            </div>
+            <div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Lenguajes de programación</h3>
+              <p class="text-xs text-slate-400">Lógica, backend y bases de datos</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <!-- C# -->
+            <div class="skill-badge group">
+              <i class="devicon-csharp-plain colored text-3xl mb-2 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">C#</span>
+              <span class="skill-level bg-blue-50 text-blue-700 border border-blue-100">Intermedio</span>
+            </div>
+            <!-- JavaScript -->
+            <div class="skill-badge group">
+              <i class="devicon-javascript-plain colored text-3xl mb-2 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">JavaScript</span>
+              <span class="skill-level bg-amber-50 text-amber-700 border border-amber-100">En aprendizaje</span>
+            </div>
+            <!-- Python -->
+            <div class="skill-badge group">
+              <i class="devicon-python-plain colored text-3xl mb-2 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">Python</span>
+              <span class="skill-level bg-amber-50 text-amber-700 border border-amber-100 text-[9px]">IA & Low-code</span>
+            </div>
+            <!-- SQL -->
+            <div class="skill-badge group">
+              <i class="devicon-sqldeveloper-plain colored text-3xl mb-2 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">SQL</span>
+              <span class="skill-level bg-slate-100 text-slate-700 border border-slate-200">Básico-intermedio</span>
+            </div>
           </div>
         </div>
 
-        <!-- Timeline Item 2 -->
-        <div class="timeline-item reveal reveal-slide-right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">2025 - 2026 (En Curso)</span>
-            <h3 class="timeline-title">Google Data Analytics</h3>
-            <p class="timeline-institution">Google / Coursera</p>
-            <p class="timeline-desc">
-              Especialización profesional en análisis de datos, abordando limpieza de información, cálculos estructurados, visualización de datos y el uso de herramientas como R, SQL y Tableau.
-            </p>
+        <!-- Category 2: Automatización e IA -->
+        <div class="reveal bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Automatización e Inteligencia Artificial</h3>
+              <p class="text-xs text-slate-400">Workflows, agentes autónomos y APIs</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <!-- n8n -->
+            <div class="skill-badge group">
+              <div class="w-8 h-8 rounded-lg bg-[#FF6D5A] text-white flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">n8n</div>
+              <span class="skill-name">n8n</span>
+              <span class="skill-level bg-blue-50 text-blue-700 border border-blue-100">Intermedio</span>
+            </div>
+            <!-- Zapier -->
+            <div class="skill-badge group">
+              <div class="w-8 h-8 rounded-lg bg-[#FF4F00] text-white flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">⚡</div>
+              <span class="skill-name">Zapier</span>
+              <span class="skill-level bg-blue-50 text-blue-700 border border-blue-100">Intermedio</span>
+            </div>
+            <!-- IA Generativa & Prompt Engineering -->
+            <div class="skill-badge group">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 text-white flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">✨</div>
+              <span class="skill-name text-[11px] leading-tight text-center">IA Generativa & Prompting</span>
+              <span class="skill-level bg-emerald-50 text-emerald-700 border border-emerald-100">Intermedio-avanzado</span>
+            </div>
+            <!-- AI Agents -->
+            <div class="skill-badge group">
+              <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">🤖</div>
+              <span class="skill-name">AI Agents</span>
+              <span class="skill-level bg-blue-50 text-blue-700 border border-blue-100">Intermedio</span>
+            </div>
+            <!-- Integración de APIs REST -->
+            <div class="skill-badge group col-span-2 sm:col-span-2">
+              <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs mb-2 group-hover:scale-110 transition-transform">🔗</div>
+              <span class="skill-name">Integración de APIs REST</span>
+              <span class="skill-level bg-blue-50 text-blue-700 border border-blue-100">Intermedio</span>
+            </div>
           </div>
         </div>
 
-        <!-- Timeline Item 3 -->
-        <div class="timeline-item reveal reveal-slide-left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">En Curso</span>
-            <h3 class="timeline-title">Backend Avanzado</h3>
-            <p class="timeline-institution">Coderhouse</p>
-            <p class="timeline-desc">
-              Formación especializada en desarrollo backend, que incluye el uso de JavaScript, Node.js, Express y bases de datos con MongoDB.
-            </p>
+        <!-- Category 3: ERP y E-commerce -->
+        <div class="reveal bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">ERP y E-commerce</h3>
+              <p class="text-xs text-slate-400">Gestión empresarial y plataformas de venta</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Odoo ERP -->
+            <div class="skill-badge group p-5">
+              <div class="w-10 h-10 rounded-xl bg-[#714B67] text-white flex items-center justify-center font-black text-sm mb-2 group-hover:scale-110 transition-transform">odoo</div>
+              <span class="skill-name font-bold">Odoo ERP</span>
+              <span class="skill-level bg-emerald-50 text-emerald-700 border border-emerald-100">Intermedio-avanzado</span>
+            </div>
+            <!-- WooCommerce -->
+            <div class="skill-badge group p-5">
+              <i class="devicon-woocommerce-plain colored text-4xl mb-2 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name font-bold">WooCommerce</span>
+              <span class="skill-level bg-blue-50 text-blue-700 border border-blue-100">Intermedio</span>
+            </div>
           </div>
         </div>
 
-        <!-- Timeline Item 4 -->
-        <div class="timeline-item reveal reveal-slide-right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <span class="timeline-date">Secundaria Completa</span>
-            <h3 class="timeline-title">Bachiller con orientación académica</h3>
-            <p class="timeline-institution">Educación de Nivel Medio</p>
-            <p class="timeline-desc">
-              Título secundario completado reglamentariamente, con foco en el desarrollo de pensamiento crítico y análisis lógico.
-            </p>
+        <!-- Category 4: Herramientas, Cloud & Bases de Datos -->
+        <div class="reveal bg-white p-7 rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-6 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center font-bold">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7z"/></svg>
+            </div>
+            <div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Bases de Datos & Herramientas</h3>
+              <p class="text-xs text-slate-400">Persistencia, backend y entornos</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <!-- Supabase (Avanzada) -->
+            <div class="skill-badge group border-emerald-200 bg-emerald-50/40">
+              <i class="devicon-supabase-plain colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name font-bold text-emerald-900">Supabase</span>
+              <span class="skill-level bg-emerald-600 text-white font-extrabold">Avanzada ⭐</span>
+            </div>
+            <!-- Git -->
+            <div class="skill-badge group">
+              <i class="devicon-git-plain colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">Git</span>
+              <span class="skill-level bg-slate-100 text-slate-700">Básico-intermedio</span>
+            </div>
+            <!-- GitHub -->
+            <div class="skill-badge group">
+              <i class="devicon-github-original colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">GitHub</span>
+              <span class="skill-level bg-slate-100 text-slate-700">Básico-intermedio</span>
+            </div>
+            <!-- Docker -->
+            <div class="skill-badge group">
+              <i class="devicon-docker-plain colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">Docker</span>
+              <span class="skill-level bg-slate-100 text-slate-700">Básico</span>
+            </div>
+            <!-- Node.js -->
+            <div class="skill-badge group">
+              <i class="devicon-nodejs-plain colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">Node.js</span>
+              <span class="skill-level bg-amber-50 text-amber-700">En aprendizaje</span>
+            </div>
+            <!-- MongoDB -->
+            <div class="skill-badge group">
+              <i class="devicon-mongodb-plain colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">MongoDB</span>
+              <span class="skill-level bg-slate-100 text-slate-700">Básico</span>
+            </div>
+            <!-- MySQL -->
+            <div class="skill-badge group">
+              <i class="devicon-mysql-plain colored text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">MySQL</span>
+              <span class="skill-level bg-slate-100 text-slate-700">Básico-intermedio</span>
+            </div>
+            <!-- Rust / Tauri -->
+            <div class="skill-badge group">
+              <i class="devicon-rust-original text-slate-900 text-3xl mb-1 group-hover:scale-110 transition-transform"></i>
+              <span class="skill-name">Rust / Tauri</span>
+              <span class="skill-level bg-blue-50 text-blue-700">Desktop ERP</span>
+            </div>
           </div>
         </div>
 
       </div>
+
     </div>
   </section>
 
-  <!-- ==========================================================================
-       CONTACTO
-       ========================================================================== */ -->
-  <section class="contact" id="contacto">
-    <div class="container">
-      <div class="section-header reveal reveal-slide-up">
-        <span class="section-tag">Hablemos</span>
-        <h2 class="section-title">Contactame</h2>
-        <p class="section-subtitle">Creemos algo extraordinario o trabajemos juntos</p>
+
+  <!-- ==================== 4. PROYECTOS ==================== -->
+  <section id="proyectos" class="py-24 bg-white relative border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="reveal text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">
+          Portfolio de Trabajo
+        </span>
+        <h2 class="font-outfit text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
+          Proyectos Destacados
+        </h2>
+        <p class="text-slate-500 text-sm mt-3">
+          Sistemas nativos de escritorio, tiendas web e-commerce, sincronizaciones cloud y flujos de automatización con IA.
+        </p>
+        <div class="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
       </div>
 
-      <div class="contact-grid">
+      <!-- Action Switcher Banner -->
+      <div class="reveal max-w-2xl mx-auto mb-12 flex flex-wrap items-center justify-center gap-3 p-2 bg-slate-100 rounded-2xl border border-slate-200 shadow-inner">
+        <button onclick="openIdeModal('sitiocel_app')" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-md flex items-center gap-2 transition-all">
+          <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+          <span>Abrir Vista Editor IDE (Código & Capturas)</span>
+        </button>
+
+        <a href="#simulador" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-600/25 flex items-center gap-2 transition-all">
+          <span>⚡ Probar Simulador CRM/ERP en Vivo</span>
+        </a>
+      </div>
+
+      <!-- 1. FEATURED HERO CARD: YAKAI -->
+      <div class="reveal mb-12 relative overflow-hidden rounded-3xl p-8 sm:p-10 bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white shadow-2xl border border-blue-500/30">
+        <div class="absolute -right-20 -top-20 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-8 space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/40 text-blue-300 text-xs font-extrabold uppercase tracking-wider">
+              ⭐ EMPRESA COFUNDADA & STARTUP
+            </div>
+
+            <h3 class="font-outfit text-3xl sm:text-5xl font-black tracking-tight text-white flex items-center gap-3">
+              YAKAI
+              <span class="text-xs sm:text-sm font-semibold text-blue-400 px-3 py-1 rounded-xl bg-white/10">Cofundador & Desarrollador</span>
+            </h3>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+              Empresa de automatización e Inteligencia Artificial orientada a digitalizar y automatizar procesos empresariales. Implementación de agentes de IA, reducción de costos operativos y modernización de sistemas comerciales.
+            </p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="project-tag-dark">IA</span>
+              <span class="project-tag-dark">Automatización</span>
+              <span class="project-tag-dark">Software</span>
+              <span class="project-tag-dark">Startup</span>
+              <span class="project-tag-dark">AI Agents</span>
+              <span class="project-tag-dark">n8n / APIs</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-center">
+            <a href="https://yakai.shop" target="_blank" rel="noopener noreferrer" 
+               class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-black text-base shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:scale-105 transition-all text-center flex items-center justify-center gap-3">
+              <span>Visitar yakai.shop</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+            <span class="text-slate-400 text-xs mt-3 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Plataforma activa en producción
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 2. PROJECT CARDS GRID (INDIVIDUAL PROJECTS) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
-        <div class="contact-info reveal reveal-slide-left">
-          <div class="contact-info-text">
-            <h3>¿Tenés un proyecto en mente?</h3>
-            <p>
-              Ya sea para un proyecto freelance, una oportunidad laboral corporativa o para trabajar junto a mi empresa de automatización <strong>YAKAI</strong>, escribime y coordinamos una reunión.
+        <!-- Project 1: Sitiocel ERP/CRM Desktop App (NATIVO RUST + TAURI + SUPABASE) -->
+        <div class="reveal project-card group border-amber-200/80 hover:border-amber-400">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i class="devicon-rust-original text-slate-900 text-2xl" title="Rust (Tauri Native Desktop)"></i>
+                <i class="devicon-supabase-plain colored text-2xl" title="Supabase Cloud"></i>
+                <span class="px-2 py-0.5 rounded bg-amber-500 text-slate-950 text-[10px] font-black tracking-wider">DESKTOP APP</span>
+              </div>
+              <button onclick="openIdeModal('sitiocel_app')" class="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-md border border-amber-300 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Ver Capturas & Código</span>
+              </button>
+            </div>
+
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2 flex items-center gap-2">
+              <span>Sitiocel ERP / CRM Desktop</span>
+            </h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Aplicación de escritorio nativa desarrollada con <strong>Rust (Tauri)</strong> y conectada en tiempo real vía <strong>Supabase</strong>. Incluye módulo de Punto de Venta (POS) para cobro en mostrador, control de inventario con SKU, historial de movimientos, finanzas, analíticas y exportación de reportes a Excel (.xlsx).
             </p>
           </div>
 
-          <div class="contact-details">
-            
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i data-lucide="mail"></i>
-              </div>
-              <div class="contact-item-details">
-                <span>Escríbeme por Email</span>
-                <a href="mailto:banegasdylan1109@gmail.com" id="contact-email-link">banegasdylan1109@gmail.com</a>
-              </div>
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag font-bold text-amber-900 bg-amber-50 border-amber-200">Rust / Tauri</span>
+              <span class="project-tag font-bold text-emerald-700 bg-emerald-50 border-emerald-200">Supabase Cloud</span>
+              <span class="project-tag">POS Mostrador</span>
+              <span class="project-tag">ERP/CRM</span>
+              <span class="project-tag">Excel Export</span>
             </div>
-
-            <div class="contact-item">
-              <div class="contact-icon">
-                <i data-lucide="linkedin"></i>
-              </div>
-              <div class="contact-item-details">
-                <span>Conectemos en LinkedIn</span>
-                <a href="https://linkedin.com/in/dylan-banegas" target="_blank" rel="noopener" id="contact-linkedin-link">linkedin.com/in/dylan-banegas</a>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="contact-socials">
-            <a href="mailto:banegasdylan1109@gmail.com" class="social-link" title="Enviar Email" aria-label="Enviar un correo electrónico a Dylan"><i data-lucide="mail"></i></a>
-            <a href="https://linkedin.com/in/dylan-banegas" target="_blank" rel="noopener" class="social-link" title="LinkedIn" aria-label="Visitar el perfil de LinkedIn de Dylan"><i data-lucide="linkedin"></i></a>
           </div>
         </div>
 
-        <div class="contact-form-container reveal reveal-slide-right">
-          <!-- Formspree action (uses Dylan's email endpoint form) -->
-          <form action="https://formspree.io/f/mqkrbzyo" method="POST" class="contact-form" id="portfolio-contact-form">
-            <div class="form-group">
-              <label for="name-input" class="form-label">Nombre completo</label>
-              <input type="text" name="name" id="name-input" class="form-control" placeholder="Ej. Juan Pérez" required>
+        <!-- Project 2: Sitiocel Tienda Web E-commerce (www.sitiocel.com) -->
+        <div class="reveal project-card group border-blue-200/80 hover:border-blue-400">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i class="devicon-html5-plain colored text-2xl" title="HTML5"></i>
+                <i class="devicon-css3-plain colored text-2xl" title="CSS3"></i>
+                <i class="devicon-javascript-plain colored text-2xl" title="JavaScript"></i>
+                <i class="devicon-supabase-plain colored text-2xl" title="Supabase"></i>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="openIdeModal('sitiocel_web')" class="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-md border border-blue-300 flex items-center gap-1 transition-colors">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span>Ver Capturas & Código</span>
+                </button>
+                <a href="https://www.sitiocel.com" target="_blank" rel="noopener noreferrer" 
+                   class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md border border-emerald-300 flex items-center gap-1 transition-colors">
+                  <span>sitiocel.com ↗</span>
+                </a>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="email-input" class="form-label">Correo electrónico</label>
-              <input type="email" name="_replyto" id="email-input" class="form-control" placeholder="nombre@correo.com" required>
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2 flex items-center justify-between">
+              <span>Sitiocel Tienda Web</span>
+            </h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Sitio web e-commerce y catálogo online creado con <strong>HTML, CSS y JavaScript puro</strong>, donde el cliente eligió el 100% de su diseño estético y funcionalidad. Sincronizado en vivo mediante <strong>Supabase</strong> para reflejar precios, stock y nuevos ingresos al instante.
+            </p>
+          </div>
+
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag font-bold text-blue-700 bg-blue-50 border-blue-200">HTML5 / CSS3 / JS</span>
+              <span class="project-tag font-bold text-emerald-700 bg-emerald-50 border-emerald-200">Supabase Realtime</span>
+              <span class="project-tag">E-commerce</span>
+              <span class="project-tag">Diseño 100% a medida</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Constructora Martinez y De La Fuente -->
+        <div class="reveal project-card group border-amber-200/80 hover:border-amber-400">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <i class="devicon-nodejs-plain colored text-2xl" title="Node.js"></i>
+                <i class="devicon-express-original text-slate-800 text-2xl" title="Express"></i>
+                <i class="devicon-mongodb-plain colored text-2xl" title="MongoDB"></i>
+                <i class="devicon-javascript-plain colored text-2xl" title="JavaScript"></i>
+              </div>
+              <button onclick="openIdeModal('martinez')" class="text-[10px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-md border border-amber-300 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Ver Capturas & Código</span>
+              </button>
             </div>
 
-            <div class="form-group">
-              <label for="message-input" class="form-label">Tu mensaje</label>
-              <textarea name="message" id="message-input" class="form-control" placeholder="¿En qué puedo ayudarte?" required></textarea>
+            <!-- Status Pill -->
+            <div class="flex items-center gap-2 mb-2.5">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100/80 text-amber-900 border border-amber-300 flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                100% Desarrollado · No Implementado
+              </span>
             </div>
 
-            <!-- Anti-spam protection of Formspree -->
-            <input type="text" name="_gotcha" style="display:none">
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2">CRM/ERP Constructora Martínez y De La Fuente</h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Sistema integral de gestión de obras civiles: panel de control general, seguimiento de cuadrillas y presentismo, curvas analíticas de ingresos vs egresos y repositorio documental de planos técnicos y habilitaciones. <strong>El software quedó 100% desarrollado y probado</strong>, aunque por decisión interna de la empresa cliente no se llegó a concluir la puesta en marcha en producción comercial.
+            </p>
+          </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;" id="form-submit-btn">
-              Enviar Mensaje <i data-lucide="send"></i>
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag font-bold text-amber-900 bg-amber-50 border-amber-200">Gestión de Obras</span>
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">Express</span>
+              <span class="project-tag">MongoDB</span>
+              <span class="project-tag">Analytics</span>
+              <span class="project-tag">Docs Planos</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: PC Optimizer ELUNDER - Web Oficial -->
+        <div class="reveal project-card group border-pink-200/80 hover:border-pink-400">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i class="devicon-html5-plain colored text-2xl" title="HTML5"></i>
+                <i class="devicon-css3-plain colored text-2xl" title="CSS3"></i>
+                <i class="devicon-javascript-plain colored text-2xl" title="JavaScript"></i>
+                <span class="px-2 py-0.5 rounded bg-pink-500 text-white text-[10px] font-black tracking-wider">CYBERPUNK WEB</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="openIdeModal('pc_optimizer_web')" class="text-[10px] font-bold uppercase tracking-wider text-pink-700 bg-pink-50 hover:bg-pink-100 px-2.5 py-1 rounded-md border border-pink-300 flex items-center gap-1 transition-colors">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span>Ver Capturas & Código</span>
+                </button>
+                <a href="https://github.com/Dyydyyb/Pc-optimizer-ELUNDER" target="_blank" rel="noopener noreferrer" 
+                   class="text-[10px] font-bold uppercase tracking-wider text-slate-800 bg-slate-100 hover:bg-slate-200 px-2.5 py-1 rounded-md border border-slate-300 flex items-center gap-1 transition-colors">
+                  <span>GitHub ↗</span>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2 flex items-center justify-between">
+              <span>PC Optimizer ELUNDER (Web Oficial)</span>
+            </h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Sitio web y landing page de distribución con estética <strong>retro-cyberpunk/underground</strong> inspirada en los años 2000. Incluye reproductor de audio integrado con Web Audio API, simulador interactivo de optimización en vivo, animaciones dinámicas al hacer scroll y diseño 100% responsivo para celulares.
+            </p>
+          </div>
+
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag font-bold text-pink-700 bg-pink-50 border-pink-200">Cyberpunk Retro</span>
+              <span class="project-tag font-bold text-blue-700 bg-blue-50 border-blue-200">HTML5 / CSS3 / JS</span>
+              <span class="project-tag">Web Audio API</span>
+              <span class="project-tag">Scroll Animations</span>
+              <span class="project-tag">Mobile Responsive</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: PC Optimizer ELUNDER - Desktop App (.EXE) -->
+        <div class="reveal project-card group border-emerald-200/80 hover:border-emerald-400">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i class="devicon-electron-original colored text-2xl" title="Electron Desktop"></i>
+                <i class="devicon-nodejs-plain colored text-2xl" title="Node.js"></i>
+                <span class="px-2 py-0.5 rounded bg-emerald-500 text-slate-950 text-[10px] font-black tracking-wider">DESKTOP .EXE</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button onclick="openIdeModal('pc_optimizer_app')" class="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md border border-emerald-300 flex items-center gap-1 transition-colors">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                  <span>Ver Capturas & Código</span>
+                </button>
+                <a href="https://github.com/Dyydyyb/Pc-optimizer-ELUNDER/releases/download/App/PCOptimizerELUNDER-Setup.exe" target="_blank" rel="noopener noreferrer" 
+                   class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md border border-emerald-300 flex items-center gap-1 transition-colors" title="Descargar instalador ejecutable">
+                  <span>Descargar .EXE ⬇</span>
+                </a>
+              </div>
+            </div>
+
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2 flex items-center justify-between">
+              <span>PC Optimizer ELUNDER (Desktop App)</span>
+            </h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Software de escritorio para Windows de optimización extrema con <strong>máxima seguridad</strong>: vacía la RAM inactiva (EmptyWorkingSet), limpia cachés de navegadores y apps (Discord, Steam, Spotify) y papelera. Posee un <strong>examen de disco blindado</strong> que impide borrar DLLs o archivos de sistema (solo ISO, RAR, ZIP, videos) y <strong>Monitor de Rendimiento en vivo</strong> que audita en qué se gasta la potencia del CPU y RAM.
+            </p>
+          </div>
+
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag font-bold text-emerald-800 bg-emerald-50 border-emerald-200">Electron / Node.js</span>
+              <span class="project-tag font-bold text-blue-700 bg-blue-50 border-blue-200">Windows Native API</span>
+              <span class="project-tag">RAM Boost Seguro</span>
+              <span class="project-tag">Examen Protegido</span>
+              <span class="project-tag">Monitor en Vivo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: Integración Odoo ↔ WooCommerce -->
+        <div class="reveal project-card">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i class="devicon-python-plain colored text-2xl" title="Python"></i>
+                <i class="devicon-woocommerce-plain colored text-2xl" title="WooCommerce"></i>
+                <span class="px-2 py-0.5 rounded bg-[#714B67] text-white text-[10px] font-bold">Odoo</span>
+              </div>
+              <button onclick="openIdeModal('odoo')" class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 hover:bg-purple-100 px-2.5 py-1 rounded-md border border-purple-200 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Ver en IDE</span>
+              </button>
+            </div>
+
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2">Integración Odoo ↔ WooCommerce</h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              API REST para sincronización automatizada de productos, stock y pedidos en tiempo real entre la plataforma de gestión Odoo ERP y tiendas online en WooCommerce.
+            </p>
+          </div>
+
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag">API REST</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Odoo</span>
+              <span class="project-tag">WooCommerce</span>
+              <span class="project-tag">Automatización</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Automatización de Procesos Empresariales -->
+        <div class="reveal project-card">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-[#FF6D5A] text-white text-[10px] font-bold">n8n</span>
+                <span class="px-2 py-0.5 rounded bg-[#FF4F00] text-white text-[10px] font-bold">Zapier</span>
+                <span class="px-2 py-0.5 rounded bg-violet-600 text-white text-[10px] font-bold">AI</span>
+              </div>
+              <button onclick="openIdeModal('yakai_ai')" class="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md border border-emerald-200 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Ver en IDE</span>
+              </button>
+            </div>
+
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2">Automatización de Procesos Empresariales</h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Diseño e implementación de workflows automatizados con n8n y Zapier, integración de sistemas y reducción de tareas manuales mediante IA para empresas comerciales y de servicios.
+            </p>
+          </div>
+
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag">n8n</span>
+              <span class="project-tag">Zapier</span>
+              <span class="project-tag">IA</span>
+              <span class="project-tag">Low-code</span>
+              <span class="project-tag">Automatización</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: Desarrollo Web Accesible -->
+        <div class="reveal project-card">
+          <div class="p-6 pb-0">
+            <!-- Tech Badges -->
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i class="devicon-html5-plain colored text-2xl" title="HTML5"></i>
+                <i class="devicon-css3-plain colored text-2xl" title="CSS3"></i>
+                <i class="devicon-javascript-plain colored text-2xl" title="JavaScript"></i>
+                <i class="devicon-wordpress-plain colored text-2xl" title="WordPress"></i>
+              </div>
+              <button onclick="openIdeModal('web_accesible')" class="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-md border border-blue-200 flex items-center gap-1 transition-colors">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>Ver en IDE</span>
+              </button>
+            </div>
+
+            <h3 class="font-outfit font-bold text-slate-900 text-xl mb-2">Desarrollo Web Accesible</h3>
+            <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              Diseño y desarrollo de sitios web profesionales, modernos y 100% responsive al precio más accesible del mercado. Creamos presencia digital de alta calidad y alto impacto para cualquier negocio, sin que tengan que gastar de más.
+            </p>
+          </div>
+
+          <div class="p-6 pt-0 mt-auto">
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-slate-100">
+              <span class="project-tag">HTML</span>
+              <span class="project-tag">CSS</span>
+              <span class="project-tag">JavaScript</span>
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">Web Design</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== LIVE CRM/ERP SIMULATOR SECTION ==================== -->
+  <section id="simulador" class="py-24 bg-slate-900 text-white relative border-t border-slate-800 overflow-hidden">
+    <!-- Glow -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Section Header -->
+      <div class="reveal text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/30 inline-flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          DEMOSTRACIÓN INTERACTIVA EN VIVO
+        </span>
+        <h2 class="font-outfit text-3xl sm:text-5xl font-extrabold text-white tracking-tight mt-4">
+          Simulador Sistema CRM / ERP
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base mt-3">
+          Probá cómo funciona un sistema de gestión a medida: analítica en tiempo real, control de clientes, inventario de stock, agenda de calendario y reportes contables.
+        </p>
+      </div>
+
+      <!-- Simulated ERP App Container -->
+      <div class="reveal bg-slate-950 rounded-3xl border border-slate-800 shadow-2xl overflow-hidden">
+        
+        <!-- App Top Bar (Window Header) -->
+        <div class="bg-slate-900/90 px-6 py-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-4">
+          
+          <!-- Window Controls & Title -->
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+            </div>
+            <div class="h-4 w-px bg-slate-700 mx-1"></div>
+            <span class="font-mono text-xs font-bold text-slate-300 flex items-center gap-2">
+              <span class="text-blue-400">⚡ ERP-Core v2.4</span> · Dylan Banegas Suite
+            </span>
+          </div>
+
+          <!-- Module Navigation Tabs -->
+          <div class="flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700 text-xs font-bold">
+            <button onclick="switchSimTab('dashboard')" id="sim-tab-dashboard" class="sim-tab active px-3.5 py-1.5 rounded-lg transition-all">
+              📊 Analíticas
             </button>
+            <button onclick="switchSimTab('crm')" id="sim-tab-crm" class="sim-tab px-3.5 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white">
+              👥 Clientes CRM
+            </button>
+            <button onclick="switchSimTab('inventario')" id="sim-tab-inventario" class="sim-tab px-3.5 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white">
+              📦 Inventario
+            </button>
+            <button onclick="switchSimTab('calendario')" id="sim-tab-calendario" class="sim-tab px-3.5 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white">
+              📅 Calendario
+            </button>
+            <button onclick="switchSimTab('reportes')" id="sim-tab-reportes" class="sim-tab px-3.5 py-1.5 rounded-lg transition-all text-slate-400 hover:text-white">
+              📑 Finanzas
+            </button>
+          </div>
 
-            <div class="form-status" id="form-status-msg"></div>
-          </form>
+          <!-- Quick Action: Export Excel -->
+          <button onclick="exportSimulatorExcel()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>Descargar Reporte .XLSX</span>
+          </button>
+
+        </div>
+
+        <!-- Simulator Content Panels -->
+        <div class="p-6 sm:p-8 min-h-[480px] bg-slate-950">
+          
+          <!-- TAB 1: DASHBOARD & ANALYTICS -->
+          <div id="sim-panel-dashboard" class="space-y-6">
+            
+            <!-- 4 Top Metric Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800/80">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Ventas / Ingresos</div>
+                <div class="text-2xl font-black text-emerald-400 font-outfit" id="sim-kpi-ingresos">$4.850.000</div>
+                <div class="text-[10px] text-emerald-500 font-semibold mt-1 flex items-center gap-1">
+                  ↑ +18.4% vs mes anterior
+                </div>
+              </div>
+              <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800/80">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Egresos Operativos</div>
+                <div class="text-2xl font-black text-rose-400 font-outfit">$1.420.000</div>
+                <div class="text-[10px] text-slate-500 font-semibold mt-1">
+                  Compras, insumos y logística
+                </div>
+              </div>
+              <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800/80">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Ganancia Neta Real</div>
+                <div class="text-2xl font-black text-blue-400 font-outfit">$3.430.000</div>
+                <div class="text-[10px] text-blue-400 font-semibold mt-1">
+                  Margen de rentabilidad 70.7%
+                </div>
+              </div>
+              <div class="bg-slate-900/90 p-5 rounded-2xl border border-slate-800/80">
+                <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Ventas Realizadas</div>
+                <div class="text-2xl font-black text-white font-outfit">142 pedidos</div>
+                <div class="text-[10px] text-slate-400 font-semibold mt-1">
+                  Ticket promedio: $34.150
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts 2-Column Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              
+              <!-- Chart 1: Monthly Evolution -->
+              <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-4">
+                  <h4 class="text-sm font-bold text-white">Evolución de Ventas vs Egresos</h4>
+                  <span class="text-[10px] text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded font-mono">Semestre Activo</span>
+                </div>
+                <div class="h-60">
+                  <canvas id="simChartRevenue"></canvas>
+                </div>
+              </div>
+
+              <!-- Chart 2: Top Products / Categories -->
+              <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-4">
+                  <h4 class="text-sm font-bold text-white">Top Rubros & Rendimiento</h4>
+                  <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded font-mono">En tiempo real</span>
+                </div>
+                <div class="h-60 flex items-center justify-center">
+                  <canvas id="simChartCategories"></canvas>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- TAB 2: CRM & CLIENTES -->
+          <div id="sim-panel-crm" class="hidden space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <input type="text" id="sim-client-search" onkeyup="filterSimClients()" placeholder="Buscar cliente por nombre o empresa..." 
+                       class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white focus:outline-none focus:border-blue-500 w-64">
+              </div>
+              <button onclick="addSimClientPrompt()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+                <span>+ Nuevo Cliente</span>
+              </button>
+            </div>
+
+            <!-- Clients Table -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-800">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/90 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                  <tr>
+                    <th class="p-3.5">Cliente / Empresa</th>
+                    <th class="p-3.5">Contacto</th>
+                    <th class="p-3.5">Estado CRM</th>
+                    <th class="p-3.5">Total Compras</th>
+                    <th class="p-3.5">Última Actividad</th>
+                    <th class="p-3.5 text-right">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="sim-clients-tbody" class="divide-y divide-slate-800/60 font-medium">
+                  <!-- Injected by script.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 3: INVENTARIO & STOCK -->
+          <div id="sim-panel-inventario" class="hidden space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="text-xs text-slate-400 font-mono">
+                Total SKUs: <span class="text-white font-bold" id="sim-stock-count">6 items</span>
+              </div>
+              <button onclick="addSimStockPrompt()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+                <span>+ Agregar Producto</span>
+              </button>
+            </div>
+
+            <!-- Inventory Table -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-800">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/90 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                  <tr>
+                    <th class="p-3.5">SKU / Código</th>
+                    <th class="p-3.5">Descripción del Producto</th>
+                    <th class="p-3.5">Categoría</th>
+                    <th class="p-3.5">Precio Costo</th>
+                    <th class="p-3.5">Precio Venta</th>
+                    <th class="p-3.5">Stock Actual</th>
+                    <th class="p-3.5 text-right">Ajuste</th>
+                  </tr>
+                </thead>
+                <tbody id="sim-stock-tbody" class="divide-y divide-slate-800/60 font-medium">
+                  <!-- Injected by script.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 4: CALENDARIO & TAREAS -->
+          <div id="sim-panel-calendario" class="hidden space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <!-- Today Summary -->
+              <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-3">
+                <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                  <span>📅 Agenda de Hoy</span>
+                </h4>
+                <div class="space-y-2">
+                  <div class="p-3 rounded-xl bg-blue-950/60 border border-blue-800/60 text-xs">
+                    <div class="font-bold text-blue-300">Reunión de Requerimientos CRM</div>
+                    <div class="text-[11px] text-slate-400">10:30 AM · Constructora Martinez</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-xs">
+                    <div class="font-bold text-emerald-300">Entrega de Módulo Facturación</div>
+                    <div class="text-[11px] text-slate-400">15:00 PM · Sitiocel ERP</div>
+                  </div>
+                  <div class="p-3 rounded-xl bg-violet-950/60 border border-violet-800/60 text-xs">
+                    <div class="font-bold text-violet-300">Revisión Flujo n8n & Zapier</div>
+                    <div class="text-[11px] text-slate-400">17:30 PM · YAKAI Enterprise</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upcoming Milestones -->
+              <div class="md:col-span-2 bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4">
+                <h4 class="text-sm font-bold text-white">Próximos Hitos y Entregas Programadas</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-1">
+                    <div class="flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                      <span>JUEVES 3 DE SEPT</span>
+                      <span class="text-emerald-400 font-bold">COMPLETADO 100%</span>
+                    </div>
+                    <div class="font-bold text-white text-sm">Deploy Rust Desktop Tauri App</div>
+                    <p class="text-slate-400 text-[11px]">Compilación de instalador MSI & EXE con sincronización instantánea Supabase.</p>
+                  </div>
+                  <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-1">
+                    <div class="flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                      <span>LUNES 7 DE SEPT</span>
+                      <span class="text-blue-400 font-bold">EN PROGRESO</span>
+                    </div>
+                    <div class="font-bold text-white text-sm">Integración Odoo API Sync</div>
+                    <p class="text-slate-400 text-[11px]">Sincronización bidireccional automática de catálogo y órdenes WooCommerce.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- TAB 5: FINANZAS & REPORTES -->
+          <div id="sim-panel-reportes" class="hidden space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div class="text-xs text-slate-400">
+                Flujo de caja y movimientos contables registrados en la sesión.
+              </div>
+              <button onclick="exportSimulatorExcel()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 transition-all">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                <span>Descargar Planilla Excel (.XLSX)</span>
+              </button>
+            </div>
+
+            <!-- Finance Table -->
+            <div class="overflow-x-auto rounded-2xl border border-slate-800">
+              <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900/90 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                  <tr>
+                    <th class="p-3.5">Fecha</th>
+                    <th class="p-3.5">Tipo</th>
+                    <th class="p-3.5">Concepto / Detalle</th>
+                    <th class="p-3.5">Categoría</th>
+                    <th class="p-3.5 text-right">Monto ARS</th>
+                  </tr>
+                </thead>
+                <tbody id="sim-finance-tbody" class="divide-y divide-slate-800/60 font-medium">
+                  <!-- Injected by script.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
 
       </div>
+
     </div>
   </section>
 
-  <!-- ==========================================================================
-       FOOTER
-       ========================================================================== */ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-logo">
-        <span>DYLAN</span>BANEGAS
+
+  <!-- ==================== 5. EDUCACIÓN ==================== -->
+  <section id="educacion" class="py-24 bg-slate-50 relative border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="reveal text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">
+          Formación & Certificaciones
+        </span>
+        <h2 class="font-outfit text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
+          Educación y Trayectoria Académica
+        </h2>
+        <div class="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full"></div>
       </div>
-      <p class="footer-text">
-        Automatización inteligente y soluciones digitales integrales para impulsar negocios y optimizar la productividad de cara al futuro.
-      </p>
-      <div class="footer-copyright" id="footer-copyright-text">
-        &copy; 2026 Dylan Banegas. Todos los derechos reservados. Diseñado con fines profesionales.
+
+      <!-- Vertical Timeline -->
+      <div class="max-w-3xl mx-auto relative">
+        
+        <!-- Central Line -->
+        <div class="absolute left-4 sm:left-1/2 top-4 bottom-4 w-0.5 bg-gradient-to-b from-blue-600 via-indigo-400 to-slate-300 transform sm:-translate-x-1/2"></div>
+
+        <!-- Item 1: Ingeniería en Informática -->
+        <div class="reveal relative flex flex-col sm:flex-row items-start mb-12 group">
+          <div class="flex items-center justify-start sm:justify-end w-full sm:w-1/2 sm:pr-8 pl-12 sm:pl-0">
+            <div class="timeline-card border-blue-200 bg-white hover:border-blue-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="timeline-badge bg-blue-50 text-blue-700">En curso</span>
+                <span class="text-xs text-slate-400 font-semibold">Marzo 2025 - Actualidad</span>
+              </div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Ingeniería en Informática</h3>
+              <p class="text-xs font-semibold text-blue-600 mb-2">UNAJ (Universidad Nacional Arturo Jauretche)</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Formación universitaria en algoritmos, estructuras de datos, arquitectura de software, bases de datos y cálculo.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-dot bg-blue-600 border-white text-white">1</div>
+          <div class="hidden sm:block sm:w-1/2"></div>
+        </div>
+
+        <!-- Item 2: Google Data Analytics -->
+        <div class="reveal relative flex flex-col sm:flex-row items-start mb-12 group">
+          <div class="hidden sm:block sm:w-1/2"></div>
+          <div class="timeline-dot bg-indigo-600 border-white text-white">2</div>
+          <div class="flex items-center justify-start w-full sm:w-1/2 sm:pl-8 pl-12">
+            <div class="timeline-card border-indigo-200 bg-white hover:border-indigo-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="timeline-badge bg-indigo-50 text-indigo-700">En curso</span>
+                <span class="text-xs text-slate-400 font-semibold">2025 - 2026</span>
+              </div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Google Data Analytics</h3>
+              <p class="text-xs font-semibold text-indigo-600 mb-2">Google / Coursera</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Especialización en análisis de datos, visualización, SQL, procesamiento analítico y toma de decisiones basadas en datos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Desarrollo Backend con JavaScript -->
+        <div class="reveal relative flex flex-col sm:flex-row items-start mb-12 group">
+          <div class="flex items-center justify-start sm:justify-end w-full sm:w-1/2 sm:pr-8 pl-12 sm:pl-0">
+            <div class="timeline-card border-emerald-200 bg-white hover:border-emerald-400">
+              <div class="flex items-center justify-between mb-1">
+                <span class="timeline-badge bg-emerald-50 text-emerald-700">En curso</span>
+                <span class="text-xs text-slate-400 font-semibold">2026</span>
+              </div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Desarrollo Backend con JavaScript</h3>
+              <p class="text-xs font-semibold text-emerald-600 mb-2">Node.js, Express.js & MongoDB</p>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Arquitectura de APIs REST, autenticación JWT, modelado de bases de datos no relacionales y microservicios.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-dot bg-emerald-600 border-white text-white">3</div>
+          <div class="hidden sm:block sm:w-1/2"></div>
+        </div>
+
+        <!-- Item 4: Educación Secundaria -->
+        <div class="reveal relative flex flex-col sm:flex-row items-start group">
+          <div class="hidden sm:block sm:w-1/2"></div>
+          <div class="timeline-dot bg-slate-400 border-white text-white">✓</div>
+          <div class="flex items-center justify-start w-full sm:w-1/2 sm:pl-8 pl-12">
+            <div class="timeline-card border-slate-200 bg-white hover:border-slate-300">
+              <div class="flex items-center justify-between mb-1">
+                <span class="timeline-badge bg-slate-100 text-slate-700">Completada</span>
+              </div>
+              <h3 class="font-outfit font-bold text-slate-900 text-lg">Educación Secundaria</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">
+                Título secundario obtenido con sólida base en ciencias y tecnología.
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== 6. CONTACTAME ==================== -->
+  <section id="contacto" class="py-24 bg-white relative border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="max-w-4xl mx-auto bg-gradient-to-br from-slate-50 via-white to-blue-50/50 p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-xl relative overflow-hidden">
+        
+        <div class="reveal text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100">
+            Hablemos
+          </span>
+          <h2 class="font-outfit text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
+            Contactame
+          </h2>
+          <p class="text-slate-600 text-base mt-4 leading-relaxed">
+            Ya sea para un proyecto freelance, una oportunidad laboral o trabajar junto a <strong>YAKAI</strong>, completá el formulario o escribime directamente por correo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+          
+          <!-- Direct Info Cards -->
+          <div class="reveal-left md:col-span-5 space-y-4">
+            
+            <!-- Email Card -->
+            <a href="mailto:banegasdylan1109@gmail.com" class="block p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div class="overflow-hidden">
+                  <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Email directo</div>
+                  <div class="text-xs sm:text-sm font-bold text-slate-800 truncate group-hover:text-blue-600 transition-colors">
+                    banegasdylan1109@gmail.com
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- LinkedIn Card -->
+            <a href="https://www.linkedin.com/in/dylan-banegas-aguilar/" target="_blank" rel="noopener noreferrer" class="block p-5 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-[#0A66C2]/10 text-[#0A66C2] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <i class="devicon-linkedin-plain text-xl"></i>
+                </div>
+                <div>
+                  <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">LinkedIn</div>
+                  <div class="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-[#0A66C2] transition-colors">
+                    linkedin.com/in/dylan-banegas-aguilar/
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <!-- YAKAI Card -->
+            <a href="https://yakai.shop" target="_blank" rel="noopener noreferrer" class="block p-5 rounded-2xl bg-slate-900 text-white hover:bg-slate-800 hover:shadow-lg transition-all group">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center font-black group-hover:scale-110 transition-transform">
+                  ⚡
+                </div>
+                <div>
+                  <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider">Empresa de Automatización</div>
+                  <div class="text-xs sm:text-sm font-bold text-white group-hover:text-blue-300 transition-colors">
+                    yakai.shop
+                  </div>
+                </div>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- Contact Form (Directly opens Email client with formatted body) -->
+          <div class="reveal-right md:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+            <form id="contact-form" class="space-y-4">
+              
+              <div>
+                <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nombre completo</label>
+                <input type="text" id="name" name="name" required placeholder="Tu nombre o empresa"
+                       class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 text-sm transition-all bg-slate-50/50">
+              </div>
+
+              <div>
+                <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Correo electrónico de contacto</label>
+                <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com"
+                       class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 text-sm transition-all bg-slate-50/50">
+              </div>
+
+              <div>
+                <label for="message" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Mensaje o consulta</label>
+                <textarea id="message" name="message" rows="4" required placeholder="Contame sobre tu proyecto, requerimientos o propuesta..."
+                          class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-600/20 focus:border-blue-600 text-sm transition-all bg-slate-50/50 resize-none"></textarea>
+              </div>
+
+              <button type="submit" id="submit-btn" 
+                      class="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
+                <span>Enviar mensaje a mi correo</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+
+              <div id="form-status" class="hidden text-xs text-center font-bold p-3 rounded-xl"></div>
+
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-outfit font-extrabold text-sm">
+          DB
+        </div>
+        <span class="font-outfit font-bold text-white text-base">Dylan Banegas</span>
+      </div>
+
+      <div class="text-xs text-center sm:text-right text-slate-400">
+        © <span id="current-year"></span> Dylan Banegas. Cofundador de <a href="https://yakai.shop" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline">YAKAI</a>. Todos los derechos reservados.
+      </div>
+
     </div>
   </footer>
 
-  <!-- Lucide Icons CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Main Javascript -->
-  <script src="index.js"></script>
+
+  <!-- ==================== MODAL: CODE EDITOR / IDE VIEWER ==================== -->
+  <div id="ide-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4 sm:p-6 transition-all duration-300">
+    <div class="bg-slate-950 w-full max-w-5xl h-[88vh] rounded-2xl border border-slate-800 shadow-2xl flex flex-col overflow-hidden animate-scale-up">
+      
+      <!-- Top Window Bar -->
+      <div class="bg-slate-900 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <button onclick="closeIdeModal()" class="w-3 h-3 rounded-full bg-red-500 hover:opacity-80 transition-opacity" title="Cerrar"></button>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+          <span class="text-xs font-mono text-slate-400 ml-2">Dylan-Studio IDE — Proyectos, Arquitectura & Capturas Reales</span>
+        </div>
+
+        <button onclick="closeIdeModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- IDE Body: Sidebar + Main Code / Preview Area -->
+      <div class="flex-1 flex flex-col md:flex-row overflow-hidden font-mono text-xs">
+        
+        <!-- Sidebar File Explorer -->
+        <div class="w-full md:w-64 bg-slate-900/70 border-r border-slate-800 p-3 space-y-4 overflow-y-auto">
+          <div class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Explorador de Proyectos</div>
+          
+          <div class="space-y-1">
+            <!-- Sitiocel Desktop App -->
+            <button onclick="loadIdeProject('sitiocel_app')" id="ide-btn-sitiocel_app" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-orange-400">🦀</span>
+              <span class="truncate font-semibold">sitiocel_app.rs (Desktop)</span>
+            </button>
+            <!-- Sitiocel Web Store -->
+            <button onclick="loadIdeProject('sitiocel_web')" id="ide-btn-sitiocel_web" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-blue-400">🌐</span>
+              <span class="truncate">sitiocel_web.html</span>
+            </button>
+            <!-- Martinez -->
+            <button onclick="loadIdeProject('martinez')" id="ide-btn-martinez" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-yellow-400">⚡</span>
+              <span class="truncate">martinez_crm.js</span>
+            </button>
+            <!-- PC Optimizer Web -->
+            <button onclick="loadIdeProject('pc_optimizer_web')" id="ide-btn-pc_optimizer_web" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-pink-400">🌐</span>
+              <span class="truncate">pc_optimizer_web.html</span>
+            </button>
+            <!-- PC Optimizer Desktop App -->
+            <button onclick="loadIdeProject('pc_optimizer_app')" id="ide-btn-pc_optimizer_app" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-emerald-400">⚡</span>
+              <span class="truncate">pc_optimizer_app.js</span>
+            </button>
+            <!-- Odoo -->
+            <button onclick="loadIdeProject('odoo')" id="ide-btn-odoo" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-blue-400">🐍</span>
+              <span class="truncate">odoo_woo_sync.py</span>
+            </button>
+            <!-- YAKAI AI -->
+            <button onclick="loadIdeProject('yakai_ai')" id="ide-btn-yakai_ai" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-emerald-400">🤖</span>
+              <span class="truncate">yakai_agents.n8n</span>
+            </button>
+            <!-- Web Accesible -->
+            <button onclick="loadIdeProject('web_accesible')" id="ide-btn-web_accesible" class="ide-file-btn w-full text-left px-2.5 py-1.5 rounded-lg flex items-center gap-2 hover:bg-slate-800 text-slate-300">
+              <span class="text-purple-400">🎨</span>
+              <span class="truncate">web_accesible.html</span>
+            </button>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800">
+            <button onclick="openSimulatorFromIde()" class="w-full px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
+              <span>⚡ Probar Simulador ERP</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Code & Mockup Viewer Area -->
+        <div class="flex-1 flex flex-col bg-slate-950 overflow-hidden">
+          
+          <!-- Tab Bar -->
+          <div class="bg-slate-900/50 px-4 py-2 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-slate-300" id="ide-current-tab">
+              <span class="text-blue-400">📄</span>
+              <span id="ide-tab-filename">sitiocel_desktop_tauri.rs</span>
+            </div>
+
+            <!-- View Toggle: Code vs Mockup Visual -->
+            <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
+              <button onclick="setIdeViewMode('code')" id="ide-view-code-btn" class="px-2.5 py-1 rounded text-[11px] font-bold bg-blue-600 text-white transition-all">
+                Código & Arquitectura
+              </button>
+              <button onclick="setIdeViewMode('mockup')" id="ide-view-mockup-btn" class="px-2.5 py-1 rounded text-[11px] font-bold text-slate-400 hover:text-white transition-all">
+                Capturas Reales / Mockup
+              </button>
+            </div>
+          </div>
+
+          <!-- Code View Panel -->
+          <div id="ide-code-panel" class="flex-1 p-5 overflow-y-auto font-mono text-xs leading-relaxed text-slate-300 space-y-4">
+            <!-- Injected by script.js -->
+          </div>
+
+          <!-- Visual Mockup & Screenshots Panel -->
+          <div id="ide-mockup-panel" class="hidden flex-1 p-6 overflow-y-auto flex flex-col items-center bg-slate-900/40">
+            <!-- Injected by script.js -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Javascript -->
+  <script src="script.js"></script>
 </body>
 </html>
