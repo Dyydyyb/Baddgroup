@@ -1048,25 +1048,76 @@ function initContactForm() {
 
   if (!contactForm || !submitBtn || !formStatus) return;
 
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const formData = new FormData(contactForm);
-    const name = formData.get('name') || '';
-    const email = formData.get('email') || '';
-    const message = formData.get('message') || '';
+    const name = (formData.get('name') || '').trim();
+    const email = (formData.get('email') || '').trim();
+    const message = (formData.get('message') || '').trim();
 
-    // Build mailto URL
+    if (!name || !email || !message) return;
+
+    // Loading State
+    const originalBtnHTML = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+    submitBtn.innerHTML = `
+      <svg class="animate-spin h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+      <span>Enviando directamente a tu correo...</span>
+    `;
+
+    formStatus.className = 'hidden';
+    formStatus.innerHTML = '';
+
     const targetEmail = 'banegasdylan1109@gmail.com';
-    const subject = `Contacto Portfolio - ${name}`;
-    const body = `Hola Dylan,\n\nMi nombre es: ${name}\nMi email de contacto es: ${email}\n\nMensaje:\n${message}\n\n---\nEnviado desde tu Portfolio Personal`;
+    const payload = {
+      name: name,
+      email: email,
+      message: message,
+      _replyto: email,
+      _subject: `Nuevo mensaje de Portfolio — ${name}`,
+      _captcha: 'false',
+      _template: 'table'
+    };
 
-    const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
 
-    // Show confirmation in UI
-    formStatus.className = 'text-xs text-center font-bold p-3 rounded-xl bg-blue-50 text-blue-800 border border-blue-200 block';
-    formStatus.textContent = '🚀 Abriendo tu aplicación de correo para enviar mensaje directo a banegasdylan1109@gmail.com...';
+      const data = await response.json().catch(() => ({}));
 
-    // Trigger Mail Client
-    window.location.href = mailtoUrl;
+      if (response.ok && (data.success === 'true' || data.success === true)) {
+        // Successful direct delivery
+        formStatus.className = 'text-xs text-center font-bold p-3.5 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 block transition-all';
+        formStatus.innerHTML = '✅ ¡Mensaje enviado con éxito! Tu consulta fue enviada directamente al correo de Dylan (banegasdylan1109@gmail.com).';
+        contactForm.reset();
+      } else if (data.message && data.message.toLowerCase().includes('activation')) {
+        // Initial 1-time activation check required by FormSubmit
+        formStatus.className = 'text-xs text-left font-medium p-3.5 rounded-xl bg-amber-50 text-amber-900 border border-amber-200 block space-y-1 transition-all';
+        formStatus.innerHTML = '📩 <strong>Confirmación única:</strong> FormSubmit te envió un correo a <code>banegasdylan1109@gmail.com</code>. Hacé clic en <em>"Activate Form"</em> en tu Gmail por única vez para habilitar las entregas directas a tu bandeja de entrada.';
+      } else {
+        throw new Error(data.message || 'Error al procesar la solicitud');
+      }
+    } catch (err) {
+      console.warn('Fallo en envío directo:', err);
+      // Fallback
+      formStatus.className = 'text-xs text-center font-medium p-3.5 rounded-xl bg-rose-50 text-rose-800 border border-rose-200 block transition-all';
+      const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent('Contacto Portfolio - ' + name)}&body=${encodeURIComponent('Nombre: ' + name + '\nEmail: ' + email + '\n\nMensaje:\n' + message)}`;
+      formStatus.innerHTML = `No se pudo completar el envío automático. <a href="${mailtoUrl}" class="font-bold underline ml-1 hover:text-rose-900">Haz clic aquí para abrir tu app de correo</a>`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+      submitBtn.innerHTML = originalBtnHTML;
+    }
   });
 }

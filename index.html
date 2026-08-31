@@ -1434,9 +1434,14 @@
 
           </div>
 
-          <!-- Contact Form (Directly opens Email client with formatted body) -->
+          <!-- Contact Form (Directly sends Email to banegasdylan1109@gmail.com via FormSubmit) -->
           <div class="reveal-right md:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <form id="contact-form" class="space-y-4">
+            <form id="contact-form" action="https://formsubmit.co/banegasdylan1109@gmail.com" method="POST" class="space-y-4">
+              
+              <!-- FormSubmit Configuration -->
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="Nuevo mensaje desde Portfolio Personal (Dylan Banegas)">
+              <input type="hidden" name="_template" value="table">
               
               <div>
                 <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nombre completo</label>
