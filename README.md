@@ -20,6 +20,8 @@ Sitio web personal de una sola página (**one-page**) moderno, rápido y 100% re
   - Lenguajes (C#, JS, Python, SQL), Automatización (n8n, Zapier, AI Agents, APIs REST), ERP (Odoo, WooCommerce), Herramientas (Git, GitHub, Docker, Node.js, MongoDB, MySQL, Rust).
 - **Proyectos Fieles a la Realidad**:
   - **Sitiocel ERP/CRM & Web Store**: Aplicación nativa de escritorio hecha con **Rust (Tauri)** conectada en tiempo real vía **Supabase** a la tienda web pública (HTML5, CSS3, JS donde el cliente eligió el 100% de su diseño).
+  - **Caber Tattoo Web & Panel Admin**: Sitio web profesional para artista del tatuaje con sedes en Avellaneda y Villa Elisa. Sincronización global con **Supabase Cloud** (PostgreSQL + Storage), panel privado **/admin** con compresión Canvas en cliente, slider 3D Coverflow y cotizador automatizado a WhatsApp ([GitHub](https://github.com/Dyydyyb/Caber)).
+  - **PC Optimizer ELUNDER**: Landing retro underground 2000s con Web Audio API y app desktop .EXE de optimización de RAM y examen seguro.
   - **YAKAI**: Empresa cofundada de automatización e Inteligencia Artificial ([yakai.shop](https://yakai.shop)).
   - **Constructora Martinez y De La Fuente**: CRM/ERP de obras y presentismo.
   - **Integración Odoo ↔ WooCommerce**: Microservicio de sincronización por API REST.

@@ -364,6 +364,67 @@ async function getTopProcessesConsumingResources() {
     liveLink: 'https://github.com/Dyydyyb/Pc-optimizer-ELUNDER/releases/tag/App'
   },
 
+  caber_tattoo: {
+    filename: 'caber_tattoo_sync.js',
+    icon: '⚡',
+    title: 'Caber Tattoo — Web & Panel Admin con Supabase Cloud',
+    badge: 'Supabase Cloud (PostgreSQL + Storage) + Vanilla JS + 3D Coverflow + REST API',
+    description: 'Sitio web profesional de autor y panel de administración en la nube para el reconocido tatuador Caber Tattoo (sedes Avellaneda y Villa Elisa). Integra base de datos cloud en Supabase con sincronización global en tiempo real de tatuajes, panel privado de administración (/admin) con compresión inteligente en Canvas antes de subir imágenes a Supabase Storage, slider 3D Coverflow interactivo, cotizador de turnos a WhatsApp, geolocalización de estudios y guía completa de cuidados.',
+    code: `// Caber Tattoo — Sincronización en la Nube con Supabase REST API & Storage
+const SUPABASE_URL = 'https://ipbfgmgcvctxrzvuihun.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI...';
+
+// Store global de tatuajes con sincronización en tiempo real
+const TattooStore = {
+  async fetchAll() {
+    const res = await fetch(\`\${SUPABASE_URL}/rest/v1/tattoos?select=*&order=order_index.asc\`, {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': \`Bearer \${SUPABASE_ANON_KEY}\` }
+    });
+    return await res.json();
+  },
+
+  // Subida con compresión previa en Canvas al bucket de Storage
+  async uploadImage(file) {
+    const compressedBlob = await compressImageCanvas(file, 1400, 0.85);
+    const fileName = \`tattoo_\${Date.now()}.\${file.type.split('/')[1] || 'jpg'}\`;
+    
+    await fetch(\`\${SUPABASE_URL}/storage/v1/object/tattoos/\${fileName}\`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': \`Bearer \${SUPABASE_ANON_KEY}\`,
+        'Content-Type': file.type
+      },
+      body: compressedBlob
+    });
+    return \`\${SUPABASE_URL}/storage/v1/object/public/tattoos/\${fileName}\`;
+  }
+};`,
+    screenshots: [
+      {
+        title: 'Manga Filigrana Ornamental (Black & Grey)',
+        desc: 'Técnica Black & Grey en antebrazo y codo con sombreado de transición suave realizado en el estudio de Avellaneda.',
+        src: 'img/caber-tattoo-filigrana.png'
+      },
+      {
+        title: 'Anime Dark / Itachi Uchiha',
+        desc: 'Composición de alto contraste con sólidos negros densos, mirada sharingan y cuervos en vuelo.',
+        src: 'img/caber-tattoo-anime.png'
+      },
+      {
+        title: 'Identidad Visual & Logo Oficial',
+        desc: 'Emblema y dirección de arte con tipografía Cinzel y estética Dark Crimson diseñada a medida.',
+        src: 'img/caber-logo.png'
+      }
+    ],
+    kpis: [
+      { label: 'Cloud Backend', value: 'Supabase (DB & Storage)', color: 'text-emerald-400' },
+      { label: 'Admin Panel', value: 'Gestión CRUD en Vivo', color: 'text-red-400' },
+      { label: 'Interactividad', value: '3D Coverflow & Cotizador', color: 'text-blue-400' }
+    ],
+    liveLink: 'https://github.com/Dyydyyb/Caber'
+  },
+
   odoo: {
     filename: 'odoo_woocommerce_sync.py',
     icon: '🐍',
