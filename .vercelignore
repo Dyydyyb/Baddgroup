@@ -1,0 +1,4 @@
+# Ignore local development server and leftover scripts from Vercel deployment
+server.mjs
+local-server.mjs
+index.js
