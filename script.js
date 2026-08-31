@@ -511,11 +511,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
 
-  if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    mobileLinks.forEach(l => l.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+  window.toggleMobileMenu = function(forceClose = false) {
+    if (!mobileMenu) return;
+    const isCurrentlyHidden = mobileMenu.classList.contains('hidden');
+    if (forceClose || !isCurrentlyHidden) {
+      mobileMenu.classList.add('hidden');
+      if (hamburgerIcon) hamburgerIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+    } else {
+      mobileMenu.classList.remove('hidden');
+      if (hamburgerIcon) hamburgerIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+    }
+  };
+
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.toggleMobileMenu();
+    });
   }
+
+  mobileLinks.forEach(l => {
+    l.addEventListener('click', () => window.toggleMobileMenu(true));
+  });
+
+  document.addEventListener('click', (e) => {
+    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+      if (!mobileMenu.contains(e.target) && mobileMenuBtn && !mobileMenuBtn.contains(e.target)) {
+        window.toggleMobileMenu(true);
+      }
+    }
+  });
 
   // Scrollspy
   const sections = document.querySelectorAll('section[id]');
@@ -652,6 +679,7 @@ window.openIdeModal = function(projectId = 'sitiocel_app') {
   if (!modal) return;
   modal.classList.remove('hidden');
   modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
   loadIdeProject(projectId);
 };
 
@@ -660,7 +688,23 @@ window.closeIdeModal = function() {
   if (!modal) return;
   modal.classList.add('hidden');
   modal.classList.remove('flex');
+  document.body.style.overflow = '';
 };
+
+// Close modal on backdrop click or ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    window.closeIdeModal();
+    window.toggleMobileMenu?.(true);
+  }
+});
+
+const ideModalEl = document.getElementById('ide-modal');
+if (ideModalEl) {
+  ideModalEl.addEventListener('click', (e) => {
+    if (e.target === ideModalEl) window.closeIdeModal();
+  });
+}
 
 window.loadIdeProject = function(projectId) {
   SIM_STATE.currentIdeProject = projectId;
@@ -677,22 +721,22 @@ window.loadIdeProject = function(projectId) {
   const codePanel = document.getElementById('ide-code-panel');
   if (codePanel) {
     codePanel.innerHTML = `
-      <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2 mb-4">
+      <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2 mb-3 sm:mb-4">
         <div class="flex items-center justify-between flex-wrap gap-2">
-          <span class="text-white font-bold text-sm">${project.title}</span>
+          <span class="text-white font-bold text-sm sm:text-base font-outfit">${project.title}</span>
           <span class="text-[10px] text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded font-mono">${project.badge}</span>
         </div>
-        <p class="text-slate-400 text-xs">${project.description}</p>
+        <p class="text-slate-400 text-xs leading-relaxed">${project.description}</p>
         ${project.liveLink ? `
           <div class="pt-2">
-            <a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-bold underline">
+            <a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 font-bold underline break-all">
               <span>Visitar sitio web oficial (${project.liveLink}) ↗</span>
             </a>
           </div>
         ` : ''}
       </div>
-      <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800/80 overflow-x-auto">
-        <pre><code class="text-slate-200">${escapeHtml(project.code)}</code></pre>
+      <div class="bg-slate-900/60 p-3 sm:p-4 rounded-xl border border-slate-800/80 overflow-x-auto no-scrollbar">
+        <pre><code class="text-slate-200 text-[11px] sm:text-xs leading-relaxed">${escapeHtml(project.code)}</code></pre>
       </div>
     `;
   }
@@ -701,9 +745,9 @@ window.loadIdeProject = function(projectId) {
   const mockupPanel = document.getElementById('ide-mockup-panel');
   if (mockupPanel) {
     const kpisHtml = project.kpis.map(k => `
-      <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-        <div class="text-[10px] text-slate-500 uppercase font-bold">${k.label}</div>
-        <div class="text-base font-black ${k.color} font-outfit mt-1">${k.value}</div>
+      <div class="bg-slate-900 p-3.5 sm:p-4 rounded-xl border border-slate-800">
+        <div class="text-[10px] text-slate-500 uppercase font-bold tracking-wider">${k.label}</div>
+        <div class="text-sm sm:text-base font-black ${k.color} font-outfit mt-1">${k.value}</div>
       </div>
     `).join('');
 
@@ -714,17 +758,17 @@ window.loadIdeProject = function(projectId) {
         : '🖼️ Capturas de la Aplicación en Producción:';
 
       galleryHtml = `
-        <div class="space-y-6 pt-2 w-full">
-          <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-2">
+        <div class="space-y-4 sm:space-y-6 pt-2 w-full">
+          <h4 class="text-xs sm:text-sm font-bold text-slate-300 uppercase tracking-wider font-mono flex items-center gap-2">
             <span>${galleryTitle}</span>
           </h4>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-5">
             ${project.screenshots.map(s => `
               <div class="bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden shadow-lg group hover:border-slate-700 transition-all">
                 <div class="relative overflow-hidden bg-slate-950 aspect-video flex items-center justify-center">
-                  <img src="${s.src}" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <img src="${s.src}" alt="${s.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
                 </div>
-                <div class="p-4 space-y-1">
+                <div class="p-3.5 sm:p-4 space-y-1">
                   <h5 class="text-xs font-bold text-white font-outfit">${s.title}</h5>
                   <p class="text-[11px] text-slate-400 leading-relaxed">${s.desc}</p>
                 </div>
@@ -736,35 +780,35 @@ window.loadIdeProject = function(projectId) {
     }
 
     const statusBadgeHtml = project.statusBadge
-      ? `<span class="text-xs ${project.statusBadge.color} ${project.statusBadge.bg} px-2.5 py-1 rounded-full font-bold border ${project.statusBadge.border}">${project.statusBadge.text}</span>`
-      : `<span class="text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full font-bold">Producción Activa</span>`;
+      ? `<span class="text-[11px] sm:text-xs ${project.statusBadge.color} ${project.statusBadge.bg} px-2.5 py-1 rounded-full font-bold border ${project.statusBadge.border}">${project.statusBadge.text}</span>`
+      : `<span class="text-[11px] sm:text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full font-bold">Producción Activa</span>`;
 
     mockupPanel.innerHTML = `
-      <div class="w-full max-w-4xl bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-2xl space-y-6">
+      <div class="w-full max-w-4xl bg-slate-950 p-3.5 sm:p-6 rounded-2xl border border-slate-800 shadow-2xl space-y-4 sm:space-y-6">
         <div class="flex items-center justify-between pb-3 border-b border-slate-800 flex-wrap gap-2">
-          <h4 class="text-white font-bold font-outfit text-base">${project.title}</h4>
+          <h4 class="text-white font-bold font-outfit text-sm sm:text-base">${project.title}</h4>
           ${statusBadgeHtml}
         </div>
 
         ${project.notice ? `
-          <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex items-start gap-3">
-            <span class="text-lg shrink-0">📌</span>
+          <div class="p-3.5 sm:p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs flex items-start gap-2.5">
+            <span class="text-base sm:text-lg shrink-0">📌</span>
             <div class="space-y-0.5">
               <div class="font-bold text-amber-300 uppercase tracking-wider text-[10px]">Aclaración de Estado</div>
-              <p class="leading-relaxed text-amber-200/90">${project.notice}</p>
+              <p class="leading-relaxed text-amber-200/90 text-xs">${project.notice}</p>
             </div>
           </div>
         ` : ''}
         
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
           ${kpisHtml}
         </div>
 
         ${galleryHtml}
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400 flex items-center justify-between flex-wrap gap-3">
-          <span>¿Querés probar la interfaz de un sistema completo?</span>
-          <button onclick="openSimulatorFromIde()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all">
+        <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-400 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 text-center sm:text-left">
+          <span>¿Querés probar la interfaz interactiva de un ERP?</span>
+          <button onclick="openSimulatorFromIde()" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all justify-center">
             Ir al Simulador en Vivo ⚡
           </button>
         </div>
