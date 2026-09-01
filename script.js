@@ -402,19 +402,29 @@ const TattooStore = {
 };`,
     screenshots: [
       {
-        title: 'Manga Filigrana Ornamental (Black & Grey)',
-        desc: 'Técnica Black & Grey en antebrazo y codo con sombreado de transición suave realizado en el estudio de Avellaneda.',
-        src: 'img/caber-tattoo-filigrana.png'
+        title: 'Hero Section & 3D Coverflow Slider',
+        desc: 'Portada inmersiva de alto impacto con el emblema de fondo a escala, tipografía Cinzel y slider 3D interactivo que amplía la pieza central y rota los laterales con profundidad.',
+        src: 'img/caber-hero-coverflow.png'
       },
       {
-        title: 'Anime Dark / Itachi Uchiha',
-        desc: 'Composición de alto contraste con sólidos negros densos, mirada sharingan y cuervos en vuelo.',
-        src: 'img/caber-tattoo-anime.png'
+        title: 'Coverflow 3D con Zoom & Lettering Custom',
+        desc: 'Detalle del carrusel dinámico en navegación: rotación angular, transiciones por GPU a 60fps y visualización de piezas destacadas como Script en Cuello.',
+        src: 'img/caber-coverflow-slide.png'
       },
       {
-        title: 'Identidad Visual & Logo Oficial',
-        desc: 'Emblema y dirección de arte con tipografía Cinzel y estética Dark Crimson diseñada a medida.',
-        src: 'img/caber-logo.png'
+        title: 'Estudios Privados & Geolocalización en Tiempo Real',
+        desc: 'Sección de sedes (Avellaneda y Villa Elisa) con Google Maps integrados en tema oscuro nativo, especificaciones técnicas y accesos directos de turnos.',
+        src: 'img/caber-estudios-mapas.png'
+      },
+      {
+        title: 'Galería de Trabajos Dinámica con Filtros',
+        desc: 'Catálogo sincronizado desde Supabase Cloud con filtros por técnica (Black & Grey, Anime Dark, Lettering, Blackwork) y visor modal Lightbox en alta definición.',
+        src: 'img/caber-galeria-filtros.png'
+      },
+      {
+        title: 'Cotizador Interactivo de Turnos para WhatsApp',
+        desc: 'Calculadora de presupuesto paso a paso (Estudio, Estilo, Zona del cuerpo y Tamaño) que genera un mensaje formal preformateado y abre WhatsApp automáticamente.',
+        src: 'img/caber-cotizador-interactivo.png'
       }
     ],
     kpis: [
@@ -422,7 +432,7 @@ const TattooStore = {
       { label: 'Admin Panel', value: 'Gestión CRUD en Vivo', color: 'text-red-400' },
       { label: 'Interactividad', value: '3D Coverflow & Cotizador', color: 'text-blue-400' }
     ],
-    liveLink: 'https://github.com/Dyydyyb/Caber'
+    liveLink: 'https://caber.vercel.app/'
   },
 
   odoo: {
