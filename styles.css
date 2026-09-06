@@ -1313,115 +1313,314 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   SOBRE MÍ & FILOSOFÍA
+   SOBRE BADDGROUP & FILOSOFÍA (AGENCY HUB DARK)
    ========================================================================== */
 
 .about-section {
-  padding: 96px 0;
-  background-color: var(--bg-main);
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 104px 0;
+  background-color: #070A12;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: -5%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, rgba(16, 185, 129, 0.03) 50%, transparent 70%);
+  pointer-events: none;
 }
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 56px;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 
 .about-visual {
   position: relative;
 }
 
-.portrait-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: 32px;
-  box-shadow: var(--shadow-lg);
+/* Tarjeta Principal de la Agencia (Agency Hub Card) */
+.agency-hub-card {
   position: relative;
+  background: linear-gradient(150deg, rgba(17, 24, 39, 0.95) 0%, rgba(8, 12, 22, 0.98) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: var(--radius-xl);
+  padding: 36px 30px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(14, 165, 233, 0.12);
+  overflow: hidden;
+  transition: all var(--transition-normal);
 }
 
-.portrait-frame {
+.agency-hub-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 32px 75px -12px rgba(0, 0, 0, 0.9), 0 0 50px rgba(14, 165, 233, 0.22);
+}
+
+.agency-hub-glow {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(16, 185, 129, 0.12) 50%, transparent 70%);
+  pointer-events: none;
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.agency-hub-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.agency-logo-container {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agency-animated-logo {
+  width: 64px;
+  height: 64px;
+  display: block;
+  animation: logoLevitate 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.5));
+}
+
+.agency-logo-pulse {
+  position: absolute;
   width: 100%;
-  aspect-ratio: 4/5;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(135deg, var(--accent-light), var(--bg-subtle));
-  border: 1px solid var(--border-subtle);
+  height: 100%;
+  border-radius: 18px;
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  animation: logoPulseRing 3.2s ease-out infinite;
+  pointer-events: none;
+}
+
+.agency-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.status-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: liveBlink 1.8s infinite;
+}
+
+.agency-hub-title {
+  font-family: var(--font-brand);
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin: 0 0 4px;
+}
+
+.agency-hub-tagline {
+  font-size: 0.8125rem;
+  color: #94A3B8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Terminal de Estado */
+.agency-terminal-box {
+  background: #040711;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  margin-bottom: 22px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.terminal-bar {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #EF4444; }
+.dot-yellow { background: #F59E0B; }
+.dot-green { background: #10B981; }
+
+.terminal-title {
+  font-size: 0.6875rem;
+  color: #64748B;
+  letter-spacing: 0.04em;
+}
+
+.terminal-screen {
+  padding: 12px 14px;
+  font-size: 0.775rem;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  gap: 4px;
 }
 
-.portrait-monogram-large {
-  width: 96px;
-  height: 96px;
-  border-radius: var(--radius-xl);
-  background-color: var(--accent-primary);
-  color: #FFFFFF;
+.term-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-heading);
-  font-size: 2.75rem;
-  font-weight: 800;
-  box-shadow: var(--shadow-md);
-  margin-bottom: 16px;
+  gap: 6px;
+  color: #CBD5E1;
 }
 
-.portrait-caption {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--text-main);
-  text-align: center;
-}
+.term-dim { color: #64748B; }
+.term-cmd { color: #38BDF8; font-weight: 600; }
+.term-success { color: #34D399; }
+.term-cyan { color: #38BDF8; }
+.term-amber { color: #FBBF24; }
+.term-cursor { color: #38BDF8; animation: termBlink 1s infinite; }
 
-.portrait-subcaption {
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  text-align: center;
-}
-
-.experience-float-badge {
-  position: absolute;
-  bottom: -16px;
-  right: -16px;
-  background-color: var(--bg-dark);
-  color: #FFFFFF;
-  padding: 14px 20px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xl);
-  border: 1px solid #374151;
-  display: flex;
-  align-items: center;
+/* Grilla de Métricas */
+.agency-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+  margin-bottom: 20px;
 }
 
-.experience-number {
-  font-family: var(--font-heading);
-  font-size: 1.75rem;
+.agency-metric-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  transition: all var(--transition-fast);
+}
+
+.agency-metric-item:hover {
+  background: rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.3);
+  transform: translateY(-2px);
+}
+
+.metric-val {
+  font-family: var(--font-brand);
+  font-size: 1.45rem;
   font-weight: 800;
-  color: #10B981;
-  line-height: 1;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin-bottom: 2px;
 }
 
-.experience-text {
-  font-size: 0.75rem;
+.metric-lbl {
+  font-size: 0.7125rem;
+  color: #94A3B8;
+  line-height: 1.35;
+}
+
+/* Stack Pills */
+.agency-stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.stack-pill {
+  font-size: 0.7125rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #D1D5DB;
-  line-height: 1.3;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #7DD3FC;
+  transition: all var(--transition-fast);
+}
+
+.stack-pill:hover {
+  background: rgba(56, 189, 248, 0.16);
+  color: #FFFFFF;
+  border-color: rgba(56, 189, 248, 0.45);
+  transform: translateY(-1px);
+}
+
+.agency-trust-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.12) 0%, rgba(14, 165, 233, 0.12) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #6EE7B7;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Contenido de Texto a la Derecha */
+.about-section .section-subtitle {
+  color: #38BDF8;
+  background-color: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.about-section .section-title {
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .about-text-content p {
   font-size: 1.0625rem;
   line-height: 1.7;
-  color: var(--text-body);
+  color: #CBD5E1;
   margin-bottom: 20px;
+}
+
+.about-text-content strong {
+  color: #FFFFFF;
 }
 
 .about-highlights {
@@ -1431,23 +1630,57 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 32px;
 }
 
-.highlight-box {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+.about-section .highlight-box {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 18px;
+  transition: all var(--transition-fast);
 }
 
-.highlight-title {
+.about-section .highlight-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.about-section .highlight-title {
   font-size: 0.9375rem;
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 4px;
+  color: #38BDF8;
+  margin-bottom: 6px;
 }
 
-.highlight-desc {
+.about-section .highlight-desc {
   font-size: 0.8125rem;
-  color: var(--text-muted);
+  color: #94A3B8;
+  line-height: 1.5;
+}
+
+/* Animaciones del Agency Hub */
+@keyframes logoLevitate {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+
+@keyframes logoPulseRing {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+@keyframes termBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
 }
 
 /* ==========================================================================

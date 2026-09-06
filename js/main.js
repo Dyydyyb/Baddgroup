@@ -6,7 +6,7 @@ import { projectsData } from './projects-data.js';
 
 // Configuración de Contacto Rápido
 const CONTACT_CONFIG = {
-  name: "baddgroup",
+  name: "Baddgroup",
   whatsappNumber: "5491123974066", // (+54 9 11 2397-4066)
   email: "banegasdylan452@gmail.com",
   linkedin: "https://www.linkedin.com/in/dylan-banegas-aguilar/",
@@ -139,7 +139,7 @@ function renderProjects(category = 'all') {
             Ver detalles del caso
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
-          <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20baddgroup,%20vi%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20me%20gustar%C3%ADa%20consultarles%20por%20algo%20similar" 
+          <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20Baddgroup,%20vi%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20me%20gustar%C3%ADa%20consultarles%20por%20algo%20similar" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="btn btn-whatsapp" 
@@ -399,7 +399,7 @@ function openProjectModal(projectId) {
     </div>
 
     <div style="display: flex; gap: 14px; flex-wrap: wrap; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
-      <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20baddgroup,%20estoy%20viendo%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20quiero%20hacerles%20una%20consulta" 
+      <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20Baddgroup,%20estoy%20viendo%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20quiero%20hacerles%20una%20consulta" 
          target="_blank" 
          rel="noopener noreferrer" 
          class="btn btn-primary">
@@ -516,7 +516,7 @@ function initContactForm() {
           contacto: contactInfo,
           servicio: serviceType,
           mensaje: message,
-          _subject: `Nueva consulta baddgroup: ${name} (${serviceType})`,
+          _subject: `Nueva consulta Baddgroup: ${name} (${serviceType})`,
           _template: 'table',
           _captcha: 'false'
         })
@@ -555,7 +555,7 @@ function initContactForm() {
         feedback.style.backgroundColor = 'rgba(239, 68, 68, 0.12)';
         feedback.style.color = '#FCA5A5';
         feedback.style.border = '1px solid rgba(239, 68, 68, 0.3)';
-        feedback.innerHTML = `No se pudo enviar automáticamente por la red en este momento. Podés escribirnos directamente a <a href="mailto:banegasdylan452@gmail.com" style="color: #38BDF8; text-decoration: underline;">banegasdylan452@gmail.com</a> o por <a href="https://wa.me/5491123974066?text=Hola%20baddgroup,%20intent%C3%A9%20enviar%20el%20formulario%20de%20contacto" target="_blank" style="color: #10B981; text-decoration: underline;">WhatsApp al 11 2397-4066</a>.`;
+        feedback.innerHTML = `No se pudo enviar automáticamente por la red en este momento. Podés escribirnos directamente a <a href="mailto:banegasdylan452@gmail.com" style="color: #38BDF8; text-decoration: underline;">banegasdylan452@gmail.com</a> o por <a href="https://wa.me/5491123974066?text=Hola%20Baddgroup,%20intent%C3%A9%20enviar%20el%20formulario%20de%20contacto" target="_blank" style="color: #10B981; text-decoration: underline;">WhatsApp al 11 2397-4066</a>.`;
       }
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnHtml;
