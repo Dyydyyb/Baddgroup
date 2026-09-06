@@ -209,6 +209,8 @@ function setupProjectSlider() {
     updatePaginationDots();
   };
 
+  window.addEventListener('resize', updateMetrics);
+
   const updatePosition = () => {
     if (!cards[0]) return;
     const cardWidth = cards[0].getBoundingClientRect().width;

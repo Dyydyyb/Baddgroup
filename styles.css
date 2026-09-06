@@ -91,13 +91,19 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
+  max-width: 100%;
+  position: relative;
   background-color: var(--bg-main);
   color: var(--text-body);
+  -webkit-text-size-adjust: 100%;
 }
 
 img {
@@ -2462,91 +2468,658 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .nav-wrapper {
-    height: 68px;
+    height: 64px;
   }
 }
 
 @media (max-width: 768px) {
-
-  .hero-section {
-    padding-top: calc(68px + 36px);
-    padding-bottom: 64px;
+  :root {
+    --nav-height: 64px;
   }
 
+  /* Contenedor seguro contra desbordes en celulares */
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 1. Header Móvil Impecable & Completo (Android & iPhone) */
+  .site-header {
+    height: 64px;
+  }
+
+  .site-header .container.header-container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .nav-wrapper {
+    height: 64px;
+    gap: 8px;
+  }
+
+  .brand-logo {
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .brand-logo-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    min-width: 0;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .brand-title {
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+    margin-top: 1px;
+    white-space: nowrap;
+  }
+
+  .nav-actions {
+    gap: 8px;
+    flex-shrink: 0;
+    align-items: center;
+  }
+
+  /* Botón de WhatsApp compacto en header móvil */
+  .header-cta-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .header-cta-btn span {
+    display: none;
+  }
+
+  .header-cta-btn svg {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+  }
+
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  /* Menú desplegable móvil */
+  .nav-links.mobile-open {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: rgba(9, 13, 22, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 20px 20px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.9);
+    gap: 12px;
+    animation: menuSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    z-index: 99;
+  }
+
+  .nav-links.mobile-open .nav-link {
+    font-size: 1.05rem;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    color: #E2E8F0;
+    width: 100%;
+  }
+
+  /* 2. Hero Section Móvil */
+  .hero-section {
+    padding-top: calc(64px + 24px);
+    padding-bottom: 48px;
+    overflow-x: hidden;
+  }
+
+  .hero-tag {
+    margin-bottom: 16px;
+  }
+
+  .badge-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .hero-title {
+    font-size: clamp(1.75rem, 5.5vw, 2.25rem);
+    line-height: 1.22;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+    word-break: break-word;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 28px;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 36px;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .hero-pillars {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-top: 24px;
+  }
+
+  .pillar-item {
+    gap: 12px;
+  }
+
+  .pillar-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .pillar-title {
+    font-size: 0.88rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.8rem;
+  }
+
+  /* 3. Espaciado y Títulos de Secciones */
+  .services-section,
+  .audience-section,
+  .process-section,
+  .portfolio-section,
+  .about-section,
+  .testimonials-section,
+  .faq-section,
+  .contact-section {
+    padding: 56px 0;
+    overflow-x: hidden;
+  }
+
+  .section-title {
+    font-size: clamp(1.4rem, 4.8vw, 1.8rem);
+    letter-spacing: -0.02em;
+    line-height: 1.28;
+    word-break: break-word;
+  }
+
+  .section-desc {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 28px;
+  }
+
+  /* 4. Servicios Especializados */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 22px 18px;
+  }
+
+  .service-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+
+  .service-target {
+    font-size: 0.78rem;
+    margin-bottom: 12px;
+  }
+
+  .service-text {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
+  }
+
+  .service-features {
+    gap: 10px;
+  }
+
+  .service-features li {
+    font-size: 0.82rem;
+    gap: 10px;
+  }
+
+  /* 5. ¿Es para ti? (Audiencia) */
   .audience-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
 
   .audience-card {
-    padding: 24px 20px;
+    padding: 22px 18px;
+  }
+
+  .audience-title {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
   }
 
   .audience-subtitle {
     min-height: auto;
+    font-size: 0.84rem;
+    margin-bottom: 16px;
   }
 
-  .projects-slider-track .project-card,
-  .projects-slider-track .project-card-custom {
-    flex: 0 0 100%;
+  .audience-points li {
+    font-size: 0.82rem;
+  }
+
+  /* 6. Metodología & Proceso */
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .process-dark .process-card {
+    padding: 22px 18px;
+  }
+
+  .process-dark .step-indicator {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .process-dark .process-title {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+  }
+
+  .process-text {
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+
+  /* 7. SLIDER DE PROYECTOS (Cero desborde y altura vertical compacta) */
+  .portfolio-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+  }
+
+  .portfolio-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    flex-shrink: 0;
+  }
+
+  .projects-slider-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+    overflow: hidden;
+  }
+
+  .slider-arrow {
+    position: absolute;
+    top: 75px;
+    z-index: 10;
+    width: 34px;
+    height: 34px;
+    background: rgba(9, 13, 22, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  .slider-prev {
+    left: 8px;
+  }
+
+  .slider-next {
+    right: 8px;
+  }
+
+  .projects-slider-track-container {
+    width: 100%;
+    min-width: 0;
+    padding: 4px 0 10px;
+    overflow: hidden;
   }
 
   .projects-slider-track {
     gap: 16px;
   }
 
+  .projects-slider-track .project-card,
+  .projects-slider-track .project-card-custom {
+    flex: 0 0 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Tarjeta de Proyecto Compacta: 50% menos de altura vertical */
+  .project-media {
+    height: 180px;
+  }
+
+  .project-body {
+    padding: 16px 14px;
+  }
+
+  .project-client {
+    font-size: 0.72rem;
+    margin-bottom: 4px;
+  }
+
+  .project-title {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .project-description {
+    font-size: 0.84rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .project-impact {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .project-tags {
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .project-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .project-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .project-footer .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 0.8125rem;
+    box-sizing: border-box;
+  }
+
+  .project-card-custom {
+    padding: 24px 16px;
+  }
+
+  .project-card-custom h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .project-card-custom p {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+
+  .slider-controls-footer {
+    margin-top: 14px;
+  }
+
   .slider-mobile-hint {
     display: flex;
+    font-size: 0.75rem;
   }
 
-  .slider-arrow {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* Menú desplegable móvil oscuro */
-  .nav-links.mobile-open {
-    display: flex !important;
-    flex-direction: column;
-    position: absolute;
-    top: var(--nav-height);
-    left: 0;
-    right: 0;
-    background-color: rgba(9, 13, 22, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.8);
-    gap: 16px;
-    animation: menuSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    z-index: 99;
-  }
-
-  .nav-links.mobile-open .nav-link {
-    font-size: 1.05rem;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    color: #E2E8F0;
-    width: 100%;
-  }
-
-  .projects-grid {
+  /* 8. SOBRE BADDGROUP (Cero Desbordes en Terminal y Métricas) */
+  .about-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
   }
 
-  .process-grid {
-    grid-template-columns: 1fr;
+  .agency-hub-card {
+    padding: 20px 14px;
+    border-radius: var(--radius-lg);
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .agency-hub-header {
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .agency-animated-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .agency-logo-container {
+    width: 48px;
+    height: 48px;
+  }
+
+  .agency-hub-title {
+    font-size: 1.35rem;
+  }
+
+  .agency-hub-tagline {
+    font-size: 0.75rem;
+  }
+
+  .agency-terminal-box {
+    margin-bottom: 16px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .terminal-screen {
+    padding: 10px 12px;
+    font-size: 0.7rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .term-row {
+    font-size: 0.7rem;
+    white-space: normal;
+    word-break: break-word;
+    flex-wrap: wrap;
+  }
+
+  .agency-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .agency-metric-item {
+    padding: 10px 8px;
+    box-sizing: border-box;
+  }
+
+  .metric-val {
+    font-size: 1.2rem;
+  }
+
+  .metric-lbl {
+    font-size: 0.65rem;
+  }
+
+  .agency-stack-pills {
+    gap: 6px 12px;
+    margin-bottom: 16px;
+  }
+
+  .stack-pill {
+    font-size: 0.72rem;
+  }
+
+  .agency-trust-badge {
+    font-size: 0.78rem;
+    padding: 6px 0 !important;
+  }
+
+  .about-highlights {
+    grid-template-columns: 1fr !important;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .about-section .highlight-box {
+    padding: 14px 12px;
+  }
+
+  .about-section .highlight-title {
+    font-size: 0.88rem;
+  }
+
+  .about-section .highlight-desc {
+    font-size: 0.78rem;
+  }
+
+  /* 9. Testimonios */
+  .testimonials-dark .testimonial-card {
+    padding: 22px 18px;
+  }
+
+  .testimonials-dark .testimonial-quote {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .testimonial-author {
+    gap: 10px;
+    padding-top: 14px;
+  }
+
+  /* 10. Formulario de Contacto & Inputs iOS Safari */
+  .contact-card {
+    padding: 22px 16px;
   }
 
   .form-row {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .contact-card .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Prevenir zoom involuntario en iOS Safari */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 
   .footer-bottom {
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .container.header-container {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+  }
+
+  .brand-title {
+    font-size: 0.52rem;
+  }
+
+  .container {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .hero-section {
+    padding-top: calc(64px + 20px);
+    padding-bottom: 40px;
+  }
+
+  .hero-title {
+    font-size: 1.65rem;
   }
 }
 
