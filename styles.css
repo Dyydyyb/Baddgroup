@@ -893,6 +893,41 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--bg-main);
 }
 
+.process-section.process-dark {
+  background-color: #080C14;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.process-dark::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.09) 0%, rgba(16, 185, 129, 0.04) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.process-dark .section-subtitle {
+  color: #38BDF8;
+  background-color: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.process-dark .section-title {
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.process-dark .section-desc {
+  color: #94A3B8;
+}
+
 .process-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -915,6 +950,21 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--border-medium);
 }
 
+.process-dark .process-card {
+  background-color: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all var(--transition-normal);
+}
+
+.process-dark .process-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(14, 165, 233, 0.18);
+}
+
 .step-indicator {
   display: inline-flex;
   align-items: center;
@@ -929,16 +979,41 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 18px;
 }
 
+.process-dark .step-indicator {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #0EA5E9 0%, #10B981 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .process-title {
   font-size: 1.125rem;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
+.process-dark .process-title {
+  color: #FFFFFF;
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
 .process-text {
   font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.55;
+}
+
+.process-dark .process-text {
+  color: #94A3B8;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
