@@ -2056,6 +2056,16 @@ h1, h2, h3, h4, h5, h6 {
   gap: 16px;
 }
 
+#contact-submit-btn {
+  width: 100%;
+  padding: 14px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
 /* ==========================================================================
    FOOTER (NEGRO CÓSMICO / GALAXIA)
    ========================================================================== */
@@ -2786,13 +2796,15 @@ h1, h2, h3, h4, h5, h6 {
 
   /* 7. SLIDER DE PROYECTOS (Cero desborde y altura vertical compacta) */
   .portfolio-filters {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    gap: 8px;
-    padding-bottom: 8px;
-    margin-bottom: 20px;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 8px !important;
+    padding: 4px 16px 10px !important;
+    margin: 0 -16px 20px !important;
     scrollbar-width: none;
   }
 
@@ -2801,10 +2813,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .filter-btn {
-    white-space: nowrap;
-    font-size: 0.8rem;
-    padding: 8px 14px;
-    flex-shrink: 0;
+    white-space: nowrap !important;
+    font-size: 0.8125rem !important;
+    padding: 8px 16px !important;
+    flex-shrink: 0 !important;
   }
 
   .projects-slider-wrapper {
@@ -3063,19 +3075,135 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 14px;
   }
 
-  /* 10. Formulario de Contacto & Inputs iOS Safari */
-  .contact-card {
-    padding: 22px 16px;
+  /* 10. Apartado de Contacto & Formulario (Cero Recortes a la Derecha) */
+  .contact-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact-info {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact-cards {
+    gap: 12px !important;
+    margin-top: 18px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact-channel-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 14px 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  .channel-left {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .channel-icon {
+    width: 36px !important;
+    height: 36px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .channel-label {
+    font-size: 0.7rem !important;
+  }
+
+  .channel-value {
+    font-size: 0.8125rem !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.35 !important;
+  }
+
+  .copy-btn {
+    flex-shrink: 0 !important;
+    padding: 6px 10px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .contact-form-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 16px !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .contact-form-card h3 {
+    font-size: 1.15rem !important;
+    margin-bottom: 16px !important;
+    line-height: 1.3 !important;
+  }
+
+  .contact-form-card form {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .form-row {
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
   }
 
-  .contact-card .btn-primary {
-    width: 100%;
-    justify-content: center;
+  .form-group {
+    margin-bottom: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .form-label {
+    font-size: 0.8125rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px 12px !important;
+  }
+
+  .btn {
+    white-space: normal !important;
+  }
+
+  #contact-submit-btn,
+  .contact-form-card .btn-primary {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    line-height: 1.35 !important;
+    padding: 12px 14px !important;
+    font-size: 0.875rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 8px !important;
   }
 
   /* Prevenir zoom involuntario en iOS Safari */
