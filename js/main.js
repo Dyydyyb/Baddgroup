@@ -6,11 +6,11 @@ import { projectsData } from './projects-data.js';
 
 // Configuración de Contacto Rápido
 const CONTACT_CONFIG = {
-  name: "Dylan Banegas",
-  whatsappNumber: "5491156466567", // Número para consultas directas
-  email: "banegasdylan1109@gmail.com",
+  name: "baddgroup",
+  whatsappNumber: "5491123974066", // (+54 9 11 2397-4066)
+  email: "banegasdylan452@gmail.com",
   linkedin: "https://www.linkedin.com/in/dylan-banegas-aguilar/",
-  github: "https://github.com/Dyydyyb"
+  github: "https://github.com/Dyydyyb/Baddgroup"
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -139,7 +139,7 @@ function renderProjects(category = 'all') {
             Ver detalles del caso
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
-          <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20Dylan,%20vi%20tu%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20me%20gustaría%20consultarte%20por%20algo%20similar" 
+          <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20baddgroup,%20vi%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20me%20gustar%C3%ADa%20consultarles%20por%20algo%20similar" 
              target="_blank" 
              rel="noopener noreferrer" 
              class="btn btn-whatsapp" 
@@ -399,7 +399,7 @@ function openProjectModal(projectId) {
     </div>
 
     <div style="display: flex; gap: 14px; flex-wrap: wrap; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
-      <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20Dylan,%20estoy%20viendo%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20quiero%20hacerte%20una%20consulta" 
+      <a href="https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=Hola%20baddgroup,%20estoy%20viendo%20el%20proyecto%20de%20${encodeURIComponent(project.title)}%20y%20quiero%20hacerles%20una%20consulta" 
          target="_blank" 
          rel="noopener noreferrer" 
          class="btn btn-primary">
@@ -466,40 +466,100 @@ function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  const feedback = document.getElementById('form-feedback');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = document.getElementById('form-name').value.trim();
     const contactInfo = document.getElementById('form-contact').value.trim();
     const serviceType = document.getElementById('form-service').value;
     const message = document.getElementById('form-message').value.trim();
+    const submitBtn = form.querySelector('button[type="submit"]');
 
     if (!name || !contactInfo || !message) {
-      alert('Por favor, completá los campos principales para poder responderte.');
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.backgroundColor = 'rgba(239, 68, 68, 0.12)';
+        feedback.style.color = '#EF4444';
+        feedback.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+        feedback.textContent = 'Por favor, completá todos los campos obligatorios para enviar tu consulta.';
+      } else {
+        alert('Por favor, completá los campos requeridos.');
+      }
       return;
     }
 
-    const compiledMessage = `Hola Dylan! Mi nombre es ${name}. 
-Contacto: ${contactInfo}
-Tipo de proyecto: ${serviceType}
-Detalle: ${message}`;
+    const originalBtnHtml = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px;">
+        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+        <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>
+      </svg>
+      <span>Enviando mensaje directo a Dylan...</span>
+    `;
 
-    const waUrl = `https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=${encodeURIComponent(compiledMessage)}`;
-    
-    // Abre WhatsApp con el mensaje compilado
-    window.open(waUrl, '_blank');
+    if (feedback) {
+      feedback.style.display = 'none';
+    }
 
-    // Muestra feedback en pantalla
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = `<span>✓ Mensaje preparado</span>`;
-    submitBtn.style.backgroundColor = '#10B981';
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/banegasdylan452@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          nombre: name,
+          contacto: contactInfo,
+          servicio: serviceType,
+          mensaje: message,
+          _subject: `Nueva consulta baddgroup: ${name} (${serviceType})`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
 
-    setTimeout(() => {
-      submitBtn.innerHTML = originalText;
-      submitBtn.style.backgroundColor = '';
-      form.reset();
-    }, 4000);
+      const data = await response.json();
+
+      if (response.ok || data.success === 'true' || data.success === true) {
+        submitBtn.innerHTML = `<span>✓ ¡Mensaje enviado a banegasdylan452@gmail.com!</span>`;
+        submitBtn.style.backgroundColor = '#10B981';
+        submitBtn.style.borderColor = '#059669';
+
+        if (feedback) {
+          feedback.style.display = 'block';
+          feedback.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
+          feedback.style.color = '#34D399';
+          feedback.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+          feedback.innerHTML = `<strong>¡Gracias, ${name}!</strong> Tu mensaje fue enviado exitosamente al correo de Dylan (<code>banegasdylan452@gmail.com</code>). Nos contactaremos a la brevedad.`;
+        }
+
+        form.reset();
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHtml;
+          submitBtn.style.backgroundColor = '';
+          submitBtn.style.borderColor = '';
+        }, 6000);
+      } else {
+        throw new Error(data.message || 'Error en la respuesta del servidor');
+      }
+    } catch (err) {
+      console.warn('FormSubmit AJAX fallback:', err);
+      if (feedback) {
+        feedback.style.display = 'block';
+        feedback.style.backgroundColor = 'rgba(239, 68, 68, 0.12)';
+        feedback.style.color = '#FCA5A5';
+        feedback.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+        feedback.innerHTML = `No se pudo enviar automáticamente por la red en este momento. Podés escribirnos directamente a <a href="mailto:banegasdylan452@gmail.com" style="color: #38BDF8; text-decoration: underline;">banegasdylan452@gmail.com</a> o por <a href="https://wa.me/5491123974066?text=Hola%20baddgroup,%20intent%C3%A9%20enviar%20el%20formulario%20de%20contacto" target="_blank" style="color: #10B981; text-decoration: underline;">WhatsApp al 11 2397-4066</a>.`;
+      }
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+    }
   });
 }
 
