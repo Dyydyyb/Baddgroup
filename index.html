@@ -16,16 +16,16 @@
   <meta property="og:description" content="Transformamos procesos manuales en sistemas confiables, aplicamos IA en tu negocio y construimos plataformas web que generan ventas reales.">
   <meta property="og:locale" content="es_AR">
 
-  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Estilos Principales -->
   <link rel="stylesheet" href="styles.css">
   
-  <!-- Favicon Monograma SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230F4C5C'/><text x='50%' y='65%' font-family='sans-serif' font-weight='800' font-size='48' fill='white' text-anchor='middle'>BG</text></svg>">
+  <!-- Favicon Logo SVG -->
+  <link rel="icon" type="image/svg+xml" href="img/baddgroup-logo.svg">
 </head>
 <body>
 
@@ -33,49 +33,49 @@
        HEADER / NAVBAR
        ======================================================================== -->
   <header class="site-header">
-    <div class="container">
+    <div class="container header-container">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo" aria-label="Ir al inicio">
-          <div class="brand-monogram">BG</div>
+        <a href="#" class="brand-logo" aria-label="BADDGROUP - Inicio">
+          <div class="brand-logo-icon">
+            <img src="img/baddgroup-logo.svg" alt="BADDGROUP Logo" width="38" height="38">
+          </div>
           <div class="brand-text">
-            <span class="brand-name">baddgroup</span>
-            <span class="brand-title">Software, IA & Desarrollo Web</span>
+            <span class="brand-name">BADDGROUP</span>
+            <span class="brand-title">SOFTWARE &bull; IA &bull; TECH</span>
           </div>
         </a>
 
-        <nav>
+        <nav class="nav-desktop">
           <ul class="nav-links">
             <li><a href="#servicios" class="nav-link">Servicios</a></li>
             <li><a href="#es-para-ti" class="nav-link">¿Es para ti?</a></li>
-            <li><a href="#proceso" class="nav-link">Cómo Trabajo</a></li>
             <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
-            <li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
-            <li><a href="#faq" class="nav-link">Preguntas</a></li>
+            <li><a href="#proceso" class="nav-link">Proceso</a></li>
+            <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+            <li><a href="#faq" class="nav-link">FAQ</a></li>
             <li><a href="#contacto" class="nav-link">Contacto</a></li>
           </ul>
         </nav>
 
         <div class="nav-actions">
-          <!-- Selector de Acento Cromático Discreto -->
-          <div class="theme-dropdown" title="Personalizar tono de acento">
-            <button type="button" class="theme-toggle-btn" id="theme-menu-btn" aria-label="Cambiar paleta">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-              <span id="current-theme-name" style="font-size: 0.75rem;">Petróleo</span>
+          <!-- Selector de Acento Cromático Discreto (Icon-only en desktop) -->
+          <div class="theme-dropdown" title="Cambiar tema de color">
+            <button type="button" class="theme-toggle-btn icon-only" id="theme-menu-btn" aria-label="Cambiar tema de color">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
             </button>
-            <div style="display: none; position: absolute; top: 100%; right: 0; margin-top: 6px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); box-shadow: var(--shadow-md); padding: 6px; z-index: 50;" id="theme-popup">
-              <button type="button" class="theme-option-btn" data-set-theme="petrol" style="display: block; width: 100%; text-align: left; padding: 6px 12px; font-size: 0.8125rem; border: none; background: none; cursor: pointer; border-radius: 4px;">Azul Petróleo (Default)</button>
-              <button type="button" class="theme-option-btn" data-set-theme="forest" style="display: block; width: 100%; text-align: left; padding: 6px 12px; font-size: 0.8125rem; border: none; background: none; cursor: pointer; border-radius: 4px;">Verde Botella</button>
-              <button type="button" class="theme-option-btn" data-set-theme="terracotta" style="display: block; width: 100%; text-align: left; padding: 6px 12px; font-size: 0.8125rem; border: none; background: none; cursor: pointer; border-radius: 4px;">Terracota</button>
+            <div style="display: none; position: absolute; top: 100%; right: 0; margin-top: 8px; background: #0F172A; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); padding: 6px; z-index: 50; min-width: 170px;" id="theme-popup">
+              <button type="button" class="theme-option-btn" data-set-theme="petrol" style="display: block; width: 100%; text-align: left; padding: 8px 12px; font-size: 0.8125rem; border: none; background: none; color: #E2E8F0; cursor: pointer; border-radius: 4px;">Azul Petróleo (Default)</button>
+              <button type="button" class="theme-option-btn" data-set-theme="forest" style="display: block; width: 100%; text-align: left; padding: 8px 12px; font-size: 0.8125rem; border: none; background: none; color: #E2E8F0; cursor: pointer; border-radius: 4px;">Verde Botella</button>
+              <button type="button" class="theme-option-btn" data-set-theme="terracotta" style="display: block; width: 100%; text-align: left; padding: 8px 12px; font-size: 0.8125rem; border: none; background: none; color: #E2E8F0; cursor: pointer; border-radius: 4px;">Terracota</button>
             </div>
           </div>
 
-          <a href="https://wa.me/5491123974066?text=Hola%20baddgroup,%20vi%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20hacerles%20una%20consulta" 
+          <a href="https://wa.me/5491123974066?text=Hola%20BADDGROUP,%20vi%20su%20sitio%20web%20y%20me%20gustar%C3%ADa%20hacerles%20una%20consulta" 
              target="_blank" 
              rel="noopener noreferrer" 
-             class="btn btn-whatsapp" 
-             style="padding: 9px 18px; font-size: 0.875rem;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            Hablemos por WhatsApp
+             class="btn btn-whatsapp header-cta-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>WhatsApp</span>
           </a>
 
           <button type="button" class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Abrir menú">
@@ -566,7 +566,7 @@
     <!-- ========================================================================
          6. TESTIMONIOS & VALIDACIÓN SOCIAL
          ======================================================================== -->
-    <section class="testimonials-section">
+    <section class="testimonials-section testimonials-dark" id="testimonios">
       <div class="container">
         <div class="section-header centered">
           <span class="section-subtitle">Validación Social</span>
@@ -806,11 +806,13 @@
     <div class="container relative-z">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="#" class="brand-logo">
-            <div class="brand-monogram">BG</div>
+          <a href="#" class="brand-logo" aria-label="BADDGROUP - Inicio">
+            <div class="brand-logo-icon">
+              <img src="img/baddgroup-logo.svg" alt="BADDGROUP Logo" width="38" height="38">
+            </div>
             <div class="brand-text">
-              <span class="brand-name">baddgroup</span>
-              <span class="brand-title">Software, IA & Desarrollo Web</span>
+              <span class="brand-name">BADDGROUP</span>
+              <span class="brand-title">SOFTWARE &bull; IA &bull; TECH</span>
             </div>
           </a>
           <p class="footer-desc">
