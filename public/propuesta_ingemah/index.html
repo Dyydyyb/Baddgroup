@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INGEMAH | Constructora en Ushuaia, Tierra del Fuego - Planos, Obras y Remodelaciones</title>
+  <meta name="description" content="Constructora líder en Ushuaia, Tierra del Fuego. Planos de arquitectura y estructura, obras llave en mano, mano de obra calificada, refacciones y renders 3D.">
+  <meta name="keywords" content="constructora ushuaia, arquitectura ushuaia, planos arquitectura tierra del fuego, obras llave en mano ushuaia, remodelaciones ushuaia, ingemah">
+
+  <!-- Favicon / Logo -->
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       01. HEADER / NAVBAR
+       ======================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="INGEMAH Inicio">
+        <div class="logo-symbol">
+          <img src="assets/img/logo.png" alt="Isotipo INGEMAH">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">INGEMAH</span>
+          <span class="brand-sub">Constructora · Ushuaia</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="#hero" class="nav-link active">Inicio</a>
+        <a href="#nosotros" class="nav-link">Sobre Nosotros</a>
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#asistente" class="nav-link">Cotizador</a>
+        <a href="#ubicacion" class="nav-link">Ubicación y Horarios</a>
+      </nav>
+
+      <!-- Action Button & Mobile Toggle -->
+      <div class="nav-actions">
+        <a href="https://wa.me/5492901411117" target="_blank" rel="noopener noreferrer" class="btn-header-cta">
+          <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.42-.099.825zm-3.392-10.416c-5.523 0-10 4.477-10 10 0 1.776.467 3.447 1.282 4.903l-1.364 4.985 5.13-1.345c1.408.767 3.018 1.207 4.73 1.207 5.522 0 10-4.477 10-10 0-5.522-4.477-10-10-10z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú de navegación">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       02. HERO SECTION CON VIDEO DE DRON
+       ======================================================================== -->
+  <section class="hero-section" id="hero">
+    <!-- Video de fondo a pantalla completa -->
+    <div class="hero-video-wrapper">
+      <video class="hero-video" autoplay muted loop playsinline poster="assets/img/hero-poster.jpg" id="heroVideo">
+        <source src="Hero.mp4" type="video/mp4">
+        <!-- Fallback si el formato no es compatible -->
+        Tu navegador no soporta video HTML5.
+      </video>
+    </div>
+
+    <!-- Overlay semitransparente para legibilidad -->
+    <div class="hero-overlay"></div>
+
+    <!-- Contenido del Hero (Centrado) -->
+    <div class="container hero-content">
+      <div class="hero-badge reveal">
+        <svg class="hero-badge-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <span>Ushuaia · Tierra del Fuego · Argentina</span>
+      </div>
+
+      <h1 class="hero-title reveal reveal-delay-1">
+        Construimos tu proyecto en el <span>fin del mundo</span>
+      </h1>
+
+      <p class="hero-description reveal reveal-delay-2">
+        Solidez técnica, diseño de vanguardia y ejecución integral de obras. Planos, construcción llave en mano y remodelaciones pensadas para resistir y destacar en el clima de Tierra del Fuego.
+      </p>
+
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#asistente" class="btn-primary">
+          <span>Armar Consulta a Medida</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#servicios" class="btn-secondary">
+          <span>Nuestros Servicios</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mouse Scroll Indicator -->
+    <div class="hero-scroll-indicator">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Deslizá</span>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       03. SOBRE NOSOTROS (FONDO BLANCO PURO)
+       ======================================================================== -->
+  <section class="about-section" id="nosotros">
+    <div class="container about-container">
+      <div class="about-grid">
+        <div class="about-content reveal">
+          <span class="section-tag">Sobre Nosotros</span>
+          <h2 class="about-title">Ingeniería y arquitectura de alta gama en Tierra del Fuego</h2>
+          <p class="about-text">
+            En <strong>INGEMAH</strong> transformamos visiones en obras sólidas, eficientes y perdurables. Construir en Ushuaia exige un conocimiento riguroso de la geografía, las cargas de nieve, los vientos extremos y el aislamiento térmico indispensable para el confort patagónico.
+          </p>
+          <p class="about-text">
+            Acompañamos a nuestros clientes en cada etapa: desde el primer trazo en los planos de arquitectura y cálculo estructural, hasta la tramitación de habilitaciones y la entrega final llave en mano.
+          </p>
+
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <h4>Cálculo Estructural Preciso</h4>
+              <p>Proyectos calculados específicamente bajo normas antisísmicas y de sobrecarga invernal.</p>
+            </div>
+            <div class="highlight-item">
+              <h4>Eficiencia & Confort Térmico</h4>
+              <p>Aislamiento de alto rendimiento para maximizar el ahorro energético y la calidez del hogar.</p>
+            </div>
+            <div class="highlight-item">
+              <h4>Gestión y Permisos Locales</h4>
+              <p>Trámites ágiles ante la Municipalidad de Ushuaia y colegios profesionales de la provincia.</p>
+            </div>
+            <div class="highlight-item">
+              <h4>Cumplimiento Riguroso</h4>
+              <p>Control estricto de cómputos métricos, presupuestos y cronogramas de obra pactados.</p>
+            </div>
+          </div>
+
+          <!-- Barra de confianza y garantía integrada prolija -->
+          <div class="about-trust-bar">
+            <div class="trust-badge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            </div>
+            <div class="trust-badge-text">
+              <span class="trust-number">100% Solidez & Garantía Constructiva</span>
+              <span class="trust-desc">Obras calculadas y ejecutadas para perdurar en el clima extremo de Ushuaia.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Slider 3D elegante sobre fondo blanco -->
+        <div class="about-visual reveal reveal-delay-2">
+          <div class="about-slider-wrapper" id="aboutSliderWrapper">
+            <div class="about-slider" id="aboutSlider">
+              <!-- Slide 1: Llave en mano -->
+              <div class="about-slide active">
+                <img src="assets/img/ushuaia_llave_en_mano.jpg" alt="Obra residencial llave en mano en Ushuaia por INGEMAH" loading="lazy">
+                <div class="slide-caption">
+                  <span class="slide-badge">Obra Llave en Mano</span>
+                  <h4 class="slide-title">Residencia Bahía Ushuaia</h4>
+                  <p class="slide-desc">Ejecución total en lenga y acero con vista panorámica al Canal Beagle.</p>
+                </div>
+              </div>
+
+              <!-- Slide 2: Renders 3D -->
+              <div class="about-slide">
+                <img src="assets/img/architecture-render.jpg" alt="Render 3D arquitectónico de ladera por INGEMAH" loading="lazy">
+                <div class="slide-caption">
+                  <span class="slide-badge">Visualización 3D & Anteproyectos</span>
+                  <h4 class="slide-title">Render Fotorrealista de Montaña</h4>
+                  <p class="slide-desc">Previsualización de volúmenes, calidez interior y texturas patagónicas.</p>
+                </div>
+              </div>
+
+              <!-- Slide 3: Planos y Cálculo -->
+              <div class="about-slide">
+                <img src="assets/img/blueprint-showcase.svg" alt="Planos de arquitectura y cálculo de estructura INGEMAH" loading="lazy">
+                <div class="slide-caption">
+                  <span class="slide-badge">Ingeniería & Planos Técnicos</span>
+                  <h4 class="slide-title">Planos Ejecutivos & Estructura</h4>
+                  <p class="slide-desc">Cálculo antisísmico y de sobrecargas de nieve bajo normas CIRSOC e INPRES.</p>
+                </div>
+              </div>
+
+              <!-- Slide 4: Implantación y Topografía -->
+              <div class="about-slide">
+                <img src="assets/img/hero-poster.jpg" alt="Implantación topográfica en Ushuaia por INGEMAH" loading="lazy">
+                <div class="slide-caption">
+                  <span class="slide-badge">Topografía & Urbanismo</span>
+                  <h4 class="slide-title">Implantación en Clima Extremo</h4>
+                  <p class="slide-desc">Diseño bioclimático integrado a la ladera de los Montes Martiales.</p>
+                </div>
+              </div>
+
+              <!-- Controles del Slider (< y >) -->
+              <button class="slider-btn prev-btn" id="sliderPrevBtn" aria-label="Imagen anterior">
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="slider-btn next-btn" id="sliderNextBtn" aria-label="Imagen siguiente">
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            <!-- Dots de navegación centrados abajo -->
+            <div class="slider-dots" id="sliderDots">
+              <button class="slider-dot active" data-index="0" aria-label="Ver obra llave en mano"></button>
+              <button class="slider-dot" data-index="1" aria-label="Ver renders 3D"></button>
+              <button class="slider-dot" data-index="2" aria-label="Ver planos y cálculo"></button>
+              <button class="slider-dot" data-index="3" aria-label="Ver implantación en Ushuaia"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       04. SERVICIOS (FONDO BLANCO PURO)
+       ======================================================================== -->
+  <section class="services-section" id="servicios">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Nuestras Soluciones</span>
+        <h2 class="section-title">Servicios Profesionales de Construcción</h2>
+        <p class="section-subtitle">
+          Ofrecemos un espectro integral que cubre cada necesidad técnica, legal y constructiva para proyectos residenciales y comerciales en Ushuaia.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- 01. Planos de arquitectura -->
+        <article class="service-card reveal">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 9h6M9 13h6M9 17h6"/></svg>
+          </div>
+          <h3 class="service-title">Planos de Arquitectura</h3>
+          <p class="service-desc">Diseño funcional, bioclimático y estético adaptado a la topografía de tu lote en Ushuaia y optimización de iluminación natural.</p>
+          <span class="service-badge">Diseño & Proyecto</span>
+        </article>
+
+        <!-- 02. Planos de estructura -->
+        <article class="service-card reveal reveal-delay-1">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16v4H4zm4 4v12m8-12v12M2 20h20"/></svg>
+          </div>
+          <h3 class="service-title">Planos de Estructura</h3>
+          <p class="service-desc">Cálculo de fundaciones, hormigón armado, perfiles metálicos y steel framing con verificación estricta de cargas de nieve y sismo.</p>
+          <span class="service-badge">Ingeniería & Solidez</span>
+        </article>
+
+        <!-- 03. Planos de instalación sanitaria -->
+        <article class="service-card reveal reveal-delay-2">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </div>
+          <h3 class="service-title">Planos de Instalación Sanitaria</h3>
+          <p class="service-desc">Tendido de agua fría y caliente, colectores, desagües cloacales y pluviales con trazado térmico protegido contra congelamiento.</p>
+          <span class="service-badge">Redes & Aislamiento</span>
+        </article>
+
+        <!-- 04. Planos de instalación eléctrica -->
+        <article class="service-card reveal reveal-delay-3">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3 class="service-title">Planos de Instalación Eléctrica</h3>
+          <p class="service-desc">Distribución de circuitos de potencia, iluminación inteligente, protecciones diferenciales y tableros normalizados según normativa AEA.</p>
+          <span class="service-badge">Energía & Seguridad</span>
+        </article>
+
+        <!-- 05. Opción llave en mano -->
+        <article class="service-card reveal">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-1.5 1.5L14 9l-3-3 2.5-2.5a3.5 3.5 0 0 1 5 0l2.5 2.5zM3 21l3-3m0 0l8-8-3-3-8 8v3h3z"/></svg>
+          </div>
+          <h3 class="service-title">Opción Llave en Mano</h3>
+          <p class="service-desc">Nos ocupamos de todo de principio a fin: proyecto, permisos, compra de materiales, dirección y ejecución hasta que recibís tu llave.</p>
+          <span class="service-badge">Solución Total</span>
+        </article>
+
+        <!-- 06. Mano de obra -->
+        <article class="service-card reveal reveal-delay-1">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M2 18h20M12 2v4m-6 3h12a3 3 0 0 1 3 3v6H3v-6a3 3 0 0 1 3-3z"/></svg>
+          </div>
+          <h3 class="service-title">Mano de Obra</h3>
+          <p class="service-desc">Cuadrillas profesionales especializadas en obra gruesa, mampostería, techados patagónicos, carpintería y finas terminaciones de interior.</p>
+          <span class="service-badge">Personal Calificado</span>
+        </article>
+
+        <!-- 07. Refacciones -->
+        <article class="service-card reveal reveal-delay-2">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3 class="service-title">Refacciones y Reformas</h3>
+          <p class="service-desc">Ampliaciones residenciales, modernización de ambientes, cambio de aberturas de alta prestación térmica y remodelación de baños y cocinas.</p>
+          <span class="service-badge">Transformación</span>
+        </article>
+
+        <!-- 08. Habilitación comercial -->
+        <article class="service-card reveal reveal-delay-3">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
+          </div>
+          <h3 class="service-title">Habilitación Comercial</h3>
+          <p class="service-desc">Relevamientos técnicos, planos de evacuación, seguridad e higiene y tramitaciones completas ante entidades municipales para tu negocio.</p>
+          <span class="service-badge">Habilitaciones</span>
+        </article>
+
+        <!-- 09. Cómputos -->
+        <article class="service-card reveal">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1zM8 7h8M8 11h8M8 15h5"/></svg>
+          </div>
+          <h3 class="service-title">Cómputos y Presupuestos</h3>
+          <p class="service-desc">Análisis exhaustivo de cantidades de materiales, rendimientos y cronogramas financieros para evitar sobrecostos e imprevistos de obra.</p>
+          <span class="service-badge">Control de Costos</span>
+        </article>
+
+        <!-- 10. Render -->
+        <article class="service-card reveal reveal-delay-1">
+          <div class="service-icon-box">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16zM3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg>
+          </div>
+          <h3 class="service-title">Render 3D Fotorrealista</h3>
+          <p class="service-desc">Visualizaciones arquitectónicas tridimensionales de alta fidelidad para previsualizar texturas, iluminación y volúmenes antes de edificar.</p>
+          <span class="service-badge">Visualización 3D</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       05. FILTRO INTERACTIVO DE ARMADO DE CONSULTA (WIZARD WHATSAPP)
+       ======================================================================== -->
+  <section class="wizard-section" id="asistente">
+    <div class="container">
+      <div class="text-center reveal">
+        <span class="section-tag">Asistente Inteligente</span>
+        <h2 class="section-title">Armá tu Consulta a Medida</h2>
+        <p class="section-subtitle">
+          Seleccioná los servicios de tu interés y las características de tu obra. Generaremos un mensaje estructurado y listo para enviar directamente a nuestro equipo por WhatsApp.
+        </p>
+      </div>
+
+      <div class="wizard-card-container reveal">
+        <!-- Barra de Progreso -->
+        <div class="wizard-progress-bar">
+          <div class="wizard-progress-line">
+            <div class="wizard-progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-step active" id="stepIndicator1">
+            <div class="step-circle">1</div>
+            <span class="step-label">Servicios</span>
+          </div>
+          <div class="progress-step" id="stepIndicator2">
+            <div class="step-circle">2</div>
+            <span class="step-label">Tu Proyecto</span>
+          </div>
+          <div class="progress-step" id="stepIndicator3">
+            <div class="step-circle">3</div>
+            <span class="step-label">WhatsApp</span>
+          </div>
+        </div>
+
+        <!-- PASO 1: Selección de Servicios -->
+        <div class="wizard-step-pane active" id="wizardStep1">
+          <div class="pane-header">
+            <h3>¿Qué servicios necesitás para tu proyecto?</h3>
+            <p>Podés seleccionar uno o varios servicios según lo que requieras:</p>
+          </div>
+
+          <div class="selectable-services-grid" id="servicesSelectionGrid">
+            <div class="service-select-item" data-service="Planos de arquitectura">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Planos de arquitectura</span>
+            </div>
+            <div class="service-select-item" data-service="Planos de estructura">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Planos de estructura</span>
+            </div>
+            <div class="service-select-item" data-service="Planos de instalación sanitaria">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Planos instalación sanitaria</span>
+            </div>
+            <div class="service-select-item" data-service="Planos de instalación eléctrica">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Planos instalación eléctrica</span>
+            </div>
+            <div class="service-select-item" data-service="Opción llave en mano">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Opción llave en mano</span>
+            </div>
+            <div class="service-select-item" data-service="Mano de obra">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Mano de obra</span>
+            </div>
+            <div class="service-select-item" data-service="Refacciones">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Refacciones / Reformas</span>
+            </div>
+            <div class="service-select-item" data-service="Habilitación comercial">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Habilitación comercial</span>
+            </div>
+            <div class="service-select-item" data-service="Cómputos">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Cómputos métricos</span>
+            </div>
+            <div class="service-select-item" data-service="Render">
+              <div class="select-checkbox"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+              <span class="select-label">Render 3D</span>
+            </div>
+          </div>
+
+          <div class="wizard-footer-nav">
+            <span style="font-size: 0.88rem; color: var(--color-slate-500);" id="servicesCountBadge">0 servicios seleccionados</span>
+            <button class="btn-wizard-next" id="btnToStep2" disabled>
+              <span>Continuar</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PASO 2: Preguntas del Proyecto -->
+        <div class="wizard-step-pane" id="wizardStep2">
+          <div class="pane-header">
+            <h3>Contanos sobre tu proyecto</h3>
+            <p>Elegí la tipología y el estado actual de tu iniciativa:</p>
+          </div>
+
+          <!-- Tipo de proyecto -->
+          <div class="options-group">
+            <h4 class="options-title">1. ¿Qué tipo de proyecto es?</h4>
+            <div class="options-grid" id="projectTypeGrid">
+              <div class="option-radio-card selected" data-type="Vivienda unifamiliar">
+                <strong>Vivienda</strong>
+                <span>Casa familiar o residencial</span>
+              </div>
+              <div class="option-radio-card" data-type="Complejo / Cabañas">
+                <strong>Cabañas / Turístico</strong>
+                <span>Alojamiento o unidades múltiples</span>
+              </div>
+              <div class="option-radio-card" data-type="Local Comercial / Oficinas">
+                <strong>Comercial / Oficina</strong>
+                <span>Negocio, local o espacio corporativo</span>
+              </div>
+              <div class="option-radio-card" data-type="Remodelación / Ampliación">
+                <strong>Remodelación</strong>
+                <span>Ampliación sobre propiedad existente</span>
+              </div>
+              <div class="option-radio-card" data-type="Obra Industrial / Galpón">
+                <strong>Industrial / Galpón</strong>
+                <span>Depósito o nave de acopio</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Estado de planos y terreno -->
+          <div class="options-group">
+            <h4 class="options-title">2. ¿Tenés planos o terreno?</h4>
+            <div class="options-grid" id="landStatusGrid">
+              <div class="option-radio-card selected" data-status="Tengo terreno sin planos">
+                <strong>Tengo terreno sin planos</strong>
+                <span>Necesito proyecto y diseño</span>
+              </div>
+              <div class="option-radio-card" data-status="Tengo terreno y planos previos">
+                <strong>Tengo terreno y planos</strong>
+                <span>Listo para cotizar obra</span>
+              </div>
+              <div class="option-radio-card" data-status="En búsqueda de terreno / Asesoramiento">
+                <strong>Buscando terreno</strong>
+                <span>Asesoramiento previo a la compra</span>
+              </div>
+              <div class="option-radio-card" data-status="Es sobre inmueble existente">
+                <strong>Inmueble existente</strong>
+                <span>Para reforma o habilitación</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-footer-nav">
+            <button class="btn-wizard-prev" id="btnBackToStep1">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span>Atrás</span>
+            </button>
+            <button class="btn-wizard-next" id="btnToStep3">
+              <span>Ver Consulta y WhatsApp</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- PASO 3: Resumen y Generación de WhatsApp -->
+        <div class="wizard-step-pane" id="wizardStep3">
+          <div class="pane-header">
+            <h3>¡Todo listo! Revisá tu consulta</h3>
+            <p>Generamos este mensaje personalizado para que lo envíes directamente a nuestro equipo:</p>
+          </div>
+
+          <div class="summary-container">
+            <!-- Detalles seleccionados -->
+            <div class="summary-details">
+              <h4>Resumen del Pedido</h4>
+              <ul class="summary-list">
+                <li>
+                  <span class="label">Servicios seleccionados:</span>
+                  <span class="value" id="summaryServicesList">-</span>
+                </li>
+                <li>
+                  <span class="label">Tipo de proyecto:</span>
+                  <span class="value" id="summaryProjectType">-</span>
+                </li>
+                <li>
+                  <span class="label">Estado del terreno/planos:</span>
+                  <span class="value" id="summaryLandStatus">-</span>
+                </li>
+                <li>
+                  <span class="label">Destino:</span>
+                  <span class="value">Ushuaia, Tierra del Fuego</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Simulación Burbuja WhatsApp -->
+            <div class="whatsapp-preview-box">
+              <div class="chat-bubble-header">
+                <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.42-.099.825zm-3.392-10.416c-5.523 0-10 4.477-10 10 0 1.776.467 3.447 1.282 4.903l-1.364 4.985 5.13-1.345c1.408.767 3.018 1.207 4.73 1.207 5.522 0 10-4.477 10-10 0-5.522-4.477-10-10-10z"/></svg>
+                <span>Vista Previa del Mensaje</span>
+              </div>
+              <div class="whatsapp-bubble">
+                <p class="whatsapp-bubble-text" id="whatsappPreviewText">Cargando consulta...</p>
+                <div class="whatsapp-bubble-time">
+                  <span id="currentTimeDisplay">12:00</span>
+                  <svg viewBox="0 0 16 11"><path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.88 5.753 6.94a.365.365 0 0 0-.515 0l-.424.424a.365.365 0 0 0 0 .516l3.42 3.42c.142.142.373.142.515 0l6.324-7.469a.365.365 0 0 0-.063-.515zm-4.24 0l-.478-.372a.365.365 0 0 0-.51.063L4.426 9.88 2.503 7.94a.365.365 0 0 0-.515 0l-.424.424a.365.365 0 0 0 0 .516l2.42 2.42c.142.142.373.142.515 0l6.324-7.469a.365.365 0 0 0-.063-.515z"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón de acción principal -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-action" id="btnSendWhatsapp">
+            <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.42-.099.825zm-3.392-10.416c-5.523 0-10 4.477-10 10 0 1.776.467 3.447 1.282 4.903l-1.364 4.985 5.13-1.345c1.408.767 3.018 1.207 4.73 1.207 5.522 0 10-4.477 10-10 0-5.522-4.477-10-10-10z"/></svg>
+            <span>Enviar Consulta por WhatsApp</span>
+          </a>
+
+          <div class="wizard-footer-nav">
+            <button class="btn-wizard-prev" id="btnBackToStep2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <span>Modificar Respuestas</span>
+            </button>
+            <button class="btn-wizard-prev" id="btnResetWizard" style="color: var(--celeste-primary); font-weight: 700;">
+              <span>Iniciar Nueva Consulta</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       06. UBICACIÓN Y HORARIOS (FONDO CELESTE CORPORATIVO)
+       ======================================================================== -->
+  <section class="location-section" id="ubicacion">
+    <div class="container">
+      <div class="location-grid">
+        <!-- Información de Contacto y Horarios -->
+        <div class="location-info reveal">
+          <span class="section-tag">Atención Personalizada</span>
+          <h2 class="location-title">Ubicación & Horarios</h2>
+          <p class="location-lead">
+            Nuestras oficinas están ubicadas en pleno centro de Ushuaia. Te esperamos para coordinar reuniones técnicas y asesorarte en cada fase de tu obra.
+          </p>
+
+          <div class="info-cards-stack">
+            <!-- Dirección -->
+            <div class="info-box-item">
+              <div class="info-box-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="info-box-content">
+                <h4>Dirección</h4>
+                <p>Hipólito Yrigoyen 407, 1° Piso<br>Ushuaia, Tierra del Fuego, Argentina</p>
+              </div>
+            </div>
+
+            <!-- Horarios -->
+            <div class="info-box-item">
+              <div class="info-box-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="info-box-content">
+                <h4>Horarios de Atención</h4>
+                <ul>
+                  <li><strong>Lunes a viernes:</strong> 9:00 a 15:00 hs</li>
+                  <li><strong>Sábados:</strong> 10:00 a 13:00 hs</li>
+                  <li><strong>Domingos:</strong> Cerrado</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Contacto Directo -->
+            <div class="info-box-item">
+              <div class="info-box-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="info-box-content">
+                <h4>Contacto Directo</h4>
+                <p>
+                  WhatsApp: <a href="https://wa.me/5492901411117" target="_blank" rel="noopener noreferrer">+54 2901 41-1117</a><br>
+                  Instagram: <a href="https://instagram.com/ingemah_" target="_blank" rel="noopener noreferrer">@ingemah_</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps Embebido -->
+        <div class="location-map-card reveal reveal-delay-2">
+          <div class="map-embed-container">
+            <!-- Google Maps iframe centrado en Hipólito Yrigoyen 407, Ushuaia -->
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2303.4076326694676!2d-68.32281852309852!3d-54.80838187287955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbc4c22e4c49d10c7%3A0x6a2c2c069bc92f9!2sHip%C3%B3lito%20Yrigoyen%20407%2C%20V9410%20Ushuaia%2C%20Tierra%20del%20Fuego!5e0!3m2!1ses!2sar!4v1710000000000!5m2!1ses!2sar" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mapa de ubicación INGEMAH Ushuaia">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       07. FOOTER (FONDO CELESTE CORPORATIVO)
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Marca y descripción -->
+        <div class="footer-col footer-col-brand">
+          <a href="#hero" class="brand-logo">
+            <div class="logo-symbol">
+              <img src="assets/img/logo.png" alt="INGEMAH Logo">
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">INGEMAH</span>
+              <span class="brand-sub">Constructora · Ushuaia</span>
+            </div>
+          </a>
+          <p>
+            Construyendo futuro en Tierra del Fuego. Planos de ingeniería, arquitectura, obra llave en mano y remodelaciones con los más altos estándares constructivos.
+          </p>
+          <div class="social-links">
+            <a href="https://instagram.com/ingemah_" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram INGEMAH">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+            </a>
+            <a href="https://wa.me/5492901411117" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="WhatsApp INGEMAH">
+              <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.42-.099.825zm-3.392-10.416c-5.523 0-10 4.477-10 10 0 1.776.467 3.447 1.282 4.903l-1.364 4.985 5.13-1.345c1.408.767 3.018 1.207 4.73 1.207 5.522 0 10-4.477 10-10 0-5.522-4.477-10-10-10z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Enlaces Rápidos -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#nosotros">Sobre Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#asistente">Cotizador Online</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="erp/" target="_blank" style="color: #93c5fd; font-weight: 600;">Acceso ERP Interno 🔒</a></li>
+          </ul>
+        </div>
+
+        <!-- Servicios -->
+        <div class="footer-col">
+          <h4>Especialidades</h4>
+          <ul class="footer-links">
+            <li><a href="#servicios">Planos de Arquitectura</a></li>
+            <li><a href="#servicios">Cálculo de Estructura</a></li>
+            <li><a href="#servicios">Opción Llave en Mano</a></li>
+            <li><a href="#servicios">Mano de Obra & Reformas</a></li>
+            <li><a href="#servicios">Renders 3D</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacto -->
+        <div class="footer-col">
+          <h4>Ushuaia</h4>
+          <ul class="footer-links">
+            <li>Hipólito Yrigoyen 407, 1° Piso</li>
+            <li>Ushuaia, Tierra del Fuego</li>
+            <li>WhatsApp: +54 2901 41-1117</li>
+            <li>Instagram: @ingemah_</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Barra inferior -->
+      <div class="footer-bottom-bar">
+        <span>© <span id="yearDisplay"></span> INGEMAH - Constructora. Todos los derechos reservados.</span>
+        <span>Ushuaia · Tierra del Fuego · Patagonia Argentina</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       08. BOTÓN FLOTANTE DE WHATSAPP
+       ======================================================================== -->
+  <aside class="floating-whatsapp">
+    <div class="floating-whatsapp-tooltip">¿Consultas sobre tu proyecto? ¡Escribinos!</div>
+    <a href="https://wa.me/5492901411117" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" aria-label="Contactar por WhatsApp a INGEMAH">
+      <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.42-.099.825zm-3.392-10.416c-5.523 0-10 4.477-10 10 0 1.776.467 3.447 1.282 4.903l-1.364 4.985 5.13-1.345c1.408.767 3.018 1.207 4.73 1.207 5.522 0 10-4.477 10-10 0-5.522-4.477-10-10-10z"/></svg>
+    </a>
+  </aside>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ingemah-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00a8ec" />
+      <stop offset="100%" stop-color="#0086d6" />
+    </linearGradient>
+    <linearGradient id="ingemah-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0077c8" />
+      <stop offset="100%" stop-color="#07529e" />
+    </linearGradient>
+    <linearGradient id="ingemah-deep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0756a5" />
+      <stop offset="100%" stop-color="#053b75" />
+    </linearGradient>
+    <linearGradient id="ingemah-sphere" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="70%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </linearGradient>
+    <filter id="soft-shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b3b70" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <!-- Circular Badge -->
+  <circle cx="200" cy="200" r="185" fill="url(#ingemah-sphere)" filter="url(#soft-shadow)" stroke="#ffffff" stroke-width="3"/>
+
+  <!-- Left lower shard (bright cyan) -->
+  <polygon points="98,295 138,266 138,172 98,202" fill="url(#ingemah-cyan)" />
+  
+  <!-- Left tall shard (cerulean blue) -->
+  <polygon points="144,302 192,266 192,88 144,124" fill="url(#ingemah-blue)" />
+
+  <!-- Center house cutout silhouette (White) -->
+  <polygon points="158,310 200,278 242,310 242,318 158,318" fill="#ffffff" />
+  
+  <!-- Right tall primary tower (cyan to cerulean) -->
+  <polygon points="208,265 258,228 258,56 208,98" fill="url(#ingemah-cyan)" />
+
+  <!-- Right mid tower (deep blue) -->
+  <polygon points="264,286 304,256 304,124 264,158" fill="url(#ingemah-blue)" />
+
+  <!-- Right diagonal accent wing (deep navy) -->
+  <polygon points="248,310 304,268 288,328 248,340" fill="url(#ingemah-deep)" />
+
+  <!-- House 4-pane window -->
+  <g fill="#0077c8">
+    <rect x="188" y="286" width="9" height="9" rx="1" />
+    <rect x="203" y="286" width="9" height="9" rx="1" />
+    <rect x="188" y="301" width="9" height="9" rx="1" />
+    <rect x="203" y="301" width="9" height="9" rx="1" />
+  </g>
+</svg>

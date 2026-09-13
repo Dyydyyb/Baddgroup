@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="100%" height="100%" style="background:#09192b; font-family:'Courier New', monospace;">
+  <defs>
+    <!-- Blueprint Grid Pattern -->
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0, 136, 214, 0.15)" stroke-width="1"/>
+    </pattern>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#smallGrid)"/>
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0, 136, 214, 0.35)" stroke-width="1.5"/>
+    </pattern>
+    <linearGradient id="glowOverlay" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0088d6" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#0b3b70" stop-opacity="0.4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base & Grid -->
+  <rect width="1200" height="900" fill="#071728" />
+  <rect width="1200" height="900" fill="url(#grid)" />
+  <rect width="1200" height="900" fill="url(#glowOverlay)" />
+
+  <!-- Drawing Frame -->
+  <rect x="40" y="40" width="1120" height="820" fill="none" stroke="#00a8ec" stroke-width="2" />
+  <rect x="46" y="46" width="1108" height="808" fill="none" stroke="rgba(0, 168, 236, 0.4)" stroke-width="1" />
+
+  <!-- HEADER / TITLE OF DRAWING -->
+  <g fill="#ffffff">
+    <text x="70" y="85" font-size="22" font-weight="bold" fill="#00c8ff" letter-spacing="3">INGEMAH · DEPARTAMENTO TÉCNICO DE INGENIERÍA Y ARQUITECTURA</text>
+    <text x="70" y="112" font-size="14" fill="#a0c8f0" letter-spacing="1">DOCUMENTACIÓN EJECUTIVA · PLANOS MUNICIPALES Y CÁLCULO ESTRUCTURAL</text>
+  </g>
+
+  <!-- ARCHITECTURAL FLOOR PLAN DRAWING (Vivienda Bioclimática Ushuaia) -->
+  <g transform="translate(100, 160)">
+    <!-- Foundation and exterior thick walls -->
+    <!-- Main Outer Walls -->
+    <path d="M 80 80 L 580 80 L 580 240 L 740 240 L 740 520 L 80 520 Z" fill="rgba(0, 136, 214, 0.08)" stroke="#ffffff" stroke-width="6" />
+    <!-- Secondary Interior Walls -->
+    <path d="M 80 260 L 380 260 M 380 80 L 380 380 M 380 380 L 80 380 M 580 240 L 580 520 M 380 260 L 580 260" fill="none" stroke="#ffffff" stroke-width="4" />
+
+    <!-- Deck exterior con vista al Canal Beagle -->
+    <path d="M 80 520 L 740 520 L 740 600 L 80 600 Z" fill="none" stroke="#00c8ff" stroke-width="2" stroke-dasharray="8 6" />
+    <text x="280" y="565" font-size="14" fill="#00c8ff" font-weight="bold" letter-spacing="2">DECK VOLADIZO CON VISTA AL CANAL BEAGLE (+2.80m)</text>
+
+    <!-- Structural Columns (Hormigón & Steel Framing) -->
+    <g fill="#00c8ff">
+      <rect x="74" y="74" width="16" height="16" />
+      <rect x="372" y="74" width="16" height="16" />
+      <rect x="572" y="74" width="16" height="16" />
+      <rect x="732" y="234" width="16" height="16" />
+      <rect x="732" y="512" width="16" height="16" />
+      <rect x="572" y="512" width="16" height="16" />
+      <rect x="372" y="512" width="16" height="16" />
+      <rect x="74" y="512" width="16" height="16" />
+      <rect x="74" y="254" width="16" height="16" />
+      <rect x="372" y="254" width="16" height="16" />
+    </g>
+
+    <!-- Room Labels & Dimensions -->
+    <!-- Living Comedor -->
+    <text x="140" y="160" font-size="16" font-weight="bold" fill="#ffffff">LIVING COMEDOR BIOCLIMÁTICO</text>
+    <text x="140" y="185" font-size="12" fill="#80b8e6">Sup: 38.50 m² | Piso Radiante</text>
+    <text x="140" y="205" font-size="11" fill="#00c8ff">Ventanal DVH Triple Vidrio 6+12+6</text>
+
+    <!-- Cocina Integrada -->
+    <text x="140" y="315" font-size="15" font-weight="bold" fill="#ffffff">COCINA INTEGRADA</text>
+    <text x="140" y="335" font-size="12" fill="#80b8e6">Sup: 16.20 m² | Inst. Sanitaria PEX</text>
+
+    <!-- Master Suite -->
+    <text x="410" y="150" font-size="15" font-weight="bold" fill="#ffffff">SUITE PRINCIPAL</text>
+    <text x="410" y="172" font-size="12" fill="#80b8e6">Sup: 24.80 m² | Orientación Norte</text>
+
+    <!-- Dormitorios / Huéspedes -->
+    <text x="600" y="320" font-size="14" font-weight="bold" fill="#ffffff">DORMITORIO 02</text>
+    <text x="600" y="340" font-size="12" fill="#80b8e6">Sup: 14.50 m²</text>
+    <text x="600" y="420" font-size="14" font-weight="bold" fill="#ffffff">QUINCHO / SALA TÉCNICA</text>
+    <text x="600" y="440" font-size="12" fill="#80b8e6">Caldera Dual de Condensación</text>
+
+    <!-- Dimension Lines (CAD style) -->
+    <!-- Horizontal Top Dimension -->
+    <line x1="80" y1="45" x2="580" y2="45" stroke="#00c8ff" stroke-width="1.5" />
+    <line x1="80" y1="35" x2="80" y2="55" stroke="#00c8ff" stroke-width="1.5" />
+    <line x1="580" y1="35" x2="580" y2="55" stroke="#00c8ff" stroke-width="1.5" />
+    <text x="310" y="40" font-size="13" fill="#00c8ff" font-weight="bold">12.50 m</text>
+
+    <!-- Vertical Left Dimension -->
+    <line x1="45" y1="80" x2="45" y2="520" stroke="#00c8ff" stroke-width="1.5" />
+    <line x1="35" y1="80" x2="55" y2="80" stroke="#00c8ff" stroke-width="1.5" />
+    <line x1="35" y1="520" x2="55" y2="520" stroke="#00c8ff" stroke-width="1.5" />
+    <text x="25" y="305" font-size="13" fill="#00c8ff" font-weight="bold" transform="rotate(-90 25 305)">11.00 m</text>
+
+    <!-- North Arrow / Rosa de los Vientos -->
+    <g transform="translate(670, 80)">
+      <circle cx="20" cy="20" r="28" fill="none" stroke="#00c8ff" stroke-width="1.5" />
+      <polygon points="20,0 26,20 20,15" fill="#00c8ff" />
+      <polygon points="20,0 14,20 20,15" fill="#ffffff" />
+      <text x="16" y="-8" font-size="14" font-weight="bold" fill="#00c8ff">N</text>
+    </g>
+  </g>
+
+  <!-- TITLE BLOCK / CARÁTULA PROFESIONAL (Right Bottom) -->
+  <g transform="translate(810, 600)">
+    <rect x="0" y="0" width="330" height="230" fill="#061320" stroke="#00a8ec" stroke-width="2" />
+    <line x1="0" y1="50" x2="330" y2="50" stroke="#00a8ec" stroke-width="1" />
+    <line x1="0" y1="100" x2="330" y2="100" stroke="#00a8ec" stroke-width="1" />
+    <line x1="0" y1="150" x2="330" y2="150" stroke="#00a8ec" stroke-width="1" />
+    <line x1="0" y1="190" x2="330" y2="190" stroke="#00a8ec" stroke-width="1" />
+
+    <text x="15" y="32" font-size="16" font-weight="bold" fill="#ffffff" letter-spacing="2">INGEMAH CONSTRUCTORA</text>
+    <text x="15" y="72" font-size="11" fill="#80b8e6">PROYECTO: <tspan fill="#ffffff" font-weight="bold">RESIDENCIAL CANAL BEAGLE</tspan></text>
+    <text x="15" y="88" font-size="10" fill="#80b8e6">UBICACIÓN: HIPÓLITO YRIGOYEN 407 · USHUAIA</text>
+
+    <text x="15" y="122" font-size="11" fill="#80b8e6">PLANO: <tspan fill="#00c8ff" font-weight="bold">ARQUITECTURA &amp; CÁLCULO ESTRUCTURAL</tspan></text>
+    <text x="15" y="138" font-size="10" fill="#80b8e6">CÁLCULO SISMO: INPRES-CIRSOC 103 | NIEVE: CIRSOC 104</text>
+
+    <text x="15" y="172" font-size="11" fill="#ffffff">ESCALA: 1:50 | SUP. TOTAL: 240 m²</text>
+    
+    <text x="15" y="212" font-size="11" fill="#25d366" font-weight="bold">ESTADO: APROBADO MUNICIPALIDAD DE USHUAIA</text>
+  </g>
+</svg>

@@ -1,3 +1,10 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/propuesta_ingemah", "destination": "/propuesta_ingemah/index.html" },
+    { "source": "/propuesta-ingemah", "destination": "/propuesta_ingemah/index.html" },
+    { "source": "/propuesta_ingemah/erp", "destination": "/propuesta_ingemah/erp/index.html" },
+    { "source": "/propuesta-ingemah/erp", "destination": "/propuesta_ingemah/erp/index.html" },
+    { "source": "/propuesta_ingemah_erp", "destination": "/propuesta_ingemah/erp/index.html" }
+  ]
 }
