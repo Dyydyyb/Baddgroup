@@ -5,13 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>INGEMAH ERP | Sistema Integral de Gestión de Obras & Ingeniería</title>
   <meta name="description" content="Sistema ERP interno de INGEMAH para gestión de obras, presupuestos, personal, compras y finanzas en Ushuaia, Tierra del Fuego.">
-  <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+  <!-- Base for routing on baddgroup.com/propuesta_ingemah/erp/ -->
+  <base href="/propuesta_ingemah/erp/">
+
+  <link rel="icon" type="image/svg+xml" href="/propuesta_ingemah/assets/img/logo.svg">
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/propuesta_ingemah/erp/styles.css">
 </head>
 <body>
   <div class="app-layout" id="appLayout">
@@ -20,7 +23,7 @@
       <div class="sidebar-header">
         <a href="#dashboard" class="brand-link" id="brandLogoBtn">
           <div class="brand-logo-wrap">
-            <img src="../assets/img/logo.svg" alt="INGEMAH Logo" class="brand-logo">
+            <img src="/propuesta_ingemah/assets/img/logo.svg" alt="INGEMAH Logo" class="brand-logo">
           </div>
           <div class="brand-text">
             <span class="brand-name">INGEMAH</span>
@@ -141,7 +144,7 @@
           <span class="dot-online"></span>
           <span>Sede Ushuaia (H. Yrigoyen 407)</span>
         </div>
-        <a href="../" target="_blank" class="link-landing" title="Ver Landing Web Pública">
+        <a href="/propuesta_ingemah/" target="_blank" class="link-landing" title="Ver Landing Web Pública">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           <span>Landing Web</span>
         </a>
@@ -431,6 +434,6 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- App Script -->
-  <script src="app.js"></script>
+  <script src="/propuesta_ingemah/erp/app.js"></script>
 </body>
 </html>

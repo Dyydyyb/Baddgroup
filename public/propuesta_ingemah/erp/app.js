@@ -193,9 +193,9 @@ const ERP_DB = {
         { name: 'Final de Obra Parcial (Estructura)', status: 'pending', date: 'Estimado Oct 2026' }
       ],
       photos: [
-        { url: '../assets/img/ushuaia_llave_en_mano.jpg', caption: 'Montaje de estructura y aislamiento térmico lana de roca', date: '2026-09-05', stage: 'Estructura' },
-        { url: '../assets/img/architecture-render.jpg', caption: 'Render volumétrico aprobado por el cliente', date: '2026-03-10', stage: 'Proyecto' },
-        { url: '../assets/img/blueprint-showcase.svg', caption: 'Plano estructural de platea y anclajes antisísmicos', date: '2026-04-02', stage: 'CIRSOC' }
+        { url: '/propuesta_ingemah/assets/img/ushuaia_llave_en_mano.jpg', caption: 'Montaje de estructura y aislamiento térmico lana de roca', date: '2026-09-05', stage: 'Estructura' },
+        { url: '/propuesta_ingemah/assets/img/architecture-render.jpg', caption: 'Render volumétrico aprobado por el cliente', date: '2026-03-10', stage: 'Proyecto' },
+        { url: '/propuesta_ingemah/assets/img/blueprint-showcase.svg', caption: 'Plano estructural de platea y anclajes antisísmicos', date: '2026-04-02', stage: 'CIRSOC' }
       ]
     },
     {
@@ -232,8 +232,8 @@ const ERP_DB = {
         { name: 'Certificado de Aptitud Sanitaria DPOSS', status: 'approved', date: '2026-07-18' }
       ],
       photos: [
-        { url: '../assets/img/architecture-render.jpg', caption: 'Render de integración paisajística en bosque de lengas', date: '2026-05-20', stage: 'Proyecto' },
-        { url: '../assets/img/ushuaia_llave_en_mano.jpg', caption: 'Hormigonado de platea sobre suelo rocoso', date: '2026-08-14', stage: 'Fundaciones' }
+        { url: '/propuesta_ingemah/assets/img/architecture-render.jpg', caption: 'Render de integración paisajística en bosque de lengas', date: '2026-05-20', stage: 'Proyecto' },
+        { url: '/propuesta_ingemah/assets/img/ushuaia_llave_en_mano.jpg', caption: 'Hormigonado de platea sobre suelo rocoso', date: '2026-08-14', stage: 'Fundaciones' }
       ]
     },
     {
@@ -269,7 +269,7 @@ const ERP_DB = {
         { name: 'Final de Obra Comercial Definitivo', status: 'pending', date: 'En revisión' }
       ],
       photos: [
-        { url: '../assets/img/hero-poster.jpg', caption: 'Fachada e interiorismo sobre calle San Martín', date: '2026-09-11', stage: 'Terminaciones' }
+        { url: '/propuesta_ingemah/assets/img/hero-poster.jpg', caption: 'Fachada e interiorismo sobre calle San Martín', date: '2026-09-11', stage: 'Terminaciones' }
       ]
     },
     {
@@ -302,7 +302,7 @@ const ERP_DB = {
         { name: 'Presentación Municipal Ushuaia', status: 'pending', date: 'Nov 2026' }
       ],
       photos: [
-        { url: '../assets/img/architecture-render.jpg', caption: 'Render preliminar de volumen bioclimático', date: '2026-09-08', stage: 'Proyecto' }
+        { url: '/propuesta_ingemah/assets/img/architecture-render.jpg', caption: 'Render preliminar de volumen bioclimático', date: '2026-09-08', stage: 'Proyecto' }
       ]
     }
   ],
@@ -2297,7 +2297,7 @@ const App = {
       const caption = prompt('Epígrafe o detalle del avance fotografiado:', 'Inspección de soleras y aislamiento térmico');
       if (caption) {
         project.photos.unshift({
-          url: '../assets/img/ushuaia_llave_en_mano.jpg',
+          url: '/propuesta_ingemah/assets/img/ushuaia_llave_en_mano.jpg',
           caption: caption,
           date: new Date().toISOString().split('T')[0],
           stage: 'Avance de Obra'
@@ -2358,7 +2358,7 @@ const App = {
       totalBudget: 32000000,
       actualCost: 1500000,
       services: ['Planos de arquitectura', 'Planos de estructura', 'Proyectos llave en mano'],
-      coverImage: '../assets/img/ushuaia_llave_en_mano.jpg',
+      coverImage: '/propuesta_ingemah/assets/img/ushuaia_llave_en_mano.jpg',
       stages: [
         { id: `stg-${Date.now()}-1`, name: 'Proyecto & Cálculo Estructural CIRSOC', start: '2026-10-01', end: '2026-11-15', progress: 15, status: 'in_progress' },
         { id: `stg-${Date.now()}-2`, name: 'Permisos Municipales Ushuaia', start: '2026-11-10', end: '2026-12-20', progress: 0, status: 'pending' },
@@ -2776,7 +2776,7 @@ const App = {
       <div class="official-letterhead">
         <div class="letterhead-header">
           <div class="letterhead-brand">
-            <img src="../assets/img/logo.svg" alt="INGEMAH Logo" class="letterhead-logo" style="width:64px; height:64px;">
+            <img src="/propuesta_ingemah/assets/img/logo.svg" alt="INGEMAH Logo" class="letterhead-logo" style="width:64px; height:64px;">
             <div class="letterhead-title">
               <h2 style="font-size:1.8rem; font-weight:800; color:var(--primary-900);">INGEMAH</h2>
               <p style="font-weight:700; color:#334155;">ESTUDIO DE ARQUITECTURA, INGENIERÍA & CONSTRUCCIÓN</p>
