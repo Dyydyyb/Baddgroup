@@ -1234,9 +1234,9 @@ h1, h2, h3, h4, .brand-title {
 /* Grid de Selección de Servicios (Paso 1) */
 .selectable-services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .service-select-item {
@@ -1244,11 +1244,12 @@ h1, h2, h3, h4, .brand-title {
   background: #ffffff;
   border: 2px solid var(--color-slate-200);
   border-radius: var(--border-radius-md);
-  padding: 16px 18px;
+  padding: 12px 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  min-height: 52px;
   transition: all var(--transition-fast);
   user-select: none;
 }
@@ -2019,21 +2020,82 @@ h1, h2, h3, h4, .brand-title {
   }
 
   .wizard-card-container {
-    padding: 24px 18px;
+    padding: 20px 14px;
     border-radius: var(--border-radius-lg);
   }
 
   .wizard-progress-bar {
     padding: 0;
+    margin-bottom: 24px;
   }
 
   .step-label {
     display: none;
   }
 
-  .selectable-services-grid,
+  .pane-header {
+    margin-bottom: 18px;
+  }
+
+  .pane-header h3 {
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .pane-header p {
+    font-size: 0.84rem;
+    margin-bottom: 6px;
+  }
+
+  .selectable-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .service-select-item {
+    padding: 8px 10px;
+    min-height: 48px;
+    gap: 8px;
+    border-radius: 10px;
+  }
+
+  .select-checkbox {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border-radius: 5px;
+  }
+
+  .select-checkbox svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .select-label {
+    font-size: 0.78rem;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
   .options-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .option-radio-card {
+    padding: 10px 10px;
+    gap: 4px;
+    border-radius: 10px;
+  }
+
+  .option-radio-card strong {
+    font-size: 0.82rem;
+  }
+
+  .option-radio-card span {
+    font-size: 0.7rem;
+    line-height: 1.2;
   }
 
   .footer-top-grid {
