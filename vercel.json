@@ -8,6 +8,9 @@
   "rewrites": [
     { "source": "/propuesta_ingemah", "destination": "/propuesta_ingemah/index.html" },
     { "source": "/propuesta-ingemah", "destination": "/propuesta_ingemah/index.html" },
+    { "source": "/propuesta_ingemah/propuesta", "destination": "/propuesta_ingemah/propuesta.html" },
+    { "source": "/propuesta-ingemah/propuesta", "destination": "/propuesta_ingemah/propuesta.html" },
+    { "source": "/propuesta_ingemah/pdf", "destination": "/propuesta_ingemah/Propuesta_INGEMAH_Baddgroup.pdf" },
     { "source": "/propuesta_ingemah/erp", "destination": "/propuesta_ingemah/erp/index.html" },
     { "source": "/propuesta-ingemah/erp", "destination": "/propuesta_ingemah/erp/index.html" },
     { "source": "/propuesta_ingemah_erp", "destination": "/propuesta_ingemah/erp/index.html" },
