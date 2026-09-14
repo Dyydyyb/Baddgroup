@@ -5,7 +5,7 @@
 // Dataset de Proyectos y Casos Destacados
 const projectsData = [
   {
-    image: 'assets/slider/foto-1.jpg',
+    image: '/GTL-Ingenieria-muestra/assets/slider/foto-1.jpg',
     category: 'Energía Solar & Sustentabilidad',
     title: 'Parque Solar Fotovoltaico & Autoconsumo Industrial',
     location: 'Parque Industrial La Plata, Buenos Aires',
@@ -18,7 +18,7 @@ const projectsData = [
     ]
   },
   {
-    image: 'assets/slider/foto-2.jpg',
+    image: '/GTL-Ingenieria-muestra/assets/slider/foto-2.jpg',
     category: 'Obras Eléctricas Industriales',
     title: 'Tablero General de Distribución & Protecciones TGBT',
     location: 'Planta de Procesamiento, Berisso / La Plata',
@@ -31,7 +31,7 @@ const projectsData = [
     ]
   },
   {
-    image: 'assets/slider/foto-3.jpg',
+    image: '/GTL-Ingenieria-muestra/assets/slider/foto-3.jpg',
     category: 'Respaldo Energético & Continuidad',
     title: 'Sistema Solar Híbrido con Banco de Baterías de Litio',
     location: 'Residencia & Estudio Profesional, City Bell',
@@ -44,7 +44,7 @@ const projectsData = [
     ]
   },
   {
-    image: 'assets/slider/foto-4.jpg',
+    image: '/GTL-Ingenieria-muestra/assets/slider/foto-4.jpg',
     category: 'Loteos y Desarrollos Urbanos',
     title: 'Infraestructura Eléctrica & Alumbrado en Loteo',
     location: 'Desarrollo Residencial Los Robles, La Plata',
@@ -57,7 +57,7 @@ const projectsData = [
     ]
   },
   {
-    image: 'assets/slider/foto-5.jpg',
+    image: '/GTL-Ingenieria-muestra/assets/slider/foto-5.jpg',
     category: 'Habilitaciones & Aptos Eléctricos',
     title: 'Acondicionamiento & Habilitación Eléctrica Comercial',
     location: 'Centro Comercial Calle 12, La Plata',
