@@ -1,7 +1,9 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/gtl-ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/", "permanent": false }
+    { "source": "/gtl-ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/", "permanent": false },
+    { "source": "/gtl-erp-muestra", "destination": "/GTL-ERP-muestra/", "permanent": false },
+    { "source": "/gtl-erp", "destination": "/GTL-ERP-muestra/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/propuesta_ingemah", "destination": "/propuesta_ingemah/index.html" },
@@ -11,6 +13,7 @@
     { "source": "/propuesta_ingemah_erp", "destination": "/propuesta_ingemah/erp/index.html" },
     { "source": "/ejemplosistemainmobiliario", "destination": "/ejemplosistemainmobiliario/index.html" },
     { "source": "/ejemplosistemainmobiliario/:match*", "destination": "/ejemplosistemainmobiliario/index.html" },
-    { "source": "/GTL-Ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/index.html" }
+    { "source": "/GTL-Ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/index.html" },
+    { "source": "/GTL-ERP-muestra", "destination": "/GTL-ERP-muestra/index.html" }
   ]
 }

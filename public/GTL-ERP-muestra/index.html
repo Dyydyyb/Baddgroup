@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>GTL Ingeniería ERP | Sistema de Gestión Integral de Obras & Energía Solar</title>
+  <meta name="description" content="Sistema ERP empresarial interno de GTL Ingeniería para la gestión integral de obras eléctricas, instalaciones industriales, energía solar híbrida, presupuestos y certificaciones en La Plata, Buenos Aires." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <base href="/GTL-ERP-muestra/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/GTL-ERP-muestra/assets/logo.png" />
+  <link rel="apple-touch-icon" href="/GTL-ERP-muestra/assets/logo.png" />
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="/GTL-ERP-muestra/styles.css" />
+</head>
+<body>
+  <div class="app-layout" id="appLayout">
+    <!-- SIDEBAR PRINCIPAL -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#dashboard" class="brand-link" id="brandLogoBtn" title="Ir al Dashboard General">
+          <div class="brand-logo-wrap">
+            <img src="/GTL-ERP-muestra/assets/logo.png" alt="GTL Ingeniería" class="brand-logo" width="38" height="38" />
+          </div>
+          <div class="brand-text">
+            <div class="brand-name-row">
+              <span class="brand-name">GTL</span>
+              <span class="brand-sub">INGENIERÍA</span>
+            </div>
+            <span class="brand-badge">ERP v1.0</span>
+          </div>
+        </a>
+        <button class="btn-icon sidebar-collapse-btn" id="collapseSidebarBtn" aria-label="Colapsar o expandir menú" title="Colapsar menú (Ctrl + B)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Tarjeta de Usuario y Selector de Rol -->
+      <div class="user-role-card" id="userRoleCard">
+        <div class="user-avatar" id="userAvatar">JT</div>
+        <div class="user-info">
+          <span class="user-name" id="userNameDisplay">Ing. Joaquín Tenti</span>
+          <div class="role-selector-wrap">
+            <select id="roleSelector" class="role-select" title="Cambiar rol activo para simulación">
+              <option value="admin">Director Técnico / Titular</option>
+              <option value="project_engineer">Ingeniero de Proyecto</option>
+              <option value="field_technician">Jefe de Cuadrilla / Campo</option>
+              <option value="accountant">Administración / Contable</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menú de Navegación por Bloques Temáticos -->
+      <nav class="sidebar-nav" aria-label="Navegación del ERP">
+        <!-- BLOQUE 1: GESTIÓN OPERATIVA -->
+        <div class="nav-section-title">GESTIÓN OPERATIVA</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#dashboard" class="nav-link active" data-view="dashboard">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span class="nav-label">Dashboard General</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#obras" class="nav-link" data-view="obras">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M9 3l3-2 3 2v4H9V3z"/></svg>
+              <span class="nav-label">Gestión de Obras & Gantt</span>
+              <span class="badge badge-primary" id="badgeObrasCount">6</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#presupuestos" class="nav-link" data-view="presupuestos">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              <span class="nav-label">Presupuestos & Cotizador</span>
+              <span class="badge badge-warning" id="badgePresupuestos">4</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#crm" class="nav-link" data-view="crm">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span class="nav-label">CRM & Consultas Web</span>
+              <span class="badge badge-info" id="badgeLeadsCount">5</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#agenda" class="nav-link" data-view="agenda">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+              <span class="nav-label">Agenda & Visitas Técnicas</span>
+              <span class="badge badge-success" id="badgeAgendaCount">3</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- BLOQUE 2: RECURSOS Y LOGÍSTICA -->
+        <div class="nav-section-title">RECURSOS & LOGÍSTICA</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#personal" class="nav-link" data-view="personal">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span class="nav-label">Personal & Cuadrillas</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#compras" class="nav-link" data-view="compras">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span class="nav-label">Compras & Depósito La Plata</span>
+              <span class="badge badge-danger" id="badgeStockAlert">2</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#documentos" class="nav-link" data-view="documentos">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              <span class="nav-label">Planos & Certificaciones DCI</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- BLOQUE 3: ADMINISTRACIÓN Y FINANZAS -->
+        <div class="nav-section-title">ADMINISTRACIÓN & FINANZAS</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#finanzas" class="nav-link" data-view="finanzas">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span class="nav-label">Finanzas & Facturación</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#reportes" class="nav-link" data-view="reportes">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span class="nav-label">Reportes & Rentabilidad</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#configuracion" class="nav-link" data-view="configuracion">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span class="nav-label">Configuración & Auditoría</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Pie del Sidebar -->
+      <div class="sidebar-footer">
+        <div class="company-tag">
+          <span class="dot-online"></span>
+          <span>Sede La Plata & GBA</span>
+        </div>
+        <a href="/GTL-Ingenieria-muestra/" target="_blank" class="link-landing" title="Ver Landing Web Pública de GTL">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>Landing Web</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Overlay para Menú Móvil -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper">
+      <!-- TOPBAR HEADER -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="btn-icon mobile-toggle-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          
+          <!-- Buscador Global -->
+          <div class="global-search-wrap" id="globalSearchTrigger">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="globalSearchInput" class="global-search-input" placeholder="Buscar obra, cliente, certificación o presupuesto (Ctrl + K)..." readonly />
+            <kbd class="kbd-shortcut">Ctrl + K</kbd>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Accesos Rápidos de Creación -->
+          <button class="btn btn-secondary btn-sm" id="btnQuickNewLead" title="Registrar nuevo lead o consulta técnica">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ Lead</span>
+          </button>
+          <button class="btn btn-secondary btn-sm" id="btnQuickNewBudget" title="Elaborar nueva cotización con calculadora solar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ Cotización</span>
+          </button>
+          <button class="btn btn-primary btn-sm" id="btnQuickNewProject" title="Dar de alta nueva obra eléctrica o solar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>+ Nueva Obra</span>
+          </button>
+
+          <div class="topbar-divider"></div>
+
+          <!-- Alternador Modo Claro / Modo Oscuro -->
+          <button class="btn-icon theme-toggle-btn" id="themeToggleBtn" aria-label="Cambiar tema" title="Alternar Modo Claro / Modo Oscuro">
+            <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+
+          <!-- Campanita de Alertas y Notificaciones -->
+          <div class="notifications-dropdown-wrap">
+            <button class="btn-icon" id="notificationsBtn" aria-label="Notificaciones" title="Alertas técnicas y normativas">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="notification-dot"></span>
+            </button>
+            <div class="notifications-panel" id="notificationsPanel">
+              <div class="notifications-header">
+                <h4>Alertas Operativas & Técnicas</h4>
+                <span class="badge badge-primary">3 críticas</span>
+              </div>
+              <ul class="notifications-list" id="notificationsList">
+                <li class="notification-item unread">
+                  <div class="notif-icon danger">⚡</div>
+                  <div class="notif-content">
+                    <p class="notif-title">Inspección EDELAP pendiente</p>
+                    <span class="notif-time">Hace 20 min • Apto DCI Calle 12 La Plata</span>
+                  </div>
+                </li>
+                <li class="notification-item unread">
+                  <div class="notif-icon warning">📦</div>
+                  <div class="notif-content">
+                    <p class="notif-title">Stock crítico: Inversores Híbridos 8kW</p>
+                    <span class="notif-time">Hace 1 hora • Depósito Central</span>
+                  </div>
+                </li>
+                <li class="notification-item unread">
+                  <div class="notif-icon success">☀️</div>
+                  <div class="notif-content">
+                    <p class="notif-title">Puesta en marcha completada con éxito</p>
+                    <span class="notif-time">Hace 3 horas • Parque Solar Industrial 45 kWp</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW CONTAINER (Dynamic SPA Switch) -->
+      <main class="main-view" id="mainViewContainer">
+        <!-- Inyectado reactivamente por app.js según data-view -->
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALES DEL SISTEMA
+       ========================================================================= -->
+
+  <!-- MODAL: DETALLE DE OBRA / GANTT / ESPECIFICACIONES TÉCNICAS -->
+  <div class="modal-backdrop" id="projectModalBackdrop">
+    <div class="modal-dialog modal-xl" id="projectModalDialog">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <h3 id="projectModalTitle">Ficha Técnica de Obra</h3>
+          <span class="badge badge-primary" id="projectModalCode">GTL-2026-01</span>
+        </div>
+        <button class="btn-icon modal-close" id="closeProjectModalBtn" aria-label="Cerrar ventana">✕</button>
+      </div>
+      <div class="modal-body" id="projectModalBody">
+        <!-- Renderizado dinámicamente vía app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ALTA DE NUEVA OBRA -->
+  <div class="modal-backdrop" id="newProjectModalBackdrop">
+    <div class="modal-dialog modal-lg" id="newProjectModalDialog">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <h3>+ Alta de Nueva Obra / Proyecto</h3>
+          <span class="badge badge-warning">Registro Oficial GTL</span>
+        </div>
+        <button class="btn-icon modal-close" id="closeNewProjectModalBtn">✕</button>
+      </div>
+      <div class="modal-body" id="newProjectModalBody">
+        <form id="newProjectForm" class="form-grid">
+          <div class="form-group col-span-2">
+            <label for="npNombre">Nombre del Proyecto / Obra *</label>
+            <input type="text" id="npNombre" class="form-input" placeholder="Ej. Instalación Solar Híbrida 10 kWp & Respaldo" required />
+          </div>
+          <div class="form-group">
+            <label for="npCliente">Cliente / Razón Social *</label>
+            <select id="npCliente" class="form-select" required></select>
+          </div>
+          <div class="form-group">
+            <label for="npTipo">Tipo de Proyecto *</label>
+            <select id="npTipo" class="form-select" required>
+              <option value="solar_hibrido">☀️ Paneles Solares & Sistema Híbrido</option>
+              <option value="industrial">⚡ Obra Eléctrica Industrial / TGBT</option>
+              <option value="comercial">🏢 Habilitación & Acondicionamiento Comercial</option>
+              <option value="apto_electrico">📋 Protocolo DCI & Medición Puesta a Tierra</option>
+              <option value="loteo">🏗️ Infraestructura Eléctrica para Loteo</option>
+            </select>
+          </div>
+          <div class="form-group col-span-2">
+            <label for="npUbicacion">Ubicación de Obra *</label>
+            <input type="text" id="npUbicacion" class="form-input" placeholder="Ej. Calle 467 e/ 28 y 29, City Bell, La Plata" required />
+          </div>
+          <div class="form-group">
+            <label for="npMonto">Monto Contratado ($ ARS) *</label>
+            <input type="number" id="npMonto" class="form-input" placeholder="Ej. 18500000" required />
+          </div>
+          <div class="form-group">
+            <label for="npResponsable">Director / Responsable Técnico *</label>
+            <select id="npResponsable" class="form-select">
+              <option value="Ing. Joaquín Tenti">Ing. Joaquín Tenti (Director)</option>
+              <option value="Ing. Martín Solís">Ing. Martín Solís (Proyectista)</option>
+              <option value="Tec. Federico Benítez">Tec. Federico Benítez (Jefe de Cuadrilla)</option>
+            </select>
+          </div>
+
+          <!-- Campos condicionales para Energía Solar -->
+          <div class="form-group col-span-2 solar-fields-box" id="npSolarFields">
+            <h5 class="form-subtitle">⚡ Parámetros Fotovoltaicos Especiales GTL:</h5>
+            <div class="form-grid-inner">
+              <div class="form-group">
+                <label for="npPotencia">Potencia Instalada (kWp)</label>
+                <input type="number" step="0.5" id="npPotencia" class="form-input" placeholder="Ej. 10.5" />
+              </div>
+              <div class="form-group">
+                <label for="npInversor">Inversor / Marca</label>
+                <input type="text" id="npInversor" class="form-input" placeholder="Ej. Growatt SPH 10000 Híbrido" />
+              </div>
+              <div class="form-group">
+                <label for="npBaterias">Almacenamiento (kWh)</label>
+                <input type="number" step="0.5" id="npBaterias" class="form-input" placeholder="Ej. 15 kWh Litio LiFePO4" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions col-span-2">
+            <button type="button" class="btn btn-secondary" id="cancelNewProjectBtn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Registrar Obra</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: NUEVO PRESUPUESTO & CALCULADORA SOLAR -->
+  <div class="modal-backdrop" id="newBudgetModalBackdrop">
+    <div class="modal-dialog modal-xl" id="newBudgetModalDialog">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <h3>+ Generador de Presupuestos & Cotización Técnica</h3>
+          <span class="badge badge-warning">GTL Ingeniería · La Plata</span>
+        </div>
+        <button class="btn-icon modal-close" id="closeNewBudgetModalBtn">✕</button>
+      </div>
+      <div class="modal-body" id="newBudgetModalBody">
+        <!-- Renderizado dinámico con Calculadora Solar integrada -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: VISTA PREVIA OFICIAL CON MEMBRETE FIRMADO POR ING. JOAQUÍN TENTI -->
+  <div class="modal-backdrop" id="budgetPrintModalBackdrop">
+    <div class="modal-dialog modal-xl modal-print" id="budgetPrintModalDialog">
+      <div class="modal-header no-print">
+        <div class="modal-header-title">
+          <h3>Presupuesto Oficial con Membrete y Firma Digital</h3>
+          <span class="badge badge-success">GTL Ingeniería · Ing. Joaquín Tenti</span>
+        </div>
+        <div class="modal-header-actions">
+          <button class="btn btn-secondary btn-sm" id="btnSendBudgetWhatsapp">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            <span>Enviar WhatsApp</span>
+          </button>
+          <button class="btn btn-primary btn-sm" id="btnPrintBudget">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>Imprimir / PDF</span>
+          </button>
+          <button class="btn-icon modal-close" id="closeBudgetPrintModalBtn">✕</button>
+        </div>
+      </div>
+      <div class="modal-body" id="budgetPrintModalBody">
+        <!-- Plantilla membretada oficial -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTRAR NUEVO LEAD / CONSULTA CRM -->
+  <div class="modal-backdrop" id="newLeadModalBackdrop">
+    <div class="modal-dialog modal-md" id="newLeadModalDialog">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <h3>+ Nuevo Lead / Consulta Técnica</h3>
+          <span class="badge badge-info">CRM GTL</span>
+        </div>
+        <button class="btn-icon modal-close" id="closeNewLeadModalBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="newLeadForm" class="form-grid">
+          <div class="form-group col-span-2">
+            <label for="nlNombre">Nombre o Empresa *</label>
+            <input type="text" id="nlNombre" class="form-input" placeholder="Ej. Distribuidora Platense S.A." required />
+          </div>
+          <div class="form-group">
+            <label for="nlTelefono">Teléfono / WhatsApp *</label>
+            <input type="tel" id="nlTelefono" class="form-input" placeholder="Ej. 0221 555-1234" required />
+          </div>
+          <div class="form-group">
+            <label for="nlEmail">Email *</label>
+            <input type="email" id="nlEmail" class="form-input" placeholder="contacto@empresa.com" required />
+          </div>
+          <div class="form-group col-span-2">
+            <label for="nlServicio">Servicio de Interés *</label>
+            <select id="nlServicio" class="form-select">
+              <option value="Paneles Solares & Sistemas Híbridos">Paneles Solares & Sistemas Híbridos</option>
+              <option value="Instalaciones Industriales y Comerciales">Instalaciones Industriales y Comerciales</option>
+              <option value="Aptos Eléctricos & Certificaciones DCI">Aptos Eléctricos & Certificaciones DCI</option>
+              <option value="Ampliaciones de Industrias">Ampliaciones de Industrias</option>
+              <option value="Habilitación de Locales Comerciales">Habilitación de Locales Comerciales</option>
+              <option value="Loteos y Desarrollos Urbanos">Loteos y Desarrollos Urbanos</option>
+            </select>
+          </div>
+          <div class="form-group col-span-2">
+            <label for="nlMensaje">Detalles de la Consulta</label>
+            <textarea id="nlMensaje" class="form-textarea" rows="3" placeholder="Requerimientos de potencia, ubicación del inmueble o fecha límite..."></textarea>
+          </div>
+          <div class="form-actions col-span-2">
+            <button type="button" class="btn btn-secondary" id="cancelNewLeadBtn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar Lead</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: BÚSQUEDA GLOBAL (Ctrl + K) -->
+  <div class="modal-backdrop" id="searchModalBackdrop">
+    <div class="modal-dialog modal-search" id="searchModalDialog">
+      <div class="search-modal-box">
+        <div class="search-modal-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="modalSearchInput" class="search-modal-input" placeholder="Buscar por obra, cliente, número de protocolo DCI o presupuesto..." autofocus />
+          <kbd class="kbd-badge">ESC</kbd>
+        </div>
+        <div class="search-modal-results" id="searchModalResults">
+          <div class="search-empty-hint">Escribí para buscar en obras, presupuestos, clientes y protocolos técnicos...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Application Script -->
+  <script src="/GTL-ERP-muestra/app.js"></script>
+</body>
+</html>
