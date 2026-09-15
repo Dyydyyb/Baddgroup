@@ -874,8 +874,60 @@ const App = {
       if (!tooltip) return;
       tooltip.innerHTML = `<div class="tooltip-title">${title}</div><div class="tooltip-val">${val}</div>`;
       tooltip.classList.add('active');
-      tooltip.style.left = `${e.clientX + 14}px`;
-      tooltip.style.top = `${e.clientY - 35}px`;
+      const x = Math.min(window.innerWidth - 200, (e.clientX || 0) + 14);
+      const y = Math.max(10, (e.clientY || 0) - 35);
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${y}px`;
+    };
+
+    window.highlightFinancialMonth = (idx) => {
+      const guide = document.getElementById(`financial-guide-${idx}`);
+      if (guide) guide.setAttribute('opacity', '1');
+      const dotIn = document.getElementById(`dot-in-${idx}`);
+      if (dotIn) { dotIn.setAttribute('r', '7'); dotIn.setAttribute('stroke-width', '3'); }
+      const dotOut = document.getElementById(`dot-out-${idx}`);
+      if (dotOut) { dotOut.setAttribute('r', '6.5'); dotOut.setAttribute('stroke-width', '3'); }
+      const dotNet = document.getElementById(`dot-net-${idx}`);
+      if (dotNet) { dotNet.setAttribute('r', '7'); dotNet.setAttribute('stroke-width', '3'); }
+    };
+
+    window.unhighlightFinancialMonth = (idx) => {
+      const guide = document.getElementById(`financial-guide-${idx}`);
+      if (guide) guide.setAttribute('opacity', '0');
+      const dotIn = document.getElementById(`dot-in-${idx}`);
+      if (dotIn) { dotIn.setAttribute('r', '5'); dotIn.setAttribute('stroke-width', '2'); }
+      const dotOut = document.getElementById(`dot-out-${idx}`);
+      if (dotOut) { dotOut.setAttribute('r', '4.5'); dotOut.setAttribute('stroke-width', '2'); }
+      const dotNet = document.getElementById(`dot-net-${idx}`);
+      if (dotNet) { dotNet.setAttribute('r', '5'); dotNet.setAttribute('stroke-width', '2'); }
+    };
+
+    window.showFinancialMonthTooltip = (e, ptLabel, inVal, outVal, netVal, pctVal) => {
+      if (!tooltip) return;
+      tooltip.innerHTML = `
+        <div style="font-weight:800; font-size:12px; margin-bottom:6px; color:#f8fafc; border-bottom:1px solid rgba(255,255,255,0.18); padding-bottom:4px;">
+          ${ptLabel} (Septiembre 2026)
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px; font-size:11px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <span style="color:#60a5fa; display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:#2563eb; display:inline-block;"></span> Ingreso Facturado:</span>
+            <strong style="font-family:var(--font-mono); color:#ffffff;">${inVal}</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <span style="color:#94a3b8; display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:#475569; display:inline-block;"></span> Egresos Consolidados:</span>
+            <strong style="font-family:var(--font-mono); color:#ffffff;">${outVal}</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <span style="color:#34d399; display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:#10b981; display:inline-block;"></span> Margen Neto:</span>
+            <strong style="font-family:var(--font-mono); color:#34d399;">+ ${netVal} (${pctVal}%)</strong>
+          </div>
+        </div>
+      `;
+      tooltip.classList.add('active');
+      const x = Math.min(window.innerWidth - 240, (e.clientX || 0) + 14);
+      const y = Math.max(10, (e.clientY || 0) - 45);
+      tooltip.style.left = `${x}px`;
+      tooltip.style.top = `${y}px`;
     };
 
     window.hideChartTooltip = () => {
@@ -1274,12 +1326,12 @@ const App = {
               <p>Ingresos facturados vs egresos operativos consolidados vs balance neto realizado</p>
             </div>
             <div class="chart-controls">
-              <!-- Selector de Tipo de Gráfico -->
+              <!-- Selector de Tipo de Gráfico (Dona Primero) -->
               <div class="chart-controls-group">
+                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'donut' ? 'active' : ''}" onclick="App.setFinancialChartType('donut')" title="Gráfico de Dona Circular">Dona</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'lines' ? 'active' : ''}" onclick="App.setFinancialChartType('lines')" title="Gráfico de Líneas">Líneas</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'area' ? 'active' : ''}" onclick="App.setFinancialChartType('area')" title="Gráfico de Áreas">Áreas</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'bars' ? 'active' : ''}" onclick="App.setFinancialChartType('bars')" title="Gráfico de Barras">Barras</button>
-                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'donut' ? 'active' : ''}" onclick="App.setFinancialChartType('donut')" title="Gráfico de Dona Circular">Dona</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'pie' ? 'active' : ''}" onclick="App.setFinancialChartType('pie')" title="Gráfico de Torta">Torta</button>
               </div>
               <!-- Selector de Unidad: $ Valores vs % Porcentaje -->
@@ -1302,10 +1354,10 @@ const App = {
               <p>Destino del capital operativo y margen neto</p>
             </div>
             <div class="chart-controls">
-              <!-- Selector de Tipo de Representación -->
+              <!-- Selector de Tipo de Representación (Dona Primero) -->
               <div class="chart-controls-group">
-                <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'breakdown' ? 'active' : ''}" onclick="App.setCostStructureType('breakdown')" title="Vista Desglose">Desglose</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'donut' ? 'active' : ''}" onclick="App.setCostStructureType('donut')" title="Vista Dona">Dona</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'breakdown' ? 'active' : ''}" onclick="App.setCostStructureType('breakdown')" title="Vista Desglose">Desglose</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'pie' ? 'active' : ''}" onclick="App.setCostStructureType('pie')" title="Vista Torta">Torta</button>
                 <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'bars' ? 'active' : ''}" onclick="App.setCostStructureType('bars')" title="Vista Barras">Barras</button>
               </div>
@@ -1760,18 +1812,27 @@ const App = {
         const baseY = chartH + 10;
 
         svgInner += `
-          <polygon points="${firstX},${baseY} ${ptsIn.join(' ')} ${lastX},${baseY}" fill="rgba(37, 99, 235, 0.18)" />
-          <polygon points="${firstX},${baseY} ${ptsOut.join(' ')} ${lastX},${baseY}" fill="rgba(71, 85, 105, 0.15)" />
-          <polygon points="${firstX},${baseY} ${ptsNet.join(' ')} ${lastX},${baseY}" fill="rgba(16, 185, 129, 0.2)" />
+          <polygon points="${firstX},${baseY} ${ptsIn.join(' ')} ${lastX},${baseY}" fill="rgba(37, 99, 235, 0.18)" style="pointer-events:none;" />
+          <polygon points="${firstX},${baseY} ${ptsOut.join(' ')} ${lastX},${baseY}" fill="rgba(71, 85, 105, 0.15)" style="pointer-events:none;" />
+          <polygon points="${firstX},${baseY} ${ptsNet.join(' ')} ${lastX},${baseY}" fill="rgba(16, 185, 129, 0.2)" style="pointer-events:none;" />
         `;
       }
 
+      // Vertical guide lines for interactive hover
+      series.forEach((pt, idx) => {
+        const x = paddingLeft + step * idx + step / 2;
+        svgInner += `
+          <line id="financial-guide-${idx}" x1="${x}" y1="10" x2="${x}" y2="${chartH + 10}" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3" opacity="0" style="transition:opacity 0.2s; pointer-events:none;" />
+        `;
+      });
+
       svgInner += `
-        <polyline points="${ptsIn.join(' ')}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-        <polyline points="${ptsOut.join(' ')}" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,4" />
-        <polyline points="${ptsNet.join(' ')}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <polyline points="${ptsIn.join(' ')}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;" />
+        <polyline points="${ptsOut.join(' ')}" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,4" style="pointer-events:none;" />
+        <polyline points="${ptsNet.join(' ')}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none;" />
       `;
 
+      // Data Points with dynamic IDs
       series.forEach((pt, idx) => {
         const x = paddingLeft + step * idx + step / 2;
         const yIn = chartH - (pt.in / yMax) * chartH + 10;
@@ -1779,26 +1840,27 @@ const App = {
         const netVal = Math.max(0, pt.in - pt.out);
         const yNet = chartH - (netVal / yMax) * chartH + 10;
 
-        const tipIn = unit === 'percent'
-          ? ((pt.in / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.in)
-          : this.formatCurrency(pt.in);
-        const tipOut = unit === 'percent'
-          ? ((pt.out / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.out)
-          : this.formatCurrency(pt.out);
-        const tipNet = unit === 'percent'
-          ? ((netVal / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(netVal)
-          : this.formatCurrency(netVal);
+        svgInner += `
+          <circle id="dot-in-${idx}" cx="${x}" cy="${yIn}" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2" style="transition:all 0.2s; pointer-events:none;" />
+          <circle id="dot-out-${idx}" cx="${x}" cy="${yOut}" r="4.5" fill="#475569" stroke="#ffffff" stroke-width="2" style="transition:all 0.2s; pointer-events:none;" />
+          <circle id="dot-net-${idx}" cx="${x}" cy="${yNet}" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2" style="transition:all 0.2s; pointer-events:none;" />
+        `;
+      });
+
+      // Full-height interactive column hover slices
+      series.forEach((pt, idx) => {
+        const x = paddingLeft + step * idx + step / 2;
+        const netVal = Math.max(0, pt.in - pt.out);
+        const netPct = pt.in > 0 ? ((netVal / pt.in) * 100).toFixed(1) : '0.0';
+        const inStr = unit === 'percent' ? ((pt.in / totalIn) * 100).toFixed(1) + '%' : this.formatCurrency(pt.in);
+        const outStr = unit === 'percent' ? ((pt.out / totalIn) * 100).toFixed(1) + '%' : this.formatCurrency(pt.out);
+        const netStr = unit === 'percent' ? ((netVal / totalIn) * 100).toFixed(1) + '%' : this.formatCurrency(netVal);
 
         svgInner += `
-          <circle cx="${x}" cy="${yIn}" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${tipIn}')"
-            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
-          <circle cx="${x}" cy="${yOut}" r="4.5" fill="#475569" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Egresos Totales', '${tipOut}')"
-            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
-          <circle cx="${x}" cy="${yNet}" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Margen Neto', '${tipNet}')"
-            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
+          <rect x="${x - step / 2}" y="0" width="${step}" height="${height}" fill="transparent" style="cursor:crosshair; pointer-events:all;"
+            onmouseenter="highlightFinancialMonth(${idx})"
+            onmousemove="showFinancialMonthTooltip(event, '${pt.label}', '${inStr}', '${outStr}', '${netStr}', '${netPct}')"
+            onmouseleave="unhighlightFinancialMonth(${idx}); hideChartTooltip()" />
         `;
       });
     }

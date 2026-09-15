@@ -134,12 +134,19 @@ html {
   border-right: 1px solid var(--sidebar-border);
   display: flex;
   flex-direction: column;
-  position: sticky;
+  position: fixed;
   top: 0;
+  bottom: 0;
+  left: 0;
   height: 100vh;
+  height: 100dvh;
   z-index: 100;
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s ease;
   box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-width-collapsed);
 }
 
 .sidebar-header {
@@ -428,6 +435,14 @@ html {
   flex-direction: column;
   min-width: 0;
   min-height: 100vh;
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1), width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.collapsed ~ .main-wrapper {
+  margin-left: var(--sidebar-width-collapsed);
+  width: calc(100% - var(--sidebar-width-collapsed));
 }
 
 .topbar {
@@ -1459,20 +1474,20 @@ textarea.form-control {
 
 .chart-tooltip {
   position: fixed;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(10px);
   color: #ffffff;
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
   font-size: 12px;
   pointer-events: none;
   opacity: 0;
   transform: translate(-50%, -120%);
-  transition: opacity 0.15s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 9999;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  white-space: nowrap;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-width: 210px;
 }
 
 .chart-tooltip.active {
@@ -1531,6 +1546,10 @@ textarea.form-control {
   }
   .sidebar.mobile-open {
     left: 0;
+  }
+  .main-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
   }
   .financial-charts-grid {
     grid-template-columns: 1fr;
