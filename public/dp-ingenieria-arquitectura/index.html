@@ -160,10 +160,10 @@
         </div>
         <div class="sidebar-footer-links">
           <button type="button" class="btn-sidebar-quick" id="btnToggleTheme" title="Cambiar tema">
-            <span>🌓 Modo</span>
+            <span>Tema</span>
           </button>
           <button type="button" class="btn-sidebar-quick" onclick="alert('Sesión segura de DP Ingeniería & Arquitectura activa.')" title="Estado de sesión">
-            <span>🔒 Activo</span>
+            <span>Sesión Activa</span>
           </button>
         </div>
       </div>
@@ -187,14 +187,14 @@
             <kbd class="kbd-shortcut">⌘K</kbd>
           </div>
 
-          <!-- ⭐ FILTRO DE RUBRO: INGENIERÍA vs ARQUITECTURA -->
+          <!-- FILTRO DE RUBRO: INGENIERÍA vs ARQUITECTURA -->
           <div class="rubro-filter-pill" id="rubroFilterGroup" title="Filtrar sistema por Rubro">
             <button type="button" class="rubro-btn active" data-rubro="all">Todos</button>
             <button type="button" class="rubro-btn" data-rubro="ingenieria">
-              <span>🏗️ Ingeniería</span>
+              <span>Ingeniería Civil</span>
             </button>
             <button type="button" class="rubro-btn" data-rubro="arquitectura">
-              <span>📐 Arquitectura</span>
+              <span>Arquitectura</span>
             </button>
           </div>
         </div>
@@ -223,25 +223,25 @@
             <div class="notifications-dropdown" id="notificationsDropdown">
               <div class="notifications-header">
                 <h4>Alertas de DP Ingeniería & Arquitectura</h4>
-                <span class="badge badge-amber">3 pendientes</span>
+                <span class="badge badge-primary">3 pendientes</span>
               </div>
               <ul class="notifications-list" id="notificationsList">
                 <li class="notification-item unread">
-                  <div class="notif-icon danger">📄</div>
+                  <div class="notif-icon danger">!</div>
                   <div class="notif-content">
                     <p class="notif-title">Subcontrato Hormigón H-30: Certificado N° 4 pendiente de visado</p>
                     <span class="notif-time">Hace 20 min • Torre Altos del Parque</span>
                   </div>
                 </li>
                 <li class="notification-item unread">
-                  <div class="notif-icon warning">⚖️</div>
+                  <div class="notif-icon warning">i</div>
                   <div class="notif-content">
                     <p class="notif-title">Póliza de Caución por vencer en 5 días</p>
                     <span class="notif-time">Hace 2 horas • Nave Industrial Cuyo</span>
                   </div>
                 </li>
                 <li class="notification-item unread">
-                  <div class="notif-icon info">🏛️</div>
+                  <div class="notif-icon info">✓</div>
                   <div class="notif-content">
                     <p class="notif-title">Aprobación de Plano Municipal & Factibilidad</p>
                     <span class="notif-time">Hace 4 horas • Residencia Vanguardia</span>
@@ -323,8 +323,8 @@
             <div class="form-group col-6">
               <label class="form-label">Rubro Principal *</label>
               <select class="form-control" id="newContractRubro" required>
-                <option value="ingenieria">🏗️ Ingeniería Civil / Estructural</option>
-                <option value="arquitectura">📐 Arquitectura & Diseño</option>
+                <option value="ingenieria">Ingeniería Civil / Estructural</option>
+                <option value="arquitectura">Arquitectura & Diseño</option>
               </select>
             </div>
           </div>
@@ -410,16 +410,111 @@
         </div>
         <div class="modal-header-actions">
           <button class="btn btn-secondary btn-sm" id="btnSendBudgetWhatsapp">
-            <span>💬 Compartir WhatsApp</span>
+            <span>Compartir WhatsApp</span>
           </button>
           <button class="btn btn-primary btn-sm" id="btnPrintBudget">
-            <span>🖨️ Imprimir / Guardar PDF</span>
+            <span>Imprimir / Guardar PDF</span>
           </button>
           <button class="btn-icon modal-close" id="closeBudgetPrintModalBtn">✕</button>
         </div>
       </div>
       <div class="modal-body" id="budgetPrintModalBody">
         <!-- Letterhead printable layout injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4B: CREAR NUEVA COTIZACIÓN / PRESUPUESTO INTERACTIVO
+       ========================================================================= -->
+  <div class="modal-backdrop" id="newBudgetModalBackdrop">
+    <div class="modal-dialog modal-xl" id="newBudgetModalDialog">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <h3>Nueva Cotización & Presupuesto de Obra</h3>
+          <span class="badge badge-primary">DP Ingeniería & Arquitectura</span>
+        </div>
+        <button class="btn-icon modal-close" id="closeNewBudgetModalBtn">✕</button>
+      </div>
+      <div class="modal-body" id="newBudgetModalBody">
+        <form id="formNewBudget">
+          <div class="form-row">
+            <div class="form-group col-4">
+              <label class="form-label">Código Presupuesto *</label>
+              <input type="text" class="form-control" id="newBudgetCode" required readonly style="font-family:var(--font-mono); font-weight:700;">
+            </div>
+            <div class="form-group col-4">
+              <label class="form-label">Comitente / Cliente *</label>
+              <input type="text" class="form-control" id="newBudgetClient" placeholder="Ej: Fideicomiso Bahía Madero" required>
+            </div>
+            <div class="form-group col-4">
+              <label class="form-label">Especialidad / Rubro *</label>
+              <select class="form-control" id="newBudgetRubro" required>
+                <option value="ingenieria">Ingeniería Civil & Estructural</option>
+                <option value="arquitectura">Arquitectura & Dirección</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-8">
+              <label class="form-label">Título del Proyecto / Cotización *</label>
+              <input type="text" class="form-control" id="newBudgetTitle" placeholder="Ej: Cálculo Estructural CIRSOC y Planos de Taller Nave Industrial" required>
+            </div>
+            <div class="form-group col-4">
+              <label class="form-label">Validez de Oferta (Días) *</label>
+              <input type="number" class="form-control" id="newBudgetValidity" value="30" min="5" max="180" required>
+            </div>
+          </div>
+
+          <!-- DYNAMIC LINE ITEMS TABLE -->
+          <div style="margin-top:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <h4 style="font-size:14px; font-weight:800; color:var(--text-primary);">Desglose de Partidas / Tareas Profesionales</h4>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnAddBudgetItem">
+                <span>+ Agregar Partida</span>
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="budget-items-table">
+                <thead>
+                  <tr>
+                    <th style="width:46%;">Descripción de la Tarea / Cómputo</th>
+                    <th style="width:14%;">Unidad</th>
+                    <th style="width:14%;">Cantidad</th>
+                    <th style="width:18%;">Precio Unit. ($)</th>
+                    <th style="width:8%; text-align:center;">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="budgetItemsTbody">
+                  <!-- Injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- TOTALS SUMMARY -->
+            <div class="budget-totals-card">
+              <div class="budget-totals-row">
+                <span>Subtotal Costo Directo & Tareas:</span>
+                <strong id="newBudgetSubtotalDisplay" style="font-family:var(--font-mono);">$ 0</strong>
+              </div>
+              <div class="budget-totals-row">
+                <span>IVA / Cargas Impositivas (21%):</span>
+                <strong id="newBudgetIvaDisplay" style="font-family:var(--font-mono);">$ 0</strong>
+              </div>
+              <div class="budget-totals-row final">
+                <span>Total Presupuesto Oficial:</span>
+                <strong id="newBudgetTotalDisplay" style="font-family:var(--font-mono);">$ 0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions" style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+            <button type="button" class="btn btn-secondary" id="btnCancelNewBudget">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar y Emitir Cotización</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -460,8 +555,8 @@
             <div class="form-group col-6">
               <label class="form-label">Rubro *</label>
               <select class="form-control" id="agendaEventRubro" required>
-                <option value="ingenieria">🏗️ Ingeniería Civil</option>
-                <option value="arquitectura">📐 Arquitectura</option>
+                <option value="ingenieria">Ingeniería Civil</option>
+                <option value="arquitectura">Arquitectura</option>
               </select>
             </div>
           </div>
@@ -514,8 +609,8 @@
             <div class="form-group col-6">
               <label class="form-label">Rubro Principal *</label>
               <select class="form-control" id="newProjectRubro" required>
-                <option value="ingenieria">🏗️ Ingeniería Civil & Estructuras</option>
-                <option value="arquitectura">📐 Arquitectura & Dirección</option>
+                <option value="ingenieria">Ingeniería Civil & Estructuras</option>
+                <option value="arquitectura">Arquitectura & Dirección</option>
               </select>
             </div>
           </div>

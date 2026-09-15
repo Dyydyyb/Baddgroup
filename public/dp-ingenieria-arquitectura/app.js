@@ -1,7 +1,8 @@
 /**
- * DP INGENIERÍA & ARQUITECTURA - CORE ERP APPLICATION ENGINE (v3.5 COMPLETE)
+ * DP INGENIERÍA & ARQUITECTURA - CORE ERP APPLICATION ENGINE (v4.0 ELEVATED)
  * Sistema Integral de Gestión de Obras Civiles, Proyectos Arquitectónicos,
- * Cálculo Estructural CIRSOC, Contratos & Subcontratos de Gremios.
+ * Cálculo Estructural CIRSOC, Contratos de Comitentes, Subcontratos de Gremios con Rentabilidad,
+ * Analítica Financiera, Presupuestador Interactivo y Calendario de Inspecciones Técnicas.
  */
 
 // ==========================================================================
@@ -13,8 +14,13 @@ const DP_DB = {
     activeRubro: 'all', // 'all' | 'ingenieria' | 'arquitectura'
     activeContractsTab: 'principales', // 'principales' | 'subcontratos'
     obrasViewMode: 'grid', // 'grid' | 'table'
+    agendaViewMode: 'calendar', // 'calendar' | 'list'
+    calendarMonth: 8, // September (0-indexed: 8 = Sep)
+    calendarYear: 2026,
+    calendarSelectedDate: '2026-09-15',
+    budgetStatusFilter: 'all', // 'all' | 'Aprobado' | 'Enviado' | 'En Revisión'
     currentTimeFilter: 'month', // 'day' | 'week' | 'month' | 'year'
-    financialChartType: 'bars', // 'bars' | 'lines' | 'area'
+    financialChartType: 'lines', // 'lines' | 'area' | 'bars'
     currentRole: 'admin',
     searchQuery: ''
   },
@@ -234,6 +240,7 @@ const DP_DB = {
 
   // ========================================================================
   // CONTRATOS PRINCIPALES (COMITENTES)
+  // Marco Legal: Cláusula de Ajuste CAC & Fondo de Reparo (5% de garantía)
   // ========================================================================
   contracts: [
     {
@@ -354,7 +361,8 @@ const DP_DB = {
   ],
 
   // ========================================================================
-  // SUBCONTRATOS POR GREMIO (CONTRATISTAS ESPECIALIZADOS)
+  // SUBCONTRATOS POR GREMIO (CON ANÁLISIS DE RENTABILIDAD & CONTROL ART)
+  // Muestra: Facturación cobrada al cliente, Costo pagado al gremio, Ganancia Neta y Margen %
   // ========================================================================
   subcontracts: [
     {
@@ -362,7 +370,7 @@ const DP_DB = {
       code: 'SUB-GRM-01',
       kind: 'subcontrato',
       gremio: 'Hormigón Armado & Encofrados',
-      title: 'Subcontrato de Mano de Obra para Estructura de H°A° (Torre)',
+      title: 'Mano de Obra para Estructura de H°A° Torre Altos del Parque',
       rubro: 'ingenieria',
       projectId: 'proj-001',
       projectTitle: 'Torre Residencial Altos del Parque',
@@ -370,16 +378,18 @@ const DP_DB = {
       responsible: 'Arq. Claudio Funes',
       cuit: '30-71120944-5',
       modalidad: 'Unidad de Medida (m³)',
-      totalAmount: 48500000,
-      certifiedAmount: 43650000,
-      paidAmount: 41467500,
+      costAmount: 43650000,     // Lo que DP le paga al gremio (costo)
+      billedAmount: 62400000,   // Lo que DP le factura al comitente por la partida
+      netProfit: 18750000,      // Ganancia neta generada para DP
+      profitMargin: 30.0,       // % de ganancia
       retentionPercent: 5,
       retentionAmount: 2182500,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2025-12-01',
       endDate: '2026-10-31',
-      artStatus: 'Nómina de 22 operarios activa en Swiss Medical ART con cláusula de no repetición a favor de DP',
+      artStatus: 'Póliza Swiss Medical ART al día (Nómina 22 operarios) con Cláusula de No Repetición a favor de DP',
+      artVerified: true,
       progress: 90
     },
     {
@@ -387,7 +397,7 @@ const DP_DB = {
       code: 'SUB-GRM-02',
       kind: 'subcontrato',
       gremio: 'Estructuras Metálicas & Tinglados',
-      title: 'Fabricación y Montaje de Pórticos y Cabriadas de Nave Industrial',
+      title: 'Fabricación y Montaje de Pórticos y Cabriadas Nave Cuyo',
       rubro: 'ingenieria',
       projectId: 'proj-002',
       projectTitle: 'Nave Logística & Centro de Distribución Cuyo',
@@ -395,16 +405,18 @@ const DP_DB = {
       responsible: 'Ing. Carlos Pellegrini',
       cuit: '30-68449012-9',
       modalidad: 'Suma Alzada',
-      totalAmount: 52000000,
-      certifiedAmount: 39000000,
-      paidAmount: 37050000,
+      costAmount: 39000000,
+      billedAmount: 54000000,
+      netProfit: 15000000,
+      profitMargin: 27.8,
       retentionPercent: 5,
       retentionAmount: 1950000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-02-15',
       endDate: '2026-08-30',
-      artStatus: 'Operarios de montaje en altura con certificado de aptitud y seguro La Segunda ART',
+      artStatus: 'Operarios de montaje en altura asegurados en La Segunda ART con Cláusula de No Repetición',
+      artVerified: true,
       progress: 75
     },
     {
@@ -412,7 +424,7 @@ const DP_DB = {
       code: 'SUB-GRM-03',
       kind: 'subcontrato',
       gremio: 'Carpintería de Aluminio & DVH',
-      title: 'Provisión y Colocación de Carpinterías A30 New y Vidrios DVH 6+12+6',
+      title: 'Provisión y Colocación de Carpinterías A30 New y Vidrios DVH',
       rubro: 'arquitectura',
       projectId: 'proj-003',
       projectTitle: 'Residencia Vanguardia San Isidro',
@@ -420,16 +432,18 @@ const DP_DB = {
       responsible: 'Sr. Marcelo Vivas',
       cuit: '20-21890441-2',
       modalidad: 'Suma Alzada',
-      totalAmount: 28400000,
-      certifiedAmount: 24140000,
-      paidAmount: 22933000,
+      costAmount: 24140000,
+      billedAmount: 34500000,
+      netProfit: 10360000,
+      profitMargin: 30.0,
       retentionPercent: 5,
       retentionAmount: 1207000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-04-01',
       endDate: '2026-09-15',
-      artStatus: 'Seguro de accidentes personales y ART Prevención al día',
+      artStatus: 'Seguro de accidentes personales y ART Prevención al día con Cláusula de No Repetición',
+      artVerified: true,
       progress: 85
     },
     {
@@ -445,21 +459,50 @@ const DP_DB = {
       responsible: 'Ing. Gustavo Albornoz',
       cuit: '33-70984421-9',
       modalidad: 'Unidad de Medida (m³)',
-      totalAmount: 21500000,
-      certifiedAmount: 21500000,
-      paidAmount: 20425000,
+      costAmount: 21500000,
+      billedAmount: 29800000,
+      netProfit: 8300000,
+      profitMargin: 27.9,
       retentionPercent: 5,
       retentionAmount: 1075000,
       status: 'completed',
       statusLabel: 'Finalizado',
       startDate: '2026-01-20',
       endDate: '2026-03-25',
-      artStatus: 'Mano de obra y maquinistas asegurados en Berkley ART',
+      artStatus: 'Maquinistas y operarios asegurados en Berkley ART con Cláusula de No Repetición',
+      artVerified: true,
       progress: 100
     },
     {
       id: 'sub-005',
       code: 'SUB-GRM-05',
+      kind: 'subcontrato',
+      gremio: 'Instalaciones Sanitarias & Incendio',
+      title: 'Red de Distribución Sanitaria, Tanques de Reserva y Red Sprinklers',
+      rubro: 'arquitectura',
+      projectId: 'proj-001',
+      projectTitle: 'Torre Residencial Altos del Parque',
+      party: 'Sanitaria Central Metropolitana',
+      responsible: 'Sr. Jorge Carrizo',
+      cuit: '23-18902144-9',
+      modalidad: 'Unidad de Medida',
+      costAmount: 15200000,
+      billedAmount: 22800000,
+      netProfit: 7600000,
+      profitMargin: 33.3,
+      retentionPercent: 5,
+      retentionAmount: 760000,
+      status: 'active',
+      statusLabel: 'En Ejecución',
+      startDate: '2026-03-01',
+      endDate: '2026-11-30',
+      artStatus: 'Cuadrilla de 8 plomeros en regla con Provincia ART y Cláusula de No Repetición',
+      artVerified: true,
+      progress: 45
+    },
+    {
+      id: 'sub-006',
+      code: 'SUB-GRM-06',
       kind: 'subcontrato',
       gremio: 'Instalaciones Eléctricas & Subestación',
       title: 'Instalación de Fuerza Motriz, Bandejas Portacables y Tableros',
@@ -470,42 +513,19 @@ const DP_DB = {
       responsible: 'Ing. Pablo Domínguez (Mat. COPIME)',
       cuit: '30-71402299-1',
       modalidad: 'Suma Alzada',
-      totalAmount: 19800000,
-      certifiedAmount: 3960000,
-      paidAmount: 3762000,
-      retentionPercent: 5,
-      retentionAmount: 198000,
-      status: 'active',
-      statusLabel: 'En Ejecución',
-      startDate: '2026-06-01',
-      endDate: '2026-09-30',
-      artStatus: 'Nómina de 6 electricistas matriculados en Federación Patronal',
-      progress: 20
-    },
-    {
-      id: 'sub-006',
-      code: 'SUB-GRM-06',
-      kind: 'subcontrato',
-      gremio: 'Instalaciones Sanitarias, Gas & Incendio',
-      title: 'Red de Distribución Sanitaria, Tanques de Reserva y Red Sprinklers',
-      rubro: 'arquitectura',
-      projectId: 'proj-001',
-      projectTitle: 'Torre Residencial Altos del Parque',
-      party: 'Sanitaria Central Metropolitana',
-      responsible: 'Sr. Jorge Carrizo',
-      cuit: '23-18902144-9',
-      modalidad: 'Unidad de Medida',
-      totalAmount: 24800000,
-      certifiedAmount: 11160000,
-      paidAmount: 10602000,
+      costAmount: 11160000,
+      billedAmount: 16500000,
+      netProfit: 5340000,
+      profitMargin: 32.4,
       retentionPercent: 5,
       retentionAmount: 558000,
       status: 'active',
       statusLabel: 'En Ejecución',
-      startDate: '2026-03-01',
-      endDate: '2026-11-30',
-      artStatus: 'Seguro de obra y ART al día',
-      progress: 45
+      startDate: '2026-06-01',
+      endDate: '2026-09-30',
+      artStatus: 'Nómina de 6 electricistas matriculados en Federación Patronal ART',
+      artVerified: true,
+      progress: 20
     },
     {
       id: 'sub-007',
@@ -520,16 +540,18 @@ const DP_DB = {
       responsible: 'Ing. Fernando Varela',
       cuit: '30-71649201-3',
       modalidad: 'Suma Alzada',
-      totalAmount: 28000000,
-      certifiedAmount: 12600000,
-      paidAmount: 11970000,
+      costAmount: 12600000,
+      billedAmount: 18800000,
+      netProfit: 6200000,
+      profitMargin: 33.0,
       retentionPercent: 5,
       retentionAmount: 630000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-04-15',
       endDate: '2026-11-30',
-      artStatus: 'Póliza de ART y seguro de herramientas en obra',
+      artStatus: 'Póliza de ART y seguro de herramientas en obra verificado',
+      artVerified: true,
       progress: 45
     },
     {
@@ -545,22 +567,24 @@ const DP_DB = {
       responsible: 'Sr. Hugo Paredes',
       cuit: '27-24902188-4',
       modalidad: 'Suma Alzada',
-      totalAmount: 11600000,
-      certifiedAmount: 1160000,
-      paidAmount: 1102000,
+      costAmount: 3160000,
+      billedAmount: 4800000,
+      netProfit: 1640000,
+      profitMargin: 34.2,
       retentionPercent: 5,
-      retentionAmount: 58000,
+      retentionAmount: 158000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-06-01',
       endDate: '2026-09-30',
-      artStatus: 'Póliza de ART presentada antes de ingreso a obra',
+      artStatus: 'Póliza de ART y nómina verificada antes de ingreso a obra',
+      artVerified: true,
       progress: 10
     }
   ],
 
   // ========================================================================
-  // COTIZACIONES & PRESUPUESTOS (MEMBRETE OFICIAL DP)
+  // COTIZACIONES & PRESUPUESTOS (100% FUNCIONAL & INTERACTIVO)
   // ========================================================================
   budgets: [
     {
@@ -574,10 +598,10 @@ const DP_DB = {
       total: 38400000,
       status: 'Aprobado',
       items: [
-        { desc: 'Anteproyecto y Plantas de Arquitectura Escala 1:50', qty: '1 gl', price: 9500000 },
-        { desc: 'Modelado 3D BIM (Revit) y 8 Renders Fotorrealistas en 4K', qty: '1 gl', price: 6800000 },
-        { desc: 'Legajo Municipal y Tramitaciones Técnicas DGIUR', qty: '1 gl', price: 4500000 },
-        { desc: 'Dirección de Obra y Control de Calidad en Obra (12 meses)', qty: '12 mes', price: 17600000 }
+        { desc: 'Anteproyecto y Plantas de Arquitectura Escala 1:50', qty: '1', unit: 'gl', price: 9500000 },
+        { desc: 'Modelado 3D BIM (Revit) y 8 Renders Fotorrealistas en 4K', qty: '1', unit: 'gl', price: 6800000 },
+        { desc: 'Legajo Municipal y Tramitaciones Técnicas DGIUR', qty: '1', unit: 'gl', price: 4500000 },
+        { desc: 'Dirección de Obra y Control de Calidad en Obra (12 meses)', qty: '12', unit: 'mes', price: 1466666 }
       ]
     },
     {
@@ -591,10 +615,10 @@ const DP_DB = {
       total: 24500000,
       status: 'Enviado',
       items: [
-        { desc: 'Estudio Geotécnico de Suelos y Ensayos de Penetración SPT', qty: '1 gl', price: 3800000 },
-        { desc: 'Memoria de Cálculo de Fundaciones y Estructura Metálica Reticulada', qty: '1 gl', price: 9200000 },
-        { desc: 'Planos de Taller para Fabricación de Pórticos y Encofrados H°A°', qty: '1 gl', price: 6500000 },
-        { desc: 'Cómputo Métrico de Materiales y Pliegos Técnicos de Licitación', qty: '1 gl', price: 5000000 }
+        { desc: 'Estudio Geotécnico de Suelos y Ensayos de Penetración SPT', qty: '1', unit: 'gl', price: 3800000 },
+        { desc: 'Memoria de Cálculo de Fundaciones y Estructura Metálica Reticulada', qty: '1', unit: 'gl', price: 9200000 },
+        { desc: 'Planos de Taller para Fabricación de Pórticos y Encofrados H°A°', qty: '1', unit: 'gl', price: 6500000 },
+        { desc: 'Cómputo Métrico de Materiales y Pliegos Técnicos de Licitación', qty: '1', unit: 'gl', price: 5000000 }
       ]
     },
     {
@@ -608,9 +632,9 @@ const DP_DB = {
       total: 16800000,
       status: 'En Revisión',
       items: [
-        { desc: 'Diseño de Interiores, Iluminación Escenográfica y Muebles a Medida', qty: '1 gl', price: 6200000 },
-        { desc: 'Planos de Instalación Termomecánica y Extracción Gastronómica', qty: '1 gl', price: 4400000 },
-        { desc: 'Coordinación de Gremios y Gestión Técnica de Compras', qty: '1 gl', price: 6200000 }
+        { desc: 'Diseño de Interiores, Iluminación Escenográfica y Muebles a Medida', qty: '1', unit: 'gl', price: 6200000 },
+        { desc: 'Planos de Instalación Termomecánica y Extracción Gastronómica', qty: '1', unit: 'gl', price: 4400000 },
+        { desc: 'Coordinación de Gremios y Gestión Técnica de Compras', qty: '1', unit: 'gl', price: 6200000 }
       ]
     }
   ],
@@ -638,13 +662,15 @@ const DP_DB = {
   ],
 
   // ========================================================================
-  // AGENDA & INSPECCIONES TÉCNICAS
+  // AGENDA & INSPECCIONES TÉCNICAS (CON FECHAS EXACTAS PARA CALENDARIO)
   // ========================================================================
   agendaEvents: [
-    { id: 'evt-01', title: 'Rotura de Probetas Hormigón H-30 a 28 Días', rubro: 'ingenieria', project: 'Torre Altos del Parque', type: 'Ensayo / Hormigón', date: 'Mañana', time: '09:30 hs', responsible: 'Ing. Daniel Peralta', notes: 'Laboratorio de Control Geotécnico. Verificar probetas N° 14 a 17.' },
-    { id: 'evt-02', title: 'Aprobación de Muestras de Porcellanato & Carpinterías DVH', rubro: 'arquitectura', project: 'Residencia Vanguardia San Isidro', type: 'Dirección de Obra', date: 'Jueves', time: '15:00 hs', responsible: 'Arq. Luciana Benítez', notes: 'Reunión en obra con comitente Dr. Rossi.' },
-    { id: 'evt-03', title: 'Inspección de Ensayos No Destructivos de Soldaduras (Pórticos)', rubro: 'ingenieria', project: 'Nave Logística Cuyo', type: 'Control de Calidad', date: 'Viernes', time: '11:00 hs', responsible: 'Ing. Marcos Varela', notes: 'Verificación por ultrasonido de uniones viga-columna.' },
-    { id: 'evt-04', title: 'Reunión de Coordinación de Gremios (Termomecánica & Electricidad)', rubro: 'arquitectura', project: 'Torre Altos del Parque', type: 'Coordinación', date: 'Lunes', time: '10:00 hs', responsible: 'Capataz Roberto Molina', notes: 'Pase de cañerías por vigas en pisos 5 al 8.' }
+    { id: 'evt-01', title: 'Rotura de Probetas Hormigón H-30 a 28 Días', rubro: 'ingenieria', project: 'Torre Altos del Parque', type: 'Ensayo / Hormigón', date: '2026-09-15', time: '09:30 hs', responsible: 'Ing. Daniel Peralta', notes: 'Laboratorio de Control Geotécnico. Probetas N° 14 a 17 de losa sobre subsuelo.' },
+    { id: 'evt-02', title: 'Aprobación Muestras Carpinterías A30 & DVH', rubro: 'arquitectura', project: 'Residencia Vanguardia San Isidro', type: 'Dirección de Obra', date: '2026-09-18', time: '15:00 hs', responsible: 'Arq. Luciana Benítez', notes: 'Reunión en obra con comitente Dr. Rossi y contratista Alumax.' },
+    { id: 'evt-03', title: 'Inspección Soldaduras por Ultrasonido (Pórticos)', rubro: 'ingenieria', project: 'Nave Logística Cuyo', type: 'Control de Calidad', date: '2026-09-08', time: '11:00 hs', responsible: 'Ing. Marcos Varela', notes: 'Verificación no destructiva de uniones soldadas viga-columna.' },
+    { id: 'evt-04', title: 'Reunión Coordinación Gremios (Termomecánica & Electricidad)', rubro: 'arquitectura', project: 'Torre Altos del Parque', type: 'Coordinación', date: '2026-09-12', time: '10:00 hs', responsible: 'Roberto Molina', notes: 'Definición de pases de cañerías por vigas en pisos 5 al 8.' },
+    { id: 'evt-05', title: 'Ensayo Compactación de Suelos & Penetración SPT', rubro: 'ingenieria', project: 'Nave Logística Cuyo', type: 'Geotecnia', date: '2026-09-22', time: '08:30 hs', responsible: 'Ing. Marcos Varela', notes: 'Verificación de densidad proctor en sub-base de playa de maniobras.' },
+    { id: 'evt-06', title: 'Inspección Municipal DGIUR y Permiso Estructural', rubro: 'arquitectura', project: 'Torre Altos del Parque', type: 'Inspección Oficial', date: '2026-09-25', time: '14:00 hs', responsible: 'Arq. Luciana Benítez', notes: 'Visita de inspectores comunales para certificado de avance de estructura.' }
   ],
 
   // ========================================================================
@@ -790,8 +816,7 @@ const App = {
       this.openNewProjectModal();
     });
     document.getElementById('btnQuickNewBudget')?.addEventListener('click', () => {
-      this.navigateTo('presupuestos');
-      this.showToast('Módulo de presupuestos: presiona "+ Nueva Cotización"');
+      this.openNewBudgetModal();
     });
   },
 
@@ -801,8 +826,8 @@ const App = {
       if (!tooltip) return;
       tooltip.innerHTML = `<div class="tooltip-title">${title}</div><div class="tooltip-val">${val}</div>`;
       tooltip.classList.add('active');
-      tooltip.style.left = `${e.clientX}px`;
-      tooltip.style.top = `${e.clientY}px`;
+      tooltip.style.left = `${e.clientX + 14}px`;
+      tooltip.style.top = `${e.clientY - 35}px`;
     };
 
     window.hideChartTooltip = () => {
@@ -812,27 +837,49 @@ const App = {
   },
 
   setupModals() {
+    // Project Modal
     document.getElementById('closeProjectModalBtn')?.addEventListener('click', () => {
       document.getElementById('projectModalBackdrop')?.classList.remove('active');
     });
+
+    // Contract Modal
     document.getElementById('closeContractModalBtn')?.addEventListener('click', () => {
       document.getElementById('contractModalBackdrop')?.classList.remove('active');
     });
+
+    // New Contract Modal
     document.getElementById('closeNewContractModalBtn')?.addEventListener('click', () => {
       document.getElementById('newContractModalBackdrop')?.classList.remove('active');
     });
     document.getElementById('btnCancelNewContract')?.addEventListener('click', () => {
       document.getElementById('newContractModalBackdrop')?.classList.remove('active');
     });
+
+    // Print Letterhead Modal
     document.getElementById('closeBudgetPrintModalBtn')?.addEventListener('click', () => {
       document.getElementById('budgetPrintModalBackdrop')?.classList.remove('active');
     });
+
+    // New Budget Builder Modal
+    document.getElementById('closeNewBudgetModalBtn')?.addEventListener('click', () => {
+      document.getElementById('newBudgetModalBackdrop')?.classList.remove('active');
+    });
+    document.getElementById('btnCancelNewBudget')?.addEventListener('click', () => {
+      document.getElementById('newBudgetModalBackdrop')?.classList.remove('active');
+    });
+    document.getElementById('btnAddBudgetItem')?.addEventListener('click', () => {
+      this.addBudgetItemRow();
+    });
+
+    // Agenda Modal
     document.getElementById('closeAgendaModalBtn')?.addEventListener('click', () => {
       document.getElementById('agendaModalBackdrop')?.classList.remove('active');
     });
     document.getElementById('btnCancelAgendaEvent')?.addEventListener('click', () => {
       document.getElementById('agendaModalBackdrop')?.classList.remove('active');
     });
+
+    // New Project Modal
     document.getElementById('closeNewProjectModalBtn')?.addEventListener('click', () => {
       document.getElementById('newProjectModalBackdrop')?.classList.remove('active');
     });
@@ -840,10 +887,13 @@ const App = {
       document.getElementById('newProjectModalBackdrop')?.classList.remove('active');
     });
 
+    // Form Submissions
     document.getElementById('formNewContract')?.addEventListener('submit', (e) => this.handleNewContractSubmit(e));
     document.getElementById('formNewProject')?.addEventListener('submit', (e) => this.handleNewProjectSubmit(e));
     document.getElementById('formNewAgendaEvent')?.addEventListener('submit', (e) => this.handleNewAgendaSubmit(e));
+    document.getElementById('formNewBudget')?.addEventListener('submit', (e) => this.handleNewBudgetSubmit(e));
 
+    // Print & WhatsApp triggers
     document.getElementById('btnPrintBudget')?.addEventListener('click', () => window.print());
     document.getElementById('btnSendBudgetWhatsapp')?.addEventListener('click', () => {
       window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent('Estimado comitente, adjuntamos la cotización oficial con membrete de DP Ingeniería & Arquitectura.'), '_blank');
@@ -931,7 +981,8 @@ const App = {
   },
 
   // ========================================================================
-  // DYNAMIC PERIOD FINANCIAL DATA
+  // ANALÍTICA DE PERÍODOS (DÍA, SEMANA, MES, AÑO)
+  // Contempla: Ingresos Facturados, Costos Obras, Compras Acopios, Gastos Estructura, Balance Neto y Rentabilidad
   // ========================================================================
   getPeriodData(period) {
     switch (period) {
@@ -939,47 +990,56 @@ const App = {
         return {
           label: 'Hoy (15 de Septiembre, 2026)',
           income: 4200000,
-          expenses: 2850000,
-          balance: 1350000,
-          margin: '32.1%',
+          costs: 2100000,
+          purchases: 750000,
+          expenses: 260000,
+          totalOut: 3110000,
+          balance: 1090000,
+          profitability: '26.0%',
           series: [
-            { label: '08:00', in: 0, out: 450000 },
-            { label: '10:00', in: 1800000, out: 620000 },
-            { label: '12:00', in: 0, out: 780000 },
-            { label: '14:00', in: 2400000, out: 550000 },
-            { label: '17:00', in: 0, out: 450000 }
+            { label: '08:00', in: 0, costs: 250000, purchases: 120000, exp: 40000, out: 410000 },
+            { label: '10:00', in: 1800000, costs: 620000, purchases: 200000, exp: 60000, out: 880000 },
+            { label: '12:00', in: 0, costs: 450000, purchases: 180000, exp: 50000, out: 680000 },
+            { label: '14:00', in: 2400000, costs: 500000, purchases: 150000, exp: 70000, out: 720000 },
+            { label: '17:00', in: 0, costs: 280000, purchases: 100000, exp: 40000, out: 420000 }
           ],
-          yMax: 2500000
+          yMax: 2600000
         };
       case 'week':
         return {
-          label: 'Semana Actual (8 al 15 Sep)',
-          income: 28500000,
-          expenses: 19400000,
-          balance: 9100000,
-          margin: '31.9%',
+          label: 'Semana en Curso (8 al 15 Sep)',
+          income: 19800000,
+          costs: 10400000,
+          purchases: 3500000,
+          expenses: 1200000,
+          totalOut: 15100000,
+          balance: 4700000,
+          profitability: '23.7%',
           series: [
-            { label: 'Lun 08', in: 4500000, out: 3100000 },
-            { label: 'Mar 09', in: 7200000, out: 4900000 },
-            { label: 'Mié 10', in: 3800000, out: 2600000 },
-            { label: 'Jue 11', in: 6100000, out: 4200000 },
-            { label: 'Vie 12', in: 5400000, out: 3700000 },
-            { label: 'Sáb 13', in: 1500000, out: 900000 }
+            { label: 'Lun 08', in: 3200000, costs: 1800000, purchases: 600000, exp: 200000, out: 2600000 },
+            { label: 'Mar 09', in: 5100000, costs: 2600000, purchases: 900000, exp: 300000, out: 3800000 },
+            { label: 'Mié 10', in: 2800000, costs: 1500000, purchases: 500000, exp: 180000, out: 2180000 },
+            { label: 'Jue 11', in: 4200000, costs: 2200000, purchases: 800000, exp: 250000, out: 3250000 },
+            { label: 'Vie 12', in: 3600000, costs: 1900000, purchases: 600000, exp: 220000, out: 2720000 },
+            { label: 'Sáb 13', in: 900000, costs: 400000, purchases: 100000, exp: 50000, out: 550000 }
           ],
-          yMax: 8000000
+          yMax: 6000000
         };
       case 'year':
         return {
-          label: 'Ejercicio Fiscal 2026',
+          label: 'Ejercicio Fiscal 2026 Consolidado',
           income: 418000000,
-          expenses: 298000000,
-          balance: 120000000,
-          margin: '28.7%',
+          costs: 218500000,
+          purchases: 73200000,
+          expenses: 25800000,
+          totalOut: 317500000,
+          balance: 100500000,
+          profitability: '24.0%',
           series: [
-            { label: 'T1 2026', in: 95000000, out: 68000000 },
-            { label: 'T2 2026', in: 135000000, out: 96000000 },
-            { label: 'T3 2026', in: 128000000, out: 92000000 },
-            { label: 'T4 (Est)', in: 60000000, out: 42000000 }
+            { label: 'T1 2026', in: 95000000, costs: 50000000, purchases: 16500000, exp: 5800000, out: 72300000 },
+            { label: 'T2 2026', in: 135000000, costs: 70500000, purchases: 23800000, exp: 8200000, out: 102500000 },
+            { label: 'T3 2026', in: 128000000, costs: 66800000, purchases: 22400000, exp: 7900000, out: 97100000 },
+            { label: 'T4 (Est)', in: 60000000, costs: 31200000, purchases: 10500000, exp: 3900000, out: 45600000 }
           ],
           yMax: 150000000
         };
@@ -988,18 +1048,21 @@ const App = {
         return {
           label: 'Mes en Curso (Septiembre 2026)',
           income: 84600000,
-          expenses: 59200000,
-          balance: 25400000,
-          margin: '30.0%',
+          costs: 44200000,
+          purchases: 14800000,
+          expenses: 5200000,
+          totalOut: 64200000,
+          balance: 20400000,
+          profitability: '24.1%',
           series: [
-            { label: 'Abr', in: 58000000, out: 41000000 },
-            { label: 'May', in: 64000000, out: 45000000 },
-            { label: 'Jun', in: 72000000, out: 51000000 },
-            { label: 'Jul', in: 69000000, out: 48000000 },
-            { label: 'Ago', in: 78000000, out: 54000000 },
-            { label: 'Sep', in: 84600000, out: 59200000 }
+            { label: 'Abr', in: 58000000, costs: 30500000, purchases: 10200000, exp: 3800000, out: 44500000 },
+            { label: 'May', in: 64000000, costs: 33600000, purchases: 11100000, exp: 4100000, out: 48800000 },
+            { label: 'Jun', in: 72000000, costs: 37800000, purchases: 12600000, exp: 4500000, out: 54900000 },
+            { label: 'Jul', in: 69000000, costs: 36200000, purchases: 12000000, exp: 4300000, out: 52500000 },
+            { label: 'Ago', in: 78000000, costs: 40800000, purchases: 13500000, exp: 4800000, out: 59100000 },
+            { label: 'Sep', in: 84600000, costs: 44200000, purchases: 14800000, exp: 5200000, out: 64200000 }
           ],
-          yMax: 90000000
+          yMax: 95000000
         };
     }
   },
@@ -1015,7 +1078,7 @@ const App = {
   },
 
   // ========================================================================
-  // VIEW: DASHBOARD GENERAL (WITH PERIOD SELECTOR & ADVANCED CHARTS)
+  // VIEW: DASHBOARD GENERAL (ANALÍTICA EJECUTIVA COMPLETA)
   // ========================================================================
   renderDashboardView() {
     const container = document.getElementById('mainViewContainer');
@@ -1025,12 +1088,6 @@ const App = {
     const filteredContracts = this.filterByRubro(DP_DB.contracts);
     const filteredSubcontracts = this.filterByRubro(DP_DB.subcontracts);
 
-    const totalContractedComitentes = filteredContracts.reduce((acc, c) => acc + c.totalAmount, 0);
-    const totalCertifiedComitentes = filteredContracts.reduce((acc, c) => acc + c.certifiedAmount, 0);
-    const totalSubcontracted = filteredSubcontracts.reduce((acc, s) => acc + s.totalAmount, 0);
-    const totalRetentionFund = filteredContracts.reduce((acc, c) => acc + c.retentionAmount, 0) +
-                               filteredSubcontracts.reduce((acc, s) => acc + s.retentionAmount, 0);
-
     const activeObrasCount = filteredProjects.filter(p => p.status === 'in_progress').length;
 
     container.innerHTML = `
@@ -1038,13 +1095,16 @@ const App = {
         <div class="page-title-wrap">
           <h1>Panel de Control · DP Ingeniería & Arquitectura</h1>
           <p class="page-description">
-            Monitoreo en tiempo real de obras civiles, proyectos arquitectónicos, contratos de comitentes y gremios subcontratados.
-            ${DP_DB.state.activeRubro !== 'all' ? `<strong>(Filtro: ${DP_DB.state.activeRubro === 'ingenieria' ? '🏗️ Ingeniería Civil' : '📐 Arquitectura'})</strong>` : ''}
+            Monitoreo económico y operativo en tiempo real de obras civiles, proyectos arquitectónicos, contratos de comitentes y subcontratos de gremios.
+            ${DP_DB.state.activeRubro !== 'all' ? `<strong>(Especialidad: ${DP_DB.state.activeRubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'})</strong>` : ''}
           </p>
         </div>
         <div class="page-header-actions">
-          <button class="btn btn-amber btn-sm" onclick="App.openNewContractModal()">
-            <span>+ Nuevo Contrato</span>
+          <button class="btn btn-secondary btn-sm" onclick="App.openNewContractModal()">
+            <span>+ Registrar Contrato</span>
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="App.openNewBudgetModal()">
+            <span>+ Nueva Cotización</span>
           </button>
           <button class="btn btn-primary btn-sm" onclick="App.openNewProjectModal()">
             <span>+ Nueva Obra</span>
@@ -1055,8 +1115,8 @@ const App = {
       <!-- PERIOD SELECTOR TOOLBAR -->
       <div class="period-toolbar">
         <div class="period-label-wrap">
-          <span class="period-title">Período de Análisis Financiero:</span>
-          <span class="period-active-date">📅 ${periodData.label}</span>
+          <span class="period-title">Período de Análisis Económico:</span>
+          <span class="period-active-date" style="font-weight:700; color:var(--text-primary);">${periodData.label}</span>
         </div>
         <div class="period-buttons-group">
           <button type="button" class="btn-period ${DP_DB.state.currentTimeFilter === 'day' ? 'active' : ''}" onclick="App.setPeriod('day')">Día</button>
@@ -1066,63 +1126,76 @@ const App = {
         </div>
       </div>
 
-      <!-- STATS KPI GRID (5 EXECUTIVE CARDS) -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon primary">🏢</div>
+      <!-- STATS KPI GRID (6 EXACT EXECUTIVE METRICS REQUESTED) -->
+      <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 24px;">
+        <!-- KPI 1: Ingresos Totales Facturados -->
+        <div class="stat-card" style="border-top: 3px solid #2563eb;">
           <div class="stat-details">
-            <span class="stat-label">Obras en Ejecución</span>
-            <span class="stat-value">${activeObrasCount}</span>
-            <span class="stat-trend up">✓ Con memorias de cálculo al día</span>
+            <span class="stat-label">Ingresos Totales Facturados</span>
+            <span class="stat-value" style="color:#2563eb;">${this.formatCurrency(periodData.income)}</span>
+            <span class="stat-trend up">Cobranzas & Certificaciones</span>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon amber">📜</div>
+
+        <!-- KPI 2: Costos Operativos -->
+        <div class="stat-card" style="border-top: 3px solid #475569;">
           <div class="stat-details">
-            <span class="stat-label">Contratado Comitentes</span>
-            <span class="stat-value">${this.formatCurrency(totalContractedComitentes)}</span>
-            <span class="stat-trend up">Certificado: ${Math.round((totalCertifiedComitentes / (totalContractedComitentes || 1)) * 100)}%</span>
+            <span class="stat-label">Costos Operativos Obras</span>
+            <span class="stat-value" style="color:var(--text-primary);">${this.formatCurrency(periodData.costs)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary);">Mano de obra y gremios</span>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon info">🔨</div>
+
+        <!-- KPI 3: Compras & Acopios -->
+        <div class="stat-card" style="border-top: 3px solid #0284c7;">
           <div class="stat-details">
-            <span class="stat-label">Subcontratos Gremios</span>
-            <span class="stat-value">${this.formatCurrency(totalSubcontracted)}</span>
-            <span class="stat-trend up">8 gremios activos en obra</span>
+            <span class="stat-label">Compras & Acopios</span>
+            <span class="stat-value" style="color:#0284c7;">${this.formatCurrency(periodData.purchases)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary);">Acero ADN, H°A° e insumos</span>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-icon success">🛡️</div>
+
+        <!-- KPI 4: Gastos Generales -->
+        <div class="stat-card" style="border-top: 3px solid #64748b;">
           <div class="stat-details">
-            <span class="stat-label">Fondo de Reparo (5%)</span>
-            <span class="stat-value">${this.formatCurrency(totalRetentionFund)}</span>
-            <span class="stat-trend up">Garantía en custodia</span>
+            <span class="stat-label">Gastos Estructura Fija</span>
+            <span class="stat-value" style="color:var(--text-secondary);">${this.formatCurrency(periodData.expenses)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary);">Oficinas, BIM, seguros, logística</span>
           </div>
         </div>
-        <div class="stat-card" style="border-left: 4px solid #10b981;">
-          <div class="stat-icon success">📈</div>
+
+        <!-- KPI 5: Balance Neto -->
+        <div class="stat-card" style="border-top: 3px solid #10b981; background: var(--bg-card);">
           <div class="stat-details">
-            <span class="stat-label">Balance Neto Período</span>
-            <span class="stat-value" style="color:#059669;">+${this.formatCurrency(periodData.balance)}</span>
-            <span class="stat-trend up">Margen Neto: ${periodData.margin}</span>
+            <span class="stat-label">Balance Neto Disponible</span>
+            <span class="stat-value" style="color:#059669;">+ ${this.formatCurrency(periodData.balance)}</span>
+            <span class="stat-trend up">Superávit consolidado de caja</span>
+          </div>
+        </div>
+
+        <!-- KPI 6: Rentabilidad Neta -->
+        <div class="stat-card" style="border-top: 3px solid #10b981;">
+          <div class="stat-details">
+            <span class="stat-label">Rentabilidad Neta</span>
+            <span class="stat-value" style="color:#059669;">${periodData.profitability}</span>
+            <span class="stat-trend up">Margen neto s/ facturación</span>
           </div>
         </div>
       </div>
 
       <!-- ADVANCED FINANCIAL & ADVANCE CHARTS (2 COLUMNS) -->
       <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px; margin-bottom: 24px;">
-        <!-- Chart 1: Curva Financiera (Ingresos Certificados vs Pagos Gremios) -->
+        <!-- Chart 1: Curva Financiera Profesional -->
         <div class="chart-card">
           <div class="chart-header">
             <div class="chart-title-wrap">
-              <h3>Flujo Financiero: Certificaciones vs Desembolsos</h3>
-              <p>Ingresos por avance de obra facturado vs egresos por subcontratos y materiales</p>
+              <h3>Evolución Financiera Consolidada</h3>
+              <p>Ingresos facturados vs egresos operativos consolidados (costos + compras + gastos) vs margen neto</p>
             </div>
             <div class="chart-controls">
-              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'bars' ? 'active' : ''}" onclick="App.setFinancialChartType('bars')">Barras</button>
               <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'lines' ? 'active' : ''}" onclick="App.setFinancialChartType('lines')">Líneas</button>
-              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'area' ? 'active' : ''}" onclick="App.setFinancialChartType('area')">Área</button>
+              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'area' ? 'active' : ''}" onclick="App.setFinancialChartType('area')">Áreas</button>
+              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'bars' ? 'active' : ''}" onclick="App.setFinancialChartType('bars')">Barras</button>
             </div>
           </div>
           <div class="chart-svg-container">
@@ -1130,16 +1203,16 @@ const App = {
           </div>
         </div>
 
-        <!-- Chart 2: Distribución por Rubro (Donut Chart) -->
+        <!-- Chart 2: Estructura de Costos vs Rentabilidad -->
         <div class="chart-card">
           <div class="chart-header">
             <div class="chart-title-wrap">
-              <h3>Distribución de Cartera</h3>
-              <p>Volumen por especialidad técnica</p>
+              <h3>Estructura de Costos & Rentabilidad</h3>
+              <p>Destino del capital operativo y margen por área técnica</p>
             </div>
           </div>
-          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:240px;">
-            ${this.renderRubroDonutChart()}
+          <div style="padding: 16px 8px;">
+            ${this.renderCostStructureWidget(periodData)}
           </div>
         </div>
       </div>
@@ -1157,11 +1230,11 @@ const App = {
               <div style="background:var(--bg-app); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:16px;">
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
                   <div>
-                    <span class="badge ${p.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${p.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura'}</span>
+                    <span class="badge ${p.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${p.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'}</span>
                     <h4 style="font-size:14px; font-weight:800; margin-top:4px; color:var(--text-primary);">${p.title}</h4>
                     <p style="font-size:11.5px; color:var(--text-secondary);">${p.client} · ${p.location}</p>
                   </div>
-                  <span class="badge ${p.progress >= 70 ? 'badge-success' : 'badge-amber'}">${p.progress}% Completado</span>
+                  <span class="badge badge-success">${p.progress}% Completado</span>
                 </div>
                 <div class="progress-meter-wrap" style="width:100%;">
                   <div class="progress-meter" style="height:10px;">
@@ -1177,28 +1250,28 @@ const App = {
           </div>
         </div>
 
-        <!-- Card 2: Balance de Contratos & Pólizas -->
+        <!-- Card 2: Resumen de Subcontratos & Rentabilidad -->
         <div class="card">
           <div class="card-title" style="margin-bottom:18px;">
-            <span>Contratos Críticos & Coberturas</span>
+            <span>Rentabilidad por Subcontrato</span>
             <a href="#contratos" class="btn btn-secondary btn-sm">Módulo Contratos</a>
           </div>
           <div style="display:flex; flex-direction:column; gap:14px;">
-            <div style="padding:14px; background:rgba(245, 158, 11, 0.08); border:1px dashed var(--amber); border-radius:var(--radius-sm);">
-              <span style="font-size:10px; font-weight:800; color:var(--amber-dark); text-transform:uppercase;">⚖️ Marco Jurídico Vigente</span>
-              <p style="font-size:12px; font-weight:700; margin-top:2px;">Contratos comitentes con índice CAC y retención del 5%</p>
-              <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">Todas las subcontrataciones exigen ART con cláusula de no repetición a favor de DP.</p>
+            <div style="padding:14px; background:var(--bg-app); border:1px solid var(--border-color); border-radius:var(--radius-sm);">
+              <span style="font-size:10px; font-weight:800; color:var(--text-secondary); text-transform:uppercase;">Control de Márgenes de Gremios</span>
+              <p style="font-size:12px; font-weight:700; margin-top:2px;">Margen promedio de ganancia en subcontrataciones: 30.0%</p>
+              <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">Todas las partidas incluyen control de póliza de ART con cláusula de no repetición a favor de DP.</p>
             </div>
-            <h5 style="font-size:12px; font-weight:800; color:var(--text-secondary); text-transform:uppercase; margin-top:6px;">Subcontratos Destacados</h5>
-            ${DP_DB.subcontracts.slice(0, 3).map(s => `
+            <h5 style="font-size:12px; font-weight:800; color:var(--text-secondary); text-transform:uppercase; margin-top:6px;">Gremios Destacados</h5>
+            ${DP_DB.subcontracts.slice(0, 4).map(s => `
               <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:var(--bg-app); border-radius:8px; border:1px solid var(--border-color);">
                 <div>
                   <p style="font-size:12px; font-weight:800; color:var(--text-primary);">${s.gremio}</p>
                   <p style="font-size:10.5px; color:var(--text-secondary);">${s.party}</p>
                 </div>
                 <div style="text-align:right;">
-                  <span style="font-size:11.5px; font-weight:800; font-family:var(--font-mono); color:var(--text-primary);">${this.formatCurrency(s.totalAmount)}</span>
-                  <span class="badge ${s.status === 'completed' ? 'badge-success' : 'badge-amber'}" style="display:block; margin-top:2px;">${s.statusLabel}</span>
+                  <span style="font-size:12px; font-weight:800; font-family:var(--font-mono); color:#059669;">+ ${this.formatCurrency(s.netProfit)}</span>
+                  <span class="badge badge-success" style="display:block; margin-top:2px;">${s.profitMargin}% margen</span>
                 </div>
               </div>
             `).join('')}
@@ -1209,13 +1282,90 @@ const App = {
   },
 
   // ========================================================================
-  // SVG CHART RENDERERS
+  // WIDGET: ESTRUCTURA DE COSTOS & RENTABILIDAD POR RUBRO
+  // ========================================================================
+  renderCostStructureWidget(periodData) {
+    const totalCosts = periodData.costs;
+    const totalPurchases = periodData.purchases;
+    const totalExpenses = periodData.expenses;
+    const netProfit = periodData.balance;
+    const totalIn = periodData.income || 1;
+
+    const pctCosts = Math.round((totalCosts / totalIn) * 100);
+    const pctPurchases = Math.round((totalPurchases / totalIn) * 100);
+    const pctExpenses = Math.round((totalExpenses / totalIn) * 100);
+    const pctProfit = Math.max(1, 100 - pctCosts - pctPurchases - pctExpenses);
+
+    const ingTotal = DP_DB.projects.filter(p => p.rubro === 'ingenieria').reduce((a, b) => a + b.totalBudget, 0);
+    const arqTotal = DP_DB.projects.filter(p => p.rubro === 'arquitectura').reduce((a, b) => a + b.totalBudget, 0);
+
+    return `
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <!-- Multi-segment breakdown bar -->
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">
+            <span>Distribución del Ingreso</span>
+            <span>100% Facturación</span>
+          </div>
+          <div style="height:14px; border-radius:6px; overflow:hidden; display:flex; background:#e2e8f0;">
+            <div style="width:${pctCosts}%; background:#475569;" title="Costos Obras: ${pctCosts}%"></div>
+            <div style="width:${pctPurchases}%; background:#0284c7;" title="Compras Materiales: ${pctPurchases}%"></div>
+            <div style="width:${pctExpenses}%; background:#94a3b8;" title="Gastos Estructura: ${pctExpenses}%"></div>
+            <div style="width:${pctProfit}%; background:#10b981;" title="Margen Neto: ${pctProfit}%"></div>
+          </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:10px; font-size:11px;">
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="width:10px; height:10px; border-radius:2px; background:#475569;"></span>
+              <span>Costos Obras (${pctCosts}%)</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="width:10px; height:10px; border-radius:2px; background:#0284c7;"></span>
+              <span>Compras (${pctPurchases}%)</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="width:10px; height:10px; border-radius:2px; background:#94a3b8;"></span>
+              <span>Gastos Fijos (${pctExpenses}%)</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="width:10px; height:10px; border-radius:2px; background:#10b981;"></span>
+              <span style="font-weight:700; color:#059669;">Margen Neto (${pctProfit}%)</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--border-color); padding-top:14px;">
+          <h4 style="font-size:12px; font-weight:800; color:var(--text-secondary); text-transform:uppercase; margin-bottom:10px;">Rentabilidad por Especialidad</h4>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--bg-app); border-radius:6px;">
+              <div>
+                <p style="font-size:12px; font-weight:800; color:var(--text-primary);">Ingeniería Civil & Estructural</p>
+                <span style="font-size:11px; font-family:var(--font-mono); color:var(--text-secondary);">${this.formatCurrency(ingTotal)}</span>
+              </div>
+              <span class="badge badge-success" style="font-weight:800;">26.5% Margen</span>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--bg-app); border-radius:6px;">
+              <div>
+                <p style="font-size:12px; font-weight:800; color:var(--text-primary);">Arquitectura & Dirección</p>
+                <span style="font-size:11px; font-family:var(--font-mono); color:var(--text-secondary);">${this.formatCurrency(arqTotal)}</span>
+              </div>
+              <span class="badge badge-primary" style="font-weight:800;">22.8% Margen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  // ========================================================================
+  // GRÁFICO SVG PROFESIONAL FINANCIERO (MULTI-CURVA O BARRAS AGRUPADAS)
+  // Sin colores naranjas brillantes. Paleta: Azul #2563eb, Grafito #475569, Esmeralda #10b981
   // ========================================================================
   renderFinancialSvgChart(series, yMax, type) {
     const width = 680;
-    const height = 220;
-    const paddingLeft = 50;
-    const paddingBottom = 30;
+    const height = 230;
+    const paddingLeft = 58;
+    const paddingBottom = 32;
     const chartW = width - paddingLeft - 20;
     const chartH = height - paddingBottom - 20;
 
@@ -1223,50 +1373,65 @@ const App = {
 
     let svgInner = '';
 
-    // Grid lines
+    // Subtle Grid lines
     for (let i = 0; i <= 4; i++) {
       const y = chartH - (chartH / 4) * i + 10;
       const val = Math.round((yMax / 4) * i);
+      const valStr = val >= 1000000 ? (val / 1000000).toFixed(1) + 'M' : (val / 1000) + 'k';
       svgInner += `
-        <line x1="${paddingLeft}" y1="${y}" x2="${width - 10}" y2="${y}" stroke="var(--border-color)" stroke-dasharray="3,3" />
-        <text x="${paddingLeft - 8}" y="${y + 4}" font-size="10" fill="var(--text-muted)" text-anchor="end" font-family="var(--font-mono)">${val >= 1000000 ? (val/1000000).toFixed(1)+'M' : (val/1000)+'k'}</text>
+        <line x1="${paddingLeft}" y1="${y}" x2="${width - 10}" y2="${y}" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="3,3" />
+        <text x="${paddingLeft - 8}" y="${y + 4}" font-size="10" fill="var(--text-muted)" text-anchor="end" font-family="var(--font-mono)">$${valStr}</text>
       `;
     }
 
     if (type === 'bars') {
-      const barWidth = Math.min(step * 0.32, 28);
+      const barWidth = Math.min(step * 0.26, 20);
       series.forEach((pt, idx) => {
         const xCenter = paddingLeft + step * idx + step / 2;
         const hIn = (pt.in / yMax) * chartH;
         const hOut = (pt.out / yMax) * chartH;
+        const hNet = Math.max(0, ((pt.in - pt.out) / yMax) * chartH);
+
         const yIn = chartH - hIn + 10;
         const yOut = chartH - hOut + 10;
+        const yNet = chartH - hNet + 10;
 
         svgInner += `
-          <!-- Bar In (Ingreso) -->
-          <rect x="${xCenter - barWidth - 2}" y="${yIn}" width="${barWidth}" height="${hIn}" rx="4" fill="#2563eb"
-            onmousemove="showChartTooltip(event, '${pt.label} · Certificado Cobrado', '${this.formatCurrency(pt.in)}')"
-            onmouseleave="hideChartTooltip()" style="cursor:pointer; opacity:0.9;" />
+          <!-- Bar 1: Ingreso Facturado (Azul) -->
+          <rect x="${xCenter - barWidth * 1.5 - 2}" y="${yIn}" width="${barWidth}" height="${hIn}" rx="3" fill="#2563eb"
+            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${this.formatCurrency(pt.in)}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
 
-          <!-- Bar Out (Egreso) -->
-          <rect x="${xCenter + 2}" y="${yOut}" width="${barWidth}" height="${hOut}" rx="4" fill="#f59e0b"
-            onmousemove="showChartTooltip(event, '${pt.label} · Desembolso Gremios', '${this.formatCurrency(pt.out)}')"
-            onmouseleave="hideChartTooltip()" style="cursor:pointer; opacity:0.9;" />
+          <!-- Bar 2: Egresos Consolidados (Grafito) -->
+          <rect x="${xCenter - barWidth * 0.5}" y="${yOut}" width="${barWidth}" height="${hOut}" rx="3" fill="#475569"
+            onmousemove="showChartTooltip(event, '${pt.label} · Costos + Compras + Gastos', '${this.formatCurrency(pt.out)}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
+
+          <!-- Bar 3: Margen Neto (Esmeralda) -->
+          <rect x="${xCenter + barWidth * 0.5 + 2}" y="${yNet}" width="${barWidth}" height="${hNet}" rx="3" fill="#10b981"
+            onmousemove="showChartTooltip(event, '${pt.label} · Balance Neto', '${this.formatCurrency(pt.in - pt.out)}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
 
           <!-- X Label -->
           <text x="${xCenter}" y="${height - 8}" font-size="11" font-weight="700" fill="var(--text-secondary)" text-anchor="middle">${pt.label}</text>
         `;
       });
     } else {
-      // Lines or Area
+      // Lines or Area multi-curve
       let ptsIn = [];
       let ptsOut = [];
+      let ptsNet = [];
+
       series.forEach((pt, idx) => {
         const x = paddingLeft + step * idx + step / 2;
         const yIn = chartH - (pt.in / yMax) * chartH + 10;
         const yOut = chartH - (pt.out / yMax) * chartH + 10;
+        const netVal = Math.max(0, pt.in - pt.out);
+        const yNet = chartH - (netVal / yMax) * chartH + 10;
+
         ptsIn.push(`${x},${yIn}`);
         ptsOut.push(`${x},${yOut}`);
+        ptsNet.push(`${x},${yNet}`);
 
         svgInner += `
           <text x="${x}" y="${height - 8}" font-size="11" font-weight="700" fill="var(--text-secondary)" text-anchor="middle">${pt.label}</text>
@@ -1279,75 +1444,54 @@ const App = {
         const baseY = chartH + 10;
 
         svgInner += `
-          <polygon points="${firstX},${baseY} ${ptsIn.join(' ')} ${lastX},${baseY}" fill="rgba(37, 99, 235, 0.2)" />
-          <polygon points="${firstX},${baseY} ${ptsOut.join(' ')} ${lastX},${baseY}" fill="rgba(245, 158, 11, 0.2)" />
+          <polygon points="${firstX},${baseY} ${ptsIn.join(' ')} ${lastX},${baseY}" fill="rgba(37, 99, 235, 0.18)" />
+          <polygon points="${firstX},${baseY} ${ptsOut.join(' ')} ${lastX},${baseY}" fill="rgba(71, 85, 105, 0.15)" />
+          <polygon points="${firstX},${baseY} ${ptsNet.join(' ')} ${lastX},${baseY}" fill="rgba(16, 185, 129, 0.2)" />
         `;
       }
 
       svgInner += `
-        <polyline points="${ptsIn.join(' ')}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" />
-        <polyline points="${ptsOut.join(' ')}" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" />
+        <polyline points="${ptsIn.join(' ')}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <polyline points="${ptsOut.join(' ')}" fill="none" stroke="#475569" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,4" />
+        <polyline points="${ptsNet.join(' ')}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
       `;
 
       series.forEach((pt, idx) => {
         const x = paddingLeft + step * idx + step / 2;
         const yIn = chartH - (pt.in / yMax) * chartH + 10;
         const yOut = chartH - (pt.out / yMax) * chartH + 10;
+        const netVal = Math.max(0, pt.in - pt.out);
+        const yNet = chartH - (netVal / yMax) * chartH + 10;
+
         svgInner += `
           <circle cx="${x}" cy="${yIn}" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Certificado', '${this.formatCurrency(pt.in)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${this.formatCurrency(pt.in)}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
-          <circle cx="${x}" cy="${yOut}" r="5" fill="#f59e0b" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Egreso Gremios', '${this.formatCurrency(pt.out)}')"
+          <circle cx="${x}" cy="${yOut}" r="4.5" fill="#475569" stroke="#ffffff" stroke-width="2"
+            onmousemove="showChartTooltip(event, '${pt.label} · Egresos Totales', '${this.formatCurrency(pt.out)}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
+          <circle cx="${x}" cy="${yNet}" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2"
+            onmousemove="showChartTooltip(event, '${pt.label} · Margen Neto Realizado', '${this.formatCurrency(netVal)}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
         `;
       });
     }
 
     return `
+      <div style="display:flex; justify-content:flex-end; gap:16px; margin-bottom:8px; font-size:11px; font-weight:700;">
+        <span style="display:flex; align-items:center; gap:6px; color:#2563eb;">
+          <span style="width:10px; height:10px; border-radius:50%; background:#2563eb;"></span> Ingresos Facturados
+        </span>
+        <span style="display:flex; align-items:center; gap:6px; color:#475569;">
+          <span style="width:10px; height:10px; border-radius:50%; background:#475569;"></span> Egresos Consolidados
+        </span>
+        <span style="display:flex; align-items:center; gap:6px; color:#10b981;">
+          <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span> Margen Neto
+        </span>
+      </div>
       <svg viewBox="0 0 ${width} ${height}" style="width:100%; height:100%; overflow:visible;">
         ${svgInner}
       </svg>
-    `;
-  },
-
-  renderRubroDonutChart() {
-    const totalIng = DP_DB.projects.filter(p => p.rubro === 'ingenieria').reduce((a, b) => a + b.totalBudget, 0);
-    const totalArq = DP_DB.projects.filter(p => p.rubro === 'arquitectura').reduce((a, b) => a + b.totalBudget, 0);
-    const total = totalIng + totalArq || 1;
-
-    const pctIng = Math.round((totalIng / total) * 100);
-    const pctArq = 100 - pctIng;
-
-    return `
-      <div style="display:flex; align-items:center; gap:24px;">
-        <div style="position:relative; width:130px; height:130px;">
-          <svg viewBox="0 0 36 36" style="width:100%; height:100%; transform: rotate(-90deg);">
-            <path stroke="#f59e0b" stroke-width="5" fill="none" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            <path stroke="#2563eb" stroke-width="5" fill="none" stroke-dasharray="${pctIng}, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-          </svg>
-          <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-            <span style="font-size:18px; font-weight:900; color:var(--text-primary); font-family:var(--font-mono);">${pctIng}%</span>
-            <span style="font-size:9px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">Ingeniería</span>
-          </div>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="width:12px; height:12px; border-radius:3px; background:#2563eb;"></span>
-            <div>
-              <p style="font-size:12px; font-weight:800; color:var(--text-primary);">Ingeniería Civil (${pctIng}%)</p>
-              <span style="font-size:11px; font-family:var(--font-mono); color:var(--text-secondary);">${this.formatCurrency(totalIng)}</span>
-            </div>
-          </div>
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span style="width:12px; height:12px; border-radius:3px; background:#f59e0b;"></span>
-            <div>
-              <p style="font-size:12px; font-weight:800; color:var(--text-primary);">Arquitectura (${pctArq}%)</p>
-              <span style="font-size:11px; font-family:var(--font-mono); color:var(--text-secondary);">${this.formatCurrency(totalArq)}</span>
-            </div>
-          </div>
-        </div>
-      </div>
     `;
   },
 
@@ -1384,8 +1528,8 @@ const App = {
             <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
               <div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                  <span class="badge ${p.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">
-                    ${p.rubro === 'ingenieria' ? '🏗️ Ingeniería Civil' : '📐 Arquitectura'}
+                  <span class="badge ${p.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">
+                    ${p.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'}
                   </span>
                   <span class="badge badge-neutral" style="font-family:var(--font-mono);">${p.code}</span>
                 </div>
@@ -1436,7 +1580,7 @@ const App = {
                 ${projects.map(p => `
                   <tr>
                     <td><span style="font-family:var(--font-mono); font-weight:700;">${p.code}</span></td>
-                    <td><span class="badge ${p.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${p.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura'}</span></td>
+                    <td><span class="badge ${p.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${p.rubro === 'ingenieria' ? 'Ingeniería' : 'Arquitectura'}</span></td>
                     <td><strong>${p.title}</strong><br><span style="font-size:11px; color:var(--text-secondary);">${p.location}</span></td>
                     <td>${p.client}</td>
                     <td style="font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(p.totalBudget)}</td>
@@ -1466,35 +1610,40 @@ const App = {
   },
 
   // ========================================================================
-  // VIEW: CONTRATOS & SUBCONTRATOS (MODULO ESTRELLA)
+  // VIEW: CONTRATOS & SUBCONTRATOS (RENTABILIDAD DE GREMIOS & RESGUARDO CAC)
   // ========================================================================
   renderContratosView() {
     const container = document.getElementById('mainViewContainer');
     const tab = DP_DB.state.activeContractsTab;
 
-    let items = tab === 'principales' ? 
-      this.filterByRubro(DP_DB.contracts) : 
-      this.filterByRubro(DP_DB.subcontracts);
+    let subcontracts = this.filterByRubro(DP_DB.subcontracts);
+    let contracts = this.filterByRubro(DP_DB.contracts);
 
     if (DP_DB.state.searchQuery) {
       const q = DP_DB.state.searchQuery;
-      items = items.filter(c => c.title.toLowerCase().includes(q) || c.party.toLowerCase().includes(q) || c.code.toLowerCase().includes(q));
+      subcontracts = subcontracts.filter(c => c.title.toLowerCase().includes(q) || c.party.toLowerCase().includes(q) || c.code.toLowerCase().includes(q) || c.gremio.toLowerCase().includes(q));
+      contracts = contracts.filter(c => c.title.toLowerCase().includes(q) || c.party.toLowerCase().includes(q) || c.code.toLowerCase().includes(q));
     }
 
-    const totalContratado = items.reduce((a, b) => a + b.totalAmount, 0);
-    const totalCertificado = items.reduce((a, b) => a + b.certifiedAmount, 0);
-    const totalRetencion = items.reduce((a, b) => a + b.retentionAmount, 0);
+    const totalSubBilled = subcontracts.reduce((a, b) => a + b.billedAmount, 0);
+    const totalSubCost = subcontracts.reduce((a, b) => a + b.costAmount, 0);
+    const totalSubProfit = subcontracts.reduce((a, b) => a + b.netProfit, 0);
+    const avgSubMargin = totalSubBilled > 0 ? ((totalSubProfit / totalSubBilled) * 100).toFixed(1) : '0.0';
+
+    const totalContratadoComitentes = contracts.reduce((a, b) => a + b.totalAmount, 0);
+    const totalCertificadoComitentes = contracts.reduce((a, b) => a + b.certifiedAmount, 0);
+    const totalRetencionCAC = contracts.reduce((a, b) => a + b.retentionAmount, 0);
 
     container.innerHTML = `
       <div class="page-header">
         <div class="page-title-wrap">
-          <h1>Módulo de Contratos & Subcontratos de Obra</h1>
+          <h1>Contratos & Subcontratos de Obra</h1>
           <p class="page-description">
-            Instrumentos contractuales con comitentes y contratistas especializados. Retenciones de fondo de reparo (5%), cláusulas CAC y control de ART.
+            Instrumentos con comitentes (ajuste CAC y fondo de reparo) y análisis de facturación, costo y rentabilidad neta por gremio subcontratado.
           </p>
         </div>
         <div class="page-header-actions">
-          <button class="btn btn-amber btn-sm" onclick="App.openNewContractModal()">
+          <button class="btn btn-primary btn-sm" onclick="App.openNewContractModal()">
             <span>+ Registrar Instrumento</span>
           </button>
         </div>
@@ -1504,96 +1653,167 @@ const App = {
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
         <div style="display:flex; gap:12px;">
           <button class="btn ${tab === 'principales' ? 'btn-primary' : 'btn-secondary'}" onclick="App.switchContractsTab('principales')">
-            📜 Contratos Principales (${this.filterByRubro(DP_DB.contracts).length})
+            Contratos Principales Comitentes (${contracts.length})
           </button>
-          <button class="btn ${tab === 'subcontratos' ? 'btn-amber' : 'btn-secondary'}" onclick="App.switchContractsTab('subcontratos')">
-            🔨 Subcontratos por Gremio (${this.filterByRubro(DP_DB.subcontracts).length})
+          <button class="btn ${tab === 'subcontratos' ? 'btn-primary' : 'btn-secondary'}" onclick="App.switchContractsTab('subcontratos')">
+            Subcontratos por Gremio & Rentabilidad (${subcontracts.length})
           </button>
         </div>
         <div style="font-size:12px; color:var(--text-secondary);">
-          Fondo de Reparo Total: <strong style="font-family:var(--font-mono); color:var(--amber-dark);">${this.formatCurrency(totalRetencion)}</strong>
+          ${tab === 'subcontratos' ? 
+            `Ganancia Total por Gremios: <strong style="font-family:var(--font-mono); color:#059669;">+ ${this.formatCurrency(totalSubProfit)}</strong>` : 
+            `Fondo de Reparo Retenido (5%): <strong style="font-family:var(--font-mono); color:var(--text-primary);">${this.formatCurrency(totalRetencionCAC)}</strong>`}
         </div>
       </div>
 
-      <!-- SUMMARY KPI FOR TAB -->
-      <div class="stats-grid" style="margin-bottom:24px;">
-        <div class="stat-card">
-          <div class="stat-details">
-            <span class="stat-label">Monto Total Comprometido</span>
-            <span class="stat-value">${this.formatCurrency(totalContratado)}</span>
+      ${tab === 'subcontratos' ? `
+        <!-- SUMMARY KPI FOR SUBCONTRACTS (FACTURADO vs COSTO vs GANANCIA vs RENTABILIDAD) -->
+        <div class="stats-grid" style="margin-bottom:24px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+          <div class="stat-card" style="border-top:3px solid #2563eb;">
+            <div class="stat-details">
+              <span class="stat-label">Total Facturado por Gremios</span>
+              <span class="stat-value" style="color:#2563eb;">${this.formatCurrency(totalSubBilled)}</span>
+              <span class="stat-trend up">Cobrado al comitente</span>
+            </div>
+          </div>
+          <div class="stat-card" style="border-top:3px solid #475569;">
+            <div class="stat-details">
+              <span class="stat-label">Costo Total Contratistas</span>
+              <span class="stat-value">${this.formatCurrency(totalSubCost)}</span>
+              <span class="stat-trend" style="color:var(--text-secondary);">Pagado a gremios</span>
+            </div>
+          </div>
+          <div class="stat-card" style="border-top:3px solid #10b981;">
+            <div class="stat-details">
+              <span class="stat-label">Ganancia Neta Generada</span>
+              <span class="stat-value" style="color:#059669;">+ ${this.formatCurrency(totalSubProfit)}</span>
+              <span class="stat-trend up">Utilidad bruta de subcontratación</span>
+            </div>
+          </div>
+          <div class="stat-card" style="border-top:3px solid #10b981;">
+            <div class="stat-details">
+              <span class="stat-label">Rentabilidad Media</span>
+              <span class="stat-value" style="color:#059669;">${avgSubMargin}%</span>
+              <span class="stat-trend up">Margen s/ facturación</span>
+            </div>
           </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-details">
-            <span class="stat-label">Total Certificado Acumulado</span>
-            <span class="stat-value" style="color:var(--primary);">${this.formatCurrency(totalCertificado)}</span>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-details">
-            <span class="stat-label">Retención Fondo Reparo en Garantía</span>
-            <span class="stat-value" style="color:var(--amber-dark);">${this.formatCurrency(totalRetencion)}</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- TABLA DE CONTRATOS / SUBCONTRATOS -->
-      <div class="card" style="padding:0; overflow:hidden;">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Rubro</th>
-                <th>${tab === 'principales' ? 'Comitente / Cliente' : 'Gremio & Contratista'}</th>
-                <th>Obra Vinculada</th>
-                <th>Modalidad</th>
-                <th>Monto Total</th>
-                <th>Certificado</th>
-                <th>Fondo Reparo (5%)</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${items.length === 0 ? `
-                <tr><td colspan="10" style="text-align:center; padding:32px; color:var(--text-secondary);">No se encontraron contratos con los filtros seleccionados.</td></tr>
-              ` : items.map(c => `
+        <!-- TABLA DE SUBCONTRATOS POR GREMIO -->
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
                 <tr>
-                  <td><span style="font-family:var(--font-mono); font-weight:800; color:var(--text-primary);">${c.code}</span></td>
-                  <td>
-                    <span class="badge ${c.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">
-                      ${c.rubro === 'ingenieria' ? '🏗️ Ing' : '📐 Arq'}
-                    </span>
-                  </td>
-                  <td>
-                    <strong>${c.party}</strong>
-                    ${tab === 'subcontratos' ? `<br><span class="badge badge-amber" style="font-size:10px; margin-top:2px;">${c.gremio}</span>` : ''}
-                  </td>
-                  <td><span style="font-size:12px; color:var(--text-secondary);">${c.projectTitle}</span></td>
-                  <td><span class="badge badge-neutral">${c.modalidad}</span></td>
-                  <td style="font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(c.totalAmount)}</td>
-                  <td style="width:130px;">
-                    <div class="progress-meter-wrap">
-                      <span style="font-size:11px; font-weight:700;">${Math.round((c.certifiedAmount / c.totalAmount) * 100)}%</span>
-                      <div class="progress-meter">
-                        <div class="progress-segment certified" style="width:${(c.certifiedAmount / c.totalAmount) * 100}%;"></div>
-                      </div>
-                    </div>
-                  </td>
-                  <td style="font-family:var(--font-mono); color:var(--amber-dark); font-weight:700;">${this.formatCurrency(c.retentionAmount)}</td>
-                  <td>
-                    <span class="badge ${c.status === 'completed' ? 'badge-success' : 'badge-amber'}">${c.statusLabel}</span>
-                  </td>
-                  <td>
-                    <button class="btn btn-secondary btn-sm" onclick="App.openContractDetailModal('${c.id}', '${c.kind}')">Ver Instrumento</button>
-                  </td>
+                  <th>Código</th>
+                  <th>Gremio & Especialista</th>
+                  <th>Obra Vinculada</th>
+                  <th style="text-align:right;">Facturado Cliente</th>
+                  <th style="text-align:right;">Costo Gremio</th>
+                  <th style="text-align:right;">Ganancia Neta</th>
+                  <th style="text-align:center;">Rentabilidad</th>
+                  <th>Control ART</th>
+                  <th>Acción</th>
                 </tr>
-              `).join('')}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                ${subcontracts.map(s => `
+                  <tr>
+                    <td><span style="font-family:var(--font-mono); font-weight:800; color:var(--text-primary);">${s.code}</span></td>
+                    <td>
+                      <strong>${s.party}</strong><br>
+                      <span class="badge badge-neutral" style="font-size:10px; margin-top:2px;">${s.gremio}</span>
+                    </td>
+                    <td><span style="font-size:12px; color:var(--text-secondary);">${s.projectTitle}</span></td>
+                    <td style="text-align:right; font-family:var(--font-mono); font-weight:800; color:var(--text-primary);">${this.formatCurrency(s.billedAmount)}</td>
+                    <td style="text-align:right; font-family:var(--font-mono); color:var(--text-secondary);">${this.formatCurrency(s.costAmount)}</td>
+                    <td style="text-align:right; font-family:var(--font-mono); font-weight:800; color:#059669;">+ ${this.formatCurrency(s.netProfit)}</td>
+                    <td style="text-align:center;">
+                      <span class="badge badge-success" style="font-weight:800; font-family:var(--font-mono);">${s.profitMargin}%</span>
+                    </td>
+                    <td>
+                      <span class="badge badge-success">✓ ART Vigente</span>
+                    </td>
+                    <td>
+                      <button class="btn btn-secondary btn-sm" onclick="App.openContractDetailModal('${s.id}', 'subcontrato')">Detalle</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      ` : `
+        <!-- SUMMARY KPI FOR CONTRATOS PRINCIPALES (CAC & FONDO DE REPARO) -->
+        <div class="stats-grid" style="margin-bottom:24px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+          <div class="stat-card" style="border-top:3px solid #2563eb;">
+            <div class="stat-details">
+              <span class="stat-label">Total Contratado Comitentes</span>
+              <span class="stat-value" style="color:#2563eb;">${this.formatCurrency(totalContratadoComitentes)}</span>
+              <span class="stat-trend up">Sujetos a redeterminación CAC</span>
+            </div>
+          </div>
+          <div class="stat-card" style="border-top:3px solid #475569;">
+            <div class="stat-details">
+              <span class="stat-label">Total Certificado & Cobrado</span>
+              <span class="stat-value">${this.formatCurrency(totalCertificadoComitentes)}</span>
+              <span class="stat-trend" style="color:var(--text-secondary);">${Math.round((totalCertificadoComitentes / (totalContratadoComitentes || 1)) * 100)}% de avance acumulado</span>
+            </div>
+          </div>
+          <div class="stat-card" style="border-top:3px solid #64748b;">
+            <div class="stat-details">
+              <span class="stat-label">Fondo de Reparo en Garantía (5%)</span>
+              <span class="stat-value" style="color:var(--text-primary);">${this.formatCurrency(totalRetencionCAC)}</span>
+              <span class="stat-trend" style="color:var(--text-secondary);">Custodia hasta recepción definitiva</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLA DE CONTRATOS PRINCIPALES -->
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Comitente / Cliente</th>
+                  <th>Obra Vinculada</th>
+                  <th>Modalidad</th>
+                  <th>Monto Contratado</th>
+                  <th>Avance Certificado</th>
+                  <th>Fondo de Reparo (5%)</th>
+                  <th>Ajuste Pactado</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${contracts.map(c => `
+                  <tr>
+                    <td><span style="font-family:var(--font-mono); font-weight:800; color:var(--text-primary);">${c.code}</span></td>
+                    <td><strong>${c.party}</strong><br><span style="font-size:11px; color:var(--text-secondary);">${c.responsible}</span></td>
+                    <td><span style="font-size:12px; color:var(--text-secondary);">${c.projectTitle}</span></td>
+                    <td><span class="badge badge-neutral">${c.modalidad}</span></td>
+                    <td style="font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(c.totalAmount)}</td>
+                    <td style="width:130px;">
+                      <div class="progress-meter-wrap">
+                        <span style="font-size:11px; font-weight:700;">${Math.round((c.certifiedAmount / c.totalAmount) * 100)}%</span>
+                        <div class="progress-meter">
+                          <div class="progress-segment certified" style="width:${(c.certifiedAmount / c.totalAmount) * 100}%;"></div>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="font-family:var(--font-mono); font-weight:700;">${this.formatCurrency(c.retentionAmount)}</td>
+                    <td><span style="font-size:11.5px; color:var(--text-secondary);">${c.adjustmentClause}</span></td>
+                    <td>
+                      <button class="btn btn-secondary btn-sm" onclick="App.openContractDetailModal('${c.id}', 'principal')">Ver Contrato</button>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `}
     `;
   },
 
@@ -1603,56 +1823,532 @@ const App = {
   },
 
   // ========================================================================
-  // VIEW: PRESUPUESTOS & COTIZADOR (CON MEMBRETE OFICIAL)
+  // VIEW: PRESUPUESTOS & COTIZADOR (100% FUNCIONAL & INTERACTIVO)
   // ========================================================================
   renderPresupuestosView() {
     const container = document.getElementById('mainViewContainer');
-    const budgets = this.filterByRubro(DP_DB.budgets);
+    let budgets = this.filterByRubro(DP_DB.budgets);
+
+    if (DP_DB.state.budgetStatusFilter && DP_DB.state.budgetStatusFilter !== 'all') {
+      budgets = budgets.filter(b => b.status === DP_DB.state.budgetStatusFilter);
+    }
+
+    const totalQuoted = budgets.reduce((a, b) => a + b.total, 0);
+    const approvedCount = DP_DB.budgets.filter(b => b.status === 'Aprobado').length;
+    const avgTicket = budgets.length > 0 ? Math.round(totalQuoted / budgets.length) : 0;
 
     container.innerHTML = `
       <div class="page-header">
         <div class="page-title-wrap">
           <h1>Presupuestos & Cotizador de Obras</h1>
-          <p class="page-description">Cálculo de costos directos, cómputos métricos, honorarios de proyecto e impresión con membrete oficial de DP.</p>
+          <p class="page-description">Generador interactivo de cómputos, partidas dinámicas de honorarios, cálculo de IVA y emisión con membrete corporativo oficial.</p>
         </div>
         <div class="page-header-actions">
-          <button class="btn btn-primary btn-sm" onclick="App.openBudgetPrintModal('pre-001')">+ Nueva Cotización</button>
+          <button class="btn btn-primary btn-sm" onclick="App.openNewBudgetModal()">+ Nueva Cotización</button>
         </div>
       </div>
 
+      <!-- ANALYTICAL CARDS FOR QUOTATIONS -->
+      <div class="stats-grid" style="margin-bottom:24px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="stat-card" style="border-top:3px solid #2563eb;">
+          <div class="stat-details">
+            <span class="stat-label">Total Cotizado en Cartera</span>
+            <span class="stat-value" style="color:#2563eb;">${this.formatCurrency(totalQuoted)}</span>
+            <span class="stat-trend up">Ofertas técnicas vigentes</span>
+          </div>
+        </div>
+        <div class="stat-card" style="border-top:3px solid #10b981;">
+          <div class="stat-details">
+            <span class="stat-label">Cotizaciones Aprobadas</span>
+            <span class="stat-value" style="color:#059669;">${approvedCount} de ${DP_DB.budgets.length}</span>
+            <span class="stat-trend up">${Math.round((approvedCount / (DP_DB.budgets.length || 1)) * 100)}% tasa de éxito</span>
+          </div>
+        </div>
+        <div class="stat-card" style="border-top:3px solid #475569;">
+          <div class="stat-details">
+            <span class="stat-label">Ticket Promedio por Proyecto</span>
+            <span class="stat-value">${this.formatCurrency(avgTicket)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary);">Proyectos ejecutivos e ingeniería</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATUS FILTER BAR -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
+        <div style="display:flex; gap:10px;">
+          <button class="btn ${DP_DB.state.budgetStatusFilter === 'all' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="App.filterBudgetsByStatus('all')">Todos</button>
+          <button class="btn ${DP_DB.state.budgetStatusFilter === 'Aprobado' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="App.filterBudgetsByStatus('Aprobado')">Aprobados</button>
+          <button class="btn ${DP_DB.state.budgetStatusFilter === 'Enviado' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="App.filterBudgetsByStatus('Enviado')">Enviados</button>
+          <button class="btn ${DP_DB.state.budgetStatusFilter === 'En Revisión' ? 'btn-primary' : 'btn-secondary'} btn-sm" onclick="App.filterBudgetsByStatus('En Revisión')">En Revisión</button>
+        </div>
+        <div style="font-size:12px; color:var(--text-secondary);">
+          Mostrando <strong>${budgets.length}</strong> cotizaciones
+        </div>
+      </div>
+
+      <!-- BUDGET CARDS GRID -->
       <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap:24px;">
         ${budgets.map(b => `
-          <div class="card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <span class="badge ${b.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${b.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura'}</span>
-              <span class="badge badge-success">${b.status}</span>
-            </div>
-            <h3 style="font-size:15px; font-weight:800; color:var(--text-primary); margin-bottom:4px;">${b.title}</h3>
-            <p style="font-size:12px; color:var(--text-secondary); margin-bottom:16px;"><strong>Comitente:</strong> ${b.client} · Válido hasta: ${b.validUntil}</p>
-
-            <div style="background:var(--bg-app); border-radius:8px; padding:12px; margin-bottom:16px; font-size:12px;">
-              <p style="font-weight:700; color:var(--text-secondary); margin-bottom:6px;">Desglose de Ítems Principales:</p>
-              <ul style="list-style:none; padding-left:0; display:flex; flex-direction:column; gap:4px;">
-                ${b.items.map(i => `
-                  <li style="display:flex; justify-content:space-between; color:var(--text-secondary);">
-                    <span>• ${i.desc}</span>
-                    <strong style="font-family:var(--font-mono); color:var(--text-primary);">${this.formatCurrency(i.price)}</strong>
-                  </li>
-                `).join('')}
-              </ul>
-            </div>
-
-            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-color); padding-top:14px;">
-              <div>
-                <span style="font-size:10px; color:var(--text-secondary); text-transform:uppercase;">Monto Total Presupuestado</span>
-                <p style="font-size:18px; font-weight:900; font-family:var(--font-mono); color:var(--primary);">${this.formatCurrency(b.total)}</p>
+          <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <span class="badge ${b.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${b.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'}</span>
+                <span class="badge ${b.status === 'Aprobado' ? 'badge-success' : (b.status === 'Enviado' ? 'badge-primary' : 'badge-neutral')}">${b.status}</span>
               </div>
-              <button class="btn btn-secondary btn-sm" onclick="App.openBudgetPrintModal('${b.id}')">
-                <span>🖨️ Membrete Oficial</span>
-              </button>
+              <h3 style="font-size:15px; font-weight:800; color:var(--text-primary); margin-bottom:4px;">${b.title}</h3>
+              <p style="font-size:12px; color:var(--text-secondary); margin-bottom:16px;"><strong>Comitente:</strong> ${b.client} · Válido hasta: ${b.validUntil}</p>
+
+              <div style="background:var(--bg-app); border-radius:8px; padding:12px; margin-bottom:16px; font-size:12px;">
+                <p style="font-weight:700; color:var(--text-secondary); margin-bottom:6px;">Desglose de Partidas:</p>
+                <ul style="list-style:none; padding-left:0; display:flex; flex-direction:column; gap:4px;">
+                  ${b.items.map(i => `
+                    <li style="display:flex; justify-content:space-between; color:var(--text-secondary);">
+                      <span>• ${i.desc} (${i.qty} ${i.unit || 'gl'})</span>
+                      <strong style="font-family:var(--font-mono); color:var(--text-primary);">${this.formatCurrency(i.price * (Number(i.qty) || 1))}</strong>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-color); padding-top:14px; margin-bottom:12px;">
+                <div>
+                  <span style="font-size:10px; color:var(--text-secondary); text-transform:uppercase;">Monto Total Presupuestado</span>
+                  <p style="font-size:18px; font-weight:900; font-family:var(--font-mono); color:#2563eb;">${this.formatCurrency(b.total)}</p>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="App.openBudgetPrintModal('${b.id}')">
+                  <span>Membrete Oficial</span>
+                </button>
+              </div>
+              <div style="display:flex; gap:8px; justify-content:flex-end;">
+                ${b.status !== 'Aprobado' ? `
+                  <button class="btn btn-secondary btn-sm" onclick="App.approveBudget('${b.id}')" title="Aprobar y pasar a estado activo">
+                    ✓ Aprobar
+                  </button>
+                ` : ''}
+                <button class="btn btn-secondary btn-sm" onclick="App.duplicateBudget('${b.id}')" title="Duplicar cotización">
+                  Duplicar
+                </button>
+                <button class="btn btn-secondary btn-sm" onclick="App.deleteBudget('${b.id}')" title="Eliminar cotización">
+                  Eliminar
+                </button>
+              </div>
             </div>
           </div>
         `).join('')}
+      </div>
+    `;
+  },
+
+  filterBudgetsByStatus(status) {
+    DP_DB.state.budgetStatusFilter = status;
+    this.renderPresupuestosView();
+  },
+
+  approveBudget(budgetId) {
+    const budget = DP_DB.budgets.find(b => b.id === budgetId);
+    if (budget) {
+      budget.status = 'Aprobado';
+      this.showToast(`Cotización ${budget.code} aprobada exitosamente.`);
+      this.renderPresupuestosView();
+    }
+  },
+
+  duplicateBudget(budgetId) {
+    const source = DP_DB.budgets.find(b => b.id === budgetId);
+    if (source) {
+      const newId = 'pre-' + Date.now().toString().slice(-4);
+      const newCode = `PRE-DP-2026-0${DP_DB.budgets.length + 1}`;
+      const clone = {
+        ...source,
+        id: newId,
+        code: newCode,
+        title: `${source.title} (Copia)`,
+        status: 'En Revisión',
+        items: JSON.parse(JSON.stringify(source.items))
+      };
+      DP_DB.budgets.unshift(clone);
+      this.showToast(`Cotización duplicada con código ${newCode}`);
+      this.renderPresupuestosView();
+    }
+  },
+
+  deleteBudget(budgetId) {
+    if (confirm('¿Desea eliminar esta cotización de la base de datos?')) {
+      DP_DB.budgets = DP_DB.budgets.filter(b => b.id !== budgetId);
+      this.showToast('Cotización eliminada.');
+      this.renderPresupuestosView();
+    }
+  },
+
+  // ========================================================================
+  // DYNAMIC BUDGET BUILDER MODAL LOGIC
+  // ========================================================================
+  openNewBudgetModal() {
+    const nextCode = `PRE-DP-2026-0${DP_DB.budgets.length + 1}`;
+    const codeInput = document.getElementById('newBudgetCode');
+    if (codeInput) codeInput.value = nextCode;
+
+    // Reset items table
+    const tbody = document.getElementById('budgetItemsTbody');
+    if (tbody) tbody.innerHTML = '';
+
+    // Add 2 default realistic rows
+    this.addBudgetItemRow('Memoria de Cálculo Estructural y Verificación Sísmica CIRSOC', 'gl', 1, 12500000);
+    this.addBudgetItemRow('Planos de Replanteo y Armaduras de Fundaciones en CAD/BIM', 'gl', 1, 8500000);
+
+    document.getElementById('newBudgetModalBackdrop')?.classList.add('active');
+  },
+
+  addBudgetItemRow(desc = '', unit = 'gl', qty = 1, price = 0) {
+    const tbody = document.getElementById('budgetItemsTbody');
+    if (!tbody) return;
+
+    const rowId = 'row-' + Date.now() + '-' + Math.floor(Math.random() * 100);
+    const tr = document.createElement('tr');
+    tr.id = rowId;
+    tr.innerHTML = `
+      <td>
+        <input type="text" class="form-control item-desc" value="${desc}" placeholder="Descripción de la tarea o cómputo" required>
+      </td>
+      <td>
+        <select class="form-control item-unit">
+          <option value="gl" ${unit === 'gl' ? 'selected' : ''}>gl (Global)</option>
+          <option value="m²" ${unit === 'm²' ? 'selected' : ''}>m² (Superficie)</option>
+          <option value="m³" ${unit === 'm³' ? 'selected' : ''}>m³ (Volumen)</option>
+          <option value="ml" ${unit === 'ml' ? 'selected' : ''}>ml (Lineales)</option>
+          <option value="mes" ${unit === 'mes' ? 'selected' : ''}>mes (Honorarios)</option>
+          <option value="un" ${unit === 'un' ? 'selected' : ''}>un (Unidad)</option>
+        </select>
+      </td>
+      <td>
+        <input type="number" class="form-control item-qty" value="${qty}" min="0.1" step="any" required>
+      </td>
+      <td>
+        <input type="number" class="form-control item-price" value="${price}" min="0" step="any" required>
+      </td>
+      <td style="text-align:center;">
+        <button type="button" class="btn-icon" style="color:#ef4444;" onclick="App.removeBudgetItemRow('${rowId}')" title="Eliminar ítem">✕</button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+
+    // Attach live change listeners for instant total updates
+    tr.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => this.recalcBudgetTotals());
+    });
+
+    this.recalcBudgetTotals();
+  },
+
+  removeBudgetItemRow(rowId) {
+    const tr = document.getElementById(rowId);
+    if (tr) {
+      tr.remove();
+      this.recalcBudgetTotals();
+    }
+  },
+
+  recalcBudgetTotals() {
+    const rows = document.querySelectorAll('#budgetItemsTbody tr');
+    let subtotal = 0;
+
+    rows.forEach(tr => {
+      const qty = Number(tr.querySelector('.item-qty')?.value) || 0;
+      const price = Number(tr.querySelector('.item-price')?.value) || 0;
+      subtotal += (qty * price);
+    });
+
+    const iva = Math.round(subtotal * 0.21);
+    const total = subtotal + iva;
+
+    const subDisplay = document.getElementById('newBudgetSubtotalDisplay');
+    const ivaDisplay = document.getElementById('newBudgetIvaDisplay');
+    const totalDisplay = document.getElementById('newBudgetTotalDisplay');
+
+    if (subDisplay) subDisplay.textContent = this.formatCurrency(subtotal);
+    if (ivaDisplay) ivaDisplay.textContent = this.formatCurrency(iva);
+    if (totalDisplay) totalDisplay.textContent = this.formatCurrency(total);
+
+    return { subtotal, iva, total };
+  },
+
+  handleNewBudgetSubmit(e) {
+    e.preventDefault();
+    const code = document.getElementById('newBudgetCode').value;
+    const client = document.getElementById('newBudgetClient').value;
+    const rubro = document.getElementById('newBudgetRubro').value;
+    const title = document.getElementById('newBudgetTitle').value;
+    const validity = Number(document.getElementById('newBudgetValidity').value) || 30;
+
+    const rows = document.querySelectorAll('#budgetItemsTbody tr');
+    if (rows.length === 0) {
+      alert('Por favor agregue al menos una partida al presupuesto.');
+      return;
+    }
+
+    const items = [];
+    rows.forEach(tr => {
+      const desc = tr.querySelector('.item-desc')?.value.trim();
+      const unit = tr.querySelector('.item-unit')?.value;
+      const qty = tr.querySelector('.item-qty')?.value;
+      const price = Number(tr.querySelector('.item-price')?.value) || 0;
+      if (desc) {
+        items.push({ desc, unit, qty, price });
+      }
+    });
+
+    const { total } = this.recalcBudgetTotals();
+
+    const today = new Date();
+    const validUntilDate = new Date(today);
+    validUntilDate.setDate(today.getDate() + validity);
+
+    const newBudget = {
+      id: 'pre-' + Date.now().toString().slice(-4),
+      code,
+      client,
+      rubro,
+      title,
+      date: today.toISOString().split('T')[0],
+      validUntil: validUntilDate.toISOString().split('T')[0],
+      total,
+      status: 'Enviado',
+      items
+    };
+
+    DP_DB.budgets.unshift(newBudget);
+    document.getElementById('newBudgetModalBackdrop')?.classList.remove('active');
+    e.target.reset();
+
+    this.showToast(`Cotización ${code} guardada con éxito.`);
+    this.renderCurrentView();
+
+    // Automatically open preview letterhead
+    setTimeout(() => {
+      this.openBudgetPrintModal(newBudget.id);
+    }, 400);
+  },
+
+  // ========================================================================
+  // VIEW: AGENDA & INSPECCIONES (CON CALENDARIO MENSUAL INTERACTIVO)
+  // ========================================================================
+  renderAgendaView() {
+    const container = document.getElementById('mainViewContainer');
+    const events = this.filterByRubro(DP_DB.agendaEvents);
+    const isCalendar = DP_DB.state.agendaViewMode === 'calendar';
+
+    container.innerHTML = `
+      <div class="page-header">
+        <div class="page-title-wrap">
+          <h1>Agenda Técnica & Inspecciones de Obra</h1>
+          <p class="page-description">Calendario interactivo de ensayos de probetas H-30, controles de calidad de soldaduras e inspecciones municipales.</p>
+        </div>
+        <div class="page-header-actions">
+          <div class="rubro-filter-pill">
+            <button type="button" class="rubro-btn ${isCalendar ? 'active' : ''}" onclick="App.toggleAgendaMode('calendar')">Vista Calendario</button>
+            <button type="button" class="rubro-btn ${!isCalendar ? 'active' : ''}" onclick="App.toggleAgendaMode('list')">Vista Cronológica</button>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="App.openAgendaModal()">+ Agendar Inspección</button>
+        </div>
+      </div>
+
+      ${isCalendar ? this.renderMonthlyCalendarWidget(events) : this.renderAgendaListView(events)}
+    `;
+  },
+
+  toggleAgendaMode(mode) {
+    DP_DB.state.agendaViewMode = mode;
+    this.renderAgendaView();
+  },
+
+  changeCalendarMonth(delta) {
+    DP_DB.state.calendarMonth += delta;
+    if (DP_DB.state.calendarMonth < 0) {
+      DP_DB.state.calendarMonth = 11;
+      DP_DB.state.calendarYear -= 1;
+    } else if (DP_DB.state.calendarMonth > 11) {
+      DP_DB.state.calendarMonth = 0;
+      DP_DB.state.calendarYear += 1;
+    }
+    this.renderAgendaView();
+  },
+
+  selectCalendarDate(dateStr) {
+    DP_DB.state.calendarSelectedDate = dateStr;
+    this.renderAgendaView();
+  },
+
+  openAgendaModalWithDate(dateStr) {
+    const dateInput = document.getElementById('agendaEventDate');
+    if (dateInput) dateInput.value = dateStr;
+    this.openAgendaModal();
+  },
+
+  renderMonthlyCalendarWidget(events) {
+    const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const currentMonth = DP_DB.state.calendarMonth;
+    const currentYear = DP_DB.state.calendarYear;
+    const monthTitle = `${monthNames[currentMonth]} ${currentYear}`;
+
+    // First day of month & total days
+    const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay(); // 0 = Sunday
+    // Convert Sunday (0) to 7 for Monday-first layout
+    const startCol = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+    const selectedDate = DP_DB.state.calendarSelectedDate;
+    const selectedEvents = events.filter(e => e.date === selectedDate);
+
+    let gridHtml = '';
+
+    // Day names header
+    const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    daysOfWeek.forEach(d => {
+      gridHtml += `<div class="calendar-day-header">${d}</div>`;
+    });
+
+    // Previous month filler days
+    for (let p = startCol - 1; p >= 0; p--) {
+      const prevDayNum = daysInPrevMonth - p;
+      gridHtml += `
+        <div class="calendar-day-cell other-month">
+          <span class="calendar-day-num">${prevDayNum}</span>
+        </div>
+      `;
+    }
+
+    // Days of current month
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dayStr = d < 10 ? '0' + d : '' + d;
+      const monthStr = (currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : '' + (currentMonth + 1);
+      const dateStr = `${currentYear}-${monthStr}-${dayStr}`;
+
+      const isToday = dateStr === '2026-09-15';
+      const isSelected = dateStr === selectedDate;
+      const dayEvents = events.filter(e => e.date === dateStr);
+
+      gridHtml += `
+        <div class="calendar-day-cell ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}" onclick="App.selectCalendarDate('${dateStr}')">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span class="calendar-day-num">${d}</span>
+            ${isToday ? '<span class="badge badge-primary" style="font-size:9px; padding:1px 5px;">Hoy</span>' : ''}
+          </div>
+          <div style="margin-top:4px; display:flex; flex-direction:column; gap:3px;">
+            ${dayEvents.map(ev => `
+              <div class="calendar-event-badge ${ev.rubro === 'ingenieria' ? 'ing' : 'arq'}" title="${ev.title} (${ev.time})">
+                ${ev.title}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // Trailing cells to fill last row
+    const totalCells = startCol + daysInMonth;
+    const remaining = 7 - (totalCells % 7);
+    if (remaining < 7) {
+      for (let r = 1; r <= remaining; r++) {
+        gridHtml += `
+          <div class="calendar-day-cell other-month">
+            <span class="calendar-day-num">${r}</span>
+          </div>
+        `;
+      }
+    }
+
+    return `
+      <div style="display:grid; grid-template-columns: 2.5fr 1fr; gap:24px;">
+        <!-- Calendar Grid Card -->
+        <div class="calendar-card">
+          <div class="calendar-topbar">
+            <div class="calendar-nav-controls">
+              <button type="button" class="calendar-btn-nav" onclick="App.changeCalendarMonth(-1)">‹ Mes Anterior</button>
+              <h3 class="calendar-month-title">${monthTitle}</h3>
+              <button type="button" class="calendar-btn-nav" onclick="App.changeCalendarMonth(1)">Mes Siguiente ›</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; font-size:11.5px; font-weight:700;">
+              <span style="display:flex; align-items:center; gap:6px; color:#2563eb;">
+                <span style="width:10px; height:10px; border-radius:3px; background:#2563eb;"></span> Ingeniería Civil
+              </span>
+              <span style="display:flex; align-items:center; gap:6px; color:#475569;">
+                <span style="width:10px; height:10px; border-radius:3px; background:#475569;"></span> Arquitectura
+              </span>
+            </div>
+          </div>
+          <div class="calendar-grid">
+            ${gridHtml}
+          </div>
+        </div>
+
+        <!-- Selected Day Inspector Panel -->
+        <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border-color); padding-bottom:8px;">
+              <div>
+                <span style="font-size:11px; color:var(--text-secondary); text-transform:uppercase;">Fecha Seleccionada:</span>
+                <h4 style="font-size:15px; font-weight:800; color:var(--text-primary); font-family:var(--font-mono);">${selectedDate}</h4>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="App.openAgendaModalWithDate('${selectedDate}')">+ Programar</button>
+            </div>
+
+            ${selectedEvents.length === 0 ? `
+              <div style="text-align:center; padding:32px 16px; color:var(--text-secondary);">
+                <p style="font-size:13px; margin-bottom:8px;">No hay inspecciones técnicas agendadas para esta fecha.</p>
+                <button class="btn btn-secondary btn-sm" onclick="App.openAgendaModalWithDate('${selectedDate}')">Agendar en esta fecha</button>
+              </div>
+            ` : `
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                ${selectedEvents.map(ev => `
+                  <div style="padding:12px; background:var(--bg-app); border-radius:8px; border-left:3px solid ${ev.rubro === 'ingenieria' ? '#2563eb' : '#475569'};">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                      <span class="badge ${ev.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${ev.rubro === 'ingenieria' ? 'Ingeniería' : 'Arquitectura'}</span>
+                      <span style="font-size:11px; font-weight:700; font-family:var(--font-mono);">${ev.time}</span>
+                    </div>
+                    <h4 style="font-size:13px; font-weight:800; color:var(--text-primary); margin-bottom:4px;">${ev.title}</h4>
+                    <p style="font-size:11.5px; color:var(--text-secondary); margin-bottom:4px;"><strong>Obra:</strong> ${ev.project}</p>
+                    <p style="font-size:11.5px; color:var(--text-secondary); margin-bottom:6px;"><strong>Responsable:</strong> ${ev.responsible}</p>
+                    <div style="font-size:11px; color:var(--text-muted); background:var(--bg-card); padding:6px 8px; border-radius:4px; border:1px solid var(--border-color);">
+                      ${ev.notes}
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+
+          <div style="margin-top:20px; padding-top:12px; border-top:1px solid var(--border-color); font-size:11.5px; color:var(--text-secondary);">
+            Protocolos de inspección avalados por la Dirección de Obra y Registro de Ensayos Geotécnicos.
+          </div>
+        </div>
+      </div>
+    `;
+  },
+
+  renderAgendaListView(events) {
+    return `
+      <div class="card">
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          ${events.map(ev => `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; background:var(--bg-app); border-radius:10px; border-left:4px solid ${ev.rubro === 'ingenieria' ? '#2563eb' : '#475569'};">
+              <div>
+                <span class="badge ${ev.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${ev.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'}</span>
+                <span class="badge badge-neutral" style="margin-left:6px;">${ev.type}</span>
+                <h4 style="font-size:14px; font-weight:800; margin-top:6px;">${ev.title}</h4>
+                <p style="font-size:12px; color:var(--text-secondary);">${ev.project} · Responsable: <strong>${ev.responsible}</strong></p>
+                <p style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">${ev.notes}</p>
+              </div>
+              <div style="text-align:right;">
+                <span style="font-size:13px; font-weight:800; color:var(--text-primary); font-family:var(--font-mono);">${ev.date}</span>
+                <p style="font-size:11.5px; color:var(--text-secondary); font-family:var(--font-mono);">${ev.time}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
       </div>
     `;
   },
@@ -1667,7 +2363,7 @@ const App = {
     container.innerHTML = `
       <div class="page-header">
         <div class="page-title-wrap">
-          <h1>Repositorio Técnico: Planos, BIM & Renders</h1>
+          <h1>Repositorio Técnico: Planos, BIM & CIRSOC</h1>
           <p class="page-description">Archivos técnicos visados, cálculos estructurales CIRSOC y renders fotorrealistas de arquitectura.</p>
         </div>
         <div class="page-header-actions">
@@ -1692,7 +2388,7 @@ const App = {
             ${plans.map(p => `
               <tr>
                 <td style="font-family:var(--font-mono); font-weight:700;">${p.code}</td>
-                <td><span class="badge ${p.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${p.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura'}</span></td>
+                <td><span class="badge ${p.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${p.rubro === 'ingenieria' ? 'Ingeniería' : 'Arquitectura'}</span></td>
                 <td><strong>${p.title}</strong></td>
                 <td>${p.project}</td>
                 <td><span class="badge badge-neutral">${p.format}</span></td>
@@ -1725,7 +2421,7 @@ const App = {
         ${leads.map(l => `
           <div class="card">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <span class="badge ${l.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${l.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura'}</span>
+              <span class="badge ${l.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${l.rubro === 'ingenieria' ? 'Ingeniería' : 'Arquitectura'}</span>
               <span class="badge badge-primary">${l.stage}</span>
             </div>
             <h3 style="font-size:15px; font-weight:800; color:var(--text-primary); margin-bottom:2px;">${l.name}</h3>
@@ -1737,45 +2433,6 @@ const App = {
             </div>
           </div>
         `).join('')}
-      </div>
-    `;
-  },
-
-  // ========================================================================
-  // VIEW: AGENDA & INSPECCIONES
-  // ========================================================================
-  renderAgendaView() {
-    const container = document.getElementById('mainViewContainer');
-    const events = this.filterByRubro(DP_DB.agendaEvents);
-
-    container.innerHTML = `
-      <div class="page-header">
-        <div class="page-title-wrap">
-          <h1>Agenda Técnica & Inspecciones de Obra</h1>
-          <p class="page-description">Control de visitas periódicas de dirección, ensayos de compresión de probetas de hormigón y reuniones de comitente.</p>
-        </div>
-        <div class="page-header-actions">
-          <button class="btn btn-primary btn-sm" onclick="App.openAgendaModal()">+ Agendar Inspección</button>
-        </div>
-      </div>
-      <div class="card">
-        <div style="display:flex; flex-direction:column; gap:14px;">
-          ${events.map(ev => `
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:16px; background:var(--bg-app); border-radius:10px; border-left:4px solid ${ev.rubro === 'ingenieria' ? '#2563eb' : '#f59e0b'};">
-              <div>
-                <span class="badge ${ev.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${ev.rubro === 'ingenieria' ? '🏗️ Ingeniería Civil' : '📐 Arquitectura'}</span>
-                <span class="badge badge-neutral" style="margin-left:6px;">${ev.type}</span>
-                <h4 style="font-size:14px; font-weight:800; margin-top:6px;">${ev.title}</h4>
-                <p style="font-size:12px; color:var(--text-secondary);">${ev.project} · Responsable: <strong>${ev.responsible}</strong></p>
-                <p style="font-size:11.5px; color:var(--text-muted); margin-top:4px;">${ev.notes}</p>
-              </div>
-              <div style="text-align:right;">
-                <span style="font-size:13px; font-weight:800; color:var(--text-primary);">${ev.date}</span>
-                <p style="font-size:11.5px; color:var(--text-secondary); font-family:var(--font-mono);">${ev.time}</p>
-              </div>
-            </div>
-          `).join('')}
-        </div>
       </div>
     `;
   },
@@ -1839,10 +2496,10 @@ const App = {
             ${items.map(i => `
               <tr>
                 <td><strong>${i.item}</strong></td>
-                <td><span class="badge ${i.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">${i.rubro === 'ingenieria' ? '🏗️ Ing' : '📐 Arq'}</span></td>
+                <td><span class="badge ${i.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">${i.rubro === 'ingenieria' ? 'Ingeniería' : 'Arquitectura'}</span></td>
                 <td>${i.project}</td>
                 <td style="font-family:var(--font-mono); font-weight:700;">${i.stock}</td>
-                <td><span class="badge ${i.alert ? 'badge-amber' : 'badge-success'}">${i.status}</span></td>
+                <td><span class="badge ${i.alert ? 'badge-danger' : 'badge-success'}">${i.status}</span></td>
               </tr>
             `).join('')}
           </tbody>
@@ -1860,10 +2517,10 @@ const App = {
           <p class="page-description">Flujo financiero consolidado entre cobros por avance de obra y pagos liquidados a subcontratistas.</p>
         </div>
       </div>
-      <div class="stats-grid" style="margin-bottom:24px;">
-        <div class="stat-card"><div class="stat-icon success">💰</div><div class="stat-details"><span class="stat-label">Ingresos por Certificados</span><span class="stat-value">$ 282.400.000</span></div></div>
-        <div class="stat-card"><div class="stat-icon danger">📤</div><div class="stat-details"><span class="stat-label">Pagos a Subcontratos & Acopios</span><span class="stat-value">$ 198.600.000</span></div></div>
-        <div class="stat-card"><div class="stat-icon primary">📈</div><div class="stat-details"><span class="stat-label">Margen Operativo Bruto</span><span class="stat-value">29.6%</span></div></div>
+      <div class="stats-grid" style="margin-bottom:24px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="stat-card" style="border-top:3px solid #2563eb;"><div class="stat-details"><span class="stat-label">Ingresos por Certificados</span><span class="stat-value" style="color:#2563eb;">$ 282.400.000</span></div></div>
+        <div class="stat-card" style="border-top:3px solid #475569;"><div class="stat-details"><span class="stat-label">Costos Subcontratos & Gremios</span><span class="stat-value">$ 170.410.000</span></div></div>
+        <div class="stat-card" style="border-top:3px solid #10b981;"><div class="stat-details"><span class="stat-label">Margen Operativo Bruto</span><span class="stat-value" style="color:#059669;">29.6%</span></div></div>
       </div>
       <div class="card">
         <h3 class="card-title" style="margin-bottom:16px;">Resumen de Movimientos Financieros Recientes</h3>
@@ -1872,7 +2529,7 @@ const App = {
           <tbody>
             <tr><td>2026-09-12</td><td>Cobro Certificado N° 3 Estructura H°A°</td><td>Torre Altos del Parque</td><td><span class="badge badge-success">Ingreso</span></td><td style="font-family:var(--font-mono); font-weight:800;">$ 42.800.000</td><td><span class="badge badge-success">Acreditado</span></td></tr>
             <tr><td>2026-09-08</td><td>Pago Subcontrato Metalúrgica San Martín</td><td>Nave Logística Cuyo</td><td><span class="badge badge-danger">Egreso</span></td><td style="font-family:var(--font-mono); font-weight:800;">$ 18.500.000</td><td><span class="badge badge-success">Liquidado</span></td></tr>
-            <tr><td>2026-09-05</td><td>Retención Fondo de Reparo (5%) Carpinterías</td><td>Residencia Vanguardia</td><td><span class="badge badge-amber">Retención</span></td><td style="font-family:var(--font-mono); font-weight:800;">$ 1.207.000</td><td><span class="badge badge-neutral">En Custodia</span></td></tr>
+            <tr><td>2026-09-05</td><td>Retención Fondo de Reparo (5%) Carpinterías</td><td>Residencia Vanguardia</td><td><span class="badge badge-neutral">Retención</span></td><td style="font-family:var(--font-mono); font-weight:800;">$ 1.207.000</td><td><span class="badge badge-neutral">En Custodia</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1898,7 +2555,7 @@ const App = {
           <tbody>
             <tr><td>Torre Altos del Parque</td><td>Arquitectura</td><td>$ 185.000.000</td><td>$ 114.200.000</td><td><span style="color:#10b981; font-weight:700;">-2.4% (Eficiente)</span></td><td>Al Día (0 días)</td></tr>
             <tr><td>Nave Logística Cuyo</td><td>Ingeniería</td><td>$ 142.000.000</td><td>$ 68.500.000</td><td><span style="color:#10b981; font-weight:700;">-1.8% (Eficiente)</span></td><td>Al Día (0 días)</td></tr>
-            <tr><td>Residencia Vanguardia</td><td>Arquitectura</td><td>$ 94.000.000</td><td>$ 66.800.000</td><td><span style="color:#f59e0b; font-weight:700;">+1.2% (Menor)</span></td><td>+5 días (Lluvias)</td></tr>
+            <tr><td>Residencia Vanguardia</td><td>Arquitectura</td><td>$ 94.000.000</td><td>$ 66.800.000</td><td><span style="color:#475569; font-weight:700;">+1.2% (Menor)</span></td><td>+5 días (Lluvias)</td></tr>
           </tbody>
         </table>
       </div>
@@ -1961,8 +2618,8 @@ const App = {
     document.getElementById('projectModalTitle').textContent = project.title;
     document.getElementById('projectModalCode').textContent = project.code;
     const rubroBadge = document.getElementById('projectModalRubro');
-    rubroBadge.className = `badge ${project.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}`;
-    rubroBadge.textContent = project.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura';
+    rubroBadge.className = `badge ${project.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}`;
+    rubroBadge.textContent = project.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura';
 
     const body = document.getElementById('projectModalBody');
     body.innerHTML = `
@@ -1983,7 +2640,7 @@ const App = {
         ${project.stages.map(s => `
           <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--bg-card); border:1px solid var(--border-color); border-radius:8px;">
             <span style="font-size:13px; font-weight:700;">${s.name}</span>
-            <span class="badge ${s.status === 'completed' ? 'badge-success' : (s.status === 'in_progress' ? 'badge-amber' : 'badge-neutral')}">${s.progress}%</span>
+            <span class="badge ${s.status === 'completed' ? 'badge-success' : 'badge-primary'}">${s.progress}%</span>
           </div>
         `).join('')}
       </div>
@@ -1993,7 +2650,7 @@ const App = {
         ${project.checklist.map(c => `
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; padding:8px 12px; background:var(--bg-app); border-radius:6px;">
             <span>✓ ${c.name}</span>
-            <span class="badge ${c.status === 'approved' ? 'badge-success' : 'badge-amber'}">${c.status === 'approved' ? 'Aprobado (' + c.date + ')' : c.date}</span>
+            <span class="badge ${c.status === 'approved' ? 'badge-success' : 'badge-neutral'}">${c.status === 'approved' ? 'Aprobado (' + c.date + ')' : c.date}</span>
           </div>
         `).join('')}
       </div>
@@ -2003,7 +2660,8 @@ const App = {
   },
 
   openContractDetailModal(contractId, kind) {
-    const item = kind === 'principal' ? 
+    const isPrincipal = kind === 'principal';
+    const item = isPrincipal ? 
       DP_DB.contracts.find(c => c.id === contractId) : 
       DP_DB.subcontracts.find(c => c.id === contractId);
 
@@ -2017,28 +2675,41 @@ const App = {
     body.innerHTML = `
       <div style="display:grid; grid-template-columns: 2fr 1fr; gap:20px; margin-bottom:24px;">
         <div style="background:var(--bg-app); border:1px solid var(--border-color); border-radius:12px; padding:18px;">
-          <span class="badge ${item.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">
-            ${item.rubro === 'ingenieria' ? '🏗️ Ingeniería' : '📐 Arquitectura'}
+          <span class="badge ${item.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">
+            ${item.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'}
           </span>
           <h4 style="font-size:16px; font-weight:800; margin-top:8px;">${item.party}</h4>
           <p style="font-size:12px; color:var(--text-secondary);">CUIT: <strong>${item.cuit}</strong> · Obra: <strong>${item.projectTitle}</strong></p>
           <div style="margin-top:14px; font-size:12px; color:var(--text-secondary); line-height:1.5;">
-            <p><strong>Cláusula de Ajuste:</strong> ${item.adjustmentClause || 'Ajuste mensual según mayores costos'}</p>
-            <p><strong>Pólizas & ART:</strong> ${item.insurance || item.artStatus || 'Póliza de Caución en regla'}</p>
+            <p><strong>Cláusula de Ajuste / Régimen:</strong> ${item.adjustmentClause || 'Ajuste contractual pactado'}</p>
+            <p><strong>Pólizas & Cobertura ART:</strong> ${item.insurance || item.artStatus || 'Póliza de ART y Caución en regla'}</p>
           </div>
         </div>
 
         <div style="background:var(--bg-app); border:1px solid var(--border-color); border-radius:12px; padding:18px; text-align:right;">
-          <span style="font-size:11px; color:var(--text-secondary); text-transform:uppercase;">Monto Total Contratado</span>
-          <p style="font-size:22px; font-weight:900; font-family:var(--font-mono); color:var(--primary);">${this.formatCurrency(item.totalAmount)}</p>
-          <div style="margin-top:10px;">
-            <span style="font-size:11px; color:var(--text-secondary);">Fondo de Reparo Retenido (5%):</span>
-            <p style="font-size:15px; font-weight:800; font-family:var(--font-mono); color:var(--amber-dark);">${this.formatCurrency(item.retentionAmount)}</p>
-          </div>
+          ${!isPrincipal ? `
+            <span style="font-size:11px; color:var(--text-secondary); text-transform:uppercase;">Facturado al Comitente</span>
+            <p style="font-size:20px; font-weight:900; font-family:var(--font-mono); color:#2563eb;">${this.formatCurrency(item.billedAmount)}</p>
+            <div style="margin-top:8px;">
+              <span style="font-size:11px; color:var(--text-secondary);">Costo Pagado al Gremio:</span>
+              <p style="font-size:14px; font-weight:700; font-family:var(--font-mono);">${this.formatCurrency(item.costAmount)}</p>
+            </div>
+            <div style="margin-top:8px; border-top:1px solid var(--border-color); padding-top:6px;">
+              <span style="font-size:11px; color:var(--text-secondary);">Ganancia Neta (${item.profitMargin}%):</span>
+              <p style="font-size:16px; font-weight:900; font-family:var(--font-mono); color:#059669;">+ ${this.formatCurrency(item.netProfit)}</p>
+            </div>
+          ` : `
+            <span style="font-size:11px; color:var(--text-secondary); text-transform:uppercase;">Monto Total Contratado</span>
+            <p style="font-size:22px; font-weight:900; font-family:var(--font-mono); color:var(--primary);">${this.formatCurrency(item.totalAmount)}</p>
+            <div style="margin-top:10px;">
+              <span style="font-size:11px; color:var(--text-secondary);">Fondo de Reparo Retenido (5%):</span>
+              <p style="font-size:15px; font-weight:800; font-family:var(--font-mono);">${this.formatCurrency(item.retentionAmount)}</p>
+            </div>
+          `}
         </div>
       </div>
 
-      <h4 style="font-size:14px; font-weight:800; margin-bottom:12px;">Historial de Certificaciones de Avance:</h4>
+      <h4 style="font-size:14px; font-weight:800; margin-bottom:12px;">Historial de Certificaciones & Hitos:</h4>
       ${item.certificates ? `
         <table class="table" style="background:var(--bg-card);">
           <thead><tr><th>N° Cert.</th><th>Fecha</th><th>Concepto</th><th>Monto</th><th>Estado</th></tr></thead>
@@ -2049,14 +2720,14 @@ const App = {
                 <td>${c.date}</td>
                 <td>${c.desc}</td>
                 <td style="font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(c.amount)}</td>
-                <td><span class="badge ${c.status === 'Cobrado' ? 'badge-success' : 'badge-amber'}">${c.status}</span></td>
+                <td><span class="badge badge-success">${c.status}</span></td>
               </tr>
             `).join('')}
           </tbody>
         </table>
       ` : `
         <div style="padding:16px; background:var(--bg-app); border-radius:8px; font-size:13px; color:var(--text-secondary);">
-          Certificaciones de gremio supervisadas directamente por Jefatura de Obra. Avance acumulado: <strong>${item.progress}%</strong>.
+          Certificaciones de gremio supervisadas directamente por Dirección Técnica. Avance acumulado: <strong>${item.progress}%</strong>.
         </div>
       `}
     `;
@@ -2087,7 +2758,7 @@ const App = {
     }
     const dateInput = document.getElementById('agendaEventDate');
     if (dateInput && !dateInput.value) {
-      dateInput.value = new Date().toISOString().split('T')[0];
+      dateInput.value = DP_DB.state.calendarSelectedDate || new Date().toISOString().split('T')[0];
     }
     document.getElementById('agendaModalBackdrop')?.classList.add('active');
   },
@@ -2138,6 +2809,11 @@ const App = {
       DP_DB.contracts.unshift(newContract);
       this.showToast(`Contrato principal con ${party} registrado exitosamente.`);
     } else {
+      // For subcontract, calculate realistic margins
+      const billedAmount = Math.round(totalAmount * 1.35); // 35% margin for DP
+      const netProfit = billedAmount - totalAmount;
+      const profitMargin = Math.round((netProfit / billedAmount) * 1000) / 10;
+
       const newSubcontract = {
         id: 'sub-' + (DP_DB.subcontracts.length + 1),
         code: `SUB-GRM-0${DP_DB.subcontracts.length + 1}`,
@@ -2151,9 +2827,10 @@ const App = {
         responsible: 'Responsable Técnico',
         cuit: '30-XXXXXXXX-X',
         modalidad,
-        totalAmount,
-        certifiedAmount: 0,
-        paidAmount: 0,
+        costAmount: totalAmount,
+        billedAmount,
+        netProfit,
+        profitMargin,
         retentionPercent,
         retentionAmount,
         status: 'active',
@@ -2161,6 +2838,7 @@ const App = {
         startDate,
         endDate,
         artStatus: 'Cobertura ART verificada con cláusula de no repetición',
+        artVerified: true,
         progress: 0
       };
       DP_DB.subcontracts.unshift(newSubcontract);
@@ -2245,6 +2923,8 @@ const App = {
     };
 
     DP_DB.agendaEvents.unshift(newEvt);
+    DP_DB.state.calendarSelectedDate = date;
+
     document.getElementById('agendaModalBackdrop')?.classList.remove('active');
     e.target.reset();
     this.showToast(`Hito técnico programado para el ${date}`);
@@ -2280,8 +2960,8 @@ const App = {
           </div>
           <div style="text-align:right;">
             <p style="font-size:12px; color:#64748b; text-transform:uppercase;">Especialidad / Rubro:</p>
-            <span class="badge ${budget.rubro === 'ingenieria' ? 'badge-rubro-ing' : 'badge-rubro-arq'}">
-              ${budget.rubro === 'ingenieria' ? '🏗️ Ingeniería Civil' : '📐 Arquitectura'}
+            <span class="badge ${budget.rubro === 'ingenieria' ? 'badge-primary' : 'badge-neutral'}">
+              ${budget.rubro === 'ingenieria' ? 'Ingeniería Civil' : 'Arquitectura'}
             </span>
           </div>
         </div>
@@ -2295,8 +2975,8 @@ const App = {
             ${budget.items.map(i => `
               <tr>
                 <td><strong>${i.desc}</strong></td>
-                <td style="text-align:center; font-family:var(--font-mono);">${i.qty}</td>
-                <td style="text-align:right; font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(i.price)}</td>
+                <td style="text-align:center; font-family:var(--font-mono);">${i.qty} ${i.unit || ''}</td>
+                <td style="text-align:right; font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(i.price * (Number(i.qty) || 1))}</td>
               </tr>
             `).join('')}
           </tbody>
