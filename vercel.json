@@ -29,6 +29,14 @@
     { "source": "/kioscos-uva-erp", "destination": "/kioscos-uva-erp-prueba/index.html" },
     { "source": "/kioscos-uva-erp/", "destination": "/kioscos-uva-erp-prueba/index.html" },
     { "source": "/kioscos-uva", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva/", "destination": "/kioscos-uva-erp-prueba/index.html" }
+    { "source": "/kioscos-uva/", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/dp-ingenieria-arquitectura", "destination": "/dp-ingenieria-arquitectura/index.html" },
+    { "source": "/dp-ingenieria-arquitectura/", "destination": "/dp-ingenieria-arquitectura/index.html" },
+    { "source": "/dp-erp", "destination": "/dp-ingenieria-arquitectura/index.html" },
+    { "source": "/dp-erp/", "destination": "/dp-ingenieria-arquitectura/index.html" },
+    { "source": "/dp-ingenieria-arquitectura/propuesta", "destination": "/dp-ingenieria-arquitectura/propuesta.html" },
+    { "source": "/dp-propuesta", "destination": "/dp-ingenieria-arquitectura/propuesta.html" },
+    { "source": "/dp-ingenieria-arquitectura/pdf", "destination": "/dp-ingenieria-arquitectura/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf" },
+    { "source": "/dp-pdf", "destination": "/dp-ingenieria-arquitectura/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf" }
   ]
 }
