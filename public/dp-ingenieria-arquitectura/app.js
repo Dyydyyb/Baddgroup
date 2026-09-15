@@ -20,7 +20,10 @@ const DP_DB = {
     calendarSelectedDate: '2026-09-15',
     budgetStatusFilter: 'all', // 'all' | 'Aprobado' | 'Enviado' | 'En Revisión'
     currentTimeFilter: 'month', // 'day' | 'week' | 'month' | 'year'
-    financialChartType: 'lines', // 'lines' | 'area' | 'bars'
+    financialChartType: 'lines', // 'lines' | 'area' | 'bars' | 'donut' | 'pie'
+    financialChartUnit: 'currency', // 'currency' | 'percent'
+    costStructureType: 'breakdown', // 'breakdown' | 'donut' | 'pie' | 'bars'
+    costStructureUnit: 'percent', // 'percent' | 'currency'
     currentRole: 'admin',
     searchQuery: ''
   },
@@ -31,13 +34,13 @@ const DP_DB = {
     roleLabel: 'Director / Socio Gerente',
     email: 'd.peralta@dp-ingenieria-arquitectura.com',
     phone: '+54 11 4982-3344',
-    office: 'Estudio Central DP · Buenos Aires'
+    office: 'Estudio Central DP · Florencio Varela'
   },
 
   // ========================================================================
   // OBRAS & PROYECTOS (BALANCEADOS: INGENIERÍA CIVIL & ARQUITECTURA)
   // ========================================================================
-  projects: [
+    projects: [
     {
       id: 'proj-001',
       code: 'OBRA-DP-01',
@@ -45,21 +48,21 @@ const DP_DB = {
       rubro: 'arquitectura',
       rubroLabel: 'Arquitectura & Dirección',
       client: 'Fideicomiso Altos del Parque',
-      location: 'Av. del Libertador 3200, CABA',
+      location: 'Av. San Martín 2100, Florencio Varela',
       description: 'Torre de 14 pisos de viviendas de alta gama, 48 departamentos, amenidades y 2 subsuelos de cocheras.',
       status: 'in_progress',
       statusLabel: 'En Ejecución',
       progress: 68,
       targetProgress: 65,
-      totalBudget: 185000000,
-      certifiedAmount: 125800000,
-      spentAmount: 114200000,
+      totalBudget: 34500000,
+      certifiedAmount: 23460000,
+      spentAmount: 21200000,
       director: 'Arq. Luciana Benítez',
       structuralEngineer: 'Ing. Daniel Peralta',
       startDate: '2025-11-01',
       endDate: '2026-12-15',
       stages: [
-        { name: 'Anteproyecto & Permiso Municipal DGIUR', progress: 100, status: 'completed' },
+        { name: 'Anteproyecto & Permiso Municipal Varela', progress: 100, status: 'completed' },
         { name: 'Cálculo Estructural CIRSOC 103/201', progress: 100, status: 'completed' },
         { name: 'Fundaciones, Muros Colados & Subsuelos', progress: 100, status: 'completed' },
         { name: 'Estructura H°A° Pisos 1 al 14', progress: 90, status: 'in_progress' },
@@ -67,42 +70,42 @@ const DP_DB = {
         { name: 'Terminaciones, Pintura & Entrega Final', progress: 0, status: 'pending' }
       ],
       checklist: [
-        { name: 'Permiso de Obra Nueva DGIUR CABA', status: 'approved', date: '2025-10-15' },
-        { name: 'Plano de Estructura Visado CPIC', status: 'approved', date: '2025-11-02' },
-        { name: 'Factibilidad de Conexión Edenor / Aysa', status: 'approved', date: '2025-12-05' },
+        { name: 'Permiso de Obra Nueva Municipalidad Florencio Varela', status: 'approved', date: '2025-10-15' },
+        { name: 'Plano de Estructura Visado Colegio de Ingenieros (D-II)', status: 'approved', date: '2025-11-02' },
+        { name: 'Factibilidad de Conexión Edesur / Aysa', status: 'approved', date: '2025-12-05' },
         { name: 'Póliza de Seguro de Obra y ART al día', status: 'approved', date: '2026-09-01' }
       ]
     },
     {
       id: 'proj-002',
       code: 'OBRA-DP-02',
-      title: 'Nave Logística & Centro de Distribución Cuyo',
+      title: 'Nave Logística & Centro de Distribución PITec',
       rubro: 'ingenieria',
       rubroLabel: 'Ingeniería Civil & Estructuras',
       client: 'Inversora Logística del Plata S.A.',
-      location: 'Parque Industrial Pilar, Buenos Aires',
+      location: 'Parque Industrial Tecnológico (PITec), Florencio Varela',
       description: 'Nave industrial de 3.800 m² con estructura metálica reticulada de gran luz, pisos industriales de alta resistencia y 8 dársenas de carga.',
       status: 'in_progress',
       statusLabel: 'En Ejecución',
       progress: 52,
       targetProgress: 50,
-      totalBudget: 142000000,
-      certifiedAmount: 73840000,
-      spentAmount: 68500000,
+      totalBudget: 28800000,
+      certifiedAmount: 14976000,
+      spentAmount: 13900000,
       director: 'Ing. Daniel Peralta',
       structuralEngineer: 'Ing. Marcos Varela',
       startDate: '2026-01-15',
       endDate: '2026-09-30',
       stages: [
-        { name: 'Estudio Geotécnico de Suelos & Cálculo Platea', progress: 100, status: 'completed' },
+        { name: 'Estudio Geotécnico de Suelos & Cálculo Platea PITec', progress: 100, status: 'completed' },
         { name: 'Movimiento de Suelos & Fundaciones Aisladas', progress: 100, status: 'completed' },
         { name: 'Montaje de Estructura Metálica Alma Llena', progress: 75, status: 'in_progress' },
         { name: 'Pisos Industriales con Fibra Metálica', progress: 40, status: 'in_progress' },
-        { name: 'Red de Incendios NFPA & Subestación', progress: 20, status: 'in_progress' },
+        { name: 'Red de Incendios NFPA & Subestación Eléctrica', progress: 20, status: 'in_progress' },
         { name: 'Habilitación Industrial Final', progress: 0, status: 'pending' }
       ],
       checklist: [
-        { name: 'Estudio Geotécnico y Capacidad Portante', status: 'approved', date: '2026-01-20' },
+        { name: 'Estudio Geotécnico y Capacidad Portante PITec', status: 'approved', date: '2026-01-20' },
         { name: 'Memoria de Cálculo Viento CIRSOC 102', status: 'approved', date: '2026-02-10' },
         { name: 'Certificado de Aptitud Ambiental OPDS', status: 'approved', date: '2026-03-05' },
         { name: 'Inspección Estructural de Soldaduras por Ultrasonido', status: 'approved', date: '2026-08-20' }
@@ -111,19 +114,19 @@ const DP_DB = {
     {
       id: 'proj-003',
       code: 'OBRA-DP-03',
-      title: 'Residencia Vanguardia San Isidro',
+      title: 'Residencia Vanguardia Club de Campo',
       rubro: 'arquitectura',
       rubroLabel: 'Arquitectura & Interiorismo',
       client: 'Familia Rossi - Menéndez',
-      location: 'Barrio Náutico San Isidro',
+      location: 'Barrio Cerrado Fincas de Hudson / Florencio Varela',
       description: 'Vivienda unifamiliar sustentable de 420 m² con voladizos de hormigón a la vista, carpinterías de piso a techo y piscina infinita.',
       status: 'in_progress',
       statusLabel: 'En Ejecución',
       progress: 78,
       targetProgress: 75,
-      totalBudget: 94000000,
-      certifiedAmount: 73320000,
-      spentAmount: 66800000,
+      totalBudget: 19400000,
+      certifiedAmount: 15132000,
+      spentAmount: 13800000,
       director: 'Arq. Luciana Benítez',
       structuralEngineer: 'Ing. Daniel Peralta',
       startDate: '2025-09-10',
@@ -137,103 +140,103 @@ const DP_DB = {
         { name: 'Parquización & Final de Obra', progress: 0, status: 'pending' }
       ],
       checklist: [
-        { name: 'Plano Aprobado Municipio de San Isidro', status: 'approved', date: '2025-08-30' },
-        { name: 'Visado CPAU Arancelario', status: 'approved', date: '2025-09-02' },
+        { name: 'Plano Aprobado Comisión de Arquitectura Barrio', status: 'approved', date: '2025-08-30' },
+        { name: 'Visado CAPBA Distrito II Arancelario', status: 'approved', date: '2025-09-02' },
         { name: 'Inspección de Estructura de Voladizo', status: 'approved', date: '2026-04-12' }
       ]
     },
     {
       id: 'proj-004',
       code: 'OBRA-DP-04',
-      title: 'Puente Peatonal & Estructura Metálica Tigre',
+      title: 'Pasarela Peatonal & Estructura Metálica Varela',
       rubro: 'ingenieria',
-      rubroLabel: 'Ingeniería Estructural & Puentes',
-      client: 'Municipio de Tigre (Obra Pública)',
-      location: 'Paseo Victorica y Río Luján, Tigre',
+      rubroLabel: 'Ingeniería Estructural & Pasarelas',
+      client: 'Municipalidad de Florencio Varela (Obra Pública)',
+      location: 'Acceso Estación Florencio Varela, Buenos Aires',
       description: 'Diseño estructural, memoria de cálculo dinámico y montaje de pasarela peatonal atirantada de 45 metros de luz libre.',
       status: 'in_progress',
       statusLabel: 'En Ejecución',
       progress: 35,
       targetProgress: 35,
-      totalBudget: 86000000,
-      certifiedAmount: 30100000,
-      spentAmount: 26400000,
+      totalBudget: 16200000,
+      certifiedAmount: 5670000,
+      spentAmount: 4980000,
       director: 'Ing. Daniel Peralta',
       structuralEngineer: 'Ing. Marcos Varela',
       startDate: '2026-03-01',
       endDate: '2026-11-20',
       stages: [
-        { name: 'Cálculo de Fundaciones en Lecho de Río', progress: 100, status: 'completed' },
+        { name: 'Cálculo de Fundaciones y Suelos', progress: 100, status: 'completed' },
         { name: 'Fabricación en Taller de Tramos Metálicos', progress: 60, status: 'in_progress' },
         { name: 'Pilotes Perforados & Cabezales de H°A°', progress: 40, status: 'in_progress' },
-        { name: 'Montaje con Grúa Flotante & Tensado de Cables', progress: 0, status: 'pending' },
+        { name: 'Montaje con Grúa & Tensado de Cables', progress: 0, status: 'pending' },
         { name: 'Pruebas de Carga Estática y Dinámica', progress: 0, status: 'pending' }
       ],
       checklist: [
-        { name: 'Estudio Batimétrico y Geotécnico', status: 'approved', date: '2026-02-15' },
-        { name: 'Aprobación Dirección de Vías Navegables', status: 'approved', date: '2026-03-10' },
+        { name: 'Estudio Geotécnico de Estación Varela', status: 'approved', date: '2026-02-15' },
+        { name: 'Aprobación Ferrocarriles y Vía Pública', status: 'approved', date: '2026-03-10' },
         { name: 'Memoria Sísmica & Cargas Dinámicas CIRSOC', status: 'approved', date: '2026-04-05' }
       ]
     },
     {
       id: 'proj-005',
       code: 'OBRA-DP-05',
-      title: 'Hotel Boutique & Restaurante Palermo Soho',
+      title: 'Centro Comercial & Oficinas San Martín',
       rubro: 'arquitectura',
-      rubroLabel: 'Arquitectura & Restauración Patrimonial',
-      client: 'Grupo Hotelero Soho Suites S.A.',
-      location: 'Honduras y Armenia, Palermo, CABA',
-      description: 'Puesta en valor de casona histórica de 1920 con ampliación de 3 niveles en steel framing y terraza mirador.',
+      rubroLabel: 'Arquitectura Comercial & Remodelación',
+      client: 'Grupo Comercial Varela Plaza S.A.',
+      location: 'Av. San Martín y Monteagudo, Florencio Varela',
+      description: 'Puesta en valor de inmueble céntrico con ampliación de 3 niveles en steel framing y locales comerciales.',
       status: 'planning',
       statusLabel: 'En Planificación',
       progress: 15,
       targetProgress: 15,
-      totalBudget: 62000000,
-      certifiedAmount: 9300000,
-      spentAmount: 8100000,
+      totalBudget: 14500000,
+      certifiedAmount: 2175000,
+      spentAmount: 1890000,
       director: 'Arq. Luciana Benítez',
       structuralEngineer: 'Ing. Daniel Peralta',
       startDate: '2026-07-01',
       endDate: '2027-04-30',
       stages: [
-        { name: 'Relevamiento Láser & Modelo BIM Patrimonial', progress: 80, status: 'in_progress' },
-        { name: 'Aprobación Consejo Asesor Asuntos Patrimoniales', progress: 20, status: 'in_progress' },
+        { name: 'Relevamiento Láser & Modelo BIM', progress: 80, status: 'in_progress' },
+        { name: 'Aprobación Permiso Municipal Florencio Varela', progress: 20, status: 'in_progress' },
         { name: 'Refuerzos Estructurales en Perfiles IPN', progress: 0, status: 'pending' },
         { name: 'Montaje de Módulos Habitacionales Livianos', progress: 0, status: 'pending' }
       ],
       checklist: [
-        { name: 'Dictamen Favorable Protección Patrimonial', status: 'pending', date: 'En trámite' },
+        { name: 'Dictamen Favorable Obras Particulares', status: 'pending', date: 'En trámite' },
         { name: 'Ensayo de Capacidad de Muros Portantes', status: 'approved', date: '2026-06-25' }
       ]
     },
     {
       id: 'proj-006',
       code: 'OBRA-DP-06',
-      title: 'Batería de Silos & Fundaciones Profundas Rosario',
+      title: 'Planta de Acopio & Silos Industriales Quilmes',
       rubro: 'ingenieria',
       rubroLabel: 'Ingeniería Agroindustrial',
-      client: 'Agroexportadora del Paraná S.A.',
-      location: 'Puerto San Martín, Santa Fe',
-      description: 'Cálculo estructural de plateas para 6 silos metálicos de 12.000 toneladas cada uno, túneles de descarga y torre de norias.',
+      client: 'Agroexportadora del Sur S.A.',
+      location: 'Acceso Sudeste, Quilmes / Florencio Varela',
+      description: 'Cálculo estructural de plateas para 4 silos metálicos de 5.000 toneladas cada uno, túneles de descarga y torre de norias.',
       status: 'planning',
       statusLabel: 'En Planificación',
       progress: 25,
       targetProgress: 25,
-      totalBudget: 110000000,
-      certifiedAmount: 27500000,
-      spentAmount: 22000000,
+      totalBudget: 22600000,
+      certifiedAmount: 5650000,
+      spentAmount: 4520000,
       director: 'Ing. Daniel Peralta',
       structuralEngineer: 'Ing. Marcos Varela',
       startDate: '2026-05-15',
       endDate: '2027-02-28',
       stages: [
         { name: 'Memoria de Cálculo de Presiones de Granos CIRSOC 201', progress: 100, status: 'completed' },
-        { name: 'Diseño de Cabezales y 120 Pilotes a 22m', progress: 50, status: 'in_progress' },
+        { name: 'Diseño de Cabezales y 60 Pilotes a 18m', progress: 50, status: 'in_progress' },
         { name: 'Licitación de Contratistas de H°A°', progress: 0, status: 'pending' }
       ],
       checklist: [
         { name: 'Estudio Geotécnico con Ensayos CPTU', status: 'approved', date: '2026-05-28' },
-        { name: 'Visado Colegio de Ingenieros Especialistas', status: 'approved', date: '2026-06-20' }
+        { name: 'Visado Colegio de Ingenieros Especialistas (D-II)', status: 'approved', date: '2026-06-20' }
       ]
     }
   ],
@@ -242,7 +245,7 @@ const DP_DB = {
   // CONTRATOS PRINCIPALES (COMITENTES)
   // Marco Legal: Cláusula de Ajuste CAC & Fondo de Reparo (5% de garantía)
   // ========================================================================
-  contracts: [
+    contracts: [
     {
       id: 'ctr-001',
       code: 'CTR-COM-01',
@@ -255,11 +258,11 @@ const DP_DB = {
       responsible: 'Dr. Martín Echeverría',
       cuit: '30-71589012-8',
       modalidad: 'Suma Alzada con Ajuste CAC',
-      totalAmount: 185000000,
-      certifiedAmount: 125800000,
-      paidAmount: 119510000,
+      totalAmount: 34500000,
+      certifiedAmount: 23460000,
+      paidAmount: 22287000,
       retentionPercent: 5,
-      retentionAmount: 6290000,
+      retentionAmount: 1173000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2025-11-01',
@@ -267,29 +270,29 @@ const DP_DB = {
       adjustmentClause: 'Índice Cámara Argentina de la Construcción (CAC) Base Oct 2025',
       insurance: 'Póliza de Caución Allianz N° 849.201 por cumplimiento de contrato',
       certificates: [
-        { number: 1, date: '2025-12-28', desc: 'Certificado N° 1 - Excavación y Muros Colados', amount: 22000000, status: 'Cobrado' },
-        { number: 2, date: '2026-02-28', desc: 'Certificado N° 2 - Fundaciones y Subsuelos 1 y 2', amount: 31000000, status: 'Cobrado' },
-        { number: 3, date: '2026-05-30', desc: 'Certificado N° 3 - Estructura H°A° Pisos 1 al 8', amount: 42800000, status: 'Cobrado' },
-        { number: 4, date: '2026-08-31', desc: 'Certificado N° 4 - Estructura H°A° Pisos 9 al 14', amount: 30000000, status: 'En Proceso de Cobro' }
+        { number: 1, date: '2025-12-28', desc: 'Certificado N° 1 - Excavación y Muros Colados', amount: 4100000, status: 'Cobrado' },
+        { number: 2, date: '2026-02-28', desc: 'Certificado N° 2 - Fundaciones y Subsuelos 1 y 2', amount: 5800000, status: 'Cobrado' },
+        { number: 3, date: '2026-05-30', desc: 'Certificado N° 3 - Estructura H°A° Pisos 1 al 8', amount: 7960000, status: 'Cobrado' },
+        { number: 4, date: '2026-08-31', desc: 'Certificado N° 4 - Estructura H°A° Pisos 9 al 14', amount: 5600000, status: 'En Proceso de Cobro' }
       ]
     },
     {
       id: 'ctr-002',
       code: 'CTR-COM-02',
       kind: 'principal',
-      title: 'Contrato Llave en Mano Nave Industrial & Logística Cuyo',
+      title: 'Contrato Llave en Mano Nave Industrial & Logística PITec',
       rubro: 'ingenieria',
       projectId: 'proj-002',
-      projectTitle: 'Nave Logística & Centro de Distribución Cuyo',
+      projectTitle: 'Nave Logística & Centro de Distribución PITec',
       party: 'Inversora Logística del Plata S.A.',
       responsible: 'Lic. Gonzalo Barrenechea',
       cuit: '30-69812401-4',
       modalidad: 'Suma Alzada',
-      totalAmount: 142000000,
-      certifiedAmount: 73840000,
-      paidAmount: 70148000,
+      totalAmount: 28800000,
+      certifiedAmount: 14976000,
+      paidAmount: 14227200,
       retentionPercent: 5,
-      retentionAmount: 3692000,
+      retentionAmount: 748800,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-01-15',
@@ -297,8 +300,8 @@ const DP_DB = {
       adjustmentClause: 'Ajuste polinómico por insumos críticos (Acero y Cemento)',
       insurance: 'Póliza de Caución Zurich Seguros N° 440.129',
       certificates: [
-        { number: 1, date: '2026-03-31', desc: 'Certificado N° 1 - Movimiento de Suelos & Plateas', amount: 28500000, status: 'Cobrado' },
-        { number: 2, date: '2026-06-30', desc: 'Certificado N° 2 - Montaje de Estructura Reticulada', amount: 45340000, status: 'Cobrado' }
+        { number: 1, date: '2026-03-31', desc: 'Certificado N° 1 - Movimiento de Suelos & Plateas', amount: 5800000, status: 'Cobrado' },
+        { number: 2, date: '2026-06-30', desc: 'Certificado N° 2 - Montaje de Estructura Reticulada', amount: 9176000, status: 'Cobrado' }
       ]
     },
     {
@@ -308,16 +311,16 @@ const DP_DB = {
       title: 'Contrato de Proyecto, Cálculo y Dirección Residencia Vanguardia',
       rubro: 'arquitectura',
       projectId: 'proj-003',
-      projectTitle: 'Residencia Vanguardia San Isidro',
+      projectTitle: 'Residencia Vanguardia Club de Campo',
       party: 'Familia Rossi - Menéndez',
       responsible: 'Dr. Alejandro Rossi',
       cuit: '20-22489012-3',
       modalidad: 'Coste y Costas + Honorarios',
-      totalAmount: 94000000,
-      certifiedAmount: 73320000,
-      paidAmount: 69654000,
+      totalAmount: 19400000,
+      certifiedAmount: 15132000,
+      paidAmount: 14375400,
       retentionPercent: 5,
-      retentionAmount: 3666000,
+      retentionAmount: 756600,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2025-09-10',
@@ -325,28 +328,28 @@ const DP_DB = {
       adjustmentClause: 'Rendición de compras certificadas quincenales',
       insurance: 'Fondo de garantía en cuenta fiduciaria bancaria',
       certificates: [
-        { number: 1, date: '2025-11-30', desc: 'Certificado N° 1 - Fundaciones y Pilotes', amount: 18500000, status: 'Cobrado' },
-        { number: 2, date: '2026-03-15', desc: 'Certificado N° 2 - Hormigón a la Vista Planta Baja y Alta', amount: 32820000, status: 'Cobrado' },
-        { number: 3, date: '2026-07-31', desc: 'Certificado N° 3 - Carpinterías y Revestimientos', amount: 22000000, status: 'Cobrado' }
+        { number: 1, date: '2025-11-30', desc: 'Certificado N° 1 - Fundaciones y Pilotes', amount: 3800000, status: 'Cobrado' },
+        { number: 2, date: '2026-03-15', desc: 'Certificado N° 2 - Hormigón a la Vista Planta Baja y Alta', amount: 6772000, status: 'Cobrado' },
+        { number: 3, date: '2026-07-31', desc: 'Certificado N° 3 - Carpinterías y Revestimientos', amount: 4560000, status: 'Cobrado' }
       ]
     },
     {
       id: 'ctr-004',
       code: 'CTR-COM-04',
       kind: 'principal',
-      title: 'Licitación Pública: Pasarela Atirantada Paseo Victorica Tigre',
+      title: 'Licitación Pública: Pasarela Peatonal Estación Florencio Varela',
       rubro: 'ingenieria',
       projectId: 'proj-004',
-      projectTitle: 'Puente Peatonal & Estructura Metálica Tigre',
-      party: 'Municipalidad de Tigre',
+      projectTitle: 'Pasarela Peatonal & Estructura Metálica Varela',
+      party: 'Municipalidad de Florencio Varela',
       responsible: 'Secretaría de Obras Públicas',
       cuit: '30-99901452-1',
       modalidad: 'Unidad de Medida',
-      totalAmount: 86000000,
-      certifiedAmount: 30100000,
-      paidAmount: 28595000,
+      totalAmount: 16200000,
+      certifiedAmount: 5670000,
+      paidAmount: 5386500,
       retentionPercent: 5,
-      retentionAmount: 1505000,
+      retentionAmount: 283500,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-03-01',
@@ -354,8 +357,8 @@ const DP_DB = {
       adjustmentClause: 'Régimen de Redeterminación de Precios de Obra Pública Ley 13.064',
       insurance: 'Póliza Provincia Seguros N° POL-OBP-882',
       certificates: [
-        { number: 1, date: '2026-05-31', desc: 'Certificado N° 1 - Ingeniería de Detalle y Ensayos', amount: 12000000, status: 'Cobrado' },
-        { number: 2, date: '2026-08-31', desc: 'Certificado N° 2 - Fabricación de Tramos Metálicos', amount: 18100000, status: 'En Proceso de Cobro' }
+        { number: 1, date: '2026-05-31', desc: 'Certificado N° 1 - Ingeniería de Detalle y Ensayos', amount: 2260000, status: 'Cobrado' },
+        { number: 2, date: '2026-08-31', desc: 'Certificado N° 2 - Fabricación de Tramos Metálicos', amount: 3410000, status: 'En Proceso de Cobro' }
       ]
     }
   ],
@@ -364,7 +367,7 @@ const DP_DB = {
   // SUBCONTRATOS POR GREMIO (CON ANÁLISIS DE RENTABILIDAD & CONTROL ART)
   // Muestra: Facturación cobrada al cliente, Costo pagado al gremio, Ganancia Neta y Margen %
   // ========================================================================
-  subcontracts: [
+    subcontracts: [
     {
       id: 'sub-001',
       code: 'SUB-GRM-01',
@@ -378,12 +381,12 @@ const DP_DB = {
       responsible: 'Arq. Claudio Funes',
       cuit: '30-71120944-5',
       modalidad: 'Unidad de Medida (m³)',
-      costAmount: 43650000,     // Lo que DP le paga al gremio (costo)
-      billedAmount: 62400000,   // Lo que DP le factura al comitente por la partida
-      netProfit: 18750000,      // Ganancia neta generada para DP
-      profitMargin: 30.0,       // % de ganancia
+      costAmount: 8730000,     // Lo que DP le paga al gremio (costo)
+      billedAmount: 12480000,  // Lo que DP le factura al comitente por la partida
+      netProfit: 3750000,      // Ganancia neta generada para DP
+      profitMargin: 30.0,      // % de ganancia
       retentionPercent: 5,
-      retentionAmount: 2182500,
+      retentionAmount: 436500,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2025-12-01',
@@ -397,20 +400,20 @@ const DP_DB = {
       code: 'SUB-GRM-02',
       kind: 'subcontrato',
       gremio: 'Estructuras Metálicas & Tinglados',
-      title: 'Fabricación y Montaje de Pórticos y Cabriadas Nave Cuyo',
+      title: 'Fabricación y Montaje de Pórticos y Cabriadas Nave PITec',
       rubro: 'ingenieria',
       projectId: 'proj-002',
-      projectTitle: 'Nave Logística & Centro de Distribución Cuyo',
-      party: 'Metalúrgica San Martín Industrial',
+      projectTitle: 'Nave Logística & Centro de Distribución PITec',
+      party: 'Metalúrgica San Martín Industrial (Varela)',
       responsible: 'Ing. Carlos Pellegrini',
       cuit: '30-68449012-9',
       modalidad: 'Suma Alzada',
-      costAmount: 39000000,
-      billedAmount: 54000000,
-      netProfit: 15000000,
+      costAmount: 7800000,
+      billedAmount: 10800000,
+      netProfit: 3000000,
       profitMargin: 27.8,
       retentionPercent: 5,
-      retentionAmount: 1950000,
+      retentionAmount: 390000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-02-15',
@@ -427,17 +430,17 @@ const DP_DB = {
       title: 'Provisión y Colocación de Carpinterías A30 New y Vidrios DVH',
       rubro: 'arquitectura',
       projectId: 'proj-003',
-      projectTitle: 'Residencia Vanguardia San Isidro',
+      projectTitle: 'Residencia Vanguardia Club de Campo',
       party: 'Aberturas & Fachadas Vidriadas Alumax',
       responsible: 'Sr. Marcelo Vivas',
       cuit: '20-21890441-2',
       modalidad: 'Suma Alzada',
-      costAmount: 24140000,
-      billedAmount: 34500000,
-      netProfit: 10360000,
+      costAmount: 4828000,
+      billedAmount: 6900000,
+      netProfit: 2072000,
       profitMargin: 30.0,
       retentionPercent: 5,
-      retentionAmount: 1207000,
+      retentionAmount: 241400,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-04-01',
@@ -454,17 +457,17 @@ const DP_DB = {
       title: 'Excavación Masiva, Nivelación y Ejecución de Cabezales de Pilotes',
       rubro: 'ingenieria',
       projectId: 'proj-002',
-      projectTitle: 'Nave Logística & Centro de Distribución Cuyo',
-      party: 'Viales del Norte Excavaciones S.A.',
+      projectTitle: 'Nave Logística & Centro de Distribución PITec',
+      party: 'Viales del Sur Excavaciones S.A.',
       responsible: 'Ing. Gustavo Albornoz',
       cuit: '33-70984421-9',
       modalidad: 'Unidad de Medida (m³)',
-      costAmount: 21500000,
-      billedAmount: 29800000,
-      netProfit: 8300000,
+      costAmount: 4300000,
+      billedAmount: 5960000,
+      netProfit: 1660000,
       profitMargin: 27.9,
       retentionPercent: 5,
-      retentionAmount: 1075000,
+      retentionAmount: 215000,
       status: 'completed',
       statusLabel: 'Finalizado',
       startDate: '2026-01-20',
@@ -482,16 +485,16 @@ const DP_DB = {
       rubro: 'arquitectura',
       projectId: 'proj-001',
       projectTitle: 'Torre Residencial Altos del Parque',
-      party: 'Sanitaria Central Metropolitana',
+      party: 'Sanitaria Central Sur',
       responsible: 'Sr. Jorge Carrizo',
       cuit: '23-18902144-9',
       modalidad: 'Unidad de Medida',
-      costAmount: 15200000,
-      billedAmount: 22800000,
-      netProfit: 7600000,
+      costAmount: 3040000,
+      billedAmount: 4560000,
+      netProfit: 1520000,
       profitMargin: 33.3,
       retentionPercent: 5,
-      retentionAmount: 760000,
+      retentionAmount: 152000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-03-01',
@@ -508,17 +511,17 @@ const DP_DB = {
       title: 'Instalación de Fuerza Motriz, Bandejas Portacables y Tableros',
       rubro: 'ingenieria',
       projectId: 'proj-002',
-      projectTitle: 'Nave Logística & Centro de Distribución Cuyo',
-      party: 'Electro-Ingeniería Buenos Aires',
+      projectTitle: 'Nave Logística & Centro de Distribución PITec',
+      party: 'Electro-Ingeniería Buenos Aires Sur',
       responsible: 'Ing. Pablo Domínguez (Mat. COPIME)',
       cuit: '30-71402299-1',
       modalidad: 'Suma Alzada',
-      costAmount: 11160000,
-      billedAmount: 16500000,
-      netProfit: 5340000,
+      costAmount: 2232000,
+      billedAmount: 3300000,
+      netProfit: 1068000,
       profitMargin: 32.4,
       retentionPercent: 5,
-      retentionAmount: 558000,
+      retentionAmount: 111600,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-06-01',
@@ -540,12 +543,12 @@ const DP_DB = {
       responsible: 'Ing. Fernando Varela',
       cuit: '30-71649201-3',
       modalidad: 'Suma Alzada',
-      costAmount: 12600000,
-      billedAmount: 18800000,
-      netProfit: 6200000,
+      costAmount: 2520000,
+      billedAmount: 3760000,
+      netProfit: 1240000,
       profitMargin: 33.0,
       retentionPercent: 5,
-      retentionAmount: 630000,
+      retentionAmount: 126000,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-04-15',
@@ -562,17 +565,17 @@ const DP_DB = {
       title: 'Subcontrato de Revestimientos Especiales y Pintura Látex Lavable',
       rubro: 'arquitectura',
       projectId: 'proj-003',
-      projectTitle: 'Residencia Vanguardia San Isidro',
+      projectTitle: 'Residencia Vanguardia Club de Campo',
       party: 'Revestimientos Andinos Decoración',
       responsible: 'Sr. Hugo Paredes',
       cuit: '27-24902188-4',
       modalidad: 'Suma Alzada',
-      costAmount: 3160000,
-      billedAmount: 4800000,
-      netProfit: 1640000,
+      costAmount: 632000,
+      billedAmount: 960000,
+      netProfit: 328000,
       profitMargin: 34.2,
       retentionPercent: 5,
-      retentionAmount: 158000,
+      retentionAmount: 31600,
       status: 'active',
       statusLabel: 'En Ejecución',
       startDate: '2026-06-01',
@@ -586,55 +589,55 @@ const DP_DB = {
   // ========================================================================
   // COTIZACIONES & PRESUPUESTOS (100% FUNCIONAL & INTERACTIVO)
   // ========================================================================
-  budgets: [
+    budgets: [
     {
       id: 'pre-001',
       code: 'PRE-DP-2026-041',
-      client: 'Fideicomiso Bahía Madero',
+      client: 'Fideicomiso Florencio Varela Centro',
       rubro: 'arquitectura',
-      title: 'Proyecto Ejecutivo, Renders 3D & Dirección de Obra Edificio Madero',
+      title: 'Proyecto Ejecutivo, Renders 3D & Dirección de Obra Edificio San Martín',
       date: '2026-06-10',
       validUntil: '2026-07-10',
-      total: 38400000,
+      total: 7680000,
       status: 'Aprobado',
       items: [
-        { desc: 'Anteproyecto y Plantas de Arquitectura Escala 1:50', qty: '1', unit: 'gl', price: 9500000 },
-        { desc: 'Modelado 3D BIM (Revit) y 8 Renders Fotorrealistas en 4K', qty: '1', unit: 'gl', price: 6800000 },
-        { desc: 'Legajo Municipal y Tramitaciones Técnicas DGIUR', qty: '1', unit: 'gl', price: 4500000 },
-        { desc: 'Dirección de Obra y Control de Calidad en Obra (12 meses)', qty: '12', unit: 'mes', price: 1466666 }
+        { desc: 'Anteproyecto y Plantas de Arquitectura Escala 1:50', qty: '1', unit: 'gl', price: 1900000 },
+        { desc: 'Modelado 3D BIM (Revit) y 8 Renders Fotorrealistas en 4K', qty: '1', unit: 'gl', price: 1360000 },
+        { desc: 'Legajo Municipal Varela y Tramitaciones Técnicas Colegios', qty: '1', unit: 'gl', price: 900000 },
+        { desc: 'Dirección de Obra y Control de Calidad en Obra (12 meses)', qty: '12', unit: 'mes', price: 293333 }
       ]
     },
     {
       id: 'pre-002',
       code: 'PRE-DP-2026-042',
-      client: 'Logística & Transportes del Sur',
+      client: 'Logística & Transportes PITec',
       rubro: 'ingenieria',
-      title: 'Cálculo Estructural CIRSOC & Cómputos Métricos Depósito 2.500m²',
+      title: 'Cálculo Estructural CIRSOC & Cómputos Métricos Galpón 2.500m²',
       date: '2026-06-08',
       validUntil: '2026-07-08',
-      total: 24500000,
+      total: 4900000,
       status: 'Enviado',
       items: [
-        { desc: 'Estudio Geotécnico de Suelos y Ensayos de Penetración SPT', qty: '1', unit: 'gl', price: 3800000 },
-        { desc: 'Memoria de Cálculo de Fundaciones y Estructura Metálica Reticulada', qty: '1', unit: 'gl', price: 9200000 },
-        { desc: 'Planos de Taller para Fabricación de Pórticos y Encofrados H°A°', qty: '1', unit: 'gl', price: 6500000 },
-        { desc: 'Cómputo Métrico de Materiales y Pliegos Técnicos de Licitación', qty: '1', unit: 'gl', price: 5000000 }
+        { desc: 'Estudio Geotécnico de Suelos y Ensayos de Penetración SPT en PITec', qty: '1', unit: 'gl', price: 760000 },
+        { desc: 'Memoria de Cálculo de Fundaciones y Estructura Metálica Reticulada', qty: '1', unit: 'gl', price: 1840000 },
+        { desc: 'Planos de Taller para Fabricación de Pórticos y Encofrados H°A°', qty: '1', unit: 'gl', price: 1300000 },
+        { desc: 'Cómputo Métrico de Materiales y Pliegos Técnicos de Licitación', qty: '1', unit: 'gl', price: 1000000 }
       ]
     },
     {
       id: 'pre-003',
       code: 'PRE-DP-2026-043',
-      client: 'Grupo Gastronómico Palermo',
+      client: 'Gastronomía & Comercio Varela',
       rubro: 'arquitectura',
-      title: 'Interiorismo & Adecuación Acústica Restaurante y Rooftop Bar',
+      title: 'Interiorismo & Adecuación Comercial Local Gastronómico Central',
       date: '2026-06-02',
       validUntil: '2026-06-30',
-      total: 16800000,
+      total: 3360000,
       status: 'En Revisión',
       items: [
-        { desc: 'Diseño de Interiores, Iluminación Escenográfica y Muebles a Medida', qty: '1', unit: 'gl', price: 6200000 },
-        { desc: 'Planos de Instalación Termomecánica y Extracción Gastronómica', qty: '1', unit: 'gl', price: 4400000 },
-        { desc: 'Coordinación de Gremios y Gestión Técnica de Compras', qty: '1', unit: 'gl', price: 6200000 }
+        { desc: 'Diseño de Interiores, Iluminación Escenográfica y Muebles a Medida', qty: '1', unit: 'gl', price: 1240000 },
+        { desc: 'Planos de Instalación Termomecánica y Extracción Gastronómica', qty: '1', unit: 'gl', price: 880000 },
+        { desc: 'Coordinación de Gremios y Gestión Técnica de Compras', qty: '1', unit: 'gl', price: 1240000 }
       ]
     }
   ],
@@ -654,11 +657,11 @@ const DP_DB = {
   // ========================================================================
   // CRM & COMITENTES
   // ========================================================================
-  crmLeads: [
-    { id: 'lead-01', name: 'Dr. Fernando Gutiérrez', company: 'Clínica Quirúrgica Norte', rubro: 'arquitectura', need: 'Ampliación de 2 quirófanos y salas de recuperación con normas sanitarias', budget: 65000000, stage: 'Negociación Avanzada', contact: '+54 11 5829-1144' },
-    { id: 'lead-02', name: 'Ing. Horacio Méndez', company: 'Agroquímicos del Litoral', rubro: 'ingenieria', need: 'Cálculo de silos metálicos y platea de hormigón armado para 10.000 toneladas', budget: 110000000, stage: 'Licitación Presentada', contact: '+54 341 498-2233' },
-    { id: 'lead-03', name: 'Arq. Mariana Soler', company: 'Estudio Soler & Asociados', rubro: 'ingenieria', need: 'Cálculo estructural de subsuelo y muro berlinés en zona Belgrano', budget: 18500000, stage: 'Propuesta Enviada', contact: '+54 11 4782-9011' },
-    { id: 'lead-04', name: 'Esteban Podestá', company: 'Desarrollos Náuticos Nordelta', rubro: 'arquitectura', need: 'Complejo de 12 townhouses con muelle privado y diseño contemporáneo', budget: 240000000, stage: 'Primer Contacto', contact: '+54 11 6399-4411' }
+    crmLeads: [
+    { id: 'lead-01', name: 'Dr. Fernando Gutiérrez', company: 'Clínica Privada Florencio Varela', rubro: 'arquitectura', need: 'Ampliación de 2 quirófanos y salas de recuperación con normas sanitarias', budget: 13000000, stage: 'Negociación Avanzada', contact: '+54 11 4255-1144' },
+    { id: 'lead-02', name: 'Ing. Horacio Méndez', company: 'Industrias Metalúrgicas Varela S.A.', rubro: 'ingenieria', need: 'Cálculo de nave de producción y platea para puente grúa 10 tn', budget: 22000000, stage: 'Licitación Presentada', contact: '+54 11 4287-2233' },
+    { id: 'lead-03', name: 'Arq. Mariana Soler', company: 'Estudio Soler & Asociados (Quilmes)', rubro: 'ingenieria', need: 'Cálculo estructural de subsuelo y muro de contención en zona centro', budget: 3700000, stage: 'Propuesta Enviada', contact: '+54 11 4782-9011' },
+    { id: 'lead-04', name: 'Esteban Podestá', company: 'Desarrollos Fincas de Hudson', rubro: 'arquitectura', need: 'Proyecto y dirección de 4 residencias de estilo racionalista', budget: 48000000, stage: 'Primer Contacto', contact: '+54 11 6399-4411' }
   ],
 
   // ========================================================================
@@ -697,6 +700,51 @@ const DP_DB = {
 // ==========================================================================
 // 2. CONTROLLER & LOGIC ENGINE
 // ==========================================================================
+// ==========================================================================
+// SVG GEOMETRY UTILITIES FOR INTERACTIVE DONUT & PIE CHARTS
+// ==========================================================================
+function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+  const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+  return {
+    x: centerX + (radius * Math.cos(angleInRadians)),
+    y: centerY + (radius * Math.sin(angleInRadians))
+  };
+}
+
+function describePieSlice(cx, cy, radius, startAngle, endAngle) {
+  let sweep = endAngle - startAngle;
+  if (sweep >= 360) sweep = 359.99;
+  if (sweep <= 0.05) return '';
+  const start = polarToCartesian(cx, cy, radius, startAngle);
+  const end = polarToCartesian(cx, cy, radius, startAngle + sweep);
+  const largeArcFlag = sweep <= 180 ? '0' : '1';
+  return [
+    'M', cx.toFixed(2), cy.toFixed(2),
+    'L', start.x.toFixed(2), start.y.toFixed(2),
+    'A', radius, radius, 0, largeArcFlag, 1, end.x.toFixed(2), end.y.toFixed(2),
+    'Z'
+  ].join(' ');
+}
+
+function describeDonutSlice(cx, cy, rOuter, rInner, startAngle, endAngle) {
+  let sweep = endAngle - startAngle;
+  if (sweep >= 360) sweep = 359.99;
+  if (sweep <= 0.05) return '';
+  const startOuter = polarToCartesian(cx, cy, rOuter, startAngle);
+  const endOuter = polarToCartesian(cx, cy, rOuter, startAngle + sweep);
+  const startInner = polarToCartesian(cx, cy, rInner, startAngle + sweep);
+  const endInner = polarToCartesian(cx, cy, rInner, startAngle);
+  const largeArcFlag = sweep <= 180 ? '0' : '1';
+
+  return [
+    'M', startOuter.x.toFixed(2), startOuter.y.toFixed(2),
+    'A', rOuter, rOuter, 0, largeArcFlag, 1, endOuter.x.toFixed(2), endOuter.y.toFixed(2),
+    'L', startInner.x.toFixed(2), startInner.y.toFixed(2),
+    'A', rInner, rInner, 0, largeArcFlag, 0, endInner.x.toFixed(2), endInner.y.toFixed(2),
+    'Z'
+  ].join(' ');
+}
+
 const App = {
   init() {
     this.setupNavigation();
@@ -984,85 +1032,85 @@ const App = {
   // ANALÍTICA DE PERÍODOS (DÍA, SEMANA, MES, AÑO)
   // Contempla: Ingresos Facturados, Costos Obras, Compras Acopios, Gastos Estructura, Balance Neto y Rentabilidad
   // ========================================================================
-  getPeriodData(period) {
+    getPeriodData(period) {
     switch (period) {
       case 'day':
         return {
           label: 'Hoy (15 de Septiembre, 2026)',
-          income: 4200000,
-          costs: 2100000,
-          purchases: 750000,
-          expenses: 260000,
-          totalOut: 3110000,
-          balance: 1090000,
+          income: 840000,
+          costs: 420000,
+          purchases: 150000,
+          expenses: 52000,
+          totalOut: 622000,
+          balance: 218000,
           profitability: '26.0%',
           series: [
-            { label: '08:00', in: 0, costs: 250000, purchases: 120000, exp: 40000, out: 410000 },
-            { label: '10:00', in: 1800000, costs: 620000, purchases: 200000, exp: 60000, out: 880000 },
-            { label: '12:00', in: 0, costs: 450000, purchases: 180000, exp: 50000, out: 680000 },
-            { label: '14:00', in: 2400000, costs: 500000, purchases: 150000, exp: 70000, out: 720000 },
-            { label: '17:00', in: 0, costs: 280000, purchases: 100000, exp: 40000, out: 420000 }
+            { label: '08:00', in: 0, costs: 50000, purchases: 24000, exp: 8000, out: 82000 },
+            { label: '10:00', in: 360000, costs: 124000, purchases: 40000, exp: 12000, out: 176000 },
+            { label: '12:00', in: 0, costs: 90000, purchases: 36000, exp: 10000, out: 136000 },
+            { label: '14:00', in: 480000, costs: 100000, purchases: 30000, exp: 14000, out: 144000 },
+            { label: '17:00', in: 0, costs: 56000, purchases: 20000, exp: 8000, out: 84000 }
           ],
-          yMax: 2600000
+          yMax: 520000
         };
       case 'week':
         return {
           label: 'Semana en Curso (8 al 15 Sep)',
-          income: 19800000,
-          costs: 10400000,
-          purchases: 3500000,
-          expenses: 1200000,
-          totalOut: 15100000,
-          balance: 4700000,
+          income: 3960000,
+          costs: 2080000,
+          purchases: 700000,
+          expenses: 240000,
+          totalOut: 3020000,
+          balance: 940000,
           profitability: '23.7%',
           series: [
-            { label: 'Lun 08', in: 3200000, costs: 1800000, purchases: 600000, exp: 200000, out: 2600000 },
-            { label: 'Mar 09', in: 5100000, costs: 2600000, purchases: 900000, exp: 300000, out: 3800000 },
-            { label: 'Mié 10', in: 2800000, costs: 1500000, purchases: 500000, exp: 180000, out: 2180000 },
-            { label: 'Jue 11', in: 4200000, costs: 2200000, purchases: 800000, exp: 250000, out: 3250000 },
-            { label: 'Vie 12', in: 3600000, costs: 1900000, purchases: 600000, exp: 220000, out: 2720000 },
-            { label: 'Sáb 13', in: 900000, costs: 400000, purchases: 100000, exp: 50000, out: 550000 }
+            { label: 'Lun 08', in: 640000, costs: 360000, purchases: 120000, exp: 40000, out: 520000 },
+            { label: 'Mar 09', in: 1020000, costs: 520000, purchases: 180000, exp: 60000, out: 760000 },
+            { label: 'Mié 10', in: 560000, costs: 300000, purchases: 100000, exp: 36000, out: 436000 },
+            { label: 'Jue 11', in: 840000, costs: 440000, purchases: 160000, exp: 50000, out: 650000 },
+            { label: 'Vie 12', in: 720000, costs: 380000, purchases: 120000, exp: 44000, out: 544000 },
+            { label: 'Sáb 13', in: 180000, costs: 80000, purchases: 20000, exp: 10000, out: 110000 }
           ],
-          yMax: 6000000
+          yMax: 1200000
         };
       case 'year':
         return {
           label: 'Ejercicio Fiscal 2026 Consolidado',
-          income: 418000000,
-          costs: 218500000,
-          purchases: 73200000,
-          expenses: 25800000,
-          totalOut: 317500000,
-          balance: 100500000,
-          profitability: '24.0%',
+          income: 98400000,
+          costs: 51400000,
+          purchases: 17200000,
+          expenses: 6100000,
+          totalOut: 74700000,
+          balance: 23700000,
+          profitability: '24.1%',
           series: [
-            { label: 'T1 2026', in: 95000000, costs: 50000000, purchases: 16500000, exp: 5800000, out: 72300000 },
-            { label: 'T2 2026', in: 135000000, costs: 70500000, purchases: 23800000, exp: 8200000, out: 102500000 },
-            { label: 'T3 2026', in: 128000000, costs: 66800000, purchases: 22400000, exp: 7900000, out: 97100000 },
-            { label: 'T4 (Est)', in: 60000000, costs: 31200000, purchases: 10500000, exp: 3900000, out: 45600000 }
+            { label: 'T1 2026', in: 22400000, costs: 11800000, purchases: 3900000, exp: 1380000, out: 17080000 },
+            { label: 'T2 2026', in: 31800000, costs: 16600000, purchases: 5600000, exp: 1940000, out: 24140000 },
+            { label: 'T3 2026', in: 30200000, costs: 15700000, purchases: 5300000, exp: 1860000, out: 22860000 },
+            { label: 'T4 (Est)', in: 14000000, costs: 7300000, purchases: 2400000, exp: 920000, out: 10620000 }
           ],
-          yMax: 150000000
+          yMax: 35000000
         };
       case 'month':
       default:
         return {
           label: 'Mes en Curso (Septiembre 2026)',
-          income: 84600000,
-          costs: 44200000,
-          purchases: 14800000,
-          expenses: 5200000,
-          totalOut: 64200000,
-          balance: 20400000,
-          profitability: '24.1%',
+          income: 16800000,
+          costs: 8750000,
+          purchases: 2940000,
+          expenses: 1050000,
+          totalOut: 12740000,
+          balance: 4060000,
+          profitability: '24.2%',
           series: [
-            { label: 'Abr', in: 58000000, costs: 30500000, purchases: 10200000, exp: 3800000, out: 44500000 },
-            { label: 'May', in: 64000000, costs: 33600000, purchases: 11100000, exp: 4100000, out: 48800000 },
-            { label: 'Jun', in: 72000000, costs: 37800000, purchases: 12600000, exp: 4500000, out: 54900000 },
-            { label: 'Jul', in: 69000000, costs: 36200000, purchases: 12000000, exp: 4300000, out: 52500000 },
-            { label: 'Ago', in: 78000000, costs: 40800000, purchases: 13500000, exp: 4800000, out: 59100000 },
-            { label: 'Sep', in: 84600000, costs: 44200000, purchases: 14800000, exp: 5200000, out: 64200000 }
+            { label: 'Abr', in: 11600000, costs: 6100000, purchases: 2050000, exp: 760000, out: 8910000 },
+            { label: 'May', in: 12800000, costs: 6720000, purchases: 2220000, exp: 820000, out: 9760000 },
+            { label: 'Jun', in: 14400000, costs: 7560000, purchases: 2520000, exp: 900000, out: 10980000 },
+            { label: 'Jul', in: 13800000, costs: 7240000, purchases: 2400000, exp: 860000, out: 10500000 },
+            { label: 'Ago', in: 15600000, costs: 8160000, purchases: 2700000, exp: 960000, out: 11820000 },
+            { label: 'Sep', in: 16800000, costs: 8750000, purchases: 2940000, exp: 1050000, out: 12740000 }
           ],
-          yMax: 95000000
+          yMax: 19000000
         };
     }
   },
@@ -1077,8 +1125,41 @@ const App = {
     this.renderDashboardView();
   },
 
+  setFinancialChartUnit(unit) {
+    DP_DB.state.financialChartUnit = unit;
+    this.renderDashboardView();
+  },
+
+  setCostStructureType(type) {
+    DP_DB.state.costStructureType = type;
+    this.renderDashboardView();
+  },
+
+  setCostStructureUnit(unit) {
+    DP_DB.state.costStructureUnit = unit;
+    this.renderDashboardView();
+  },
+
+  setFinancialChartUnit(unit) {
+    DP_DB.state.financialChartUnit = unit;
+    this.renderDashboardView();
+  },
+
+  setCostStructureType(type) {
+    DP_DB.state.costStructureType = type;
+    this.renderDashboardView();
+  },
+
+  setCostStructureUnit(unit) {
+    DP_DB.state.costStructureUnit = unit;
+    this.renderDashboardView();
+  },
+
   // ========================================================================
   // VIEW: DASHBOARD GENERAL (ANALÍTICA EJECUTIVA COMPLETA)
+  // ========================================================================
+  // ========================================================================
+  // VIEW: DASHBOARD GENERAL (ANALÍTICA EJECUTIVA COMPLETA & ENLARGED METRICS)
   // ========================================================================
   renderDashboardView() {
     const container = document.getElementById('mainViewContainer');
@@ -1126,93 +1207,117 @@ const App = {
         </div>
       </div>
 
-      <!-- STATS KPI GRID (6 EXACT EXECUTIVE METRICS REQUESTED) -->
-      <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 24px;">
+      <!-- STATS KPI GRID (6 ENLARGED EXECUTIVE METRIC CARDS) -->
+      <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
         <!-- KPI 1: Ingresos Totales Facturados -->
-        <div class="stat-card" style="border-top: 3px solid #2563eb;">
+        <div class="stat-card" style="border-top: 4px solid #2563eb; padding: 24px 26px; min-height: 145px;">
           <div class="stat-details">
-            <span class="stat-label">Ingresos Totales Facturados</span>
-            <span class="stat-value" style="color:#2563eb;">${this.formatCurrency(periodData.income)}</span>
-            <span class="stat-trend up">Cobranzas & Certificaciones</span>
+            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Ingresos Totales Facturados</span>
+            <span class="stat-value" style="color:#2563eb; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.income)}</span>
+            <span class="stat-trend up" style="font-size:12px; font-weight:600;">Cobranzas & Certificaciones de comitentes</span>
           </div>
         </div>
 
         <!-- KPI 2: Costos Operativos -->
-        <div class="stat-card" style="border-top: 3px solid #475569;">
+        <div class="stat-card" style="border-top: 4px solid #475569; padding: 24px 26px; min-height: 145px;">
           <div class="stat-details">
-            <span class="stat-label">Costos Operativos Obras</span>
-            <span class="stat-value" style="color:var(--text-primary);">${this.formatCurrency(periodData.costs)}</span>
-            <span class="stat-trend" style="color:var(--text-secondary);">Mano de obra y gremios</span>
+            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Costos Operativos Obras</span>
+            <span class="stat-value" style="color:var(--text-primary); font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.costs)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary); font-size:12px; font-weight:600;">Mano de obra y gremios subcontratados</span>
           </div>
         </div>
 
         <!-- KPI 3: Compras & Acopios -->
-        <div class="stat-card" style="border-top: 3px solid #0284c7;">
+        <div class="stat-card" style="border-top: 4px solid #0284c7; padding: 24px 26px; min-height: 145px;">
           <div class="stat-details">
-            <span class="stat-label">Compras & Acopios</span>
-            <span class="stat-value" style="color:#0284c7;">${this.formatCurrency(periodData.purchases)}</span>
-            <span class="stat-trend" style="color:var(--text-secondary);">Acero ADN, H°A° e insumos</span>
+            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Compras & Acopios</span>
+            <span class="stat-value" style="color:#0284c7; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.purchases)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary); font-size:12px; font-weight:600;">Acero ADN 420, hormigón H-30 e insumos</span>
           </div>
         </div>
 
-        <!-- KPI 4: Gastos Generales -->
-        <div class="stat-card" style="border-top: 3px solid #64748b;">
+        <!-- KPI 4: Gastos Estructura Fija -->
+        <div class="stat-card" style="border-top: 4px solid #64748b; padding: 24px 26px; min-height: 145px;">
           <div class="stat-details">
-            <span class="stat-label">Gastos Estructura Fija</span>
-            <span class="stat-value" style="color:var(--text-secondary);">${this.formatCurrency(periodData.expenses)}</span>
-            <span class="stat-trend" style="color:var(--text-secondary);">Oficinas, BIM, seguros, logística</span>
+            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Gastos Estructura Fija</span>
+            <span class="stat-value" style="color:var(--text-secondary); font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.expenses)}</span>
+            <span class="stat-trend" style="color:var(--text-secondary); font-size:12px; font-weight:600;">Estudio Florencio Varela, software BIM y seguros</span>
           </div>
         </div>
 
-        <!-- KPI 5: Balance Neto -->
-        <div class="stat-card" style="border-top: 3px solid #10b981; background: var(--bg-card);">
+        <!-- KPI 5: Balance Neto Disponible -->
+        <div class="stat-card" style="border-top: 4px solid #10b981; background: var(--bg-card); padding: 24px 26px; min-height: 145px;">
           <div class="stat-details">
-            <span class="stat-label">Balance Neto Disponible</span>
-            <span class="stat-value" style="color:#059669;">+ ${this.formatCurrency(periodData.balance)}</span>
-            <span class="stat-trend up">Superávit consolidado de caja</span>
+            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Balance Neto Disponible</span>
+            <span class="stat-value" style="color:#059669; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">+ ${this.formatCurrency(periodData.balance)}</span>
+            <span class="stat-trend up" style="font-size:12px; font-weight:600;">Superávit de caja consolidado</span>
           </div>
         </div>
 
         <!-- KPI 6: Rentabilidad Neta -->
-        <div class="stat-card" style="border-top: 3px solid #10b981;">
+        <div class="stat-card" style="border-top: 4px solid #10b981; padding: 24px 26px; min-height: 145px;">
           <div class="stat-details">
-            <span class="stat-label">Rentabilidad Neta</span>
-            <span class="stat-value" style="color:#059669;">${periodData.profitability}</span>
-            <span class="stat-trend up">Margen neto s/ facturación</span>
+            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Rentabilidad Neta</span>
+            <span class="stat-value" style="color:#059669; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${periodData.profitability}</span>
+            <span class="stat-trend up" style="font-size:12px; font-weight:600;">Margen neto s/ facturación total</span>
           </div>
         </div>
       </div>
 
-      <!-- ADVANCED FINANCIAL & ADVANCE CHARTS (2 COLUMNS) -->
+      <!-- ADVANCED FINANCIAL & COST STRUCTURE CHARTS (2 COLUMNS) -->
       <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px; margin-bottom: 24px;">
-        <!-- Chart 1: Curva Financiera Profesional -->
+        <!-- Chart 1: Curva Financiera Profesional & Multi-Modo -->
         <div class="chart-card">
           <div class="chart-header">
             <div class="chart-title-wrap">
               <h3>Evolución Financiera Consolidada</h3>
-              <p>Ingresos facturados vs egresos operativos consolidados (costos + compras + gastos) vs margen neto</p>
+              <p>Ingresos facturados vs egresos operativos consolidados vs balance neto realizado</p>
             </div>
             <div class="chart-controls">
-              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'lines' ? 'active' : ''}" onclick="App.setFinancialChartType('lines')">Líneas</button>
-              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'area' ? 'active' : ''}" onclick="App.setFinancialChartType('area')">Áreas</button>
-              <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'bars' ? 'active' : ''}" onclick="App.setFinancialChartType('bars')">Barras</button>
+              <!-- Selector de Tipo de Gráfico -->
+              <div class="chart-controls-group">
+                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'lines' ? 'active' : ''}" onclick="App.setFinancialChartType('lines')" title="Gráfico de Líneas">Líneas</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'area' ? 'active' : ''}" onclick="App.setFinancialChartType('area')" title="Gráfico de Áreas">Áreas</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'bars' ? 'active' : ''}" onclick="App.setFinancialChartType('bars')" title="Gráfico de Barras">Barras</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'donut' ? 'active' : ''}" onclick="App.setFinancialChartType('donut')" title="Gráfico de Dona Circular">Dona</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.financialChartType === 'pie' ? 'active' : ''}" onclick="App.setFinancialChartType('pie')" title="Gráfico de Torta">Torta</button>
+              </div>
+              <!-- Selector de Unidad: $ Valores vs % Porcentaje -->
+              <div class="chart-controls-group">
+                <button type="button" class="chart-toggle-btn ${DP_DB.state.financialChartUnit === 'currency' ? 'active' : ''}" onclick="App.setFinancialChartUnit('currency')" title="Expresar en Valores Monetarios">$ Valores</button>
+                <button type="button" class="chart-toggle-btn ${DP_DB.state.financialChartUnit === 'percent' ? 'active' : ''}" onclick="App.setFinancialChartUnit('percent')" title="Expresar en Porcentajes">% Porcentaje</button>
+              </div>
             </div>
           </div>
           <div class="chart-svg-container">
-            ${this.renderFinancialSvgChart(periodData.series, periodData.yMax, DP_DB.state.financialChartType)}
+            ${this.renderFinancialSvgChart(periodData, DP_DB.state.financialChartType, DP_DB.state.financialChartUnit)}
           </div>
         </div>
 
-        <!-- Chart 2: Estructura de Costos vs Rentabilidad -->
+        <!-- Chart 2: Estructura de Costos vs Rentabilidad Multi-Modo -->
         <div class="chart-card">
           <div class="chart-header">
             <div class="chart-title-wrap">
               <h3>Estructura de Costos & Rentabilidad</h3>
-              <p>Destino del capital operativo y margen por área técnica</p>
+              <p>Destino del capital operativo y margen neto</p>
+            </div>
+            <div class="chart-controls">
+              <!-- Selector de Tipo de Representación -->
+              <div class="chart-controls-group">
+                <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'breakdown' ? 'active' : ''}" onclick="App.setCostStructureType('breakdown')" title="Vista Desglose">Desglose</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'donut' ? 'active' : ''}" onclick="App.setCostStructureType('donut')" title="Vista Dona">Dona</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'pie' ? 'active' : ''}" onclick="App.setCostStructureType('pie')" title="Vista Torta">Torta</button>
+                <button type="button" class="chart-type-btn ${DP_DB.state.costStructureType === 'bars' ? 'active' : ''}" onclick="App.setCostStructureType('bars')" title="Vista Barras">Barras</button>
+              </div>
+              <!-- Selector de Unidad: % Porcentaje vs $ Valores -->
+              <div class="chart-controls-group">
+                <button type="button" class="chart-toggle-btn ${DP_DB.state.costStructureUnit === 'percent' ? 'active' : ''}" onclick="App.setCostStructureUnit('percent')" title="Expresar en Porcentajes">% Porcentaje</button>
+                <button type="button" class="chart-toggle-btn ${DP_DB.state.costStructureUnit === 'currency' ? 'active' : ''}" onclick="App.setCostStructureUnit('currency')" title="Expresar en Valores Monetarios">$ Valores</button>
+              </div>
             </div>
           </div>
-          <div style="padding: 16px 8px;">
-            ${this.renderCostStructureWidget(periodData)}
+          <div style="padding: 14px 6px;">
+            ${this.renderCostStructureWidget(periodData, DP_DB.state.costStructureType, DP_DB.state.costStructureUnit)}
           </div>
         </div>
       </div>
@@ -1282,54 +1387,175 @@ const App = {
   },
 
   // ========================================================================
-  // WIDGET: ESTRUCTURA DE COSTOS & RENTABILIDAD POR RUBRO
+  // WIDGET: ESTRUCTURA DE COSTOS & RENTABILIDAD MULTI-MODO
+  // Soporta: 'breakdown' | 'donut' | 'pie' | 'bars' con unidad 'percent' o 'currency'
   // ========================================================================
-  renderCostStructureWidget(periodData) {
-    const totalCosts = periodData.costs;
-    const totalPurchases = periodData.purchases;
-    const totalExpenses = periodData.expenses;
-    const netProfit = periodData.balance;
+  renderCostStructureWidget(periodData, type = 'breakdown', unit = 'percent') {
     const totalIn = periodData.income || 1;
+    const items = [
+      { key: 'costs', label: 'Costos Operativos Obras', val: periodData.costs, color: '#475569', desc: 'Mano de obra y gremios' },
+      { key: 'purchases', label: 'Compras & Acopios', val: periodData.purchases, color: '#0284c7', desc: 'Materiales e insumos' },
+      { key: 'expenses', label: 'Gastos Estructura Fija', val: periodData.expenses, color: '#94a3b8', desc: 'Estudio, software, seguros' },
+      { key: 'balance', label: 'Balance / Margen Neto', val: periodData.balance, color: '#10b981', desc: 'Ganancia neta disponible' }
+    ];
 
-    const pctCosts = Math.round((totalCosts / totalIn) * 100);
-    const pctPurchases = Math.round((totalPurchases / totalIn) * 100);
-    const pctExpenses = Math.round((totalExpenses / totalIn) * 100);
-    const pctProfit = Math.max(1, 100 - pctCosts - pctPurchases - pctExpenses);
+    items.forEach(it => {
+      it.pct = Math.max(0, (it.val / totalIn) * 100);
+    });
 
     const ingTotal = DP_DB.projects.filter(p => p.rubro === 'ingenieria').reduce((a, b) => a + b.totalBudget, 0);
     const arqTotal = DP_DB.projects.filter(p => p.rubro === 'arquitectura').reduce((a, b) => a + b.totalBudget, 0);
 
+    const fmtVal = (it) => {
+      if (unit === 'percent') {
+        return it.pct.toFixed(1) + '%';
+      } else {
+        return this.formatCurrency(it.val);
+      }
+    };
+
+    if (type === 'donut') {
+      let currentAngle = 0;
+      const slicesSvg = items.map(it => {
+        const sweep = (it.val / totalIn) * 360;
+        const path = describeDonutSlice(150, 95, 78, 48, currentAngle, currentAngle + sweep);
+        currentAngle += sweep;
+        return `
+          <path d="${path}" fill="${it.color}" stroke="var(--bg-card)" stroke-width="2"
+            onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%)')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer; transition:opacity 0.2s;" />
+        `;
+      }).join('');
+
+      return `
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <svg viewBox="0 0 300 195" style="width:100%; max-width:280px; height:195px; overflow:visible;">
+            ${slicesSvg}
+            <text x="150" y="90" font-size="11" font-weight="700" fill="var(--text-secondary)" text-anchor="middle">
+              ${unit === 'percent' ? 'Margen Neto' : 'Balance'}
+            </text>
+            <text x="150" y="110" font-size="16" font-weight="900" fill="#10b981" text-anchor="middle" font-family="var(--font-mono)">
+              ${unit === 'percent' ? periodData.profitability : '+ ' + (periodData.balance >= 1000000 ? (periodData.balance/1000000).toFixed(1) + 'M' : (periodData.balance/1000).toFixed(0) + 'k')}
+            </text>
+          </svg>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; width:100%; margin-top:8px;">
+            ${items.map(it => `
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:var(--bg-app); border-radius:6px; border:1px solid var(--border-color);"
+                onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%)')"
+                onmouseleave="hideChartTooltip()">
+                <div style="display:flex; align-items:center; gap:6px; min-width:0;">
+                  <span style="width:8px; height:8px; border-radius:2px; background:${it.color}; flex-shrink:0;"></span>
+                  <span style="font-size:11px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${it.label.split(' ')[0]}</span>
+                </div>
+                <span style="font-size:11px; font-weight:800; font-family:var(--font-mono); color:${it.key === 'balance' ? '#059669' : 'var(--text-secondary)'};">${fmtVal(it)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    if (type === 'pie') {
+      let currentAngle = 0;
+      const slicesSvg = items.map(it => {
+        const sweep = (it.val / totalIn) * 360;
+        const path = describePieSlice(150, 95, 78, currentAngle, currentAngle + sweep);
+        currentAngle += sweep;
+        return `
+          <path d="${path}" fill="${it.color}" stroke="var(--bg-card)" stroke-width="2"
+            onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%)')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer; transition:opacity 0.2s;" />
+        `;
+      }).join('');
+
+      return `
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <svg viewBox="0 0 300 195" style="width:100%; max-width:280px; height:195px; overflow:visible;">
+            ${slicesSvg}
+          </svg>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; width:100%; margin-top:8px;">
+            ${items.map(it => `
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:var(--bg-app); border-radius:6px; border:1px solid var(--border-color);"
+                onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%)')"
+                onmouseleave="hideChartTooltip()">
+                <div style="display:flex; align-items:center; gap:6px; min-width:0;">
+                  <span style="width:8px; height:8px; border-radius:2px; background:${it.color}; flex-shrink:0;"></span>
+                  <span style="font-size:11px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${it.label.split(' ')[0]}</span>
+                </div>
+                <span style="font-size:11px; font-weight:800; font-family:var(--font-mono); color:${it.key === 'balance' ? '#059669' : 'var(--text-secondary)'};">${fmtVal(it)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    if (type === 'bars') {
+      const chartH = 140;
+      const barW = 44;
+      const startX = 22;
+      const gapX = 70;
+
+      const barsSvg = items.map((it, idx) => {
+        const x = startX + idx * gapX;
+        const h = Math.max(6, (it.pct / 100) * chartH * 1.5);
+        const y = 160 - h;
+        const topLabel = unit === 'percent' ? it.pct.toFixed(0) + '%' : (it.val >= 1000000 ? (it.val/1000000).toFixed(1) + 'M' : (it.val/1000).toFixed(0) + 'k');
+        return `
+          <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="4" fill="${it.color}"
+            onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%)')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
+          <text x="${x + barW / 2}" y="${y - 6}" font-size="10.5" font-weight="800" font-family="var(--font-mono)" fill="var(--text-primary)" text-anchor="middle">
+            ${topLabel}
+          </text>
+          <text x="${x + barW / 2}" y="180" font-size="10.5" font-weight="700" fill="var(--text-secondary)" text-anchor="middle">
+            ${it.label.split(' ')[0]}
+          </text>
+        `;
+      }).join('');
+
+      return `
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <svg viewBox="0 0 310 195" style="width:100%; height:195px; overflow:visible;">
+            <line x1="15" y1="160" x2="295" y2="160" stroke="var(--border-color)" stroke-width="1.5" />
+            ${barsSvg}
+          </svg>
+          <div style="font-size:11px; color:var(--text-secondary); text-align:center; margin-top:4px;">
+            Comparativa de destino de facturación (${unit === 'percent' ? 'Porcentajes relativos' : 'Valores en ARS'})
+          </div>
+        </div>
+      `;
+    }
+
+    // Default: 'breakdown'
+    const pctCosts = items[0].pct;
+    const pctPurchases = items[1].pct;
+    const pctExpenses = items[2].pct;
+    const pctProfit = items[3].pct;
+
     return `
       <div style="display:flex; flex-direction:column; gap:18px;">
-        <!-- Multi-segment breakdown bar -->
         <div>
           <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">
-            <span>Distribución del Ingreso</span>
-            <span>100% Facturación</span>
+            <span>Distribución del Capital Facturado</span>
+            <span>${unit === 'percent' ? '100% Facturación' : this.formatCurrency(totalIn)}</span>
           </div>
           <div style="height:14px; border-radius:6px; overflow:hidden; display:flex; background:#e2e8f0;">
-            <div style="width:${pctCosts}%; background:#475569;" title="Costos Obras: ${pctCosts}%"></div>
-            <div style="width:${pctPurchases}%; background:#0284c7;" title="Compras Materiales: ${pctPurchases}%"></div>
-            <div style="width:${pctExpenses}%; background:#94a3b8;" title="Gastos Estructura: ${pctExpenses}%"></div>
-            <div style="width:${pctProfit}%; background:#10b981;" title="Margen Neto: ${pctProfit}%"></div>
+            <div style="width:${pctCosts}%; background:#475569;" title="Costos Obras: ${pctCosts.toFixed(1)}%"></div>
+            <div style="width:${pctPurchases}%; background:#0284c7;" title="Compras Materiales: ${pctPurchases.toFixed(1)}%"></div>
+            <div style="width:${pctExpenses}%; background:#94a3b8;" title="Gastos Estructura: ${pctExpenses.toFixed(1)}%"></div>
+            <div style="width:${pctProfit}%; background:#10b981;" title="Margen Neto: ${pctProfit.toFixed(1)}%"></div>
           </div>
-          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:10px; font-size:11px;">
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span style="width:10px; height:10px; border-radius:2px; background:#475569;"></span>
-              <span>Costos Obras (${pctCosts}%)</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span style="width:10px; height:10px; border-radius:2px; background:#0284c7;"></span>
-              <span>Compras (${pctPurchases}%)</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span style="width:10px; height:10px; border-radius:2px; background:#94a3b8;"></span>
-              <span>Gastos Fijos (${pctExpenses}%)</span>
-            </div>
-            <div style="display:flex; align-items:center; gap:6px;">
-              <span style="width:10px; height:10px; border-radius:2px; background:#10b981;"></span>
-              <span style="font-weight:700; color:#059669;">Margen Neto (${pctProfit}%)</span>
-            </div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:12px; font-size:11px;">
+            ${items.map(it => `
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:var(--bg-app); border-radius:6px; border:1px solid var(--border-color);">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="width:10px; height:10px; border-radius:2px; background:${it.color}; flex-shrink:0;"></span>
+                  <span style="color:var(--text-primary); font-weight:600;">${it.label.split(' ')[0]}</span>
+                </div>
+                <span style="font-weight:800; font-family:var(--font-mono); color:${it.key === 'balance' ? '#059669' : 'var(--text-secondary)'};">${fmtVal(it)}</span>
+              </div>
+            `).join('')}
           </div>
         </div>
 
@@ -1358,34 +1584,114 @@ const App = {
   },
 
   // ========================================================================
-  // GRÁFICO SVG PROFESIONAL FINANCIERO (MULTI-CURVA O BARRAS AGRUPADAS)
-  // Sin colores naranjas brillantes. Paleta: Azul #2563eb, Grafito #475569, Esmeralda #10b981
+  // GRÁFICO SVG PROFESIONAL FINANCIERO (MULTI-MODO: LÍNEAS, ÁREAS, BARRAS, DONA, TORTA)
+  // Soporta toggle de Unidad: $ Valores vs % Porcentaje
   // ========================================================================
-  renderFinancialSvgChart(series, yMax, type) {
+  renderFinancialSvgChart(periodData, type = 'lines', unit = 'currency') {
     const width = 680;
-    const height = 230;
+    const height = 240;
+    const series = periodData.series;
+    const yMax = periodData.yMax;
+    const totalIn = periodData.income || 1;
+
+    if (type === 'donut' || type === 'pie') {
+      const items = [
+        { label: 'Costos Operativos Obras', val: periodData.costs, color: '#475569' },
+        { label: 'Compras & Acopios', val: periodData.purchases, color: '#0284c7' },
+        { label: 'Gastos Estructura Fija', val: periodData.expenses, color: '#94a3b8' },
+        { label: 'Margen Neto Disponible', val: periodData.balance, color: '#10b981' }
+      ];
+
+      items.forEach(it => {
+        it.pct = Math.max(0, (it.val / totalIn) * 100);
+      });
+
+      let currentAngle = 0;
+      const slicesSvg = items.map(it => {
+        const sweep = (it.val / totalIn) * 360;
+        const path = type === 'donut'
+          ? describeDonutSlice(190, 120, 102, 60, currentAngle, currentAngle + sweep)
+          : describePieSlice(190, 120, 102, currentAngle, currentAngle + sweep);
+        currentAngle += sweep;
+
+        const tipVal = unit === 'percent'
+          ? it.pct.toFixed(1) + '% · ' + this.formatCurrency(it.val)
+          : this.formatCurrency(it.val) + ' (' + it.pct.toFixed(1) + '%)';
+
+        return `
+          <path d="${path}" fill="${it.color}" stroke="var(--bg-card)" stroke-width="2"
+            onmousemove="showChartTooltip(event, '${it.label}', '${tipVal}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer; transition:opacity 0.2s;" />
+        `;
+      }).join('');
+
+      return `
+        <div style="display:flex; justify-content:space-between; align-items:center; width:100%; height:100%;">
+          <div style="flex: 1.1; display:flex; justify-content:center;">
+            <svg viewBox="0 0 380 240" style="width:100%; max-width:320px; height:240px; overflow:visible;">
+              ${slicesSvg}
+              ${type === 'donut' ? `
+                <text x="190" y="112" font-size="11" font-weight="700" fill="var(--text-secondary)" text-anchor="middle">
+                  ${unit === 'percent' ? 'Rentabilidad' : 'Facturación'}
+                </text>
+                <text x="190" y="136" font-size="19" font-weight="900" fill="${unit === 'percent' ? '#10b981' : '#2563eb'}" text-anchor="middle" font-family="var(--font-mono)">
+                  ${unit === 'percent' ? periodData.profitability : (periodData.income >= 1000000 ? '$ ' + (periodData.income/1000000).toFixed(1) + 'M' : this.formatCurrency(periodData.income))}
+                </text>
+              ` : ''}
+            </svg>
+          </div>
+          <div style="flex: 1.3; display:flex; flex-direction:column; gap:8px; padding-right:16px;">
+            <span style="font-size:11px; font-weight:800; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">
+              Distribución de ${periodData.label}
+            </span>
+            ${items.map(it => `
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:var(--bg-app); border:1px solid var(--border-color); border-radius:6px;"
+                onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%)')"
+                onmouseleave="hideChartTooltip()">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="width:10px; height:10px; border-radius:3px; background:${it.color}; flex-shrink:0;"></span>
+                  <span style="font-size:12px; font-weight:700; color:var(--text-primary);">${it.label}</span>
+                </div>
+                <div style="text-align:right;">
+                  <span style="font-size:12.5px; font-weight:900; font-family:var(--font-mono); color:${it.color === '#10b981' ? '#059669' : 'var(--text-primary)'};">
+                    ${unit === 'percent' ? it.pct.toFixed(1) + '%' : this.formatCurrency(it.val)}
+                  </span>
+                  ${unit === 'percent' ? `<span style="display:block; font-size:10px; color:var(--text-secondary); font-family:var(--font-mono);">${this.formatCurrency(it.val)}</span>` : `<span style="display:block; font-size:10px; color:var(--text-secondary);">${it.pct.toFixed(1)}%</span>`}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // Lines, Area, Bars
     const paddingLeft = 58;
     const paddingBottom = 32;
     const chartW = width - paddingLeft - 20;
     const chartH = height - paddingBottom - 20;
-
     const step = chartW / series.length;
 
     let svgInner = '';
 
-    // Subtle Grid lines
+    // Y Axis Grid lines
     for (let i = 0; i <= 4; i++) {
       const y = chartH - (chartH / 4) * i + 10;
-      const val = Math.round((yMax / 4) * i);
-      const valStr = val >= 1000000 ? (val / 1000000).toFixed(1) + 'M' : (val / 1000) + 'k';
+      let labelStr = '';
+      if (unit === 'percent') {
+        labelStr = (i * 25) + '%';
+      } else {
+        const val = Math.round((yMax / 4) * i);
+        labelStr = '$' + (val >= 1000000 ? (val / 1000000).toFixed(1) + 'M' : (val / 1000) + 'k');
+      }
       svgInner += `
         <line x1="${paddingLeft}" y1="${y}" x2="${width - 10}" y2="${y}" stroke="var(--border-color)" stroke-width="1" stroke-dasharray="3,3" />
-        <text x="${paddingLeft - 8}" y="${y + 4}" font-size="10" fill="var(--text-muted)" text-anchor="end" font-family="var(--font-mono)">$${valStr}</text>
+        <text x="${paddingLeft - 8}" y="${y + 4}" font-size="10" fill="var(--text-muted)" text-anchor="end" font-family="var(--font-mono)">${labelStr}</text>
       `;
     }
 
     if (type === 'bars') {
-      const barWidth = Math.min(step * 0.26, 20);
+      const barWidth = Math.min(step * 0.26, 22);
       series.forEach((pt, idx) => {
         const xCenter = paddingLeft + step * idx + step / 2;
         const hIn = (pt.in / yMax) * chartH;
@@ -1396,20 +1702,30 @@ const App = {
         const yOut = chartH - hOut + 10;
         const yNet = chartH - hNet + 10;
 
+        const tipIn = unit === 'percent'
+          ? ((pt.in / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.in)
+          : this.formatCurrency(pt.in);
+        const tipOut = unit === 'percent'
+          ? ((pt.out / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.out)
+          : this.formatCurrency(pt.out);
+        const tipNet = unit === 'percent'
+          ? (((pt.in - pt.out) / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.in - pt.out)
+          : this.formatCurrency(pt.in - pt.out);
+
         svgInner += `
           <!-- Bar 1: Ingreso Facturado (Azul) -->
           <rect x="${xCenter - barWidth * 1.5 - 2}" y="${yIn}" width="${barWidth}" height="${hIn}" rx="3" fill="#2563eb"
-            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${this.formatCurrency(pt.in)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${tipIn}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
 
           <!-- Bar 2: Egresos Consolidados (Grafito) -->
           <rect x="${xCenter - barWidth * 0.5}" y="${yOut}" width="${barWidth}" height="${hOut}" rx="3" fill="#475569"
-            onmousemove="showChartTooltip(event, '${pt.label} · Costos + Compras + Gastos', '${this.formatCurrency(pt.out)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Costos + Compras + Gastos', '${tipOut}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
 
           <!-- Bar 3: Margen Neto (Esmeralda) -->
           <rect x="${xCenter + barWidth * 0.5 + 2}" y="${yNet}" width="${barWidth}" height="${hNet}" rx="3" fill="#10b981"
-            onmousemove="showChartTooltip(event, '${pt.label} · Balance Neto', '${this.formatCurrency(pt.in - pt.out)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Balance Neto', '${tipNet}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
 
           <!-- X Label -->
@@ -1463,15 +1779,25 @@ const App = {
         const netVal = Math.max(0, pt.in - pt.out);
         const yNet = chartH - (netVal / yMax) * chartH + 10;
 
+        const tipIn = unit === 'percent'
+          ? ((pt.in / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.in)
+          : this.formatCurrency(pt.in);
+        const tipOut = unit === 'percent'
+          ? ((pt.out / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(pt.out)
+          : this.formatCurrency(pt.out);
+        const tipNet = unit === 'percent'
+          ? ((netVal / totalIn) * 100).toFixed(1) + '% del total · ' + this.formatCurrency(netVal)
+          : this.formatCurrency(netVal);
+
         svgInner += `
           <circle cx="${x}" cy="${yIn}" r="5" fill="#2563eb" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${this.formatCurrency(pt.in)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Ingreso Facturado', '${tipIn}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
           <circle cx="${x}" cy="${yOut}" r="4.5" fill="#475569" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Egresos Totales', '${this.formatCurrency(pt.out)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Egresos Totales', '${tipOut}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
           <circle cx="${x}" cy="${yNet}" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${pt.label} · Margen Neto Realizado', '${this.formatCurrency(netVal)}')"
+            onmousemove="showChartTooltip(event, '${pt.label} · Margen Neto', '${tipNet}')"
             onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
         `;
       });
@@ -1486,7 +1812,7 @@ const App = {
           <span style="width:10px; height:10px; border-radius:50%; background:#475569;"></span> Egresos Consolidados
         </span>
         <span style="display:flex; align-items:center; gap:6px; color:#10b981;">
-          <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span> Margen Neto
+          <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span> Margen Neto (${periodData.profitability})
         </span>
       </div>
       <svg viewBox="0 0 ${width} ${height}" style="width:100%; height:100%; overflow:visible;">
@@ -1494,6 +1820,7 @@ const App = {
       </svg>
     `;
   },
+
 
   // ========================================================================
   // VIEW: OBRAS & PROYECTOS
@@ -2580,7 +2907,7 @@ const App = {
           </div>
           <div class="form-group col-6">
             <label class="form-label">Dirección Fiscal / Sede Central</label>
-            <input type="text" class="form-control" value="Av. del Libertador 4800, Piso 8, Buenos Aires" readonly>
+            <input type="text" class="form-control" value="Av. San Martín 1840, Florencio Varela, Buenos Aires" readonly>
           </div>
         </div>
         <div class="form-row">
@@ -2991,7 +3318,7 @@ const App = {
 
         <div style="display:flex; justify-content:space-between; margin-top:40px; padding-top:20px; border-top:1px solid #e2e8f0; font-size:11px; color:#64748b;">
           <div>
-            <p><strong>Estudio Central DP:</strong> Av. del Libertador 4800, Piso 8, Buenos Aires</p>
+            <p><strong>Estudio Central DP:</strong> Av. San Martín 1840, Florencio Varela, Buenos Aires</p>
             <p>Email: contacto@dp-ingenieria-arquitectura.com · Tel: +54 11 4982-3344</p>
           </div>
           <div style="text-align:right;">

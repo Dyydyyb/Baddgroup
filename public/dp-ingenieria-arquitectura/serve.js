@@ -20,7 +20,9 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   let reqUrl = req.url.split('?')[0];
-  if (reqUrl === '/') reqUrl = '/index.html';
+  if (reqUrl === '/' || reqUrl.toLowerCase() === '/dp-sistema-ejemplo' || reqUrl.toLowerCase() === '/dp-sistema-ejemplo/') {
+    reqUrl = '/index.html';
+  }
 
   const filePath = path.join(PUBLIC_DIR, reqUrl);
 

@@ -762,26 +762,28 @@ button, input, select, textarea {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 24px 26px;
+  min-height: 140px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 .stat-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-md);
+  border-color: #cbd5e1;
 }
 
 .stat-icon {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 22px;
+  font-size: 24px;
   flex-shrink: 0;
 }
 
@@ -793,28 +795,31 @@ button, input, select, textarea {
 .stat-details {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .stat-label {
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 800;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .stat-value {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 30px;
+  font-weight: 900;
   font-family: var(--font-mono);
   color: var(--text-primary);
-  margin-top: 2px;
+  margin-top: 4px;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
 }
 
 .stat-trend {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: 6px;
 }
 .stat-trend.up { color: var(--success); }
 .stat-trend.warning { color: var(--accent-slate); }
@@ -1341,13 +1346,23 @@ textarea.form-control {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
-.chart-type-btn {
+.chart-controls-group {
+  display: flex;
   background: var(--bg-app);
   border: 1px solid var(--border-color);
-  padding: 4px 10px;
   border-radius: var(--radius-sm);
+  padding: 2px;
+  gap: 2px;
+}
+
+.chart-type-btn, .chart-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 5px 11px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: 700;
   color: var(--text-secondary);
@@ -1355,16 +1370,24 @@ textarea.form-control {
   transition: all 0.15s ease;
 }
 
-.chart-type-btn.active, .chart-type-btn:hover {
+.chart-type-btn.active, .chart-toggle-btn.active {
   background: var(--primary);
   color: #ffffff;
-  border-color: var(--primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.chart-type-btn:hover:not(.active), .chart-toggle-btn:hover:not(.active) {
+  background: var(--border-color);
+  color: var(--text-primary);
 }
 
 .chart-svg-container {
   width: 100%;
-  height: 240px;
+  min-height: 250px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chart-tooltip {
