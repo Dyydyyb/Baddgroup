@@ -111,13 +111,17 @@ button, input, select, textarea {
   font-size: inherit;
 }
 
-/* ==========================================================================
-   LAYOUT STRUCTURE
-   ========================================================================== */
+html {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 .app-layout {
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background-color: var(--bg-app);
 }
 
@@ -1443,6 +1447,14 @@ textarea.form-control {
   }
 }
 
+/* Financial Charts Grid */
+.financial-charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .mobile-toggle-btn {
@@ -1451,9 +1463,113 @@ textarea.form-control {
   .sidebar {
     position: fixed;
     left: -280px;
+    z-index: 1000;
+    transition: left 0.3s ease;
   }
   .sidebar.mobile-open {
     left: 0;
+  }
+  .financial-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .main-view {
+    padding: 16px 14px 40px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .topbar {
+    padding: 10px 14px;
+    height: auto;
+    min-height: 56px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar-left {
+    max-width: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .global-search-wrap {
+    min-width: 130px;
+    flex: 1;
+  }
+  .rubro-filter-pill {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .topbar-right {
+    display: none;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .page-header-actions {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+  }
+  .page-header-actions .btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 8px 10px;
+    font-size: 11.5px;
+  }
+  .period-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+  .period-buttons-group {
+    width: 100%;
+    display: flex;
+  }
+  .period-buttons-group .btn-period {
+    flex: 1;
+    text-align: center;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .financial-charts-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .chart-controls {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 8px;
+  }
+  .chart-controls-group {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .calendar-grid {
+    font-size: 10px;
+  }
+  .calendar-day-cell {
+    min-height: 60px;
+    padding: 4px;
+  }
+  .stat-value {
+    font-size: 24px !important;
   }
 }
 

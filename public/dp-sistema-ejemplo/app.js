@@ -1265,7 +1265,7 @@ const App = {
       </div>
 
       <!-- ADVANCED FINANCIAL & COST STRUCTURE CHARTS (2 COLUMNS) -->
-      <div style="display:grid; grid-template-columns: 2fr 1fr; gap:24px; margin-bottom: 24px;">
+      <div class="financial-charts-grid">
         <!-- Chart 1: Curva Financiera Profesional & Multi-Modo -->
         <div class="chart-card">
           <div class="chart-header">
