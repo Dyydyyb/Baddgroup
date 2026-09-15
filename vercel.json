@@ -1,71 +1,331 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/gtl-ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/", "permanent": false },
-    { "source": "/gtl-erp-muestra", "destination": "/GTL-ERP-muestra/", "permanent": false },
-    { "source": "/gtl-erp", "destination": "/GTL-ERP-muestra/", "permanent": false },
-    { "source": "/briceno-realty-muestra", "destination": "/briceno-realty-muestra/", "permanent": false },
-    { "source": "/briceno-realty-demo", "destination": "/briceno-realty-muestra/", "permanent": false },
-    { "source": "/briceno-realty-group", "destination": "/briceno-realty-muestra/", "permanent": false },
-    { "source": "/briceno-inversiones-demo", "destination": "/briceno-realty-muestra/", "permanent": false },
-    { "source": "/DP-sistema-ejemplo", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/DP-sistema-ejemplo/", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/dp-sistema-ejemplo", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/dp-ingenieria-arquitectura", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/dp-ingenieria-arquitectura/", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/dp-erp", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/dp-erp/", "destination": "/dp-sistema-ejemplo/", "permanent": false },
-    { "source": "/DP-sistema-ejemplo/propuesta", "destination": "/dp-sistema-ejemplo/propuesta.html", "permanent": false },
-    { "source": "/DP-sistema-ejemplo/pdf", "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf", "permanent": false }
+    {
+      "source": "/gtl-ingenieria-muestra",
+      "destination": "/GTL-Ingenieria-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/gtl-erp-muestra",
+      "destination": "/GTL-ERP-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/gtl-erp",
+      "destination": "/GTL-ERP-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/briceno-realty-muestra",
+      "destination": "/briceno-realty-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/briceno-realty-demo",
+      "destination": "/briceno-realty-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/briceno-realty-group",
+      "destination": "/briceno-realty-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/briceno-inversiones-demo",
+      "destination": "/briceno-realty-muestra/",
+      "permanent": false
+    },
+    {
+      "source": "/DP-sistema-ejemplo",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/DP-sistema-ejemplo/",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/dp-sistema-ejemplo",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/dp-ingenieria-arquitectura",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/dp-ingenieria-arquitectura/",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/dp-erp",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/dp-erp/",
+      "destination": "/dp-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/DP-sistema-ejemplo/propuesta",
+      "destination": "/dp-sistema-ejemplo/propuesta.html",
+      "permanent": false
+    },
+    {
+      "source": "/DP-sistema-ejemplo/pdf",
+      "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf",
+      "permanent": false
+    },
+    {
+      "source": "/sistema-ejemplo-ingenieria-aeronautica",
+      "destination": "/aero-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/aero-ingenieria-ejemplo",
+      "destination": "/aero-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/aero-erp",
+      "destination": "/aero-sistema-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/aerotec-erp",
+      "destination": "/aero-sistema-ejemplo/",
+      "permanent": false
+    }
   ],
   "rewrites": [
-    { "source": "/propuesta_ingemah", "destination": "/propuesta_ingemah/index.html" },
-    { "source": "/propuesta-ingemah", "destination": "/propuesta_ingemah/index.html" },
-    { "source": "/propuesta_ingemah/propuesta", "destination": "/propuesta_ingemah/propuesta.html" },
-    { "source": "/propuesta-ingemah/propuesta", "destination": "/propuesta_ingemah/propuesta.html" },
-    { "source": "/propuesta_ingemah/pdf", "destination": "/propuesta_ingemah/Propuesta_INGEMAH_Baddgroup.pdf" },
-    { "source": "/propuesta_ingemah/erp", "destination": "/propuesta_ingemah/erp/index.html" },
-    { "source": "/propuesta-ingemah/erp", "destination": "/propuesta_ingemah/erp/index.html" },
-    { "source": "/propuesta_ingemah_erp", "destination": "/propuesta_ingemah/erp/index.html" },
-    { "source": "/ejemplosistemainmobiliario", "destination": "/ejemplosistemainmobiliario/index.html" },
-    { "source": "/ejemplosistemainmobiliario/:match*", "destination": "/ejemplosistemainmobiliario/index.html" },
-    { "source": "/GTL-Ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/index.html" },
-    { "source": "/GTL-ERP-muestra", "destination": "/GTL-ERP-muestra/index.html" },
-    { "source": "/kioscos-uva-erp-prueba", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva-erp-prueba/", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva-prueba", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva-prueba/", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva-erp-prueba/propuesta", "destination": "/kioscos-uva-erp-prueba/propuesta_kioscos_uva.html" },
-    { "source": "/kioscos-uva-prueba/propuesta", "destination": "/kioscos-uva-erp-prueba/propuesta_kioscos_uva.html" },
-    { "source": "/kioscos-uva-erp-prueba/pdf", "destination": "/kioscos-uva-erp-prueba/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf" },
-    { "source": "/kioscos-uva-prueba/pdf", "destination": "/kioscos-uva-erp-prueba/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf" },
-    { "source": "/kioscos-uva-erp", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva-erp/", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/kioscos-uva/", "destination": "/kioscos-uva-erp-prueba/index.html" },
-    { "source": "/dp-ingenieria-arquitectura", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/dp-ingenieria-arquitectura/", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/dp-erp", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/dp-erp/", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/dp-ingenieria-arquitectura/propuesta", "destination": "/dp-sistema-ejemplo/propuesta.html" },
-    { "source": "/dp-propuesta", "destination": "/dp-sistema-ejemplo/propuesta.html" },
-    { "source": "/dp-ingenieria-arquitectura/pdf", "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf" },
-    { "source": "/dp-pdf", "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf" },
-    { "source": "/DP-sistema-ejemplo", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/DP-sistema-ejemplo/", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/dp-sistema-ejemplo", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/dp-sistema-ejemplo/", "destination": "/dp-sistema-ejemplo/index.html" },
-    { "source": "/DP-sistema-ejemplo/propuesta", "destination": "/dp-sistema-ejemplo/propuesta.html" },
-    { "source": "/dp-sistema-ejemplo/propuesta", "destination": "/dp-sistema-ejemplo/propuesta.html" },
-    { "source": "/DP-sistema-ejemplo/pdf", "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf" },
-    { "source": "/dp-sistema-ejemplo/pdf", "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf" },
-    { "source": "/briceno-realty-muestra", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-realty-muestra/", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-realty-demo", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-realty-demo/", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-realty-group", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-realty-group/", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-inversiones-demo", "destination": "/briceno-realty-muestra/index.html" },
-    { "source": "/briceno-inversiones-demo/", "destination": "/briceno-realty-muestra/index.html" }
+    {
+      "source": "/propuesta_ingemah",
+      "destination": "/propuesta_ingemah/index.html"
+    },
+    {
+      "source": "/propuesta-ingemah",
+      "destination": "/propuesta_ingemah/index.html"
+    },
+    {
+      "source": "/propuesta_ingemah/propuesta",
+      "destination": "/propuesta_ingemah/propuesta.html"
+    },
+    {
+      "source": "/propuesta-ingemah/propuesta",
+      "destination": "/propuesta_ingemah/propuesta.html"
+    },
+    {
+      "source": "/propuesta_ingemah/pdf",
+      "destination": "/propuesta_ingemah/Propuesta_INGEMAH_Baddgroup.pdf"
+    },
+    {
+      "source": "/propuesta_ingemah/erp",
+      "destination": "/propuesta_ingemah/erp/index.html"
+    },
+    {
+      "source": "/propuesta-ingemah/erp",
+      "destination": "/propuesta_ingemah/erp/index.html"
+    },
+    {
+      "source": "/propuesta_ingemah_erp",
+      "destination": "/propuesta_ingemah/erp/index.html"
+    },
+    {
+      "source": "/ejemplosistemainmobiliario",
+      "destination": "/ejemplosistemainmobiliario/index.html"
+    },
+    {
+      "source": "/ejemplosistemainmobiliario/:match*",
+      "destination": "/ejemplosistemainmobiliario/index.html"
+    },
+    {
+      "source": "/GTL-Ingenieria-muestra",
+      "destination": "/GTL-Ingenieria-muestra/index.html"
+    },
+    {
+      "source": "/GTL-ERP-muestra",
+      "destination": "/GTL-ERP-muestra/index.html"
+    },
+    {
+      "source": "/kioscos-uva-erp-prueba",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva-erp-prueba/",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva-prueba",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva-prueba/",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva-erp-prueba/propuesta",
+      "destination": "/kioscos-uva-erp-prueba/propuesta_kioscos_uva.html"
+    },
+    {
+      "source": "/kioscos-uva-prueba/propuesta",
+      "destination": "/kioscos-uva-erp-prueba/propuesta_kioscos_uva.html"
+    },
+    {
+      "source": "/kioscos-uva-erp-prueba/pdf",
+      "destination": "/kioscos-uva-erp-prueba/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf"
+    },
+    {
+      "source": "/kioscos-uva-prueba/pdf",
+      "destination": "/kioscos-uva-erp-prueba/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf"
+    },
+    {
+      "source": "/kioscos-uva-erp",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva-erp/",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/kioscos-uva/",
+      "destination": "/kioscos-uva-erp-prueba/index.html"
+    },
+    {
+      "source": "/dp-ingenieria-arquitectura",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/dp-ingenieria-arquitectura/",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/dp-erp",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/dp-erp/",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/dp-ingenieria-arquitectura/propuesta",
+      "destination": "/dp-sistema-ejemplo/propuesta.html"
+    },
+    {
+      "source": "/dp-propuesta",
+      "destination": "/dp-sistema-ejemplo/propuesta.html"
+    },
+    {
+      "source": "/dp-ingenieria-arquitectura/pdf",
+      "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf"
+    },
+    {
+      "source": "/dp-pdf",
+      "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf"
+    },
+    {
+      "source": "/DP-sistema-ejemplo",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/DP-sistema-ejemplo/",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/dp-sistema-ejemplo",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/dp-sistema-ejemplo/",
+      "destination": "/dp-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/DP-sistema-ejemplo/propuesta",
+      "destination": "/dp-sistema-ejemplo/propuesta.html"
+    },
+    {
+      "source": "/dp-sistema-ejemplo/propuesta",
+      "destination": "/dp-sistema-ejemplo/propuesta.html"
+    },
+    {
+      "source": "/DP-sistema-ejemplo/pdf",
+      "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf"
+    },
+    {
+      "source": "/dp-sistema-ejemplo/pdf",
+      "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf"
+    },
+    {
+      "source": "/briceno-realty-muestra",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-realty-muestra/",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-realty-demo",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-realty-demo/",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-realty-group",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-realty-group/",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-inversiones-demo",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/briceno-inversiones-demo/",
+      "destination": "/briceno-realty-muestra/index.html"
+    },
+    {
+      "source": "/aero-sistema-ejemplo",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/aero-sistema-ejemplo/",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/sistema-ejemplo-ingenieria-aeronautica",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/sistema-ejemplo-ingenieria-aeronautica/",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/aero-ingenieria-ejemplo",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/aero-ingenieria-ejemplo/",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/aerotec-erp",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/aero-erp",
+      "destination": "/aero-sistema-ejemplo/index.html"
+    }
   ]
 }
