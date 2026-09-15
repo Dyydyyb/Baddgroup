@@ -736,40 +736,45 @@ const AERO_DB = {
   ]
 };
 
-// Helper SVG path generator functions
+// SVG GEOMETRY UTILITIES FOR INTERACTIVE DONUT & PIE CHARTS
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
   const angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
   return {
-    x: centerX + radius * Math.cos(angleInRadians),
-    y: centerY + radius * Math.sin(angleInRadians)
+    x: centerX + (radius * Math.cos(angleInRadians)),
+    y: centerY + (radius * Math.sin(angleInRadians))
   };
 }
 
-function describeDonutSlice(x, y, radius, innerRadius, startAngle, endAngle) {
-  const start = polarToCartesian(x, y, radius, endAngle);
-  const end = polarToCartesian(x, y, radius, startAngle);
-  const innerStart = polarToCartesian(x, y, innerRadius, endAngle);
-  const innerEnd = polarToCartesian(x, y, innerRadius, startAngle);
-  const arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
-
+function describePieSlice(cx, cy, radius, startAngle, endAngle) {
+  let sweep = endAngle - startAngle;
+  if (sweep >= 360) sweep = 359.99;
+  if (sweep <= 0.05) return '';
+  const start = polarToCartesian(cx, cy, radius, startAngle);
+  const end = polarToCartesian(cx, cy, radius, startAngle + sweep);
+  const largeArcFlag = sweep <= 180 ? '0' : '1';
   return [
-    'M', start.x, start.y,
-    'A', radius, radius, 0, arcSweep, 0, end.x, end.y,
-    'L', innerEnd.x, innerEnd.y,
-    'A', innerRadius, innerRadius, 0, arcSweep, 1, innerStart.x, innerStart.y,
+    'M', Number(cx).toFixed(2), Number(cy).toFixed(2),
+    'L', start.x.toFixed(2), start.y.toFixed(2),
+    'A', radius, radius, 0, largeArcFlag, 1, end.x.toFixed(2), end.y.toFixed(2),
     'Z'
   ].join(' ');
 }
 
-function describePieSlice(x, y, radius, startAngle, endAngle) {
-  const start = polarToCartesian(x, y, radius, endAngle);
-  const end = polarToCartesian(x, y, radius, startAngle);
-  const arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
+function describeDonutSlice(cx, cy, rOuter, rInner, startAngle, endAngle) {
+  let sweep = endAngle - startAngle;
+  if (sweep >= 360) sweep = 359.99;
+  if (sweep <= 0.05) return '';
+  const startOuter = polarToCartesian(cx, cy, rOuter, startAngle);
+  const endOuter = polarToCartesian(cx, cy, rOuter, startAngle + sweep);
+  const startInner = polarToCartesian(cx, cy, rInner, startAngle + sweep);
+  const endInner = polarToCartesian(cx, cy, rInner, startAngle);
+  const largeArcFlag = sweep <= 180 ? '0' : '1';
 
   return [
-    'M', x, y,
-    'L', start.x, start.y,
-    'A', radius, radius, 0, arcSweep, 0, end.x, end.y,
+    'M', startOuter.x.toFixed(2), startOuter.y.toFixed(2),
+    'A', rOuter, rOuter, 0, largeArcFlag, 1, endOuter.x.toFixed(2), endOuter.y.toFixed(2),
+    'L', startInner.x.toFixed(2), startInner.y.toFixed(2),
+    'A', rInner, rInner, 0, largeArcFlag, 0, endInner.x.toFixed(2), endInner.y.toFixed(2),
     'Z'
   ].join(' ');
 }
@@ -902,10 +907,12 @@ const App = {
     const tooltip = document.getElementById('chartTooltip');
     window.showChartTooltip = (e, title, val) => {
       if (!tooltip) return;
-      tooltip.innerHTML = '<strong>' + title + '</strong><br>' + val;
+      tooltip.innerHTML = '<div class="tooltip-title">' + title + '</div><div class="tooltip-val">' + val + '</div>';
       tooltip.classList.add('active');
-      tooltip.style.left = (e.pageX + 14) + 'px';
-      tooltip.style.top = (e.pageY - 34) + 'px';
+      const x = Math.min(window.innerWidth - 220, Math.max(10, (e.clientX || 0) + 14));
+      const y = Math.max(10, (e.clientY || 0) - 35);
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
     };
 
     window.hideChartTooltip = () => {
@@ -916,37 +923,53 @@ const App = {
     window.highlightAeroMonth = (idx) => {
       const guide = document.getElementById('aero-guide-' + idx);
       if (guide) guide.setAttribute('opacity', '1');
-      ['in', 'out', 'net'].forEach(k => {
-        const dot = document.getElementById('aero-dot-' + k + '-' + idx);
-        if (dot) dot.setAttribute('r', '7.5');
-      });
+      const dotIn = document.getElementById('aero-dot-in-' + idx);
+      if (dotIn) { dotIn.setAttribute('r', '7.5'); dotIn.setAttribute('stroke-width', '3'); }
+      const dotOut = document.getElementById('aero-dot-out-' + idx);
+      if (dotOut) { dotOut.setAttribute('r', '7'); dotOut.setAttribute('stroke-width', '3'); }
+      const dotNet = document.getElementById('aero-dot-net-' + idx);
+      if (dotNet) { dotNet.setAttribute('r', '7.5'); dotNet.setAttribute('stroke-width', '3'); }
     };
 
     window.unhighlightAeroMonth = (idx) => {
       const guide = document.getElementById('aero-guide-' + idx);
       if (guide) guide.setAttribute('opacity', '0');
-      ['in', 'out', 'net'].forEach(k => {
-        const dot = document.getElementById('aero-dot-' + k + '-' + idx);
-        if (dot) dot.setAttribute('r', k === 'out' ? '4.5' : '5');
-      });
+      const dotIn = document.getElementById('aero-dot-in-' + idx);
+      if (dotIn) { dotIn.setAttribute('r', '5'); dotIn.setAttribute('stroke-width', '2'); }
+      const dotOut = document.getElementById('aero-dot-out-' + idx);
+      if (dotOut) { dotOut.setAttribute('r', '4.5'); dotOut.setAttribute('stroke-width', '2'); }
+      const dotNet = document.getElementById('aero-dot-net-' + idx);
+      if (dotNet) { dotNet.setAttribute('r', '5'); dotNet.setAttribute('stroke-width', '2'); }
     };
 
     window.showAeroMonthTooltip = (e, label, inVal, outVal, netVal, netPct) => {
       if (!tooltip) return;
-      tooltip.innerHTML = 
-        '<div style="font-weight:800; font-size:12px; margin-bottom:4px; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:3px;">' + label + ' (Septiembre 2026)</div>' +
-        '<div style="display:flex; justify-content:space-between; gap:16px; font-size:11px; margin-top:2px;">' +
-          '<span>● Ingreso Facturado:</span> <strong style="font-family:var(--font-mono); color:#93c5fd;">' + inVal + '</strong>' +
-        '</div>' +
-        '<div style="display:flex; justify-content:space-between; gap:16px; font-size:11px; margin-top:2px;">' +
-          '<span>● Egresos Totales MRO:</span> <strong style="font-family:var(--font-mono); color:#cbd5e1;">' + outVal + '</strong>' +
-        '</div>' +
-        '<div style="display:flex; justify-content:space-between; gap:16px; font-size:11px; margin-top:3px; border-top:1px solid rgba(255,255,255,0.15); padding-top:2px;">' +
-          '<span>● Margen Neto Taller:</span> <strong style="font-family:var(--font-mono); color:#34d399;">+ ' + netVal + ' (' + netPct + '%)</strong>' +
-        '</div>';
+      const currentPeriod = AERO_DB.financials[AERO_DB.state.currentTimeFilter || 'month'];
+      const pLabel = currentPeriod ? currentPeriod.label : 'Período';
+      tooltip.innerHTML = `
+        <div style="font-weight:800; font-size:12px; margin-bottom:6px; color:#f8fafc; border-bottom:1px solid rgba(255,255,255,0.18); padding-bottom:4px;">
+          ${label} (${pLabel})
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px; font-size:11px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <span style="color:#60a5fa; display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:#2563eb; display:inline-block;"></span> Facturación Certificaciones:</span>
+            <strong style="font-family:var(--font-mono); color:#ffffff;">${inVal}</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <span style="color:#94a3b8; display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:#475569; display:inline-block;"></span> Egresos MRO:</span>
+            <strong style="font-family:var(--font-mono); color:#ffffff;">${outVal}</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:16px;">
+            <span style="color:#34d399; display:flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:#10b981; display:inline-block;"></span> Margen Neto Taller:</span>
+            <strong style="font-family:var(--font-mono); color:#34d399;">+ ${netVal} (${netPct}%)</strong>
+          </div>
+        </div>
+      `;
       tooltip.classList.add('active');
-      tooltip.style.left = (e.pageX + 14) + 'px';
-      tooltip.style.top = (e.pageY - 40) + 'px';
+      const x = Math.min(window.innerWidth - 260, Math.max(10, (e.clientX || 0) + 14));
+      const y = Math.max(10, (e.clientY || 0) - 45);
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
     };
   },
 
@@ -1088,17 +1111,17 @@ const App = {
         </div>
       </div>
 
-      <!-- Time Filter Selector Bar -->
-      <div class="time-filter-bar">
-        <div class="time-filter-info">
-          <span>Período de Análisis Económico & Operacional:</span>
-          <strong>${periodData.label}</strong>
+      <!-- Period Toolbar -->
+      <div class="period-toolbar">
+        <div class="period-info">
+          <span class="period-label">Período de Análisis Económico & Operacional:</span>
+          <span class="period-active-date">${periodData.label}</span>
         </div>
-        <div class="time-filter-buttons">
-          <button type="button" class="time-btn ${periodKey === 'day' ? 'active' : ''}" onclick="App.setPeriod('day')">Día</button>
-          <button type="button" class="time-btn ${periodKey === 'week' ? 'active' : ''}" onclick="App.setPeriod('week')">Semana</button>
-          <button type="button" class="time-btn ${periodKey === 'month' ? 'active' : ''}" onclick="App.setPeriod('month')">Mes</button>
-          <button type="button" class="time-btn ${periodKey === 'year' ? 'active' : ''}" onclick="App.setPeriod('year')">Año</button>
+        <div class="period-buttons-group">
+          <button type="button" class="btn-period ${periodKey === 'day' ? 'active' : ''}" onclick="App.setPeriod('day')">Día</button>
+          <button type="button" class="btn-period ${periodKey === 'week' ? 'active' : ''}" onclick="App.setPeriod('week')">Semana</button>
+          <button type="button" class="btn-period ${periodKey === 'month' ? 'active' : ''}" onclick="App.setPeriod('month')">Mes</button>
+          <button type="button" class="btn-period ${periodKey === 'year' ? 'active' : ''}" onclick="App.setPeriod('year')">Año</button>
         </div>
       </div>
 
@@ -1179,7 +1202,7 @@ const App = {
       </div>
 
       <!-- CHARTS DUAL GRID -->
-      <div class="dashboard-charts-grid" style="margin-top:22px;">
+      <div class="financial-charts-grid" style="margin-top:22px;">
         <!-- Chart 1: Evolución Financiera Consolidada -->
         <div class="chart-card">
           <div class="chart-header">
@@ -1197,8 +1220,8 @@ const App = {
                 <button type="button" class="chart-type-btn ${AERO_DB.state.financialChartType === 'pie' ? 'active' : ''}" onclick="App.setFinancialChartType('pie')" title="Gráfico de Torta">Torta</button>
               </div>
               <div class="chart-controls-group">
-                <button type="button" class="chart-type-btn ${AERO_DB.state.financialChartUnit === 'currency' ? 'active' : ''}" onclick="App.setFinancialChartUnit('currency')">$ Valores</button>
-                <button type="button" class="chart-type-btn ${AERO_DB.state.financialChartUnit === 'percent' ? 'active' : ''}" onclick="App.setFinancialChartUnit('percent')">% Porcentaje</button>
+                <button type="button" class="chart-toggle-btn ${AERO_DB.state.financialChartUnit === 'currency' ? 'active' : ''}" onclick="App.setFinancialChartUnit('currency')">$ Valores</button>
+                <button type="button" class="chart-toggle-btn ${AERO_DB.state.financialChartUnit === 'percent' ? 'active' : ''}" onclick="App.setFinancialChartUnit('percent')">% Porcentaje</button>
               </div>
             </div>
           </div>
@@ -1222,8 +1245,8 @@ const App = {
                 <button type="button" class="chart-type-btn ${AERO_DB.state.costStructureType === 'bars' ? 'active' : ''}" onclick="App.setCostStructureType('bars')" title="Vista Barras">Barras</button>
               </div>
               <div class="chart-controls-group">
-                <button type="button" class="chart-type-btn ${AERO_DB.state.costStructureUnit === 'percent' ? 'active' : ''}" onclick="App.setCostStructureUnit('percent')">% Porcentaje</button>
-                <button type="button" class="chart-type-btn ${AERO_DB.state.costStructureUnit === 'currency' ? 'active' : ''}" onclick="App.setCostStructureUnit('currency')">$ Valores</button>
+                <button type="button" class="chart-toggle-btn ${AERO_DB.state.costStructureUnit === 'percent' ? 'active' : ''}" onclick="App.setCostStructureUnit('percent')">% Porcentaje</button>
+                <button type="button" class="chart-toggle-btn ${AERO_DB.state.costStructureUnit === 'currency' ? 'active' : ''}" onclick="App.setCostStructureUnit('currency')">$ Valores</button>
               </div>
             </div>
           </div>
@@ -1549,41 +1572,56 @@ const App = {
   // ========================================================================
   renderCostStructureWidget(periodData, type = 'donut', unit = 'percent') {
     const totalIn = periodData.income || 1;
-    const lines = AERO_DB.serviceLinesFinancials;
+    const lines = AERO_DB.serviceLinesFinancials.map(it => ({
+      ...it,
+      currentVal: Math.round(totalIn * (it.pct / 100))
+    }));
+
+    const fmtVal = (it) => {
+      return unit === 'percent' ? it.pct + '%' : this.formatCurrency(it.currentVal);
+    };
 
     if (type === 'donut') {
       let currentAngle = 0;
       const slicesSvg = lines.map(it => {
-        const sweep = (it.val / totalIn) * 360;
-        const path = describeDonutSlice(140, 110, 88, 52, currentAngle, currentAngle + sweep);
+        const sweep = (it.pct / 100) * 360;
+        const path = describeDonutSlice(140, 100, 80, 50, currentAngle, currentAngle + sweep);
         currentAngle += sweep;
+
+        const tipVal = unit === 'percent'
+          ? `${it.pct}% · ${this.formatCurrency(it.currentVal)} · Margen: ${it.margin}`
+          : `${this.formatCurrency(it.currentVal)} (${it.pct}%) · Margen: ${it.margin}`;
 
         return `
           <path d="${path}" fill="${it.color}" stroke="var(--bg-card)" stroke-width="2"
-            onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct.toFixed(1)}%) · Margen: ${it.margin}')"
-            onmouseleave="hideChartTooltip()" style="cursor:pointer;" />
+            onmousemove="showChartTooltip(event, '${it.label}', '${tipVal}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer; transition:opacity 0.2s;" />
         `;
       }).join('');
 
       return `
-        <div style="display:flex; flex-direction:column; width:100%; height:100%;">
-          <div style="display:flex; justify-content:center; align-items:center; height:180px;">
-            <svg viewBox="0 0 280 220" style="width:100%; max-width:240px; height:180px;">
+        <div style="display:flex; flex-direction:column; align-items:center; width:100%; height:100%;">
+          <div style="display:flex; justify-content:center; align-items:center; width:100%; min-height:190px;">
+            <svg viewBox="0 0 280 200" style="width:100%; max-width:250px; height:190px; overflow:visible;">
               ${slicesSvg}
-              <text x="140" y="104" font-size="10" font-weight="800" fill="var(--text-secondary)" text-anchor="middle">Margen Neto MRO</text>
-              <text x="140" y="126" font-size="16" font-weight="900" fill="#10b981" text-anchor="middle" font-family="var(--font-mono)">${periodData.profitability}</text>
+              <text x="140" y="94" font-size="10" font-weight="700" fill="var(--text-secondary)" text-anchor="middle">
+                ${unit === 'percent' ? 'Margen Neto MRO' : 'Facturación'}
+              </text>
+              <text x="140" y="116" font-size="16" font-weight="900" fill="${unit === 'percent' ? '#10b981' : '#2563eb'}" text-anchor="middle" font-family="var(--font-mono)">
+                ${unit === 'percent' ? periodData.profitability : (totalIn >= 1000000 ? '$ ' + (totalIn/1000000).toFixed(1) + 'M' : this.formatCurrency(totalIn))}
+              </text>
             </svg>
           </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-top:8px; padding:0 10px; font-size:11px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; margin-top:8px;">
             ${lines.map(it => `
-              <div style="display:flex; align-items:center; justify-content:space-between;"
-                onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.val)} (${it.pct}%) · Margen: ${it.margin}')"
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:var(--bg-app); border-radius:6px; border:1px solid var(--border-color); cursor:pointer;"
+                onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.currentVal)} (${it.pct}%) · Margen: ${it.margin}')"
                 onmouseleave="hideChartTooltip()">
-                <div style="display:flex; align-items:center; gap:6px; overflow:hidden;">
+                <div style="display:flex; align-items:center; gap:6px; min-width:0;">
                   <span style="width:8px; height:8px; border-radius:2px; background:${it.color}; flex-shrink:0;"></span>
-                  <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-secondary);">${it.label.split(' ')[0]}</span>
+                  <span style="font-size:11px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${it.label.split(' ')[0]}</span>
                 </div>
-                <strong style="font-family:var(--font-mono); color:var(--text-primary);">${it.pct}%</strong>
+                <span style="font-size:11px; font-weight:800; font-family:var(--font-mono); color:var(--text-primary);">${fmtVal(it)}</span>
               </div>
             `).join('')}
           </div>
@@ -1591,26 +1629,108 @@ const App = {
       `;
     }
 
-    // Default breakdown list
-    return `
-      <div style="display:flex; flex-direction:column; gap:8px; width:100%; padding:4px 6px;">
-        ${lines.map(it => `
-          <div style="background:var(--bg-app); border:1px solid var(--border-color); border-radius:8px; padding:10px 12px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-              <div style="display:flex; align-items:center; gap:8px;">
-                <span style="width:10px; height:10px; border-radius:3px; background:${it.color};"></span>
-                <strong style="font-size:12px; color:var(--text-primary);">${it.label}</strong>
-              </div>
-              <span class="badge badge-success" style="font-family:var(--font-mono);">Margen ${it.margin}</span>
-            </div>
-            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-secondary); margin-top:4px;">
-              <span>Facturación Asignada:</span>
-              <strong style="font-family:var(--font-mono); color:var(--text-primary);">${this.formatCurrency(it.val)} (${it.pct}%)</strong>
-            </div>
+    if (type === 'pie') {
+      let currentAngle = 0;
+      const slicesSvg = lines.map(it => {
+        const sweep = (it.pct / 100) * 360;
+        const path = describePieSlice(140, 100, 80, currentAngle, currentAngle + sweep);
+        currentAngle += sweep;
+
+        const tipVal = unit === 'percent'
+          ? `${it.pct}% · ${this.formatCurrency(it.currentVal)} · Margen: ${it.margin}`
+          : `${this.formatCurrency(it.currentVal)} (${it.pct}%) · Margen: ${it.margin}`;
+
+        return `
+          <path d="${path}" fill="${it.color}" stroke="var(--bg-card)" stroke-width="2"
+            onmousemove="showChartTooltip(event, '${it.label}', '${tipVal}')"
+            onmouseleave="hideChartTooltip()" style="cursor:pointer; transition:opacity 0.2s;" />
+        `;
+      }).join('');
+
+      return `
+        <div style="display:flex; flex-direction:column; align-items:center; width:100%; height:100%;">
+          <div style="display:flex; justify-content:center; align-items:center; width:100%; min-height:190px;">
+            <svg viewBox="0 0 280 200" style="width:100%; max-width:250px; height:190px; overflow:visible;">
+              ${slicesSvg}
+            </svg>
           </div>
-        `).join('')}
-      </div>
-    `;
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; margin-top:8px;">
+            ${lines.map(it => `
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; background:var(--bg-app); border-radius:6px; border:1px solid var(--border-color); cursor:pointer;"
+                onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.currentVal)} (${it.pct}%) · Margen: ${it.margin}')"
+                onmouseleave="hideChartTooltip()">
+                <div style="display:flex; align-items:center; gap:6px; min-width:0;">
+                  <span style="width:8px; height:8px; border-radius:2px; background:${it.color}; flex-shrink:0;"></span>
+                  <span style="font-size:11px; font-weight:700; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${it.label.split(' ')[0]}</span>
+                </div>
+                <span style="font-size:11px; font-weight:800; font-family:var(--font-mono); color:var(--text-primary);">${fmtVal(it)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    if (type === 'breakdown') {
+      return `
+        <div style="display:flex; flex-direction:column; gap:10px; width:100%; padding:4px 0;">
+          <!-- Multi-segment visual bar -->
+          <div style="height:14px; display:flex; border-radius:6px; overflow:hidden; border:1px solid var(--border-color); margin-bottom:4px;">
+            ${lines.map(it => `
+              <div style="width:${it.pct}%; background:${it.color}; cursor:pointer;"
+                onmousemove="showChartTooltip(event, '${it.label}', '${it.pct}% · ${this.formatCurrency(it.currentVal)} · Margen: ${it.margin}')"
+                onmouseleave="hideChartTooltip()"></div>
+            `).join('')}
+          </div>
+          <!-- Detailed Service Line Cards -->
+          ${lines.map(it => `
+            <div style="background:var(--bg-app); border:1px solid var(--border-color); border-left:4px solid ${it.color}; border-radius:8px; padding:9px 12px; cursor:pointer;"
+              onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.currentVal)} (${it.pct}%) · Margen Neto: ${it.margin}')"
+              onmouseleave="hideChartTooltip()">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="width:9px; height:9px; border-radius:2px; background:${it.color}; flex-shrink:0;"></span>
+                  <strong style="font-size:12px; color:var(--text-primary);">${it.label}</strong>
+                </div>
+                <span style="font-size:12px; font-weight:900; font-family:var(--font-mono); color:var(--text-primary);">${fmtVal(it)}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px; font-size:11px; color:var(--text-secondary);">
+                <span>Cuota de Facturación: <strong>${it.pct}%</strong></span>
+                <span style="color:#059669; font-weight:700;">Margen Neto: ${it.margin}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    if (type === 'bars') {
+      return `
+        <div style="display:flex; flex-direction:column; gap:12px; width:100%; padding:8px 2px;">
+          ${lines.map(it => `
+            <div style="display:flex; flex-direction:column; gap:5px; cursor:pointer;"
+              onmousemove="showChartTooltip(event, '${it.label}', '${this.formatCurrency(it.currentVal)} (${it.pct}%) · Margen: ${it.margin}')"
+              onmouseleave="hideChartTooltip()">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:11.5px;">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="width:8px; height:8px; border-radius:2px; background:${it.color};"></span>
+                  <span style="font-weight:700; color:var(--text-primary);">${it.label}</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-weight:800; font-family:var(--font-mono); color:var(--text-primary);">${fmtVal(it)}</span>
+                  <span style="font-size:10.5px; color:#059669; font-weight:700;">(${it.margin})</span>
+                </div>
+              </div>
+              <div style="height:8px; width:100%; background:var(--border-color); border-radius:4px; overflow:hidden;">
+                <div style="height:100%; width:${it.pct}%; background:${it.color}; border-radius:4px; transition:width 0.3s ease;"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    return '';
   },
 
   // ========================================================================

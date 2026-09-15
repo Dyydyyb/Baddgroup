@@ -879,8 +879,8 @@ html { overflow-x: hidden; max-width: 100%; }
   font-size: 12px;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, -120%);
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transform: none;
+  transition: opacity 0.15s ease;
   z-index: 9999;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(56, 189, 248, 0.25);
@@ -888,6 +888,18 @@ html { overflow-x: hidden; max-width: 100%; }
 }
 .chart-tooltip.active {
   opacity: 1;
+}
+.chart-tooltip .tooltip-title {
+  font-weight: 700;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 2px;
+}
+.chart-tooltip .tooltip-val {
+  font-weight: 900;
+  font-size: 13.5px;
+  font-family: var(--font-mono);
+  color: #38bdf8;
 }
 
 /* ==========================================================================
