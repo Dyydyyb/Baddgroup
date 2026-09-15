@@ -3,7 +3,11 @@
   "redirects": [
     { "source": "/gtl-ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/", "permanent": false },
     { "source": "/gtl-erp-muestra", "destination": "/GTL-ERP-muestra/", "permanent": false },
-    { "source": "/gtl-erp", "destination": "/GTL-ERP-muestra/", "permanent": false }
+    { "source": "/gtl-erp", "destination": "/GTL-ERP-muestra/", "permanent": false },
+    { "source": "/DP-sistema-ejemplo", "destination": "/dp-sistema-ejemplo", "permanent": false },
+    { "source": "/DP-sistema-ejemplo/", "destination": "/dp-sistema-ejemplo", "permanent": false },
+    { "source": "/DP-sistema-ejemplo/propuesta", "destination": "/dp-sistema-ejemplo/propuesta.html", "permanent": false },
+    { "source": "/DP-sistema-ejemplo/pdf", "destination": "/dp-sistema-ejemplo/Propuesta_DP_Ingenieria_Arquitectura_Dylan_Banegas.pdf", "permanent": false }
   ],
   "rewrites": [
     { "source": "/propuesta_ingemah", "destination": "/propuesta_ingemah/index.html" },
