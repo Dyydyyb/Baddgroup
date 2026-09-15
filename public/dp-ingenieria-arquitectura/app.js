@@ -20,7 +20,7 @@ const DP_DB = {
     calendarSelectedDate: '2026-09-15',
     budgetStatusFilter: 'all', // 'all' | 'Aprobado' | 'Enviado' | 'En Revisión'
     currentTimeFilter: 'month', // 'day' | 'week' | 'month' | 'year'
-    financialChartType: 'lines', // 'lines' | 'area' | 'bars' | 'donut' | 'pie'
+    financialChartType: 'donut', // Default: 'donut' as requested (user can switch to lines, area, bars, pie)
     financialChartUnit: 'currency', // 'currency' | 'percent'
     costStructureType: 'breakdown', // 'breakdown' | 'donut' | 'pie' | 'bars'
     costStructureUnit: 'percent', // 'percent' | 'currency'
@@ -1207,59 +1207,59 @@ const App = {
         </div>
       </div>
 
-      <!-- STATS KPI GRID (6 ENLARGED EXECUTIVE METRIC CARDS) -->
-      <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 28px;">
+      <!-- STATS KPI GRID (6 EXECUTIVE METRIC CARDS IN 1 ROW ON DESKTOP) -->
+      <div class="executive-stats-grid">
         <!-- KPI 1: Ingresos Totales Facturados -->
-        <div class="stat-card" style="border-top: 4px solid #2563eb; padding: 24px 26px; min-height: 145px;">
-          <div class="stat-details">
-            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Ingresos Totales Facturados</span>
-            <span class="stat-value" style="color:#2563eb; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.income)}</span>
-            <span class="stat-trend up" style="font-size:12px; font-weight:600;">Cobranzas & Certificaciones de comitentes</span>
+        <div class="stat-card executive-stat-card" style="border-top: 4px solid #2563eb;">
+          <div class="stat-details" style="width:100%;">
+            <span class="stat-label executive-kpi-label">Ingresos Totales Facturados</span>
+            <span class="stat-value executive-kpi-value" style="color:#2563eb;">${this.formatCurrency(periodData.income)}</span>
+            <span class="stat-trend up executive-kpi-trend">Cobranzas & Certificaciones de comitentes</span>
           </div>
         </div>
 
         <!-- KPI 2: Costos Operativos -->
-        <div class="stat-card" style="border-top: 4px solid #475569; padding: 24px 26px; min-height: 145px;">
-          <div class="stat-details">
-            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Costos Operativos Obras</span>
-            <span class="stat-value" style="color:var(--text-primary); font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.costs)}</span>
-            <span class="stat-trend" style="color:var(--text-secondary); font-size:12px; font-weight:600;">Mano de obra y gremios subcontratados</span>
+        <div class="stat-card executive-stat-card" style="border-top: 4px solid #475569;">
+          <div class="stat-details" style="width:100%;">
+            <span class="stat-label executive-kpi-label">Costos Operativos Obras</span>
+            <span class="stat-value executive-kpi-value" style="color:var(--text-primary);">${this.formatCurrency(periodData.costs)}</span>
+            <span class="stat-trend executive-kpi-trend" style="color:var(--text-secondary);">Mano de obra y gremios subcontratados</span>
           </div>
         </div>
 
         <!-- KPI 3: Compras & Acopios -->
-        <div class="stat-card" style="border-top: 4px solid #0284c7; padding: 24px 26px; min-height: 145px;">
-          <div class="stat-details">
-            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Compras & Acopios</span>
-            <span class="stat-value" style="color:#0284c7; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.purchases)}</span>
-            <span class="stat-trend" style="color:var(--text-secondary); font-size:12px; font-weight:600;">Acero ADN 420, hormigón H-30 e insumos</span>
+        <div class="stat-card executive-stat-card" style="border-top: 4px solid #0284c7;">
+          <div class="stat-details" style="width:100%;">
+            <span class="stat-label executive-kpi-label">Compras & Acopios</span>
+            <span class="stat-value executive-kpi-value" style="color:#0284c7;">${this.formatCurrency(periodData.purchases)}</span>
+            <span class="stat-trend executive-kpi-trend" style="color:var(--text-secondary);">Acero ADN 420, hormigón H-30 e insumos</span>
           </div>
         </div>
 
         <!-- KPI 4: Gastos Estructura Fija -->
-        <div class="stat-card" style="border-top: 4px solid #64748b; padding: 24px 26px; min-height: 145px;">
-          <div class="stat-details">
-            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Gastos Estructura Fija</span>
-            <span class="stat-value" style="color:var(--text-secondary); font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${this.formatCurrency(periodData.expenses)}</span>
-            <span class="stat-trend" style="color:var(--text-secondary); font-size:12px; font-weight:600;">Estudio Florencio Varela, software BIM y seguros</span>
+        <div class="stat-card executive-stat-card" style="border-top: 4px solid #64748b;">
+          <div class="stat-details" style="width:100%;">
+            <span class="stat-label executive-kpi-label">Gastos Estructura Fija</span>
+            <span class="stat-value executive-kpi-value" style="color:var(--text-secondary);">${this.formatCurrency(periodData.expenses)}</span>
+            <span class="stat-trend executive-kpi-trend" style="color:var(--text-secondary);">Estudio Florencio Varela, BIM y seguros</span>
           </div>
         </div>
 
         <!-- KPI 5: Balance Neto Disponible -->
-        <div class="stat-card" style="border-top: 4px solid #10b981; background: var(--bg-card); padding: 24px 26px; min-height: 145px;">
-          <div class="stat-details">
-            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Balance Neto Disponible</span>
-            <span class="stat-value" style="color:#059669; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">+ ${this.formatCurrency(periodData.balance)}</span>
-            <span class="stat-trend up" style="font-size:12px; font-weight:600;">Superávit de caja consolidado</span>
+        <div class="stat-card executive-stat-card" style="border-top: 4px solid #10b981; background: var(--bg-card);">
+          <div class="stat-details" style="width:100%;">
+            <span class="stat-label executive-kpi-label">Balance Neto Disponible</span>
+            <span class="stat-value executive-kpi-value" style="color:#059669;">+ ${this.formatCurrency(periodData.balance)}</span>
+            <span class="stat-trend up executive-kpi-trend">Superávit de caja consolidado</span>
           </div>
         </div>
 
         <!-- KPI 6: Rentabilidad Neta -->
-        <div class="stat-card" style="border-top: 4px solid #10b981; padding: 24px 26px; min-height: 145px;">
-          <div class="stat-details">
-            <span class="stat-label" style="font-size:13px; font-weight:800; color:var(--text-secondary); letter-spacing:0.5px;">Rentabilidad Neta</span>
-            <span class="stat-value" style="color:#059669; font-size:32px; font-weight:900; margin: 8px 0 4px; line-height: 1.15;">${periodData.profitability}</span>
-            <span class="stat-trend up" style="font-size:12px; font-weight:600;">Margen neto s/ facturación total</span>
+        <div class="stat-card executive-stat-card" style="border-top: 4px solid #059669;">
+          <div class="stat-details" style="width:100%;">
+            <span class="stat-label executive-kpi-label">Rentabilidad Neta</span>
+            <span class="stat-value executive-kpi-value" style="color:#059669;">${periodData.profitability}</span>
+            <span class="stat-trend up executive-kpi-trend">Margen neto s/ facturación total</span>
           </div>
         </div>
       </div>
@@ -1626,8 +1626,8 @@ const App = {
       }).join('');
 
       return `
-        <div style="display:flex; justify-content:space-between; align-items:center; width:100%; height:100%;">
-          <div style="flex: 1.1; display:flex; justify-content:center;">
+        <div class="chart-content-wrapper chart-donut-wrapper" style="display:flex; justify-content:space-between; align-items:center; width:100%; min-height:240px; gap:16px;">
+          <div style="flex: 1 1 240px; display:flex; justify-content:center; align-items:center;">
             <svg viewBox="0 0 380 240" style="width:100%; max-width:320px; height:240px; overflow:visible;">
               ${slicesSvg}
               ${type === 'donut' ? `
@@ -1640,7 +1640,7 @@ const App = {
               ` : ''}
             </svg>
           </div>
-          <div style="flex: 1.3; display:flex; flex-direction:column; gap:8px; padding-right:16px;">
+          <div style="flex: 1.3 1 260px; display:flex; flex-direction:column; gap:8px; padding-right:8px;">
             <span style="font-size:11px; font-weight:800; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">
               Distribución de ${periodData.label}
             </span>
@@ -1804,20 +1804,24 @@ const App = {
     }
 
     return `
-      <div style="display:flex; justify-content:flex-end; gap:16px; margin-bottom:8px; font-size:11px; font-weight:700;">
-        <span style="display:flex; align-items:center; gap:6px; color:#2563eb;">
-          <span style="width:10px; height:10px; border-radius:50%; background:#2563eb;"></span> Ingresos Facturados
-        </span>
-        <span style="display:flex; align-items:center; gap:6px; color:#475569;">
-          <span style="width:10px; height:10px; border-radius:50%; background:#475569;"></span> Egresos Consolidados
-        </span>
-        <span style="display:flex; align-items:center; gap:6px; color:#10b981;">
-          <span style="width:10px; height:10px; border-radius:50%; background:#10b981;"></span> Margen Neto (${periodData.profitability})
-        </span>
+      <div class="chart-content-wrapper" style="width:100%; display:flex; flex-direction:column; overflow:hidden;">
+        <div style="display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:10px; font-size:11px; font-weight:700; width:100%; padding:0 6px;">
+          <span style="display:inline-flex; align-items:center; gap:6px; color:#2563eb; white-space:nowrap;">
+            <span style="width:10px; height:10px; border-radius:50%; background:#2563eb; flex-shrink:0;"></span> Ingresos Facturados
+          </span>
+          <span style="display:inline-flex; align-items:center; gap:6px; color:#475569; white-space:nowrap;">
+            <span style="width:10px; height:10px; border-radius:50%; background:#475569; flex-shrink:0;"></span> Egresos Consolidados
+          </span>
+          <span style="display:inline-flex; align-items:center; gap:6px; color:#10b981; white-space:nowrap;">
+            <span style="width:10px; height:10px; border-radius:50%; background:#10b981; flex-shrink:0;"></span> Margen Neto (${periodData.profitability})
+          </span>
+        </div>
+        <div style="width:100%; height:230px; position:relative; overflow:hidden;">
+          <svg viewBox="0 0 ${width} ${height}" style="width:100%; height:100%; display:block; overflow:hidden;">
+            ${svgInner}
+          </svg>
+        </div>
       </div>
-      <svg viewBox="0 0 ${width} ${height}" style="width:100%; height:100%; overflow:visible;">
-        ${svgInner}
-      </svg>
     `;
   },
 
