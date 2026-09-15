@@ -6,5 +6,7 @@ Disallow: /GTL-ERP-muestra/
 Disallow: /gtl-erp-muestra/
 Disallow: /kioscos-uva-erp/
 Disallow: /kioscos-uva/
+Disallow: /kioscos-uva-erp-prueba/
+Disallow: /kioscos-uva-prueba/
 
 Sitemap: https://www.baddgroup.com/sitemap.xml

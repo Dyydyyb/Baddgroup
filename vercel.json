@@ -18,13 +18,17 @@
     { "source": "/ejemplosistemainmobiliario/:match*", "destination": "/ejemplosistemainmobiliario/index.html" },
     { "source": "/GTL-Ingenieria-muestra", "destination": "/GTL-Ingenieria-muestra/index.html" },
     { "source": "/GTL-ERP-muestra", "destination": "/GTL-ERP-muestra/index.html" },
-    { "source": "/kioscos-uva-erp", "destination": "/kioscos-uva-erp/index.html" },
-    { "source": "/kioscos-uva-erp/", "destination": "/kioscos-uva-erp/index.html" },
-    { "source": "/kioscos-uva", "destination": "/kioscos-uva-erp/index.html" },
-    { "source": "/kioscos-uva/", "destination": "/kioscos-uva-erp/index.html" },
-    { "source": "/kioscos-uva-erp/propuesta", "destination": "/kioscos-uva-erp/propuesta_kioscos_uva.html" },
-    { "source": "/kioscos-uva/propuesta", "destination": "/kioscos-uva-erp/propuesta_kioscos_uva.html" },
-    { "source": "/kioscos-uva-erp/pdf", "destination": "/kioscos-uva-erp/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf" },
-    { "source": "/kioscos-uva/pdf", "destination": "/kioscos-uva-erp/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf" }
+    { "source": "/kioscos-uva-erp-prueba", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva-erp-prueba/", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva-prueba", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva-prueba/", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva-erp-prueba/propuesta", "destination": "/kioscos-uva-erp-prueba/propuesta_kioscos_uva.html" },
+    { "source": "/kioscos-uva-prueba/propuesta", "destination": "/kioscos-uva-erp-prueba/propuesta_kioscos_uva.html" },
+    { "source": "/kioscos-uva-erp-prueba/pdf", "destination": "/kioscos-uva-erp-prueba/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf" },
+    { "source": "/kioscos-uva-prueba/pdf", "destination": "/kioscos-uva-erp-prueba/Propuesta_Kioscos_UVA_ERP_Dylan_Banegas.pdf" },
+    { "source": "/kioscos-uva-erp", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva-erp/", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva", "destination": "/kioscos-uva-erp-prueba/index.html" },
+    { "source": "/kioscos-uva/", "destination": "/kioscos-uva-erp-prueba/index.html" }
   ]
 }
