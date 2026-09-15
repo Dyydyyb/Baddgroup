@@ -4,5 +4,7 @@ Disallow: /GTL-Ingenieria-muestra/
 Disallow: /gtl-ingenieria-muestra/
 Disallow: /GTL-ERP-muestra/
 Disallow: /gtl-erp-muestra/
+Disallow: /kioscos-uva-erp/
+Disallow: /kioscos-uva/
 
 Sitemap: https://www.baddgroup.com/sitemap.xml

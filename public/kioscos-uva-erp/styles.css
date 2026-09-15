@@ -1,0 +1,243 @@
+/* ==========================================================================
+   KIOSCOS UVA - ERP & SISTEMA DE GESTIÓN (Arquitectura Sitiocel)
+   ========================================================================== */
+
+/* Fuentes */
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  background-color: #f9fafb;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Sidebar Nav Links (Estilo Exacto Sitiocel) */
+.nav-link-item {
+  color: rgba(255, 255, 255, 0.82);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link-item:hover {
+  background-color: rgba(0, 0, 0, 0.18);
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* Píldora Negra Activa de Sitiocel */
+.nav-link-item.active {
+  background-color: #030712 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 20px -3px rgba(3, 7, 18, 0.4) !important;
+}
+
+.nav-link-item.active svg {
+  stroke: #ffffff;
+}
+
+/* Control de Rol Vendedor */
+body.role-vendedor .admin-only-item {
+  display: none !important;
+}
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Animaciones */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.15s ease-out forwards;
+}
+
+/* Tablas Admin Sitiocel */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f8fafc;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.admin-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+/* Tarjetas de Producto en POS */
+.pos-prod-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pos-prod-card:hover {
+  border-color: #6b3b82;
+  box-shadow: 0 10px 25px -5px rgba(107, 59, 130, 0.12);
+  transform: translateY(-2px);
+}
+
+.pos-prod-card:active {
+  transform: scale(0.98);
+}
+
+/* Animación Escaneo Láser */
+@keyframes laserScan {
+  0% { top: 12%; opacity: 0.85; }
+  50% { top: 86%; opacity: 1; box-shadow: 0 0 15px #ef4444; }
+  100% { top: 12%; opacity: 0.85; }
+}
+
+.animate-laser-scan {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ef4444, #f87171, #ef4444, transparent);
+  box-shadow: 0 0 10px #ef4444;
+  animation: laserScan 1.8s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   MODO OSCURO (DARK MODE)
+   ========================================================================== */
+html.dark body {
+  background-color: #0b0f19;
+  color: #f3f4f6;
+}
+
+html.dark .bg-white {
+  background-color: #131b2e !important;
+  border-color: #222f47 !important;
+  color: #f1f5f9;
+}
+
+html.dark .bg-gray-50 {
+  background-color: #0b0f19 !important;
+  color: #e2e8f0;
+}
+
+html.dark .bg-gray-100 {
+  background-color: #1a243b !important;
+  color: #f1f5f9;
+}
+
+html.dark .border-gray-100,
+html.dark .border-gray-200 {
+  border-color: #222f47 !important;
+}
+
+html.dark .text-gray-900 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-gray-800 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-gray-700 {
+  color: #e2e8f0 !important;
+}
+
+html.dark .text-gray-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+html.dark .admin-table th {
+  background-color: #131b2e;
+  border-color: #222f47;
+  color: #94a3b8;
+}
+
+html.dark .admin-table td {
+  border-color: #1a243b;
+  color: #e2e8f0;
+}
+
+html.dark .admin-table tr:hover td {
+  background-color: rgba(34, 47, 71, 0.4);
+}
+
+html.dark input,
+html.dark select,
+html.dark textarea {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-color: #2a3b5c !important;
+}
+
+html.dark input::placeholder {
+  color: #64748b !important;
+}
+
+/* ==========================================================================
+   ESTILOS DE IMPRESIÓN (CARTELERÍA GÓNDOLA)
+   ========================================================================== */
+@media print {
+  #sidebar,
+  .no-print,
+  .print-hide,
+  nav,
+  button:not(.print-include) {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #appMainView {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .gondola-print-container {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .gondola-tag {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 2px solid #000000 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+  }
+}
