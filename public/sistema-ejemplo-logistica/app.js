@@ -20,6 +20,7 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     consumoFlota: '2.840 Litros (Nafta Súper)',
     consumoRendimiento: '38.2 Km / L promedio',
     costoKm: '$ 142 / Km',
+    kmTotales: '48.200 Km',
     reporteUnidades: [
       {
             "patente": "A 192 JKL",
@@ -286,6 +287,7 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     consumoFlota: '28.400 Litros (Gasoil D-Grado 3)',
     consumoRendimiento: '3.2 Km / L (31.2 L/100Km)',
     costoKm: '$ 890 / Km',
+    kmTotales: '142.800 Km',
     reporteUnidades: [
       {
             "patente": "AF 342 LK",
@@ -550,6 +552,7 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     consumoFlota: '9.400 Litros (Diésel Euro)',
     consumoRendimiento: '9.8 Km / L (10.2 L/100Km)',
     costoKm: '$ 285 / Km',
+    kmTotales: '68.400 Km',
     reporteUnidades: [
       {
             "patente": "AF 703 QR",
@@ -811,6 +814,7 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     consumoFlota: '21.800 Litros (Gasoil Agro)',
     consumoRendimiento: '3.1 Km / L (32.3 L/100Km)',
     costoKm: '$ 740 / Km',
+    kmTotales: '112.500 Km',
     reporteUnidades: [
       {
             "patente": "AE 918 MM",
@@ -1098,6 +1102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCalendar();
   initModals();
   initSearch();
+  initReportControls();
 
   // Carga inicial del sector por defecto
   setSector('motos');
@@ -1378,6 +1383,8 @@ function renderDashboardKPIs(customKpis) {
   document.getElementById('kpiVolumenDespachado').textContent = kpis.volumen;
   document.getElementById('kpiVolumenSub').textContent = kpis.volumenSub;
   document.getElementById('kpiOcupacionFlota').textContent = kpis.ocupacion;
+  const elKm = document.getElementById('kpiKmTotales');
+  if (elKm) elKm.textContent = kpis.kmTotales || sector.kmTotales || '48.200 Km';
   document.getElementById('kpiAlertasDoc').textContent = kpis.alertas;
   document.getElementById('kpiAlertasDocSub').textContent = kpis.alertasSub;
 
@@ -2807,10 +2814,51 @@ function showToast(message, icon = '') {
   }, 3200);
 }
 
+
 // =============================================================================
 // MÓDULO DE REPORTES & ANÁLISIS ESTRATÉGICO
 // (Rendimiento por unidad, Estructura de costos, Top clientes)
+// Altamente interactivo, dinámico, claro y profesional
 // =============================================================================
+let repRentabilidadMetric = 'comparativa'; // 'comparativa' | 'rentabilidad' | 'margen'
+let repCostosType = 'donut'; // 'donut' | 'bars'
+let repClientesMetric = 'facturado'; // 'facturado' | 'viajes'
+
+function initReportControls() {
+  // Reporte 1 Toggles
+  document.querySelectorAll('#repRentabilidadMetricToggle .btn-chart-type').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#repRentabilidadMetricToggle .btn-chart-type').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      repRentabilidadMetric = btn.getAttribute('data-rep-metric');
+      const sector = getActiveData();
+      renderReportRentabilidad(sector);
+    });
+  });
+
+  // Reporte 2 Toggles
+  document.querySelectorAll('#repCostosTypeToggle .btn-chart-type').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#repCostosTypeToggle .btn-chart-type').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      repCostosType = btn.getAttribute('data-rep-cost');
+      const sector = getActiveData();
+      renderReportCostos(sector);
+    });
+  });
+
+  // Reporte 3 Toggles
+  document.querySelectorAll('#repClientesMetricToggle .btn-chart-type').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#repClientesMetricToggle .btn-chart-type').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      repClientesMetric = btn.getAttribute('data-rep-cli');
+      const sector = getActiveData();
+      renderReportTopClientes(sector);
+    });
+  });
+}
+
 function renderReportsView() {
   const sector = getActiveData();
   renderReportRentabilidad(sector);
@@ -2824,67 +2872,150 @@ function renderReportRentabilidad(sector) {
   const units = sector.reporteUnidades || [];
 
   if (tableBody) {
-    tableBody.innerHTML = units.map(u => `
-      <tr>
+    tableBody.innerHTML = units.map((u, idx) => `
+      <tr id="repUnitRow_${idx}" class="report-table-row">
         <td><strong>${u.patente}</strong></td>
         <td>${u.marca}</td>
-        <td style="font-family:var(--font-mono);">${u.viajes}</td>
+        <td>${u.chofer || sector.choferes[idx % sector.choferes.length]?.nombre || 'Asignado'}</td>
         <td style="font-family:var(--font-mono);">${Number(u.km).toLocaleString()} Km</td>
+        <td style="font-family:var(--font-mono);">${u.viajes}</td>
         <td style="font-weight:700; color:var(--text-main);">${formatARS(u.facturado)}</td>
-        <td style="color:var(--danger);">${formatARS(u.costo)}</td>
-        <td style="font-weight:800; color:var(--success);">${formatARS(u.rentabilidad)}</td>
-        <td><span class="status-badge completada" style="font-size:10.5px;">${u.margen}%</span></td>
-        <td style="font-family:var(--font-mono); font-size:11px;">${u.consumo}</td>
+        <td style="color:var(--danger); font-family:var(--font-mono);">${formatARS(u.costo)}</td>
+        <td style="font-weight:800; color:var(--success); font-family:var(--font-mono);">+${formatARS(u.rentabilidad)}</td>
+        <td><span class="status-badge completada" style="font-size:11px; font-weight:800;">${u.margen}%</span></td>
       </tr>
     `).join('');
   }
 
+  // Actualizar resumen en cabecera
+  const repCountEl = document.getElementById('repUnidadesCount');
+  if (repCountEl) repCountEl.textContent = `${units.length} Unidades Activas`;
+  const repMargenEl = document.getElementById('repMargenPromedio');
+  if (repMargenEl && units.length > 0) {
+    const avgMargen = (units.reduce((acc, u) => acc + u.margen, 0) / units.length).toFixed(1);
+    repMargenEl.textContent = `${avgMargen}%`;
+  }
+
   if (container && units.length > 0) {
-    const width = 680;
-    const height = 240;
-    const paddingBottom = 40;
-    const paddingTop = 25;
-    const paddingLeft = 50;
-    const paddingRight = 20;
+    const width = 760;
+    const height = 260;
+    const paddingBottom = 45;
+    const paddingTop = 30;
+    const paddingLeft = 70;
+    const paddingRight = 30;
     const chartWidth = width - paddingLeft - paddingRight;
     const chartHeight = height - paddingBottom - paddingTop;
-    const maxVal = Math.max(...units.map(u => u.facturado)) * 1.15;
     const colWidth = chartWidth / units.length;
+
+    let maxVal = 100;
+    if (repRentabilidadMetric === 'comparativa') {
+      maxVal = Math.max(...units.map(u => u.facturado)) * 1.18;
+    } else if (repRentabilidadMetric === 'rentabilidad') {
+      maxVal = Math.max(...units.map(u => u.rentabilidad)) * 1.18;
+    }
+
+    // Gridlines horizontales
+    let gridLines = '';
+    const numLines = 4;
+    for (let l = 0; l <= numLines; l++) {
+      const yLine = height - paddingBottom - (l / numLines) * chartHeight;
+      const labelVal = repRentabilidadMetric === 'margen' 
+        ? `${Math.round((l / numLines) * 100)}%` 
+        : formatARS(Math.round((l / numLines) * maxVal));
+      
+      gridLines += `
+        <line x1="${paddingLeft}" y1="${yLine}" x2="${width - paddingRight}" y2="${yLine}" stroke="var(--border-color)" stroke-dasharray="3 3" opacity="0.6" />
+        <text x="${paddingLeft - 8}" y="${yLine + 4}" text-anchor="end" font-size="9.5" fill="var(--text-subtle)" font-family="var(--font-mono)">${labelVal}</text>
+      `;
+    }
 
     let barsHtml = '';
     units.forEach((u, i) => {
       const xCenter = paddingLeft + i * colWidth + colWidth / 2;
-      const barW = Math.min(24, colWidth * 0.38);
-      const hFact = (u.facturado / maxVal) * chartHeight;
-      const yFact = height - paddingBottom - hFact;
-      const hCosto = (u.costo / maxVal) * chartHeight;
-      const yCosto = height - paddingBottom - hCosto;
 
-      barsHtml += `
-        <g class="report-bar-group">
-          <!-- Barra Facturación -->
-          <rect x="${xCenter - barW - 2}" y="${yFact}" width="${barW}" height="${hFact}" rx="4" fill="var(--accent)" />
-          <!-- Barra Costo Operativo -->
-          <rect x="${xCenter + 2}" y="${yCosto}" width="${barW}" height="${hCosto}" rx="4" fill="#94a3b8" />
-          <!-- Label Patente -->
-          <text x="${xCenter}" y="${height - 14}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--text-subtle)">${u.patente}</text>
-          <!-- Margen % encima -->
-          <text x="${xCenter}" y="${Math.min(yFact, yCosto) - 6}" text-anchor="middle" font-size="10" font-weight="800" fill="var(--success)">${u.margen}%</text>
-        </g>
-      `;
+      if (repRentabilidadMetric === 'comparativa') {
+        const barW = Math.min(22, colWidth * 0.36);
+        const hFact = (u.facturado / maxVal) * chartHeight;
+        const yFact = height - paddingBottom - hFact;
+        const hCosto = (u.costo / maxVal) * chartHeight;
+        const yCosto = height - paddingBottom - hCosto;
+
+        barsHtml += `
+          <g class="rep-bar-group" data-idx="${i}" style="cursor:pointer;" 
+             data-tooltip-title="${u.patente} · ${u.marca}"
+             data-tooltip-fact="${formatARS(u.facturado)}"
+             data-tooltip-costo="${formatARS(u.costo)}"
+             data-tooltip-rent="${formatARS(u.rentabilidad)}"
+             data-tooltip-margen="${u.margen}%"
+             data-tooltip-consumo="${u.consumo}">
+            <!-- Barra Facturación -->
+            <rect x="${xCenter - barW - 2}" y="${yFact}" width="${barW}" height="${hFact}" rx="4" fill="var(--accent)" class="rep-bar-anim" />
+            <!-- Barra Costo -->
+            <rect x="${xCenter + 2}" y="${yCosto}" width="${barW}" height="${hCosto}" rx="4" fill="#64748b" class="rep-bar-anim" />
+            <!-- Margen % encima -->
+            <text x="${xCenter}" y="${Math.min(yFact, yCosto) - 7}" text-anchor="middle" font-size="10" font-weight="800" fill="var(--success)">${u.margen}%</text>
+            <!-- Label Patente -->
+            <text x="${xCenter}" y="${height - 18}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--text-main)">${u.patente}</text>
+            <text x="${xCenter}" y="${height - 6}" text-anchor="middle" font-size="9" fill="var(--text-subtle)">${u.viajes} vjs</text>
+          </g>
+        `;
+      } else if (repRentabilidadMetric === 'rentabilidad') {
+        const barW = Math.min(36, colWidth * 0.65);
+        const hRent = (u.rentabilidad / maxVal) * chartHeight;
+        const yRent = height - paddingBottom - hRent;
+
+        barsHtml += `
+          <g class="rep-bar-group" data-idx="${i}" style="cursor:pointer;"
+             data-tooltip-title="${u.patente} · Rentabilidad Neta"
+             data-tooltip-rent="+${formatARS(u.rentabilidad)}"
+             data-tooltip-fact="Fact: ${formatARS(u.facturado)}"
+             data-tooltip-costo="Costo: ${formatARS(u.costo)}">
+            <rect x="${xCenter - barW / 2}" y="${yRent}" width="${barW}" height="${hRent}" rx="5" fill="var(--success)" class="rep-bar-anim" />
+            <text x="${xCenter}" y="${yRent - 6}" text-anchor="middle" font-size="10" font-weight="800" fill="var(--success)" font-family="var(--font-mono)">+${formatARS(u.rentabilidad)}</text>
+            <text x="${xCenter}" y="${height - 18}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--text-main)">${u.patente}</text>
+            <text x="${xCenter}" y="${height - 6}" text-anchor="middle" font-size="9" fill="var(--text-subtle)">${u.margen}% margen</text>
+          </g>
+        `;
+      } else {
+        // Modo Margen %
+        const barW = Math.min(36, colWidth * 0.65);
+        const hMargen = (u.margen / 100) * chartHeight;
+        const yMargen = height - paddingBottom - hMargen;
+
+        barsHtml += `
+          <g class="rep-bar-group" data-idx="${i}" style="cursor:pointer;"
+             data-tooltip-title="${u.patente} · Margen Operativo"
+             data-tooltip-margen="${u.margen}%"
+             data-tooltip-rent="Ganancia: ${formatARS(u.rentabilidad)}">
+            <rect x="${xCenter - barW / 2}" y="${yMargen}" width="${barW}" height="${hMargen}" rx="5" fill="var(--accent)" class="rep-bar-anim" />
+            <text x="${xCenter}" y="${yMargen - 6}" text-anchor="middle" font-size="10.5" font-weight="900" fill="var(--accent)" font-family="var(--font-mono)">${u.margen}%</text>
+            <text x="${xCenter}" y="${height - 18}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--text-main)">${u.patente}</text>
+            <text x="${xCenter}" y="${height - 6}" text-anchor="middle" font-size="9" fill="var(--text-subtle)">${u.consumo}</text>
+          </g>
+        `;
+      }
     });
 
+    let legendHtml = '';
+    if (repRentabilidadMetric === 'comparativa') {
+      legendHtml = `
+        <div style="display:flex; justify-content:flex-end; gap:16px; font-size:11.5px; font-weight:700; margin-bottom:8px;">
+          <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:12px; background:var(--accent); border-radius:3px; display:inline-block;"></span> Facturación Bruta Devengada</span>
+          <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:12px; background:#64748b; border-radius:3px; display:inline-block;"></span> Costo Operativo Directo</span>
+          <span style="display:flex; align-items:center; gap:6px; color:var(--success);"><span style="width:8px; height:8px; background:var(--success); border-radius:50%; display:inline-block;"></span> Margen Neto (%)</span>
+        </div>
+      `;
+    }
+
     container.innerHTML = `
-      <div style="display:flex; justify-content:flex-end; gap:16px; font-size:11px; margin-bottom:8px; font-weight:700;">
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:12px; background:var(--accent); border-radius:3px; display:inline-block;"></span> Facturación Bruta</span>
-        <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:12px; background:#94a3b8; border-radius:3px; display:inline-block;"></span> Costo Operativo</span>
-      </div>
-      <svg viewBox="0 0 ${width} ${height}" width="100%" height="220">
-        <line x1="${paddingLeft}" y1="${height - paddingBottom}" x2="${width - paddingRight}" y2="${height - paddingBottom}" stroke="var(--border-color)" stroke-width="1" />
-        <line x1="${paddingLeft}" y1="${height - paddingBottom - chartHeight / 2}" x2="${width - paddingRight}" y2="${height - paddingBottom - chartHeight / 2}" stroke="var(--border-color)" stroke-dasharray="4 4" opacity="0.4" />
+      ${legendHtml}
+      <svg viewBox="0 0 ${width} ${height}" width="100%" height="240" style="overflow:visible;">
+        ${gridLines}
         ${barsHtml}
       </svg>
     `;
+
+    attachReportTooltips();
   }
 }
 
@@ -2893,49 +3024,108 @@ function renderReportCostos(sector) {
   const tableBody = document.getElementById('reportCostosTableBody');
   const costos = sector.reporteCostos || [];
 
+  const totalCosto = costos.reduce((acc, c) => acc + c.monto, 0);
+  const totalCostoEl = document.getElementById('repCostoTotalMes');
+  if (totalCostoEl) totalCostoEl.textContent = formatARS(totalCosto);
+  const costoKmEl = document.getElementById('repCostoKmLabel');
+  if (costoKmEl) costoKmEl.textContent = sector.costoKm || '$ 142 / Km';
+
   if (tableBody) {
     tableBody.innerHTML = costos.map(c => `
       <tr>
         <td>
-          <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:${c.color}; margin-right:6px;"></span>
+          <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:${c.color}; margin-right:8px;"></span>
           <strong>${c.categoria}</strong>
         </td>
         <td style="font-weight:700; font-family:var(--font-mono);">${formatARS(c.monto)}</td>
         <td style="font-weight:800; color:var(--text-main);">${c.pct}%</td>
-        <td style="font-family:var(--font-mono);">${c.costoKm}</td>
+        <td style="font-family:var(--font-mono); font-weight:700;">${c.costoKm}</td>
+        <td style="color:var(--text-muted);">Asignado</td>
         <td style="font-weight:700; color:${c.tendencia.startsWith('+') ? 'var(--danger)' : 'var(--success)'};">${c.tendencia}</td>
       </tr>
     `).join('');
   }
 
   if (container && costos.length > 0) {
-    const cx = 110;
-    const cy = 110;
-    const r = 90;
-    const innerR = 54;
-    let startAngle = 0;
-    let paths = [];
+    if (repCostosType === 'bars') {
+      // Modo Barras Horizontales
+      container.innerHTML = `
+        <div style="display:flex; flex-direction:column; gap:14px; width:100%; padding:14px;">
+          ${costos.map(c => `
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:5px;">
+                <span style="font-weight:700; color:var(--text-main);">${c.categoria}</span>
+                <span style="font-family:var(--font-mono); font-weight:800; color:${c.color};">${formatARS(c.monto)} (${c.pct}%)</span>
+              </div>
+              <div style="height:14px; width:100%; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden;">
+                <div style="width:${c.pct}%; height:100%; background:${c.color}; border-radius:999px; transition:width 0.4s ease;"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      // Modo Dona Interactiva
+      const cx = 115;
+      const cy = 115;
+      const r = 95;
+      const innerR = 58;
+      let startAngle = 0;
+      let paths = [];
 
-    costos.forEach(c => {
-      const angle = (c.pct / 100) * 360;
-      const endAngle = startAngle + angle;
-      const d = describeArc(cx, cy, r, innerR, startAngle, endAngle);
-      startAngle = endAngle;
+      costos.forEach((c, idx) => {
+        const angle = (c.pct / 100) * 360;
+        const endAngle = startAngle + angle;
+        const d = describeArc(cx, cy, r, innerR, startAngle, endAngle);
+        startAngle = endAngle;
 
-      paths.push(`
-        <path d="${d}" fill="${c.color}" title="${c.categoria}: ${c.pct}% (${formatARS(c.monto)})" style="transition: transform 0.2s;" />
-      `);
-    });
+        paths.push(`
+          <path d="${d}" fill="${c.color}" class="rep-donut-slice" 
+                data-idx="${idx}"
+                data-cat="${c.categoria}"
+                data-val="${formatARS(c.monto)}"
+                data-pct="${c.pct}%"
+                data-km="${c.costoKm}"
+                style="cursor:pointer; transition: transform 0.2s, opacity 0.2s;" />
+        `);
+      });
 
-    container.innerHTML = `
-      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%;">
-        <svg viewBox="0 0 220 220" width="190" height="190">
-          ${paths.join('')}
-          <text x="${cx}" y="${cy - 4}" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--text-subtle)">COSTOS</text>
-          <text x="${cx}" y="${cy + 16}" text-anchor="middle" font-size="13" font-weight="900" fill="var(--text-main)" font-family="'JetBrains Mono'">100%</text>
-        </svg>
-      </div>
-    `;
+      container.innerHTML = `
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%;">
+          <svg viewBox="0 0 230 230" width="210" height="210">
+            ${paths.join('')}
+            <text x="${cx}" y="${cy - 6}" text-anchor="middle" font-size="11" font-weight="800" fill="var(--text-subtle)" id="donutCenterLabel">TOTAL</text>
+            <text x="${cx}" y="${cy + 15}" text-anchor="middle" font-size="14" font-weight="900" fill="var(--text-main)" font-family="var(--font-mono)" id="donutCenterValue">${formatARS(totalCosto)}</text>
+          </svg>
+          <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:8px 14px; margin-top:8px;">
+            ${costos.map(c => `
+              <span style="font-size:11px; display:inline-flex; align-items:center; gap:5px;">
+                <span style="width:9px; height:9px; background:${c.color}; border-radius:2px;"></span>
+                ${c.categoria.split('(')[0].trim()}: <strong>${c.pct}%</strong>
+              </span>
+            `).join('')}
+          </div>
+        </div>
+      `;
+
+      // Slice hover interaction
+      container.querySelectorAll('.rep-donut-slice').forEach(slice => {
+        slice.addEventListener('mouseenter', () => {
+          const cat = slice.getAttribute('data-cat');
+          const val = slice.getAttribute('data-val');
+          const pct = slice.getAttribute('data-pct');
+          document.getElementById('donutCenterLabel').textContent = pct;
+          document.getElementById('donutCenterValue').textContent = val;
+          slice.style.transform = 'scale(1.05)';
+          slice.style.transformOrigin = 'center center';
+        });
+        slice.addEventListener('mouseleave', () => {
+          document.getElementById('donutCenterLabel').textContent = 'TOTAL';
+          document.getElementById('donutCenterValue').textContent = formatARS(totalCosto);
+          slice.style.transform = 'scale(1)';
+        });
+      });
+    }
   }
 }
 
@@ -2944,35 +3134,50 @@ function renderReportTopClientes(sector) {
   const tableBody = document.getElementById('reportTopClientesTableBody');
   const clientes = sector.reporteClientes || [];
 
+  const countEl = document.getElementById('repTopClientesCount');
+  if (countEl) countEl.textContent = `${clientes.length} Cuentas Clave`;
+
   if (tableBody) {
-    tableBody.innerHTML = clientes.map(cl => `
+    tableBody.innerHTML = clientes.map((cl, idx) => `
       <tr>
-        <td><span class="code-pill" style="font-size:10.5px;">#${cl.puesto}</span></td>
+        <td><span class="code-pill" style="font-size:11px; font-weight:800;">#${cl.puesto}</span></td>
         <td><strong>${cl.cliente}</strong></td>
-        <td style="font-family:var(--font-mono); font-size:11px;">${cl.cuit}</td>
-        <td style="font-family:var(--font-mono);">${cl.viajes}</td>
-        <td style="font-weight:800; color:var(--text-main);">${formatARS(cl.facturado)}</td>
-        <td><span class="status-badge en_transito" style="font-size:10px;">${cl.participacion}%</span></td>
-        <td style="font-weight:700; color:var(--success);">${formatARS(cl.rentabilidad)}</td>
-        <td><span class="status-badge ${cl.estado === 'Al Día' ? 'completada' : 'programado'}">${cl.estado}</span></td>
+        <td>${cl.cuit}</td>
+        <td style="font-family:var(--font-mono); font-weight:700;">${cl.viajes} viajes</td>
+        <td style="font-weight:800; color:var(--text-main); font-family:var(--font-mono);">${formatARS(cl.facturado)}</td>
+        <td><span class="status-badge en_transito" style="font-size:11px; font-weight:800;">${cl.participacion}%</span></td>
+        <td>15-30 días</td>
+        <td><span class="status-badge ${cl.estado === 'Al Día' ? 'completada' : 'programado'}">● ${cl.estado}</span></td>
       </tr>
     `).join('');
   }
 
   if (container && clientes.length > 0) {
-    const maxVal = Math.max(...clientes.map(cl => cl.facturado));
+    const isFact = repClientesMetric === 'facturado';
+    const maxVal = Math.max(...clientes.map(cl => isFact ? cl.facturado : cl.viajes));
+
     container.innerHTML = `
-      <div style="display:flex; flex-direction:column; gap:12px; width:100%; padding:10px 4px;">
+      <div style="display:flex; flex-direction:column; gap:12px; width:100%; padding:8px 4px;">
         ${clientes.map(cl => {
-          const pctWidth = Math.round((cl.facturado / maxVal) * 100);
+          const curVal = isFact ? cl.facturado : cl.viajes;
+          const pctWidth = Math.round((curVal / maxVal) * 100);
+          const displayVal = isFact ? formatARS(cl.facturado) : `${cl.viajes} Despachos`;
+
           return `
-            <div>
-              <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:4px;">
-                <span style="font-weight:700; color:var(--text-main);">#${cl.puesto} ${cl.cliente}</span>
-                <span style="font-family:var(--font-mono); font-weight:800; color:var(--accent);">${formatARS(cl.facturado)} (${cl.participacion}%)</span>
+            <div class="rep-client-row" style="cursor:pointer;" title="${cl.cliente}: ${displayVal} (${cl.participacion}% del total)">
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; margin-bottom:5px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:11px; font-weight:900; background:var(--accent-light); color:var(--accent); padding:2px 6px; border-radius:4px; font-family:var(--font-mono);">#${cl.puesto}</span>
+                  <strong style="color:var(--text-main);">${cl.cliente}</strong>
+                  <span style="font-size:11px; color:var(--text-subtle);">CUIT: ${cl.cuit}</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-family:var(--font-mono); font-weight:800; color:var(--accent); font-size:13px;">${displayVal}</span>
+                  <span class="status-badge en_transito" style="font-size:10px;">${cl.participacion}%</span>
+                </div>
               </div>
               <div style="height:14px; width:100%; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden;">
-                <div style="width:${pctWidth}%; height:100%; background:var(--accent); border-radius:999px; transition:width 0.4s ease;"></div>
+                <div style="width:${pctWidth}%; height:100%; background:linear-gradient(90deg, var(--accent), var(--success)); border-radius:999px; transition:width 0.4s ease;"></div>
               </div>
             </div>
           `;
@@ -2982,10 +3187,45 @@ function renderReportTopClientes(sector) {
   }
 }
 
-// Botones de exportación
-document.getElementById('btnExportPDF')?.addEventListener('click', () => {
-  showToast('Generando reporte ejecutivo en PDF...');
-});
-document.getElementById('btnExportExcel')?.addEventListener('click', () => {
-  showToast('Exportando planilla analítica a Excel (.xlsx)...');
-});
+function attachReportTooltips() {
+  const tooltip = document.getElementById('floatingChartTooltip');
+  if (!tooltip) return;
+
+  document.querySelectorAll('.rep-bar-group').forEach(group => {
+    group.addEventListener('mousemove', (e) => {
+      const title = group.getAttribute('data-tooltip-title');
+      const fact = group.getAttribute('data-tooltip-fact');
+      const costo = group.getAttribute('data-tooltip-costo');
+      const rent = group.getAttribute('data-tooltip-rent');
+      const margen = group.getAttribute('data-tooltip-margen');
+      const consumo = group.getAttribute('data-tooltip-consumo');
+
+      let bodyHtml = '';
+      if (fact) bodyHtml += `<div>Facturación: <strong>${fact}</strong></div>`;
+      if (costo) bodyHtml += `<div>Costo Operativo: <strong style="color:#ef4444;">${costo}</strong></div>`;
+      if (rent) bodyHtml += `<div>Rentabilidad Neta: <strong style="color:#10b981;">${rent}</strong></div>`;
+      if (margen) bodyHtml += `<div>Margen: <strong>${margen}</strong></div>`;
+      if (consumo) bodyHtml += `<div>Consumo Medio: <strong>${consumo}</strong></div>`;
+
+      tooltip.innerHTML = `
+        <strong style="color:var(--accent); font-size:12px; margin-bottom:4px; display:block;">${title}</strong>
+        ${bodyHtml}
+      `;
+      tooltip.style.display = 'flex';
+      tooltip.style.left = `${e.clientX + 14}px`;
+      tooltip.style.top = `${e.clientY + 14}px`;
+
+      // Highlight table row
+      const idx = group.getAttribute('data-idx');
+      document.querySelectorAll('.report-table-row').forEach(r => r.style.backgroundColor = '');
+      const targetRow = document.getElementById(`repUnitRow_${idx}`);
+      if (targetRow) targetRow.style.backgroundColor = 'var(--accent-light)';
+    });
+
+    group.addEventListener('mouseleave', () => {
+      tooltip.style.display = 'none';
+      document.querySelectorAll('.report-table-row').forEach(r => r.style.backgroundColor = '');
+    });
+  });
+}
+

@@ -361,7 +361,7 @@
           <!-- MÉTRICAS OPERATIVAS & LOGÍSTICAS -->
           <div class="kpi-section-title" style="margin-top: 20px;">
             <span>MÉTRICAS OPERATIVAS & LOGÍSTICAS</span>
-            <span class="kpi-subtitle">Estado del servicio</span>
+            <span class="kpi-subtitle">Estado del servicio · 8 Indicadores</span>
           </div>
           <div class="kpis-grid operational-grid">
             <div class="kpi-card">
@@ -432,6 +432,21 @@
                 <span id="kpiAlertasDocSub">VTV preventiva</span>
               </div>
               <div class="kpi-footer-note">Seguros al día</div>
+            </div>
+
+            <!-- DISTANCIA TOTAL RECORRIDA -->
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">DISTANCIA RECORRIDA</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </span>
+              </div>
+              <div class="kpi-value" id="kpiKmTotales">48.200 Km</div>
+              <div class="kpi-trend positive">
+                <span>+8.4% vs mes anterior</span>
+              </div>
+              <div class="kpi-footer-note">Odómetro acumulado activo</div>
             </div>
 
             <!-- COSTO OPERATIVO PROMEDIO POR KM -->
@@ -963,7 +978,12 @@
                 <span class="summary-pill">Unidades analizadas: <strong id="repUnidadesCount">14</strong></span>
                 <span class="summary-pill">Margen promedio: <strong class="text-green" id="repMargenPromedio">61.6%</strong></span>
               </div>
-            </div>
+              <div class="chart-controls" id="repRentabilidadMetricToggle" style="margin-left:auto;">
+                <button class="btn-chart-type active" data-rep-metric="comparativa">Comparativa (Fact. vs Costo)</button>
+                <button class="btn-chart-type" data-rep-metric="rentabilidad">Rentabilidad Neta ($)</button>
+                <button class="btn-chart-type" data-rep-metric="margen">Margen %</button>
+              </div>
+</div>
             <!-- Gráfico de Rentabilidad por Unidad -->
             <div class="chart-body" style="margin-bottom: 20px;">
               <div class="chart-svg-wrap full-width" id="reportRentabilidadChartContainer" style="min-height: 220px;"></div>
@@ -1001,7 +1021,11 @@
                 <span class="summary-pill">Costo Total Período: <strong id="repCostoTotalMes">$ 7.270.000</strong></span>
                 <span class="summary-pill">Costo Promedio / Km: <strong id="repCostoKmLabel">$ 142 / Km</strong></span>
               </div>
-            </div>
+              <div class="chart-controls" id="repCostosTypeToggle" style="margin-left:auto;">
+                <button class="btn-chart-type active" data-rep-cost="donut">Dona</button>
+                <button class="btn-chart-type" data-rep-cost="bars">Barras</button>
+              </div>
+</div>
             <div class="report-two-cols-grid">
               <div class="report-chart-box">
                 <div class="chart-svg-wrap" id="reportCostosChartContainer" style="min-height: 240px;"></div>
@@ -1036,7 +1060,11 @@
                 <span class="summary-pill">Cuentas Analizadas: <strong id="repTopClientesCount">6 Clientes</strong></span>
                 <span class="summary-pill">Concentración Top 3: <strong class="text-teal" id="repConcentracionTop3">68.2%</strong></span>
               </div>
-            </div>
+              <div class="chart-controls" id="repClientesMetricToggle" style="margin-left:auto;">
+                <button class="btn-chart-type active" data-rep-cli="facturado">Facturación ($)</button>
+                <button class="btn-chart-type" data-rep-cli="viajes">Despachos</button>
+              </div>
+</div>
             <!-- Gráfico Ranking de Clientes -->
             <div class="chart-body" style="margin-bottom: 20px;">
               <div class="chart-svg-wrap full-width" id="reportTopClientesChartContainer" style="min-height: 200px;"></div>
