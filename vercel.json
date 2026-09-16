@@ -100,6 +100,21 @@
       "source": "/aerotec-erp",
       "destination": "/aero-sistema-ejemplo/",
       "permanent": false
+    },
+    {
+      "source": "/logistica-sistema-ejemplo",
+      "destination": "/sistema-ejemplo-logistica/",
+      "permanent": false
+    },
+    {
+      "source": "/logistica-erp",
+      "destination": "/sistema-ejemplo-logistica/",
+      "permanent": false
+    },
+    {
+      "source": "/ivarra-logistica-muestra",
+      "destination": "/sistema-ejemplo-logistica/",
+      "permanent": false
     }
   ],
   "rewrites": [
