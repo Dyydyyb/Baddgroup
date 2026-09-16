@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = 3048;
+const PORT = 3049;
 const PUBLIC_DIR = __dirname;
 
 const MIME_TYPES = {
@@ -22,6 +22,11 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   let reqPath = req.url.split('?')[0];
+  if (reqPath.startsWith('/sistema-ejemplo-logistica/')) {
+    reqPath = reqPath.replace('/sistema-ejemplo-logistica', '');
+  } else if (reqPath === '/sistema-ejemplo-logistica') {
+    reqPath = '/index.html';
+  }
   if (reqPath === '/' || reqPath === '') {
     reqPath = '/index.html';
   }
