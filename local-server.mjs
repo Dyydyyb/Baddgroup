@@ -41,7 +41,21 @@ const server = http.createServer((req, res) => {
 
   let filePath = path.join(__dirname, reqPath);
 
-  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+  if (!fs.existsSync(filePath)) {
+    const publicPath = path.join(__dirname, 'public', reqPath);
+    if (fs.existsSync(publicPath)) {
+      filePath = publicPath;
+    }
+  }
+
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    const indexInDir = path.join(filePath, 'index.html');
+    if (fs.existsSync(indexInDir)) {
+      filePath = indexInDir;
+    } else {
+      filePath = path.join(__dirname, 'index.html');
+    }
+  } else if (!fs.existsSync(filePath)) {
     filePath = path.join(__dirname, 'index.html');
   }
 

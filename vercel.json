@@ -326,6 +326,30 @@
     {
       "source": "/aero-erp",
       "destination": "/aero-sistema-ejemplo/index.html"
+    },
+    {
+      "source": "/sistema-ejemplo-logistica",
+      "destination": "/sistema-ejemplo-logistica/index.html"
+    },
+    {
+      "source": "/sistema-ejemplo-logistica/",
+      "destination": "/sistema-ejemplo-logistica/index.html"
+    },
+    {
+      "source": "/logistica-sistema-ejemplo",
+      "destination": "/sistema-ejemplo-logistica/index.html"
+    },
+    {
+      "source": "/logistica-sistema-ejemplo/",
+      "destination": "/sistema-ejemplo-logistica/index.html"
+    },
+    {
+      "source": "/logistica-erp",
+      "destination": "/sistema-ejemplo-logistica/index.html"
+    },
+    {
+      "source": "/ivarra-logistica-muestra",
+      "destination": "/sistema-ejemplo-logistica/index.html"
     }
   ]
 }

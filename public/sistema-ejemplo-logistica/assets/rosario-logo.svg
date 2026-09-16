@@ -1,0 +1,7 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" rx="16" fill="#C62828"/>
+  <text x="100" y="70" font-family="Arial Black,sans-serif" font-size="42" font-weight="900" fill="white" text-anchor="middle">SER</text>
+  <text x="100" y="105" font-family="Arial Black,sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle">LOGÍSTICA</text>
+  <text x="100" y="135" font-family="Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.8)" text-anchor="middle">SERVICIOS EMPRESARIALES ROSARIO</text>
+  <line x1="30" y1="145" x2="170" y2="145" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+</svg>

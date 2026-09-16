@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="100" fill="#00ACC1"/>
+  <text x="100" y="85" font-family="Arial Black,sans-serif" font-size="36" font-weight="900" fill="white" text-anchor="middle">HERMES</text>
+  <text x="100" y="118" font-family="Arial,sans-serif" font-size="13" fill="rgba(255,255,255,0.9)" text-anchor="middle">LOGÍSTICA INTEGRAL</text>
+  <path d="M 55 130 Q 100 145 145 130" stroke="white" stroke-width="2" fill="none" opacity="0.6"/>
+</svg>

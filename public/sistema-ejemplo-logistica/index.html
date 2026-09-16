@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <base href="/sistema-ejemplo-logistica/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIX TMS & ERP | Sistema Integral de Gestión Logística, Flotas & Despachos · Baddgroup</title>
+  <meta name="description" content="Software ERP y TMS para empresas de transporte, logística integral, motomensajería urbana y distribución de cargas. Telemetría GPS en vivo, flota, choferes, finanzas y remitos oficiales.">
+  <link rel="icon" type="image/svg+xml" href="assets/logix-logo.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout" id="appLayout">
+    <!-- =========================================================================
+         TOPBAR: SELECTOR MULTI-EMPRESA, BUSCADOR GLOBAL, ACCIONES & PERFIL
+         ========================================================================= -->
+    <header class="topbar" id="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle-btn" id="menuToggleBtn" aria-label="Abrir menú de navegación">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <div class="brand-badge-container">
+          <img src="assets/logix-logo.svg" alt="LOGIX TMS" class="brand-mini-logo" id="headerLogo">
+          <div class="brand-text-block">
+            <div class="brand-main-row">
+              <span class="brand-name" id="currentCompanyName">IVARRA LOGÍSTICA</span>
+              <span class="brand-edition-badge" id="currentCompanySector">MOTOMENSAJERÍA & FLEX</span>
+            </div>
+            <span class="brand-sub-label">SISTEMA ERP & TMS INTEGRAL · BADDGROUP</span>
+          </div>
+        </div>
+
+        <!-- COMPANY SWITCHER TABS -->
+        <div class="company-switcher-pills" id="companySwitcher">
+          <button class="btn-company active" data-company="ivarra" title="Cambiar a Ivarra Logística">
+            <span class="company-icon">🛵</span>
+            <span class="company-label">Ivarra (Motos & Flex)</span>
+          </button>
+          <button class="btn-company" data-company="ztrans" title="Cambiar a Ztrans Transporte">
+            <span class="company-icon">🚛</span>
+            <span class="company-label">Ztrans (Pesados & Larga Distancia)</span>
+          </button>
+          <button class="btn-company" data-company="hermes" title="Cambiar a Hermes Logística">
+            <span class="company-icon">📦</span>
+            <span class="company-label">Hermes (Integral B2B/B2C)</span>
+          </button>
+          <button class="btn-company" data-company="rosario" title="Cambiar a Rosario Logística">
+            <span class="company-icon">🏭</span>
+            <span class="company-label">Rosario (Industrial & Litoral)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- BUSCADOR CONTEXTUAL -->
+        <div class="topbar-search-box">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="globalSearchInput" placeholder="Buscar patente, chofer, ruta, cliente o guía..." autocomplete="off">
+          <span class="search-kbd-shortcut">Ctrl K</span>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS -->
+        <div class="quick-action-buttons">
+          <button class="btn-primary-action" id="btnNuevaRuta" title="Crear nueva hoja de ruta / despacho">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span class="btn-text">+ Despacho</span>
+          </button>
+          <button class="btn-secondary-action" id="btnNuevoRemitoQuick" title="Generar e imprimir remito oficial">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span class="btn-text">Remito</span>
+          </button>
+        </div>
+
+        <!-- THEME TOGGLE -->
+        <button class="theme-toggle-btn" id="themeToggleBtn" title="Alternar Modo Oscuro / Claro" aria-label="Cambiar tema">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <!-- USER PROFILE -->
+        <div class="user-profile-pill">
+          <div class="user-avatar-badge" id="userAvatar">OP</div>
+          <div class="user-meta">
+            <span class="user-name">Jefe de Operaciones</span>
+            <span class="user-role-text">Dylan Banegas · Baddgroup</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <!-- =======================================================================
+           SIDEBAR: NAVEGACIÓN FIJA MODULAR
+           ======================================================================= -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-inner">
+          <div class="sidebar-company-card">
+            <img src="assets/ivarra-logo.png" alt="Logo de Empresa" class="sidebar-company-logo" id="sidebarCompanyLogo">
+            <div class="sidebar-company-info">
+              <span class="sidebar-company-title" id="sidebarCompanyName">Ivarra Logística</span>
+              <span class="sidebar-company-rut" id="sidebarCompanyCuit">CUIT: 30-71889421-3</span>
+              <span class="sidebar-status-live"><span class="pulse-dot"></span> Centro Operativo Activo</span>
+            </div>
+          </div>
+
+          <nav class="sidebar-nav">
+            <div class="nav-group-label">OPERACIÓN EN VIVO</div>
+            <ul class="nav-list">
+              <li>
+                <a href="#dashboard" class="nav-item active" data-view="dashboard">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  <span class="nav-text">Dashboard General</span>
+                  <span class="nav-badge live">LIVE</span>
+                </a>
+              </li>
+              <li>
+                <a href="#rutas" class="nav-item" data-view="rutas">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                  <span class="nav-text">Hojas de Ruta & TMS</span>
+                  <span class="nav-badge primary" id="badgeRutasActivas">6</span>
+                </a>
+              </li>
+              <li>
+                <a href="#flota" class="nav-item" data-view="flota">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  <span class="nav-text">Flota & Unidades</span>
+                  <span class="nav-badge info" id="badgeTotalFlota">12</span>
+                </a>
+              </li>
+              <li>
+                <a href="#tracking" class="nav-item" data-view="tracking">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  <span class="nav-text">Seguimiento GPS Satelital</span>
+                  <span class="nav-badge success">GPS</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="nav-group-label">RECURSOS & LOGÍSTICA</div>
+            <ul class="nav-list">
+              <li>
+                <a href="#choferes" class="nav-item" data-view="choferes">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span class="nav-text" id="navLabelChoferes">Choferes & Cadetes</span>
+                  <span class="nav-badge" id="badgeChoferesCount">8</span>
+                </a>
+              </li>
+              <li>
+                <a href="#mantenimiento" class="nav-item" data-view="mantenimiento">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  <span class="nav-text">Taller & Mantenimiento</span>
+                  <span class="nav-badge warning" id="badgeMantenimientoAlerts">2</span>
+                </a>
+              </li>
+              <li>
+                <a href="#agenda" class="nav-item" data-view="agenda">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span class="nav-text">Agenda & Salidas</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="nav-group-label">ADMINISTRACIÓN & FINANZAS</div>
+            <ul class="nav-list">
+              <li>
+                <a href="#finanzas" class="nav-item" data-view="finanzas">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  <span class="nav-text">Finanzas & Balances</span>
+                </a>
+              </li>
+              <li>
+                <a href="#clientes" class="nav-item" data-view="clientes">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="9" y1="13" x2="9" y2="13.01"/><line x1="9" y1="17" x2="9" y2="17.01"/></svg>
+                  <span class="nav-text">Clientes & Cuentas</span>
+                  <span class="nav-badge" id="badgeClientesCount">12</span>
+                </a>
+              </li>
+              <li>
+                <a href="#remitos" class="nav-item" data-view="remitos">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span class="nav-text">Remitos Oficiales</span>
+                  <span class="nav-badge success">PDF</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="sidebar-footer">
+            <div class="baddgroup-sign">
+              <span class="baddgroup-tag">Baddgroup Software 🧉</span>
+              <span class="baddgroup-sub">Versión Enterprise 2026.4</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- =======================================================================
+           CANVAS PRINCIPAL DE CONTENIDO DINÁMICO
+           ======================================================================= -->
+      <main class="main-content" id="mainContent">
+        <!-- SECCIÓN 1: DASHBOARD GENERAL -->
+        <section class="view-panel active" id="view-dashboard">
+          <!-- TELEMETRÍA STATUS BANNER -->
+          <div class="dashboard-banner">
+            <div class="banner-left">
+              <div class="radar-ping"></div>
+              <div class="banner-texts">
+                <span class="banner-title" id="bannerEmpresaTitle">CENTRO DE CONTROL LOGÍSTICO · IVARRA MOTOMENSAJERÍA</span>
+                <span class="banner-desc" id="bannerEmpresaDesc">Monitoreo en tiempo real de despachos Flex, cadetes en tránsito, liquidaciones y telemetría de flota en CABA y AMBA.</span>
+              </div>
+            </div>
+            <div class="banner-right">
+              <div class="banner-stat-pill">
+                <span class="stat-pill-label">ESTADO SERVICIO</span>
+                <span class="stat-pill-value green"><span class="pulse-dot"></span> OPERATIVO 100%</span>
+              </div>
+              <div class="banner-stat-pill">
+                <span class="stat-pill-label">SERVIDOR</span>
+                <span class="stat-pill-value">LATENCIA 18ms</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SELECTOR DE PERÍODO INTERACTIVO -->
+          <div class="period-toolbar">
+            <div class="period-info">
+              <span class="period-label">PERÍODO OPERATIVO:</span>
+              <span class="period-active-date" id="periodActiveDateLabel">Septiembre 2026 (Mes en Curso)</span>
+            </div>
+            <div class="period-buttons-group" id="periodSelectorGroup">
+              <button class="btn-period" data-period="dia">Día</button>
+              <button class="btn-period" data-period="semana">Semana</button>
+              <button class="btn-period active" data-period="mes">Mes</button>
+              <button class="btn-period" data-period="anio">Año</button>
+            </div>
+          </div>
+
+          <!-- 6 KPIS ECONÓMICOS -->
+          <div class="kpi-section-title">
+            <span>MÉTRICAS FINANCIERAS & RENTABILIDAD</span>
+            <span class="kpi-subtitle">Moneda: ARS ($) · En tiempo real</span>
+          </div>
+          <div class="kpis-grid economic-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">FACTURACIÓN FLETES</span>
+                <span class="kpi-icon blue">💰</span>
+              </div>
+              <div class="kpi-value" id="kpiFacturacionTotal">$ 18.940.000</div>
+              <div class="kpi-trend positive" id="kpiFacturacionTrend">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                <span>+14.8% vs período anterior</span>
+              </div>
+              <div class="kpi-footer-note" id="kpiFacturacionSub">Total bruto devengado</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">COMBUSTIBLE & PEAJES</span>
+                <span class="kpi-icon orange">⛽</span>
+              </div>
+              <div class="kpi-value" id="kpiCombustible">$ 4.280.000</div>
+              <div class="kpi-trend neutral" id="kpiCombustibleTrend">
+                <span>Consumo: 3.420 Litros</span>
+              </div>
+              <div class="kpi-footer-note" id="kpiCombustibleSub">22.6% del costo operativo</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">MANTENIMIENTO & SERVICE</span>
+                <span class="kpi-icon purple">🔧</span>
+              </div>
+              <div class="kpi-value" id="kpiMantenimientoCosto">$ 1.840.000</div>
+              <div class="kpi-trend positive">
+                <span>9.7% del costo total</span>
+              </div>
+              <div class="kpi-footer-note">Talleres y repuestos certificados</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">SEGUROS, R.U.T.A. & TASAS</span>
+                <span class="kpi-icon yellow">🛡️</span>
+              </div>
+              <div class="kpi-value" id="kpiSeguros">$ 1.150.000</div>
+              <div class="kpi-trend positive">
+                <span>Pólizas al día</span>
+              </div>
+              <div class="kpi-footer-note">Cobertura total de mercadería</div>
+            </div>
+
+            <div class="kpi-card highlight-card">
+              <div class="kpi-header">
+                <span class="kpi-title">BALANCE NETO DISPONIBLE</span>
+                <span class="kpi-icon green">📈</span>
+              </div>
+              <div class="kpi-value text-green" id="kpiBalanceNeto">+ $ 11.670.000</div>
+              <div class="kpi-trend positive">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                <span>Caja neta superavitaria</span>
+              </div>
+              <div class="kpi-footer-note">Cobranzas liquidadas 100%</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">MARGEN OPERATIVO NETO</span>
+                <span class="kpi-icon teal">🎯</span>
+              </div>
+              <div class="kpi-value text-teal" id="kpiMargenPorc">61.6%</div>
+              <div class="kpi-trend positive">
+                <span>Excelente rentabilidad neta</span>
+              </div>
+              <div class="kpi-footer-note">Optimización de recorridos</div>
+            </div>
+          </div>
+
+          <!-- 6 KPIS OPERACIONALES -->
+          <div class="kpi-section-title" style="margin-top: 24px;">
+            <span>MÉTRICAS OPERATIVAS & TELEMETRÍA EN RUTA</span>
+            <span class="kpi-subtitle">Rendimiento logístico y estado de flota</span>
+          </div>
+          <div class="kpis-grid operational-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">UNIDADES EN RUTA ACTIVA</span>
+                <span class="kpi-icon blue">🧭</span>
+              </div>
+              <div class="kpi-value" id="kpiUnidadesRuta">8 / 12</div>
+              <div class="kpi-trend positive">
+                <span class="pulse-dot"></span> <span id="kpiUnidadesRutaPct">66.7% operando ahora</span>
+              </div>
+              <div class="kpi-footer-note">3 en base · 1 en service</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">PUNTUALIDAD (ON-TIME)</span>
+                <span class="kpi-icon green">⏱️</span>
+              </div>
+              <div class="kpi-value text-green" id="kpiPuntualidad">98.4%</div>
+              <div class="kpi-trend positive">
+                <span>SLA cumplido holgadamente</span>
+              </div>
+              <div class="kpi-footer-note">Entregas dentro de ventana horaria</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">VOLUMEN DESPACHADO</span>
+                <span class="kpi-icon purple" id="kpiVolumenIcon">📦</span>
+              </div>
+              <div class="kpi-value" id="kpiVolumenDespachado">1.480 Envíos</div>
+              <div class="kpi-trend positive">
+                <span id="kpiVolumenSub">100% Flex MercadoLibre</span>
+              </div>
+              <div class="kpi-footer-note">Tasa de entrega efectiva 99.2%</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">OCUPACIÓN DE FLOTA</span>
+                <span class="kpi-icon orange">📊</span>
+              </div>
+              <div class="kpi-value" id="kpiOcupacionFlota">88.5%</div>
+              <div class="kpi-trend positive">
+                <span>Capacidad aprovechada</span>
+              </div>
+              <div class="kpi-footer-note">Cero viajes en vacío</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">ALERTAS DE DOCUMENTACIÓN</span>
+                <span class="kpi-icon yellow">⚠️</span>
+              </div>
+              <div class="kpi-value text-yellow" id="kpiAlertasDoc">1 Próxima</div>
+              <div class="kpi-trend neutral">
+                <span id="kpiAlertasDocSub">VTV Moto A 552 TUV vence en 18d</span>
+              </div>
+              <div class="kpi-footer-note">Seguros y licencias al día</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">COSTO PROMEDIO / KM</span>
+                <span class="kpi-icon teal">📍</span>
+              </div>
+              <div class="kpi-value" id="kpiCostoKm">$ 142 / Km</div>
+              <div class="kpi-trend positive">
+                <span>Eficiencia óptima de combustible</span>
+              </div>
+              <div class="kpi-footer-note">Cálculo integral por unidad</div>
+            </div>
+          </div>
+
+          <!-- CHARTS SECTION: ESTRUCTURA DE COSTOS & EVOLUCIÓN -->
+          <div class="charts-row">
+            <!-- GRÁFICO 1: ESTRUCTURA DE COSTOS LOGÍSTICOS -->
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div class="chart-titles">
+                  <span class="chart-title">ESTRUCTURA DE COSTOS LOGÍSTICOS</span>
+                  <span class="chart-subtitle">Desglose de egresos operativos y margen neto de la empresa</span>
+                </div>
+                <div class="chart-controls">
+                  <div class="chart-type-toggle" id="costChartTypeToggle">
+                    <button class="btn-chart-type active" data-type="donut" title="Modo Dona">Dona</button>
+                    <button class="btn-chart-type" data-type="pie" title="Modo Torta">Torta</button>
+                    <button class="btn-chart-type" data-type="bars" title="Modo Barras">Barras</button>
+                  </div>
+                  <div class="chart-unit-toggle" id="costChartUnitToggle">
+                    <button class="btn-chart-unit active" data-unit="pct">%</button>
+                    <button class="btn-chart-unit" data-unit="val">$</button>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-body">
+                <div class="chart-svg-wrap" id="costChartContainer">
+                  <!-- SVG inyectado por app.js -->
+                </div>
+                <div class="cost-legend" id="costLegendContainer">
+                  <!-- Leyendas inyectadas por app.js -->
+                </div>
+              </div>
+            </div>
+
+            <!-- GRÁFICO 2: EVOLUCIÓN DE FLETES Y DESPACHOS -->
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <div class="chart-titles">
+                  <span class="chart-title">EVOLUCIÓN DE FACTURACIÓN & VIAJES</span>
+                  <span class="chart-subtitle">Ingresos devengados por mes y volumen de fletes completados</span>
+                </div>
+                <div class="chart-controls">
+                  <div class="chart-metric-badge">
+                    <span class="legend-dot blue"></span> Facturación ($)
+                  </div>
+                  <div class="chart-metric-badge">
+                    <span class="legend-dot green"></span> Viajes Efectivos
+                  </div>
+                </div>
+              </div>
+              <div class="chart-body">
+                <div class="chart-svg-wrap full-width" id="evolutionChartContainer">
+                  <!-- SVG inyectado por app.js -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DESPACHOS EN TIEMPO REAL & ALERTAS CRÍTICAS -->
+          <div class="dashboard-tables-row">
+            <div class="table-card">
+              <div class="table-card-header">
+                <span class="table-card-title">HOJAS DE RUTA EN TRÁNSITO AHORA MISMO</span>
+                <a href="#rutas" class="table-action-link" data-view="rutas">Ver todas las rutas →</a>
+              </div>
+              <div class="table-responsive">
+                <table class="data-table" id="dashboardRoutesTable">
+                  <thead>
+                    <tr>
+                      <th>CÓDIGO</th>
+                      <th>CLIENTE</th>
+                      <th>CONDUCTOR</th>
+                      <th>UNIDAD</th>
+                      <th>ORIGEN ➔ DESTINO</th>
+                      <th>PROGRESO</th>
+                      <th>ESTADO</th>
+                      <th>ACCIONES</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardRoutesTableBody">
+                    <!-- Filas inyectadas por app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="table-card narrow-card">
+              <div class="table-card-header">
+                <span class="table-card-title">ALERTAS & MANTENIMIENTO PREVENTIVO</span>
+                <span class="badge-alert-count" id="dashboardAlertsCount">3 Pendientes</span>
+              </div>
+              <div class="alerts-feed-list" id="dashboardAlertsList">
+                <!-- Alertas inyectadas por app.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 2: HOJAS DE RUTA & DESPACHOS (TMS) -->
+        <section class="view-panel" id="view-rutas">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Gestión de Hojas de Ruta & Despachos (TMS)</h1>
+              <p class="view-desc">Planificación, asignación de cargas, despacho, telemetría y confirmación de entrega.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevaHojaRutaView">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Nueva Hoja de Ruta
+              </button>
+            </div>
+          </div>
+
+          <!-- FILTROS -->
+          <div class="filters-bar">
+            <div class="filter-group">
+              <span class="filter-label">Estado:</span>
+              <div class="filter-pills" id="routeFilterPills">
+                <button class="filter-pill active" data-filter="todos">Todos</button>
+                <button class="filter-pill" data-filter="en_transito">En Tránsito</button>
+                <button class="filter-pill" data-filter="programado">Programados</button>
+                <button class="filter-pill" data-filter="completada">Entregados</button>
+              </div>
+            </div>
+            <div class="search-input-wrap">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="routeSearchInput" placeholder="Filtrar por código, cliente o destino...">
+            </div>
+          </div>
+
+          <!-- TABLA COMPLETA DE RUTAS -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table full-table" id="mainRoutesTable">
+                <thead>
+                  <tr>
+                    <th>CÓDIGO</th>
+                    <th>CLIENTE / DESTINATARIO</th>
+                    <th>CHOFER / CADETE</th>
+                    <th>UNIDAD</th>
+                    <th>ORIGEN Y DESTINO</th>
+                    <th>TIPO DE CARGA</th>
+                    <th>FLETE ($)</th>
+                    <th>PROGRESO</th>
+                    <th>ESTADO</th>
+                    <th>ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody id="mainRoutesTableBody">
+                  <!-- Filas inyectadas por app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 3: FLOTA & UNIDADES -->
+        <section class="view-panel" id="view-flota">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Parque Automotor & Gestión de Unidades</h1>
+              <p class="view-desc">Fichas técnicas, odómetros, consumo de combustible, asignación de choferes y control de VTV/R.U.T.A.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevaUnidadModal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Agregar Unidad
+              </button>
+            </div>
+          </div>
+
+          <!-- FILTROS DE FLOTA -->
+          <div class="filters-bar">
+            <div class="filter-group">
+              <span class="filter-label">Estado:</span>
+              <div class="filter-pills" id="fleetFilterPills">
+                <button class="filter-pill active" data-filter="todos">Todos (<span id="countFleetTodos">12</span>)</button>
+                <button class="filter-pill" data-filter="ocupado">En Ruta Activa (<span id="countFleetOcupados">8</span>)</button>
+                <button class="filter-pill" data-filter="disponible">En Base / Disponible (<span id="countFleetDisponibles">3</span>)</button>
+                <button class="filter-pill" data-filter="mantenimiento">En Service / Taller (<span id="countFleetMantenimiento">1</span>)</button>
+              </div>
+            </div>
+            <div class="search-input-wrap">
+              <input type="text" id="fleetSearchInput" placeholder="Buscar por patente, marca o modelo...">
+            </div>
+          </div>
+
+          <!-- GRID DE TARJETAS DE VEHÍCULOS -->
+          <div class="fleet-cards-grid" id="fleetCardsGrid">
+            <!-- Tarjetas inyectadas por app.js -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN 4: SEGUIMIENTO GPS SATELITAL EN VIVO -->
+        <section class="view-panel" id="view-tracking">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Centro de Telemetría & Monitoreo GPS en Vivo</h1>
+              <p class="view-desc">Posición satelital en tiempo real, velocímetro, geocercas, telemetría de motor y alertas de desvío.</p>
+            </div>
+            <div class="section-actions">
+              <div class="gps-status-indicator">
+                <span class="pulse-dot"></span> SEÑAL GPS: ALTA PRECISIÓN (14 SATÉLITES)
+              </div>
+            </div>
+          </div>
+
+          <div class="tracking-dashboard-layout">
+            <div class="tracking-map-panel">
+              <div class="map-viewport-mock" id="gpsMapContainer">
+                <div class="map-grid-lines"></div>
+                <div class="map-roads-network" id="mapRoadsNetwork">
+                  <!-- Rutas y trazados vectoriales dinámicos -->
+                </div>
+                <!-- PINES GPS DINÁMICOS -->
+                <div class="map-markers-layer" id="mapMarkersLayer">
+                  <!-- Marcadores inyectados por app.js -->
+                </div>
+                <div class="map-overlay-hud">
+                  <div class="hud-item">ZONA DE MONITOREO: <span id="hudAreaName">CABA & CORREDOR METROPOLITANO AMBA</span></div>
+                  <div class="hud-item">ACTUALIZACIÓN: <span id="hudLastUpdate">HACE 2 SEGUNDOS</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tracking-sidebar-panel">
+              <div class="tracking-panel-header">
+                <span>UNIDADES EN MOVIMIENTO</span>
+                <span class="units-active-count" id="trackingActiveCount">8 Activas</span>
+              </div>
+              <div class="tracking-units-list" id="trackingUnitsList">
+                <!-- Lista de unidades monitoreadas inyectada por app.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 5: CHOFERES & CADETES -->
+        <section class="view-panel" id="view-choferes">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title" id="choferesViewTitle">Directorio de Conductores & Personal de Tránsito</h1>
+              <p class="view-desc">Padrón de choferes, licencias habilitantes (A2, C2, E1, LiNTI), examen psicofísico y contacto directo.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevoChoferModal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Nuevo Conductor
+              </button>
+            </div>
+          </div>
+
+          <div class="drivers-cards-grid" id="driversCardsGrid">
+            <!-- Tarjetas de choferes inyectadas por app.js -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN 6: TALLER & MANTENIMIENTO PREVENTIVO -->
+        <section class="view-panel" id="view-mantenimiento">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Plan de Mantenimiento Preventivo & Taller Mecánico</h1>
+              <p class="view-desc">Programación de services por odómetro, cambio de neumáticos, frenos, lubricantes y control de costos.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevoServiceModal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Programar Service
+              </button>
+            </div>
+          </div>
+
+          <div class="maintenance-grid" id="maintenanceGridContainer">
+            <!-- Mantenimiento inyectado por app.js -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN 7: AGENDA & SALIDAS PROGRAMADAS -->
+        <section class="view-panel" id="view-agenda">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Cronograma de Despachos & Vencimientos Legales</h1>
+              <p class="view-desc">Turnero de salidas de depósitos, horarios de carga y alertas de renovación de documentación.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevoEventoAgenda">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Agendar Despacho
+              </button>
+            </div>
+          </div>
+
+          <div class="agenda-timeline-view" id="agendaTimelineView">
+            <!-- Eventos inyectados por app.js -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN 8: FINANZAS & BALANCES -->
+        <section class="view-panel" id="view-finanzas">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Gestión Financiera, Rendiciones & Flujo de Caja</h1>
+              <p class="view-desc">Cobranzas contra entrega, fletes cobrados, anticipos, combustible, peajes y comisiones de conductores.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevoMovimientoFinanciero">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Registrar Movimiento
+              </button>
+            </div>
+          </div>
+
+          <div class="finance-overview-cards" id="financeOverviewCards">
+            <!-- Tarjetas de balance inyectadas por app.js -->
+          </div>
+
+          <div class="table-card" style="margin-top: 24px;">
+            <div class="table-card-header">
+              <span class="table-card-title">HISTORIAL DE INGRESOS Y EGRESOS OPERATIVOS</span>
+              <div class="finance-filters" id="financeFiltersGroup">
+                <button class="filter-pill active" data-filter="todos">Todos</button>
+                <button class="filter-pill" data-filter="ingreso">Solo Ingresos</button>
+                <button class="filter-pill" data-filter="egreso">Solo Egresos</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="financesTable">
+                <thead>
+                  <tr>
+                    <th>FECHA</th>
+                    <th>TIPO</th>
+                    <th>DESCRIPCIÓN</th>
+                    <th>CATEGORÍA</th>
+                    <th>COMPROBANTE</th>
+                    <th>MÉTODO</th>
+                    <th>MONTO ($)</th>
+                  </tr>
+                </thead>
+                <tbody id="financesTableBody">
+                  <!-- Filas inyectadas por app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN 9: CLIENTES & CUENTAS CORRIENTES -->
+        <section class="view-panel" id="view-clientes">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Directorio de Clientes & Cuentas Corrientes</h1>
+              <p class="view-desc">Cuentas corporativas, comercios adheridos, tiendas e-commerce Flex y saldo de facturación.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" id="btnNuevoClienteModal">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                + Nuevo Cliente
+              </button>
+            </div>
+          </div>
+
+          <div class="clients-cards-grid" id="clientsCardsGrid">
+            <!-- Clientes inyectados por app.js -->
+          </div>
+        </section>
+
+        <!-- SECCIÓN 10: REMITOS & DOCUMENTACIÓN OFICIAL -->
+        <section class="view-panel" id="view-remitos">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Emisión de Remitos Oficiales & Cartas de Porte</h1>
+              <p class="view-desc">Documento legal con membrete, código QR de verificación AFIP / R.U.T.A., datos de carga y firma de recepción.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-primary" onclick="window.print()" title="Imprimir Remito Actual">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Imprimir Documento
+              </button>
+            </div>
+          </div>
+
+          <!-- VISOR DE REMITO OFICIAL -->
+          <div class="remito-document-container" id="remitoDocumentContainer">
+            <!-- Remito inyectado por app.js -->
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODALES INTERACTIVOS
+       ========================================================================= -->
+  <!-- MODAL 1: SEGUIMIENTO SATELITAL GPS EN TIEMPO REAL -->
+  <div class="modal-backdrop" id="gpsTrackingModal">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-row">
+          <span class="modal-badge-gps"><span class="pulse-dot"></span> GPS EN VIVO</span>
+          <h3 class="modal-title" id="gpsModalTitle">Telemetría de Despacho #FLX-2026-081</h3>
+        </div>
+        <button class="modal-close-btn" data-close-modal="gpsTrackingModal">&times;</button>
+      </div>
+      <div class="modal-body" id="gpsModalBody">
+        <!-- Contenido dinámico inyectado por app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: NUEVA HOJA DE RUTA / DESPACHO -->
+  <div class="modal-backdrop" id="newRouteModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Crear Nueva Hoja de Ruta / Despacho</h3>
+        <button class="modal-close-btn" data-close-modal="newRouteModal">&times;</button>
+      </div>
+      <form id="newRouteForm" class="modal-body modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nrCodigo">Código de Despacho</label>
+            <input type="text" id="nrCodigo" required readonly>
+          </div>
+          <div class="form-group">
+            <label for="nrCliente">Cliente</label>
+            <select id="nrCliente" required></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nrVehiculo">Unidad / Vehículo</label>
+            <select id="nrVehiculo" required></select>
+          </div>
+          <div class="form-group">
+            <label for="nrChofer">Conductor / Cadete</label>
+            <select id="nrChofer" required></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nrOrigen">Punto de Origen</label>
+            <input type="text" id="nrOrigen" placeholder="Ej: Depósito Central Villa Crespo" required>
+          </div>
+          <div class="form-group">
+            <label for="nrDestino">Punto de Destino</label>
+            <input type="text" id="nrDestino" placeholder="Ej: Belgrano / Núñez, CABA" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nrCarga">Descripción de la Carga</label>
+            <input type="text" id="nrCarga" placeholder="Ej: Envíos Flex Mercado Libre (32 bultos)" required>
+          </div>
+          <div class="form-group">
+            <label for="nrMonto">Valor del Flete ($ ARS)</label>
+            <input type="number" id="nrMonto" placeholder="85000" min="1000" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close-modal="newRouteModal">Cancelar</button>
+          <button type="submit" class="btn-primary">Crear Despacho & Asignar GPS</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 3: NUEVA UNIDAD DE FLOTA -->
+  <div class="modal-backdrop" id="newVehicleModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Incorporar Unidad a la Flota</h3>
+        <button class="modal-close-btn" data-close-modal="newVehicleModal">&times;</button>
+      </div>
+      <form id="newVehicleForm" class="modal-body modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nvPatente">Patente</label>
+            <input type="text" id="nvPatente" placeholder="AF 920 KL o A 192 JKL" required>
+          </div>
+          <div class="form-group">
+            <label for="nvMarca">Marca y Modelo</label>
+            <input type="text" id="nvMarca" placeholder="Honda CG 150 Titan / Scania R450" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nvTipo">Tipo de Carrocería / Equipo</label>
+            <input type="text" id="nvTipo" placeholder="Moto c/ Baúl 45L / Semirremolque Sider" required>
+          </div>
+          <div class="form-group">
+            <label for="nvAnio">Año</label>
+            <input type="number" id="nvAnio" value="2024" min="2010" max="2027" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nvCapacidad">Capacidad de Carga (Tn)</label>
+            <input type="number" id="nvCapacidad" step="0.001" placeholder="0.03 o 28" required>
+          </div>
+          <div class="form-group">
+            <label for="nvKm">Kilometraje / Odómetro</label>
+            <input type="number" id="nvKm" placeholder="18500" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close-modal="newVehicleModal">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar e Incorporar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 4: NUEVO CONDUCTOR / CADETE -->
+  <div class="modal-backdrop" id="newDriverModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Alta de Conductor / Cadete</h3>
+        <button class="modal-close-btn" data-close-modal="newDriverModal">&times;</button>
+      </div>
+      <form id="newDriverForm" class="modal-body modal-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ndNombre">Nombre Completo</label>
+            <input type="text" id="ndNombre" placeholder="Carlos Alberto Fernández" required>
+          </div>
+          <div class="form-group">
+            <label for="ndDni">DNI</label>
+            <input type="text" id="ndDni" placeholder="38.412.905" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ndLicencia">Categoría de Licencia</label>
+            <input type="text" id="ndLicencia" placeholder="A2 - Motovehículos / E1 Cargas Pesadas" required>
+          </div>
+          <div class="form-group">
+            <label for="ndVencimiento">Vencimiento de Licencia</label>
+            <input type="date" id="ndVencimiento" value="2027-05-15" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ndTelefono">Teléfono (WhatsApp)</label>
+            <input type="text" id="ndTelefono" value="5491123974066" required>
+          </div>
+          <div class="form-group">
+            <label for="ndCargo">Puesto / Cargo</label>
+            <input type="text" id="ndCargo" placeholder="Cadete Flex CABA / Chofer Larga Distancia" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" data-close-modal="newDriverModal">Cancelar</button>
+          <button type="submit" class="btn-primary">Registrar Conductor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOOLTIP FLOTANTE INTERACTIVO PARA GRÁFICOS -->
+  <div class="floating-tooltip" id="floatingChartTooltip"></div>
+
+  <!-- SCRIPTS -->
+  <script src="app.js"></script>
+</body>
+</html>
