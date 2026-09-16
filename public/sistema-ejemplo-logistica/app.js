@@ -17,6 +17,161 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     theme: 'motos',
     bannerTitle: 'CENTRO DE CONTROL LOGÍSTICO · MOTOS & ENVÍOS FLEX',
     bannerDesc: 'Sistema de prueba para motomensajería urbana, cadetería express, despachos Flex para e-commerce y cobranzas contra entrega en CABA y AMBA.',
+    consumoFlota: '2.840 Litros (Nafta Súper)',
+    consumoRendimiento: '38.2 Km / L promedio',
+    costoKm: '$ 142 / Km',
+    reporteUnidades: [
+      {
+            "patente": "A 192 JKL",
+            "marca": "Honda CG 150 Titan",
+            "tipo": "Moto Baúl 45L",
+            "viajes": 164,
+            "km": 4820,
+            "facturado": 2980000,
+            "costo": 680000,
+            "rentabilidad": 2300000,
+            "margen": 77.2,
+            "consumo": "38 Km/L"
+      },
+      {
+            "patente": "A 283 MNP",
+            "marca": "Yamaha FZ-S FI 150",
+            "tipo": "Moto Inyección Alforjas",
+            "viajes": 152,
+            "km": 4410,
+            "facturado": 2750000,
+            "costo": 650000,
+            "rentabilidad": 2100000,
+            "margen": 76.4,
+            "consumo": "36 Km/L"
+      },
+      {
+            "patente": "A 419 QRS",
+            "marca": "Honda Wave 110S",
+            "tipo": "Moto Ligera Express",
+            "viajes": 188,
+            "km": 3950,
+            "facturado": 2640000,
+            "costo": 510000,
+            "rentabilidad": 2130000,
+            "margen": 80.7,
+            "consumo": "45 Km/L"
+      },
+      {
+            "patente": "A 703 WXY",
+            "marca": "Honda XR 150L",
+            "tipo": "Moto On-Off Urbana",
+            "viajes": 138,
+            "km": 4100,
+            "facturado": 2420000,
+            "costo": 690000,
+            "rentabilidad": 1730000,
+            "margen": 71.5,
+            "consumo": "34 Km/L"
+      },
+      {
+            "patente": "A 890 ZAB",
+            "marca": "Benelli TNT 15",
+            "tipo": "Moto Paquetera",
+            "viajes": 144,
+            "km": 4300,
+            "facturado": 2510000,
+            "costo": 670000,
+            "rentabilidad": 1840000,
+            "margen": 73.3,
+            "consumo": "36 Km/L"
+      },
+      {
+            "patente": "A 912 CDE",
+            "marca": "Bajaj Rouser NS 200",
+            "tipo": "Moto Enlace Autopista",
+            "viajes": 126,
+            "km": 5120,
+            "facturado": 2780000,
+            "costo": 820000,
+            "rentabilidad": 1960000,
+            "margen": 70.5,
+            "consumo": "32 Km/L"
+      }
+],
+    reporteCostos: [
+      {
+            "categoria": "Combustible (Nafta Súper)",
+            "monto": 4280000,
+            "pct": 58.9,
+            "costoKm": "$ 84 / Km",
+            "tendencia": "+2.4%",
+            "color": "#ea580c"
+      },
+      {
+            "categoria": "Mantenimiento & Repuestos",
+            "monto": 1840000,
+            "pct": 25.3,
+            "costoKm": "$ 36 / Km",
+            "tendencia": "-1.1%",
+            "color": "#f59e0b"
+      },
+      {
+            "categoria": "Seguros & Pólizas de Carga",
+            "monto": 1150000,
+            "pct": 15.8,
+            "costoKm": "$ 22 / Km",
+            "tendencia": "0.0%",
+            "color": "#0284c7"
+      }
+],
+    reporteClientes: [
+      {
+            "puesto": 1,
+            "cliente": "ElectroNorte Oficial SRL",
+            "cuit": "30-71449820-1",
+            "viajes": 320,
+            "facturado": 4890000,
+            "participacion": 25.8,
+            "rentabilidad": 3010000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 2,
+            "cliente": "Bazar & Hogar Deco Argentina",
+            "cuit": "30-71689012-4",
+            "viajes": 410,
+            "facturado": 5120000,
+            "participacion": 27,
+            "rentabilidad": 3150000,
+            "estado": "Cta Cte"
+      },
+      {
+            "puesto": 3,
+            "cliente": "FarmaSalud 24 Distribuidora",
+            "cuit": "33-70981245-9",
+            "viajes": 280,
+            "facturado": 3950000,
+            "participacion": 20.9,
+            "rentabilidad": 2430000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 4,
+            "cliente": "Moda Urbana Argentina SA",
+            "cuit": "30-71239841-8",
+            "viajes": 215,
+            "facturado": 2740000,
+            "participacion": 14.5,
+            "rentabilidad": 1690000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 5,
+            "cliente": "TechCell Accesorios Mayorista",
+            "cuit": "30-71890145-3",
+            "viajes": 195,
+            "facturado": 2320000,
+            "participacion": 12.2,
+            "rentabilidad": 1430000,
+            "estado": "Cta Cte"
+      }
+],
     kpis: {
       mes: { facturacion: 18940000, combustible: 4280000, mantenimiento: 1840000, seguros: 1150000, balance: 11670000, margen: 61.6, unidadesRuta: '8 / 14', unidadesRutaPct: '57.1% activas', puntualidad: '98.4%', volumen: '1.480 Envíos', volumenSub: '100% Flex E-commerce', ocupacion: '88.5%', alertas: '1 Próxima', alertasSub: 'VTV Moto A 552 TUV', costoKm: '$ 142 / Km' },
       dia: { facturacion: 780000, combustible: 175000, mantenimiento: 62000, seguros: 41000, balance: 502000, margen: 64.3, unidadesRuta: '8 / 14', unidadesRutaPct: 'Operando CABA', puntualidad: '99.1%', volumen: '74 Envíos', volumenSub: 'Despachos del Día', ocupacion: '91.0%', alertas: '1 Próxima', alertasSub: 'Revisión técnica', costoKm: '$ 138 / Km' },
@@ -79,14 +234,14 @@ const BADDGROUP_LOGISTICS_SECTORS = {
       { id: 'EXP-2026-088', cliente: 'Laboratorios Raffo CABA', chofer: 'Lautaro Maidana', vehiculo: 'A 810 XYZ (Honda GLH 150)', origen: 'Sede Saavedra CABA', destino: 'Sanatorio Norte & Clínica Olivos', carga: 'Muestras Médicas Urgentes', monto: 52000, progreso: 15, estado: 'en_transito', eta: '20:45 hs', pago: 'Cuenta Corriente', bultos: 4, peso: '5 Kg' }
     ],
     choferes: [
-      { id: 'ch-1', nombre: 'Carlos Fernández', dni: '38.412.905', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-04-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 192 JKL', viajes: 412, calif: '4.9 ★' },
-      { id: 'ch-2', nombre: 'Lucas Benítez', dni: '39.814.220', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2026-11-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 283 MNP', viajes: 380, calif: '5.0 ★' },
-      { id: 'ch-3', nombre: 'Franco Morales', dni: '41.220.104', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-08-12', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 419 QRS', viajes: 290, calif: '4.8 ★' },
-      { id: 'ch-4', nombre: 'Matías Rossi', dni: '37.605.819', licencia: 'A3 - Motovehículos más de 150cc', vencimiento: '2027-03-05', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 703 WXY', viajes: 520, calif: '5.0 ★' },
-      { id: 'ch-5', nombre: 'Rodrigo Almirón', dni: '40.119.542', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2026-12-22', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 890 ZAB', viajes: 310, calif: '4.9 ★' },
-      { id: 'ch-6', nombre: 'Esteban Navarro', dni: '36.904.318', licencia: 'A3 - Motovehículos más de 150cc', vencimiento: '2027-06-19', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 912 CDE', viajes: 460, calif: '4.9 ★' },
-      { id: 'ch-7', nombre: 'Agustín Pereyra', dni: '42.088.115', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-01-14', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 341 FGH', viajes: 180, calif: '4.7 ★' },
-      { id: 'ch-8', nombre: 'Lautaro Maidana', dni: '43.190.201', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-09-02', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 810 XYZ', viajes: 145, calif: '4.8 ★' }
+      { id: 'ch-1', nombre: 'Carlos Fernández', dni: '38.412.905', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-04-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 192 JKL', viajes: 412, calif: '4.9 ' },
+      { id: 'ch-2', nombre: 'Lucas Benítez', dni: '39.814.220', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2026-11-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 283 MNP', viajes: 380, calif: '5.0 ' },
+      { id: 'ch-3', nombre: 'Franco Morales', dni: '41.220.104', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-08-12', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 419 QRS', viajes: 290, calif: '4.8 ' },
+      { id: 'ch-4', nombre: 'Matías Rossi', dni: '37.605.819', licencia: 'A3 - Motovehículos más de 150cc', vencimiento: '2027-03-05', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 703 WXY', viajes: 520, calif: '5.0 ' },
+      { id: 'ch-5', nombre: 'Rodrigo Almirón', dni: '40.119.542', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2026-12-22', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 890 ZAB', viajes: 310, calif: '4.9 ' },
+      { id: 'ch-6', nombre: 'Esteban Navarro', dni: '36.904.318', licencia: 'A3 - Motovehículos más de 150cc', vencimiento: '2027-06-19', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 912 CDE', viajes: 460, calif: '4.9 ' },
+      { id: 'ch-7', nombre: 'Agustín Pereyra', dni: '42.088.115', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-01-14', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 341 FGH', viajes: 180, calif: '4.7 ' },
+      { id: 'ch-8', nombre: 'Lautaro Maidana', dni: '43.190.201', licencia: 'A2 - Motovehículos hasta 150cc', vencimiento: '2027-09-02', telefono: '5491123974066', estado: 'En Ruta', moto: 'A 810 XYZ', viajes: 145, calif: '4.8 ' }
     ],
     mantenimiento: [
       { id: 'm-1', moto: 'A 552 TUV (Suzuki GN 125)', tarea: 'Service Completo: Aceite Motul 5100, Filtro y Frenos', fecha: '2026-09-14', km: 28900, taller: 'Taller Warnes Integral', costo: 64000, estado: 'En Proceso' },
@@ -128,6 +283,161 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     theme: 'pesados',
     bannerTitle: 'CENTRO DE CONTROL LOGÍSTICO · PESADOS & LARGA DISTANCIA',
     bannerDesc: 'Sistema de prueba para transporte federal pesado, semirremolques sider, tolvas cerealeras, bateas y bitrenes de alta capacidad.',
+    consumoFlota: '28.400 Litros (Gasoil D-Grado 3)',
+    consumoRendimiento: '3.2 Km / L (31.2 L/100Km)',
+    costoKm: '$ 890 / Km',
+    reporteUnidades: [
+      {
+            "patente": "AF 342 LK",
+            "marca": "Scania R450 6x2",
+            "tipo": "Tractor + Sider 28Tn",
+            "viajes": 18,
+            "km": 14200,
+            "facturado": 15400000,
+            "costo": 7200000,
+            "rentabilidad": 8200000,
+            "margen": 53.2,
+            "consumo": "31 L/100Km"
+      },
+      {
+            "patente": "AE 918 MM",
+            "marca": "Mercedes Actros 2645",
+            "tipo": "Tractor + Batea 30Tn",
+            "viajes": 16,
+            "km": 12800,
+            "facturado": 13800000,
+            "costo": 6800000,
+            "rentabilidad": 7000000,
+            "margen": 50.7,
+            "consumo": "33 L/100Km"
+      },
+      {
+            "patente": "AD 881 BB",
+            "marca": "Volvo FH 500 Bitren",
+            "tipo": "Bitren Pesado 35Tn",
+            "viajes": 14,
+            "km": 15600,
+            "facturado": 17200000,
+            "costo": 8400000,
+            "rentabilidad": 8800000,
+            "margen": 51.2,
+            "consumo": "35 L/100Km"
+      },
+      {
+            "patente": "AF 703 QR",
+            "marca": "VW Constellation 19.320",
+            "tipo": "Tractor + Baranda Volcable",
+            "viajes": 20,
+            "km": 11900,
+            "facturado": 11900000,
+            "costo": 5900000,
+            "rentabilidad": 6000000,
+            "margen": 50.4,
+            "consumo": "30 L/100Km"
+      },
+      {
+            "patente": "AE 114 CD",
+            "marca": "Scania G410",
+            "tipo": "Tractor + Tolva 32Tn",
+            "viajes": 17,
+            "km": 13400,
+            "facturado": 14100000,
+            "costo": 7100000,
+            "rentabilidad": 7000000,
+            "margen": 49.6,
+            "consumo": "32 L/100Km"
+      },
+      {
+            "patente": "AC 920 GH",
+            "marca": "Iveco Stralis 440",
+            "tipo": "Tractor + Térmico 28Tn",
+            "viajes": 15,
+            "km": 12100,
+            "facturado": 12200000,
+            "costo": 6100000,
+            "rentabilidad": 6100000,
+            "margen": 50,
+            "consumo": "31 L/100Km"
+      }
+],
+    reporteCostos: [
+      {
+            "categoria": "Combustible (Gasoil Grado 3)",
+            "monto": 28400000,
+            "pct": 66.5,
+            "costoKm": "$ 592 / Km",
+            "tendencia": "+3.1%",
+            "color": "#dc2626"
+      },
+      {
+            "categoria": "Taller, Neumáticos & Repuestos",
+            "monto": 9200000,
+            "pct": 21.5,
+            "costoKm": "$ 192 / Km",
+            "tendencia": "-0.8%",
+            "color": "#f59e0b"
+      },
+      {
+            "categoria": "Seguros de Carga & R.U.T.A.",
+            "monto": 5100000,
+            "pct": 12,
+            "costoKm": "$ 106 / Km",
+            "tendencia": "+0.5%",
+            "color": "#0284c7"
+      }
+],
+    reporteClientes: [
+      {
+            "puesto": 1,
+            "cliente": "Siderurgia & Tubos Industriales SA",
+            "cuit": "30-50001234-8",
+            "viajes": 84,
+            "facturado": 38200000,
+            "participacion": 45.2,
+            "rentabilidad": 18900000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 2,
+            "cliente": "Consumo Masivo & Alimentos SA",
+            "cuit": "30-50123984-2",
+            "viajes": 65,
+            "facturado": 26400000,
+            "participacion": 31.2,
+            "rentabilidad": 13100000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 3,
+            "cliente": "YPF Logística Upstream SA",
+            "cuit": "30-54668997-4",
+            "viajes": 44,
+            "facturado": 24200000,
+            "participacion": 28.6,
+            "rentabilidad": 12000000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 4,
+            "cliente": "Laminados y Perfiles Zárate SRL",
+            "cuit": "30-58914201-9",
+            "viajes": 52,
+            "facturado": 22800000,
+            "participacion": 26.9,
+            "rentabilidad": 11300000,
+            "estado": "Cta Cte"
+      },
+      {
+            "puesto": 5,
+            "cliente": "Loma Negra Cemento & Áridos",
+            "cuit": "30-50004128-5",
+            "viajes": 58,
+            "facturado": 19400000,
+            "participacion": 22.9,
+            "rentabilidad": 9600000,
+            "estado": "Al Día"
+      }
+],
     kpis: {
       mes: { facturacion: 84600000, combustible: 28400000, mantenimiento: 9200000, seguros: 5100000, balance: 41900000, margen: 49.5, unidadesRuta: '8 / 12', unidadesRutaPct: '66.7% en ruta', puntualidad: '97.2%', volumen: '380 Tn Carga', volumenSub: 'Semirremolques Sider', ocupacion: '94.2%', alertas: '2 Próximas', alertasSub: 'R.U.T.A. Semirremolque AF 342', costoKm: '$ 890 / Km' },
       dia: { facturacion: 3450000, combustible: 1120000, mantenimiento: 340000, seguros: 190000, balance: 1800000, margen: 52.1, unidadesRuta: '8 / 12', unidadesRutaPct: 'En tránsito federal', puntualidad: '98.0%', volumen: '42 Tn', volumenSub: 'Despachos del Día', ocupacion: '95.0%', alertas: '2 Próximas', alertasSub: 'Inspección técnica', costoKm: '$ 880 / Km' },
@@ -188,14 +498,14 @@ const BADDGROUP_LOGISTICS_SECTORS = {
       { id: 'RUT-2026-108', cliente: 'Minera Andina San Juan', chofer: 'Diego Luna', vehiculo: 'AF 904 OP (Mercedes Actros Bitren)', origen: 'Campana Puerto', destino: 'Jáchal / Iglesia (San Juan)', carga: 'Insumos Mineros y Estructuras Indivisibles', monto: 6200000, progreso: 20, estado: 'en_transito', eta: 'Pasado mañana 16:30 hs', pago: 'Transferencia Bancaria', bultos: 6, peso: '38.000 Kg' }
     ],
     choferes: [
-      { id: 'ch-z1', nombre: 'Roberto Gómez', dni: '28.450.119', licencia: 'E1 - Semirremolques y Articulados', vencimiento: '2027-04-15', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 342 LK', viajes: 580, calif: '5.0 ★' },
-      { id: 'ch-z2', nombre: 'Carlos Rossi', dni: '31.229.804', licencia: 'E1 - Cargas Generales & LiNTI', vencimiento: '2026-11-20', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 918 MM', viajes: 620, calif: '4.9 ★' },
-      { id: 'ch-z3', nombre: 'Marcos Benítez', dni: '35.610.420', licencia: 'E2 - Bitrenes y Cargas Especiales', vencimiento: '2027-08-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 881 BB', viajes: 490, calif: '5.0 ★' },
-      { id: 'ch-z4', nombre: 'Facundo Morales', dni: '34.190.412', licencia: 'E1 - Cargas Generales Federales', vencimiento: '2027-01-20', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 703 QR', viajes: 410, calif: '4.8 ★' },
-      { id: 'ch-z5', nombre: 'Héctor Romero', dni: '30.118.904', licencia: 'E1 - Tolvas y Cargas a Granel', vencimiento: '2027-03-25', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 114 CD', viajes: 530, calif: '4.9 ★' },
-      { id: 'ch-z6', nombre: 'Mariano Castro', dni: '32.905.112', licencia: 'E1 - Mercancías Peligrosas / LiNTI', vencimiento: '2027-07-12', telefono: '5491123974066', estado: 'En Ruta', moto: 'AC 920 GH', viajes: 470, calif: '5.0 ★' },
-      { id: 'ch-z7', nombre: 'Rubén Acuña', dni: '33.812.449', licencia: 'E1 - Chasis con Acoplado y Playo', vencimiento: '2027-02-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 780 MN', viajes: 390, calif: '4.9 ★' },
-      { id: 'ch-z8', nombre: 'Diego Luna', dni: '29.714.220', licencia: 'E2 - Bitrenes y Sobredimensionados', vencimiento: '2027-10-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 904 OP', viajes: 650, calif: '5.0 ★' }
+      { id: 'ch-z1', nombre: 'Roberto Gómez', dni: '28.450.119', licencia: 'E1 - Semirremolques y Articulados', vencimiento: '2027-04-15', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 342 LK', viajes: 580, calif: '5.0 ' },
+      { id: 'ch-z2', nombre: 'Carlos Rossi', dni: '31.229.804', licencia: 'E1 - Cargas Generales & LiNTI', vencimiento: '2026-11-20', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 918 MM', viajes: 620, calif: '4.9 ' },
+      { id: 'ch-z3', nombre: 'Marcos Benítez', dni: '35.610.420', licencia: 'E2 - Bitrenes y Cargas Especiales', vencimiento: '2027-08-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 881 BB', viajes: 490, calif: '5.0 ' },
+      { id: 'ch-z4', nombre: 'Facundo Morales', dni: '34.190.412', licencia: 'E1 - Cargas Generales Federales', vencimiento: '2027-01-20', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 703 QR', viajes: 410, calif: '4.8 ' },
+      { id: 'ch-z5', nombre: 'Héctor Romero', dni: '30.118.904', licencia: 'E1 - Tolvas y Cargas a Granel', vencimiento: '2027-03-25', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 114 CD', viajes: 530, calif: '4.9 ' },
+      { id: 'ch-z6', nombre: 'Mariano Castro', dni: '32.905.112', licencia: 'E1 - Mercancías Peligrosas / LiNTI', vencimiento: '2027-07-12', telefono: '5491123974066', estado: 'En Ruta', moto: 'AC 920 GH', viajes: 470, calif: '5.0 ' },
+      { id: 'ch-z7', nombre: 'Rubén Acuña', dni: '33.812.449', licencia: 'E1 - Chasis con Acoplado y Playo', vencimiento: '2027-02-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 780 MN', viajes: 390, calif: '4.9 ' },
+      { id: 'ch-z8', nombre: 'Diego Luna', dni: '29.714.220', licencia: 'E2 - Bitrenes y Sobredimensionados', vencimiento: '2027-10-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 904 OP', viajes: 650, calif: '5.0 ' }
     ],
     mantenimiento: [
       { id: 'mz-1', moto: 'AF 342 LK (Scania R450)', tarea: 'Service Oficial 150.000 Km: Aceite Sintético Scania LDF-4 y Filtros', fecha: '2026-09-10', km: 148200, taller: 'Concesionario Scania Pacheco', costo: 890000, estado: 'Finalizado' },
@@ -237,6 +547,161 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     theme: 'integral',
     bannerTitle: 'CENTRO DE CONTROL LOGÍSTICO · INTEGRAL B2B & B2C',
     bannerDesc: 'Sistema de prueba para distribución capilar urbana, hub de cross-docking, paquetería e-commerce y furgones utilitarios.',
+    consumoFlota: '9.400 Litros (Diésel Euro)',
+    consumoRendimiento: '9.8 Km / L (10.2 L/100Km)',
+    costoKm: '$ 285 / Km',
+    reporteUnidades: [
+      {
+            "patente": "AF 703 QR",
+            "marca": "Mercedes Sprinter 516",
+            "tipo": "Furgón XL 14m3",
+            "viajes": 52,
+            "km": 6800,
+            "facturado": 7200000,
+            "costo": 2750000,
+            "rentabilidad": 4450000,
+            "margen": 61.8,
+            "consumo": "11 L/100Km"
+      },
+      {
+            "patente": "AD 912 BB",
+            "marca": "Iveco Daily 70C17",
+            "tipo": "Furgón Rampa 4.2Tn",
+            "viajes": 46,
+            "km": 5900,
+            "facturado": 6800000,
+            "costo": 2700000,
+            "rentabilidad": 4100000,
+            "margen": 60.3,
+            "consumo": "13 L/100Km"
+      },
+      {
+            "patente": "AE 441 CC",
+            "marca": "Renault Master L2H2",
+            "tipo": "Furgón Urbano 10m3",
+            "viajes": 58,
+            "km": 6200,
+            "facturado": 6400000,
+            "costo": 2450000,
+            "rentabilidad": 3950000,
+            "margen": 61.7,
+            "consumo": "9.5 L/100Km"
+      },
+      {
+            "patente": "AF 119 DD",
+            "marca": "Ford Transit 350L",
+            "tipo": "Furgón Mediano 2Tn",
+            "viajes": 50,
+            "km": 5600,
+            "facturado": 5900000,
+            "costo": 2300000,
+            "rentabilidad": 3600000,
+            "margen": 61,
+            "consumo": "10 L/100Km"
+      },
+      {
+            "patente": "AF 532 HH",
+            "marca": "Peugeot Partner Confort",
+            "tipo": "Utilitario Postal",
+            "viajes": 68,
+            "km": 4900,
+            "facturado": 4800000,
+            "costo": 1800000,
+            "rentabilidad": 3000000,
+            "margen": 62.5,
+            "consumo": "6.5 L/100Km"
+      },
+      {
+            "patente": "AE 318 II",
+            "marca": "Renault Kangoo Maxi",
+            "tipo": "Compacto Express B2C",
+            "viajes": 64,
+            "km": 4800,
+            "facturado": 4700000,
+            "costo": 1750000,
+            "rentabilidad": 2950000,
+            "margen": 62.8,
+            "consumo": "6.8 L/100Km"
+      }
+],
+    reporteCostos: [
+      {
+            "categoria": "Combustible Diésel / Nafta",
+            "monto": 9400000,
+            "pct": 64.6,
+            "costoKm": "$ 184 / Km",
+            "tendencia": "+1.8%",
+            "color": "#0284c7"
+      },
+      {
+            "categoria": "Mantenimiento & Utilitarios",
+            "monto": 3200000,
+            "pct": 22,
+            "costoKm": "$ 63 / Km",
+            "tendencia": "-0.5%",
+            "color": "#f59e0b"
+      },
+      {
+            "categoria": "Seguros Mercadería en Tránsito",
+            "monto": 1950000,
+            "pct": 13.4,
+            "costoKm": "$ 38 / Km",
+            "tendencia": "0.0%",
+            "color": "#16a34a"
+      }
+],
+    reporteClientes: [
+      {
+            "puesto": 1,
+            "cliente": "Mayorista & Distribución Retail SA",
+            "cuit": "30-70891234-9",
+            "viajes": 180,
+            "facturado": 14200000,
+            "participacion": 38.6,
+            "rentabilidad": 8600000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 2,
+            "cliente": "Cadena Supermercados & Alimentos",
+            "cuit": "30-61234901-4",
+            "viajes": 145,
+            "facturado": 11800000,
+            "participacion": 32.1,
+            "rentabilidad": 7100000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 3,
+            "cliente": "Librerías & Papelería Central SA",
+            "cuit": "30-71049281-2",
+            "viajes": 95,
+            "facturado": 7400000,
+            "participacion": 20.1,
+            "rentabilidad": 4450000,
+            "estado": "Cta Cte"
+      },
+      {
+            "puesto": 4,
+            "cliente": "Tecnología & Consumo Gamer SRL",
+            "cuit": "30-71882014-7",
+            "viajes": 88,
+            "facturado": 6950000,
+            "participacion": 18.9,
+            "rentabilidad": 4200000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 5,
+            "cliente": "Distribuidora Cosmética Belleza",
+            "cuit": "30-69814205-3",
+            "viajes": 74,
+            "facturado": 4850000,
+            "participacion": 13.2,
+            "rentabilidad": 2950000,
+            "estado": "Al Día"
+      }
+],
     kpis: {
       mes: { facturacion: 36800000, combustible: 9400000, mantenimiento: 3200000, seguros: 1950000, balance: 22250000, margen: 60.4, unidadesRuta: '8 / 12', unidadesRutaPct: '66.7% en reparto', puntualidad: '98.9%', volumen: '4.200 Bultos', volumenSub: 'Cross-docking B2B', ocupacion: '91.2%', alertas: '1 Próxima', alertasSub: 'Service 40k Sprinter AF 703', costoKm: '$ 285 / Km' },
       dia: { facturacion: 1450000, combustible: 380000, mantenimiento: 120000, seguros: 75000, balance: 875000, margen: 60.3, unidadesRuta: '8 / 12', unidadesRutaPct: 'En reparto', puntualidad: '99.2%', volumen: '185 Bultos', volumenSub: 'Despachos del Día', ocupacion: '92.0%', alertas: '1 Próxima', alertasSub: 'Plan preventivo', costoKm: '$ 280 / Km' },
@@ -296,14 +761,14 @@ const BADDGROUP_LOGISTICS_SECTORS = {
       { id: 'INT-2026-208', cliente: 'Ferretería Industrial del Oeste', chofer: 'Ezequiel Paz', vehiculo: 'AF 890 KK (Fiat Ducato Maxi)', origen: 'Centro Distribución Caseros', destino: 'San Miguel / Moreno', carga: 'Herramientas Eléctricas y Bulonería', monto: 350000, progreso: 25, estado: 'en_transito', eta: '20:30 hs', pago: 'Transferencia 15d', bultos: 110, peso: '1.950 Kg' }
     ],
     choferes: [
-      { id: 'ch-h1', nombre: 'Damián Soria', dni: '34.810.992', licencia: 'B2 - Utilitarios y Furgones hasta 3.5Tn', vencimiento: '2027-05-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 703 QR', viajes: 420, calif: '4.9 ★' },
-      { id: 'ch-h2', nombre: 'Gonzalo Silva', dni: '32.419.004', licencia: 'C1 - Camiones Livianos hasta 12Tn', vencimiento: '2026-11-14', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 912 BB', viajes: 510, calif: '5.0 ★' },
-      { id: 'ch-h3', nombre: 'Federico Rivas', dni: '36.220.180', licencia: 'B2 - Utilitarios de Carga', vencimiento: '2027-08-22', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 441 CC', viajes: 340, calif: '4.8 ★' },
-      { id: 'ch-h4', nombre: 'Nicolás Vega', dni: '38.109.552', licencia: 'B2 - Furgones Medianos', vencimiento: '2027-05-15', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 119 DD', viajes: 295, calif: '4.9 ★' },
-      { id: 'ch-h5', nombre: 'Maximiliano Godoy', dni: '37.894.210', licencia: 'B1 - Utilitarios Ligeros', vencimiento: '2027-09-12', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 532 HH', viajes: 380, calif: '4.9 ★' },
-      { id: 'ch-h6', nombre: 'Sebastián Blanco', dni: '35.405.118', licencia: 'B1 - Reparto Urbano', vencimiento: '2027-04-10', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 318 II', viajes: 410, calif: '5.0 ★' },
-      { id: 'ch-h7', nombre: 'Ignacio Ortiz', dni: '39.012.884', licencia: 'B2 - Cargas Médicas Refrigeradas', vencimiento: '2026-12-28', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 104 JJ', viajes: 260, calif: '4.8 ★' },
-      { id: 'ch-h8', nombre: 'Ezequiel Paz', dni: '33.901.442', licencia: 'B2 - Utilitarios y Furgones', vencimiento: '2027-11-04', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 890 KK', viajes: 480, calif: '5.0 ★' }
+      { id: 'ch-h1', nombre: 'Damián Soria', dni: '34.810.992', licencia: 'B2 - Utilitarios y Furgones hasta 3.5Tn', vencimiento: '2027-05-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 703 QR', viajes: 420, calif: '4.9 ' },
+      { id: 'ch-h2', nombre: 'Gonzalo Silva', dni: '32.419.004', licencia: 'C1 - Camiones Livianos hasta 12Tn', vencimiento: '2026-11-14', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 912 BB', viajes: 510, calif: '5.0 ' },
+      { id: 'ch-h3', nombre: 'Federico Rivas', dni: '36.220.180', licencia: 'B2 - Utilitarios de Carga', vencimiento: '2027-08-22', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 441 CC', viajes: 340, calif: '4.8 ' },
+      { id: 'ch-h4', nombre: 'Nicolás Vega', dni: '38.109.552', licencia: 'B2 - Furgones Medianos', vencimiento: '2027-05-15', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 119 DD', viajes: 295, calif: '4.9 ' },
+      { id: 'ch-h5', nombre: 'Maximiliano Godoy', dni: '37.894.210', licencia: 'B1 - Utilitarios Ligeros', vencimiento: '2027-09-12', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 532 HH', viajes: 380, calif: '4.9 ' },
+      { id: 'ch-h6', nombre: 'Sebastián Blanco', dni: '35.405.118', licencia: 'B1 - Reparto Urbano', vencimiento: '2027-04-10', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 318 II', viajes: 410, calif: '5.0 ' },
+      { id: 'ch-h7', nombre: 'Ignacio Ortiz', dni: '39.012.884', licencia: 'B2 - Cargas Médicas Refrigeradas', vencimiento: '2026-12-28', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 104 JJ', viajes: 260, calif: '4.8 ' },
+      { id: 'ch-h8', nombre: 'Ezequiel Paz', dni: '33.901.442', licencia: 'B2 - Utilitarios y Furgones', vencimiento: '2027-11-04', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 890 KK', viajes: 480, calif: '5.0 ' }
     ],
     mantenimiento: [
       { id: 'mh-1', moto: 'AD 671 GG (Peugeot Boxer)', tarea: 'Service y Carga de Gas Equipo de Frío ThermoKing', fecha: '2026-09-14', km: 69000, taller: 'Taller Frigorífico San Martín', costo: 210000, estado: 'En Proceso' },
@@ -343,6 +808,161 @@ const BADDGROUP_LOGISTICS_SECTORS = {
     theme: 'industrial',
     bannerTitle: 'CENTRO DE CONTROL LOGÍSTICO · INDUSTRIAL & CORREDOR LITORAL',
     bannerDesc: 'Sistema de prueba para cargas pesadas siderúrgicas, tolvas cerealeras, granos a granel y logística agroexportadora.',
+    consumoFlota: '21.800 Litros (Gasoil Agro)',
+    consumoRendimiento: '3.1 Km / L (32.3 L/100Km)',
+    costoKm: '$ 740 / Km',
+    reporteUnidades: [
+      {
+            "patente": "AE 918 MM",
+            "marca": "Mercedes Actros 2645",
+            "tipo": "Tractor + Tolva 32Tn",
+            "viajes": 22,
+            "km": 11200,
+            "facturado": 11400000,
+            "costo": 5800000,
+            "rentabilidad": 5600000,
+            "margen": 49.1,
+            "consumo": "32 L/100Km"
+      },
+      {
+            "patente": "AF 340 AA",
+            "marca": "Scania G450 6x2",
+            "tipo": "Batea Áridos 30Tn",
+            "viajes": 24,
+            "km": 11800,
+            "facturado": 12200000,
+            "costo": 6200000,
+            "rentabilidad": 6000000,
+            "margen": 49.2,
+            "consumo": "33 L/100Km"
+      },
+      {
+            "patente": "AD 622 BB",
+            "marca": "Volvo FH 540",
+            "tipo": "Bitren Cerealero 38Tn",
+            "viajes": 18,
+            "km": 13500,
+            "facturado": 14200000,
+            "costo": 7200000,
+            "rentabilidad": 7000000,
+            "margen": 49.3,
+            "consumo": "35 L/100Km"
+      },
+      {
+            "patente": "AF 110 CC",
+            "marca": "VW Meteor 28.460",
+            "tipo": "Tolva Granelera 32Tn",
+            "viajes": 20,
+            "km": 10900,
+            "facturado": 10800000,
+            "costo": 5500000,
+            "rentabilidad": 5300000,
+            "margen": 49.1,
+            "consumo": "31 L/100Km"
+      },
+      {
+            "patente": "AE 775 DD",
+            "marca": "Scania R450 6x4",
+            "tipo": "Tractor Siderúrgico 34Tn",
+            "viajes": 19,
+            "km": 12100,
+            "facturado": 12500000,
+            "costo": 6400000,
+            "rentabilidad": 6100000,
+            "margen": 48.8,
+            "consumo": "34 L/100Km"
+      },
+      {
+            "patente": "AC 512 PK",
+            "marca": "Iveco Tector 170E28",
+            "tipo": "Camión Chasis 14Tn",
+            "viajes": 28,
+            "km": 8400,
+            "facturado": 8900000,
+            "costo": 4400000,
+            "rentabilidad": 4500000,
+            "margen": 50.6,
+            "consumo": "27 L/100Km"
+      }
+],
+    reporteCostos: [
+      {
+            "categoria": "Gasoil Diésel Grado 3",
+            "monto": 21800000,
+            "pct": 67.1,
+            "costoKm": "$ 496 / Km",
+            "tendencia": "+2.8%",
+            "color": "#16a34a"
+      },
+      {
+            "categoria": "Mantenimiento de Tolvas & Ejes",
+            "monto": 6900000,
+            "pct": 21.2,
+            "costoKm": "$ 157 / Km",
+            "tendencia": "-1.2%",
+            "color": "#f59e0b"
+      },
+      {
+            "categoria": "Seguros de Granos & ART",
+            "monto": 3800000,
+            "pct": 11.7,
+            "costoKm": "$ 87 / Km",
+            "tendencia": "0.0%",
+            "color": "#0284c7"
+      }
+],
+    reporteClientes: [
+      {
+            "puesto": 1,
+            "cliente": "Agroexportadora Puerto San Martín SA",
+            "cuit": "30-50289123-1",
+            "viajes": 92,
+            "facturado": 24800000,
+            "participacion": 39.7,
+            "rentabilidad": 11900000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 2,
+            "cliente": "Ternium Siderar Planta Savio",
+            "cuit": "30-50001844-3",
+            "viajes": 74,
+            "facturado": 19500000,
+            "participacion": 31.3,
+            "rentabilidad": 9350000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 3,
+            "cliente": "Molinos Agro SA Terminal Muelle",
+            "cuit": "30-50148920-7",
+            "viajes": 68,
+            "facturado": 17200000,
+            "participacion": 27.6,
+            "rentabilidad": 8250000,
+            "estado": "Cta Cte"
+      },
+      {
+            "puesto": 4,
+            "cliente": "Cargill SACI Puerto Quebracho",
+            "cuit": "30-50012390-2",
+            "viajes": 60,
+            "facturado": 16800000,
+            "participacion": 26.9,
+            "rentabilidad": 8050000,
+            "estado": "Al Día"
+      },
+      {
+            "puesto": 5,
+            "cliente": "Acindar Industria Argentina de Aceros",
+            "cuit": "30-50008912-9",
+            "viajes": 55,
+            "facturado": 15400000,
+            "participacion": 24.7,
+            "rentabilidad": 7400000,
+            "estado": "Al Día"
+      }
+],
     kpis: {
       mes: { facturacion: 62400000, combustible: 21800000, mantenimiento: 6900000, seguros: 3800000, balance: 29900000, margen: 47.9, unidadesRuta: '8 / 12', unidadesRutaPct: '66.7% en puertos', puntualidad: '97.8%', volumen: '2.850 Tn', volumenSub: 'Granos & Siderúrgico', ocupacion: '93.5%', alertas: '1 Próxima', alertasSub: 'Balanza Tolva AC 512', costoKm: '$ 740 / Km' },
       dia: { facturacion: 2600000, combustible: 910000, mantenimiento: 280000, seguros: 160000, balance: 1250000, margen: 48.0, unidadesRuta: '8 / 12', unidadesRutaPct: 'Operando', puntualidad: '98.5%', volumen: '120 Tn', volumenSub: 'Descarga Puerto', ocupacion: '94.0%', alertas: '1 Próxima', alertasSub: 'Plan diario', costoKm: '$ 735 / Km' },
@@ -402,14 +1022,14 @@ const BADDGROUP_LOGISTICS_SECTORS = {
       { id: 'IND-2026-308', cliente: 'Bunge Puerto Pampa', chofer: 'Lucas Santillán', vehiculo: 'AF 819 GG (Ford Cargo)', origen: 'Casilda (Santa Fe)', destino: 'Muelle Bunge Puerto San Martín', carga: 'Trigo Pan Panadero Exportación (15 Tn)', monto: 1180000, progreso: 85, estado: 'en_transito', eta: '18:40 hs', pago: 'Transferencia Inmediata', bultos: 1, peso: '15.000 Kg' }
     ],
     choferes: [
-      { id: 'ch-r1', nombre: 'Marcelo Gómez', dni: '30.814.229', licencia: 'E1 - Semirremolques Cerealeros', vencimiento: '2027-06-25', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 918 MM', viajes: 510, calif: '4.9 ★' },
-      { id: 'ch-r2', nombre: 'Roberto Bianchi', dni: '33.910.450', licencia: 'C2 - Cargas Generales Litoral', vencimiento: '2026-12-05', telefono: '5491123974066', estado: 'En Ruta', moto: 'AC 512 PK', viajes: 480, calif: '5.0 ★' },
-      { id: 'ch-r3', nombre: 'Claudio Mansilla', dni: '29.412.809', licencia: 'E1 - Tolvas Graneleras', vencimiento: '2027-08-10', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 340 AA', viajes: 540, calif: '4.8 ★' },
-      { id: 'ch-r4', nombre: 'Oscar Valenzuela', dni: '32.119.004', licencia: 'E2 - Bitrenes Cerealeros y Puerto', vencimiento: '2027-04-20', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 622 BB', viajes: 610, calif: '5.0 ★' },
-      { id: 'ch-r5', nombre: 'Gustavo Ferreyra', dni: '34.805.119', licencia: 'E1 - Cargas Agroindustriales', vencimiento: '2027-10-15', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 110 CC', viajes: 390, calif: '4.9 ★' },
-      { id: 'ch-r6', nombre: 'Horacio Molina', dni: '31.904.331', licencia: 'E1 - Siderúrgicos Pesados', vencimiento: '2027-03-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 775 DD', viajes: 520, calif: '5.0 ★' },
-      { id: 'ch-r7', nombre: 'Daniel Coronel', dni: '35.210.884', licencia: 'E1 - Cisternas y Líquidos Industriales', vencimiento: '2027-01-22', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 440 FF', viajes: 430, calif: '4.8 ★' },
-      { id: 'ch-r8', nombre: 'Lucas Santillán', dni: '36.812.001', licencia: 'C2 - Camiones Chasis Granel', vencimiento: '2027-06-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 819 GG', viajes: 370, calif: '4.9 ★' }
+      { id: 'ch-r1', nombre: 'Marcelo Gómez', dni: '30.814.229', licencia: 'E1 - Semirremolques Cerealeros', vencimiento: '2027-06-25', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 918 MM', viajes: 510, calif: '4.9 ' },
+      { id: 'ch-r2', nombre: 'Roberto Bianchi', dni: '33.910.450', licencia: 'C2 - Cargas Generales Litoral', vencimiento: '2026-12-05', telefono: '5491123974066', estado: 'En Ruta', moto: 'AC 512 PK', viajes: 480, calif: '5.0 ' },
+      { id: 'ch-r3', nombre: 'Claudio Mansilla', dni: '29.412.809', licencia: 'E1 - Tolvas Graneleras', vencimiento: '2027-08-10', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 340 AA', viajes: 540, calif: '4.8 ' },
+      { id: 'ch-r4', nombre: 'Oscar Valenzuela', dni: '32.119.004', licencia: 'E2 - Bitrenes Cerealeros y Puerto', vencimiento: '2027-04-20', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 622 BB', viajes: 610, calif: '5.0 ' },
+      { id: 'ch-r5', nombre: 'Gustavo Ferreyra', dni: '34.805.119', licencia: 'E1 - Cargas Agroindustriales', vencimiento: '2027-10-15', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 110 CC', viajes: 390, calif: '4.9 ' },
+      { id: 'ch-r6', nombre: 'Horacio Molina', dni: '31.904.331', licencia: 'E1 - Siderúrgicos Pesados', vencimiento: '2027-03-30', telefono: '5491123974066', estado: 'En Ruta', moto: 'AE 775 DD', viajes: 520, calif: '5.0 ' },
+      { id: 'ch-r7', nombre: 'Daniel Coronel', dni: '35.210.884', licencia: 'E1 - Cisternas y Líquidos Industriales', vencimiento: '2027-01-22', telefono: '5491123974066', estado: 'En Ruta', moto: 'AD 440 FF', viajes: 430, calif: '4.8 ' },
+      { id: 'ch-r8', nombre: 'Lucas Santillán', dni: '36.812.001', licencia: 'C2 - Camiones Chasis Granel', vencimiento: '2027-06-18', telefono: '5491123974066', estado: 'En Ruta', moto: 'AF 819 GG', viajes: 370, calif: '4.9 ' }
     ],
     mantenimiento: [
       { id: 'mr-1', moto: 'AE 918 MM (Mercedes Actros)', tarea: 'Engrase General de Pernos y Ejes de Tolva Cerealera', fecha: '2026-09-11', km: 114000, taller: 'Taller Integral Puerto San Martín', costo: 180000, estado: 'Finalizado' },
@@ -474,6 +1094,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPeriodSelector();
   initChartControls();
   initFleetFilterPills();
+  initRouteFilterPills();
   initCalendar();
   initModals();
   initSearch();
@@ -542,7 +1163,7 @@ function initSectorSwitcher() {
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       setSector(sectorId);
-      showToast(`Sector activo: ${BADDGROUP_LOGISTICS_SECTORS[sectorId].sectorTitle}`, '🏢');
+      showToast(`Sector activo: ${BADDGROUP_LOGISTICS_SECTORS[sectorId].sectorTitle}`);
     });
   });
 }
@@ -589,6 +1210,7 @@ function setSector(sectorId) {
   renderClientsCards();
   renderRemitoDocument();
   populateRouteModalSelects();
+  renderReportsView();
 }
 
 // =============================================================================
@@ -605,40 +1227,57 @@ function renderFleetStatusOverview() {
   const pctDisp = Math.round((disponibles.length / total) * 100);
   const pctTaller = 100 - pctEnRuta - pctDisp;
 
-  // Barra de distribución
-  document.getElementById('barSegmentEnRuta').style.width = `${pctEnRuta}%`;
-  document.getElementById('barSegmentDisponible').style.width = `${pctDisp}%`;
-  document.getElementById('barSegmentTaller').style.width = `${pctTaller}%`;
+  // Actualizar resumen en la cabecera del cuadro
+  const summaryEl = document.getElementById('fleetRealtimeSummary');
+  if (summaryEl) {
+    summaryEl.textContent = `${total} Unidades en parque automotor · ${enRuta.length} en viaje (${pctEnRuta}%) · ${disponibles.length} disponibles (${pctDisp}%) · ${enTaller.length} en taller (${pctTaller}%)`;
+  }
 
-  document.getElementById('fleetDistributionSummary').textContent = 
-    `${total} Unidades en parque automotor · ${enRuta.length} en tránsito (${pctEnRuta}%) · ${disponibles.length} disponibles (${pctDisp}%) · ${enTaller.length} en taller (${pctTaller}%)`;
+  // Cuadro 1: En Viaje / En Ruta
+  const elEnRutaCount = document.getElementById('metricEnRutaCount');
+  if (elEnRutaCount) elEnRutaCount.textContent = enRuta.length;
+  const elCountEnRutaBadge = document.getElementById('countEnRutaBadge');
+  if (elCountEnRutaBadge) elCountEnRutaBadge.textContent = `${enRuta.length} Unidades (${pctEnRuta}%)`;
 
-  document.getElementById('countEnRutaBadge').textContent = `${enRuta.length} Unidades (${pctEnRuta}%)`;
-  document.getElementById('countDisponibleBadge').textContent = `${disponibles.length} Unidades (${pctDisp}%)`;
-  document.getElementById('countTallerBadge').textContent = `${enTaller.length} Unidades (${pctTaller}%)`;
+  // Cuadro 2: Disponibles en Base
+  const elDispCount = document.getElementById('metricDisponibleCount');
+  if (elDispCount) elDispCount.textContent = disponibles.length;
+  const elCountDispBadge = document.getElementById('countDisponibleBadge');
+  if (elCountDispBadge) elCountDispBadge.textContent = `${disponibles.length} Unidades (${pctDisp}%)`;
 
-  // Chips de móviles interactivos
+  // Cuadro 3: En Taller / Service
+  const elTallerCount = document.getElementById('metricTallerCount');
+  if (elTallerCount) elTallerCount.textContent = enTaller.length;
+  const elCountTallerBadge = document.getElementById('countTallerBadge');
+  if (elCountTallerBadge) elCountTallerBadge.textContent = `${enTaller.length} Unidades (${pctTaller}%)`;
+
+  // Chips de móviles interactivos para cada una de las 3 cajas
   const chipsRuta = document.getElementById('chipsEnRutaList');
+  if (chipsRuta) {
+    chipsRuta.innerHTML = enRuta.map(v => `
+      <span class="status-unit-chip" style="border-left:3px solid var(--success); cursor:pointer;" onclick="switchView('flota'); filterFleetCards('ocupado');" title="Ver unidad en Flota">
+        <strong>${v.patente}</strong> (${v.marca.split(' ')[0]}) - ${v.chofer.split(' ')[0]}
+      </span>
+    `).join('') || '<span style="font-size:11px; color:var(--text-subtle);">Sin unidades en viaje</span>';
+  }
+
   const chipsDisp = document.getElementById('chipsDisponibleList');
+  if (chipsDisp) {
+    chipsDisp.innerHTML = disponibles.map(v => `
+      <span class="status-unit-chip" style="border-left:3px solid var(--info); cursor:pointer;" onclick="switchView('flota'); filterFleetCards('disponible');" title="Ver unidad en Flota">
+        <strong>${v.patente}</strong> (${v.marca.split(' ')[0]}) · Base Central
+      </span>
+    `).join('') || '<span style="font-size:11px; color:var(--text-subtle);">Todas las unidades en viaje</span>';
+  }
+
   const chipsTaller = document.getElementById('chipsTallerList');
-
-  chipsRuta.innerHTML = enRuta.map(v => `
-    <span class="status-unit-chip" style="border-left:3px solid var(--success); cursor:pointer;" onclick="switchView('flota'); filterFleetCards('ocupado');" title="Ver unidad en Flota">
-      <strong>${v.patente}</strong> (${v.marca.split(' ')[0]}) ➔ ${v.chofer.split(' ')[0]}
-    </span>
-  `).join('') || '<span style="font-size:11px; color:var(--text-subtle);">Sin unidades en tránsito</span>';
-
-  chipsDisp.innerHTML = disponibles.map(v => `
-    <span class="status-unit-chip" style="border-left:3px solid var(--info); cursor:pointer;" onclick="switchView('flota'); filterFleetCards('disponible');" title="Ver unidad en Flota">
-      <strong>${v.patente}</strong> (${v.marca.split(' ')[0]}) · Base Central
-    </span>
-  `).join('') || '<span style="font-size:11px; color:var(--text-subtle);">Todas las unidades asignadas</span>';
-
-  chipsTaller.innerHTML = enTaller.map(v => `
-    <span class="status-unit-chip" style="border-left:3px solid var(--warning); cursor:pointer;" onclick="switchView('flota'); filterFleetCards('mantenimiento');" title="Ver unidad en Flota">
-      <strong>${v.patente}</strong> · Service Preventivo
-    </span>
-  `).join('') || '<span style="font-size:11px; color:var(--success);">Taller al día (0 en service)</span>';
+  if (chipsTaller) {
+    chipsTaller.innerHTML = enTaller.map(v => `
+      <span class="status-unit-chip" style="border-left:3px solid var(--warning); cursor:pointer;" onclick="switchView('flota'); filterFleetCards('mantenimiento');" title="Ver unidad en Flota">
+        <strong>${v.patente}</strong> · Service Preventivo
+      </span>
+    `).join('') || '<span style="font-size:11px; color:var(--success);">Taller al día (0 en service)</span>';
+  }
 }
 
 // =============================================================================
@@ -664,11 +1303,67 @@ function initPeriodSelector() {
       renderCostChart();
     });
   });
+
+  // Selector libre de fechas Desde - Hasta
+  const btnApply = document.getElementById('btnApplyDateRange');
+  btnApply?.addEventListener('click', () => {
+    const fromVal = document.getElementById('periodDateFrom')?.value;
+    const toVal = document.getElementById('periodDateTo')?.value;
+    if (!fromVal || !toVal) {
+      showToast('Por favor seleccione una fecha inicial y una fecha final');
+      return;
+    }
+
+    const dFrom = new Date(fromVal);
+    const dTo = new Date(toVal);
+    if (dFrom > dTo) {
+      showToast('La fecha Desde no puede ser posterior a la fecha Hasta');
+      return;
+    }
+
+    const diffTime = Math.abs(dTo - dFrom);
+    const diffDays = Math.max(1, Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1);
+
+    periodButtons.forEach(b => b.classList.remove('active'));
+
+    const [yFrom, mFrom, dayFrom] = fromVal.split('-');
+    const [yTo, mTo, dayTo] = toVal.split('-');
+    document.getElementById('periodActiveDateLabel').textContent = 
+      `Rango Personalizado: ${dayFrom}/${mFrom}/${yFrom} al ${dayTo}/${mTo}/${yTo} (${diffDays} días)`;
+
+    const sector = getActiveData();
+    const baseKpis = sector.kpis.mes;
+    const factor = diffDays / 30;
+
+    const customKpis = {
+      facturacion: Math.round(baseKpis.facturacion * factor),
+      combustible: Math.round(baseKpis.combustible * factor),
+      mantenimiento: Math.round(baseKpis.mantenimiento * factor),
+      seguros: Math.round(baseKpis.seguros * factor),
+      balance: Math.round(baseKpis.balance * factor),
+      margen: baseKpis.margen,
+      unidadesRuta: baseKpis.unidadesRuta,
+      unidadesRutaPct: `${diffDays} días evaluados`,
+      puntualidad: baseKpis.puntualidad,
+      volumen: `${Math.round(parseInt(baseKpis.volumen.replace(/\D/g, '')) * factor)} Envíos`,
+      volumenSub: 'En el período seleccionado',
+      ocupacion: baseKpis.ocupacion,
+      alertas: baseKpis.alertas,
+      alertasSub: baseKpis.alertasSub,
+      costoKm: baseKpis.costoKm,
+      consumoFlota: `${Math.round(parseInt(sector.consumoFlota.replace(/\D/g, '')) * factor)} Litros`,
+      consumoRendimiento: sector.consumoRendimiento
+    };
+
+    renderDashboardKPIs(customKpis);
+    renderCostChart();
+    showToast(`Período operativo actualizado: ${diffDays} días evaluados`);
+  });
 }
 
-function renderDashboardKPIs() {
+function renderDashboardKPIs(customKpis) {
   const sector = getActiveData();
-  const kpis = sector.kpis[currentPeriod] || sector.kpis.mes;
+  const kpis = customKpis || sector.kpis[currentPeriod] || sector.kpis.mes;
 
   document.getElementById('kpiFacturacionTotal').textContent = formatARS(kpis.facturacion);
   document.getElementById('kpiCombustible').textContent = formatARS(kpis.combustible);
@@ -685,7 +1380,15 @@ function renderDashboardKPIs() {
   document.getElementById('kpiOcupacionFlota').textContent = kpis.ocupacion;
   document.getElementById('kpiAlertasDoc').textContent = kpis.alertas;
   document.getElementById('kpiAlertasDocSub').textContent = kpis.alertasSub;
-  document.getElementById('kpiCostoKm').textContent = kpis.costoKm;
+
+  const elCostoKm = document.getElementById('kpiCostoKm');
+  if (elCostoKm) elCostoKm.textContent = kpis.costoKm || sector.costoKm || '$ 142 / Km';
+
+  const elConsumo = document.getElementById('kpiConsumoFlota');
+  if (elConsumo) elConsumo.textContent = kpis.consumoFlota || sector.consumoFlota || '2.840 Litros';
+
+  const elConsumoSub = document.getElementById('kpiConsumoFlotaSub');
+  if (elConsumoSub) elConsumoSub.textContent = kpis.consumoRendimiento || sector.consumoRendimiento || '38.2 Km / L';
 }
 
 // =============================================================================
@@ -1027,61 +1730,138 @@ function attachChartTooltips() {
 function renderDashboardTables() {
   const sector = getActiveData();
   const tableBody = document.getElementById('dashboardRoutesTableBody');
-  const alertsList = document.getElementById('dashboardAlertsList');
-  if (!tableBody || !alertsList) return;
+  const alertsTable = document.getElementById('dashboardAlertsTableBody');
 
-  tableBody.innerHTML = sector.rutas.slice(0, 5).map(r => `
-    <tr>
-      <td><span class="code-pill">${r.id}</span></td>
-      <td><strong>${r.cliente}</strong></td>
-      <td>${r.chofer}</td>
-      <td>${r.vehiculo.split('(')[0]}</td>
-      <td>${r.origen.split(',')[0]} ➔ ${r.destino.split(',')[0]}</td>
-      <td>
-        <div class="progress-bar-container">
-          <div class="progress-bar-fill" style="width: ${r.progreso}%;"></div>
-        </div>
-        <span style="font-size:10px; font-family:var(--font-mono); color:var(--text-muted);">${r.progreso}% · ETA ${r.eta}</span>
-      </td>
-      <td><span class="status-badge ${r.estado}">● En Tránsito</span></td>
-      <td>
-        <button class="btn-table-action" onclick="openRouteDetailModal('${r.id}')">👁️ Ver Detalle</button>
-      </td>
-    </tr>
-  `).join('');
+  if (tableBody) {
+    tableBody.innerHTML = sector.rutas.slice(0, 5).map(r => `
+      <tr>
+        <td><span class="code-pill">${r.id}</span></td>
+        <td><strong>${r.cliente}</strong></td>
+        <td>${r.chofer}</td>
+        <td>${r.vehiculo.split('(')[0]}</td>
+        <td>${r.origen.split(',')[0]} → ${r.destino.split(',')[0]}</td>
+        <td>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" style="width: ${r.progreso}%;"></div>
+          </div>
+          <span style="font-size:10px; font-family:var(--font-mono); color:var(--text-muted);">${r.progreso}% · ETA ${r.eta}</span>
+        </td>
+        <td><span class="status-badge ${r.estado}">● En Tránsito</span></td>
+        <td>
+          <button class="btn-table-action" onclick="openRouteDetailModal('${r.id}')">Ver Detalle</button>
+        </td>
+      </tr>
+    `).join('');
+  }
 
-  alertsList.innerHTML = `
-    <div class="alert-feed-item">
-      <div class="alert-icon-box warning">⚠️</div>
-      <div class="alert-texts">
-        <span class="alert-title">Renovación de VTV / R.U.T.A. Próxima</span>
-        <span class="alert-desc">Unidad ${sector.vehiculos[3]?.patente || 'AF 703'} vence en menos de 20 días hábiles.</span>
-        <span class="alert-time">Planta Oficial · Prioridad Preventiva</span>
-      </div>
-    </div>
-    <div class="alert-feed-item">
-      <div class="alert-icon-box info">🔧</div>
-      <div class="alert-texts">
-        <span class="alert-title">Service Programado por Odómetro</span>
-        <span class="alert-desc">Cambio de lubricantes y revisión de frenos para unidad ${sector.vehiculos[0]?.patente || 'Móvil'}.</span>
-        <span class="alert-time">Odómetro: ${Number(sector.vehiculos[0]?.km || 19400).toLocaleString()} Km</span>
-      </div>
-    </div>
-  `;
+  if (alertsTable) {
+    const alertsData = [
+      { prio: 'ALTA', prioClass: 'alta', unidad: sector.vehiculos[3]?.patente || 'AF 703 QR', alerta: 'Vencimiento de VTV en menos de 20 días hábiles', venc: '04/10/2026', accion: 'switchView("agenda")' },
+      { prio: 'MEDIA', prioClass: 'media', unidad: sector.vehiculos[0]?.patente || 'A 192 JKL', alerta: 'Service Programado por Odómetro (Aceite y Frenos)', venc: '18/10/2026', accion: 'switchView("mantenimiento")' },
+      { prio: 'PREVENTIVA', prioClass: 'preventiva', unidad: sector.vehiculos[1]?.patente || 'A 283 MNP', alerta: 'Rotación y alineación de neumáticos preventiva', venc: '25/10/2026', accion: 'switchView("mantenimiento")' },
+      { prio: 'PREVENTIVA', prioClass: 'preventiva', unidad: sector.choferes[1]?.nombre || 'Lucas Benítez', alerta: 'Renovación Psicofísico LiNTI / Registro Profesional', venc: '30/11/2026', accion: 'switchView("choferes")' }
+    ];
+
+    alertsTable.innerHTML = alertsData.map(a => `
+      <tr>
+        <td><span class="priority-pill ${a.prioClass}">${a.prio}</span></td>
+        <td><strong>${a.unidad}</strong></td>
+        <td>${a.alerta}</td>
+        <td><span class="date-badge">${a.venc}</span></td>
+        <td>
+          <button class="btn-table-action" onclick="${a.accion}">Gestionar</button>
+        </td>
+      </tr>
+    `).join('');
+  }
 }
 
-function renderRoutesTable() {
+let currentRouteFilter = 'todos';
+
+function initRouteFilterPills() {
+  const pills = document.querySelectorAll('#routeFilterPills .filter-pill');
+  pills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      currentRouteFilter = btn.getAttribute('data-route-filter');
+      filterRoutesTable(currentRouteFilter);
+    });
+  });
+
+  const search = document.getElementById('routeSearchInput');
+  search?.addEventListener('input', (e) => {
+    filterRoutesTable(currentRouteFilter, e.target.value.toLowerCase().trim());
+  });
+}
+
+function updateRoutePillsCount() {
+  const sector = getActiveData();
+  const total = sector.rutas.length;
+  const enTransito = sector.rutas.filter(r => r.estado === 'en_transito').length;
+  const completadas = sector.rutas.filter(r => r.estado === 'completada').length;
+
+  const cTodos = document.getElementById('countRoutesTodos');
+  const cEnTransito = document.getElementById('countRoutesEnTransito');
+  const cCompletadas = document.getElementById('countRoutesCompletadas');
+
+  if (cTodos) cTodos.textContent = total;
+  if (cEnTransito) cEnTransito.textContent = enTransito;
+  if (cCompletadas) cCompletadas.textContent = completadas;
+}
+
+function filterRoutesTable(filterStatus, query = '') {
   const sector = getActiveData();
   const tableBody = document.getElementById('mainRoutesTableBody');
   if (!tableBody) return;
 
-  tableBody.innerHTML = sector.rutas.map(r => `
+  let filtered = sector.rutas;
+  if (filterStatus && filterStatus !== 'todos') {
+    filtered = filtered.filter(r => r.estado === filterStatus);
+  }
+
+  if (query) {
+    filtered = filtered.filter(r => 
+      r.id.toLowerCase().includes(query) ||
+      r.cliente.toLowerCase().includes(query) ||
+      r.chofer.toLowerCase().includes(query) ||
+      r.vehiculo.toLowerCase().includes(query) ||
+      r.origen.toLowerCase().includes(query) ||
+      r.destino.toLowerCase().includes(query)
+    );
+  }
+
+  renderRoutesTableHtml(filtered);
+}
+
+function renderRoutesTable() {
+  const sector = getActiveData();
+  renderRoutesTableHtml(sector.rutas);
+  updateRoutePillsCount();
+}
+
+function renderRoutesTableHtml(routes) {
+  const tableBody = document.getElementById('mainRoutesTableBody');
+  if (!tableBody) return;
+
+  if (routes.length === 0) {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="10" style="text-align:center; padding:32px; color:var(--text-muted);">
+          No se encontraron hojas de ruta con los filtros seleccionados.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tableBody.innerHTML = routes.map(r => `
     <tr>
       <td><span class="code-pill">${r.id}</span></td>
       <td><strong>${r.cliente}</strong></td>
       <td>${r.chofer}</td>
       <td><span class="plate-badge" style="font-size:11px; padding:2px 6px;">${r.vehiculo.split('(')[0]}</span></td>
-      <td><strong>${r.origen}</strong> ➔ ${r.destino}</td>
+      <td><strong>${r.origen}</strong> → ${r.destino}</td>
       <td>${r.carga}</td>
       <td><strong>${formatARS(r.monto)}</strong></td>
       <td>
@@ -1090,11 +1870,11 @@ function renderRoutesTable() {
         </div>
         <span style="font-size:10.5px; font-family:var(--font-mono); color:var(--text-muted);">${r.progreso}% · ${r.eta}</span>
       </td>
-      <td><span class="status-badge ${r.estado}">● En Tránsito</span></td>
+      <td><span class="status-badge ${r.estado}">● ${r.estado === 'completada' ? 'Entregado' : 'En Tránsito'}</span></td>
       <td>
         <div style="display:flex; gap:6px;">
-          <button class="btn-table-action" onclick="openRouteDetailModal('${r.id}')" title="Ver Detalle Completo">👁️ Detalle</button>
-          <button class="btn-table-action" onclick="verRemitoDeRuta('${r.id}')" title="Emitir Remito Oficial">📄 Remito</button>
+          <button class="btn-table-action" onclick="openRouteDetailModal('${r.id}')" title="Ver Detalle Completo">Detalle</button>
+          <button class="btn-table-action" onclick="verRemitoDeRuta('${r.id}')" title="Emitir Remito Oficial">Remito</button>
         </div>
       </td>
     </tr>
@@ -1124,7 +1904,7 @@ function openRouteDetailModal(routeId) {
           </div>
           <div style="display:flex; flex-direction:column; gap:6px;">
             <div style="display:flex; align-items:center; gap:8px;">
-              <span style="color:var(--success); font-size:14px;">📍</span>
+              <span style="color:var(--success); font-size:14px;">Origen:</span>
               <div>
                 <span style="font-size:10.5px; color:var(--text-subtle);">PUNTO DE ORIGEN</span>
                 <div style="font-size:13px; font-weight:700; color:var(--text-main);">${route.origen}</div>
@@ -1132,7 +1912,7 @@ function openRouteDetailModal(routeId) {
             </div>
             <div style="height:14px; border-left:2px dashed var(--border-color); margin-left:17px;"></div>
             <div style="display:flex; align-items:center; gap:8px;">
-              <span style="color:var(--danger); font-size:14px;">🏁</span>
+              <span style="color:var(--danger); font-size:14px;">Destino:</span>
               <div>
                 <span style="font-size:10.5px; color:var(--text-subtle);">PUNTO DE DESTINO</span>
                 <div style="font-size:13px; font-weight:700; color:var(--text-main);">${route.destino}</div>
@@ -1145,28 +1925,28 @@ function openRouteDetailModal(routeId) {
           <span style="font-size:12px; font-weight:800; color:var(--text-main);">CHECKPOINTS Y EVENTOS DE VIAJE</span>
           <div class="detail-checkpoints-timeline">
             <div class="checkpoint-item completed">
-              <div class="checkpoint-icon">✓</div>
+              <div class="checkpoint-icon"></div>
               <div class="checkpoint-texts">
                 <span class="checkpoint-title">Salida de Base y Carga Despachada</span>
                 <span class="checkpoint-desc">Unidad verificada y remito electrónico emitido</span>
               </div>
             </div>
             <div class="checkpoint-item ${route.progreso >= 50 ? 'completed' : 'active'}">
-              <div class="checkpoint-icon">${route.progreso >= 50 ? '✓' : '●'}</div>
+              <div class="checkpoint-icon">${route.progreso >= 50 ? '' : '●'}</div>
               <div class="checkpoint-texts">
                 <span class="checkpoint-title">En Tránsito por Corredor Vial</span>
                 <span class="checkpoint-desc">Velocidad crucero controlada por odómetro</span>
               </div>
             </div>
             <div class="checkpoint-item ${route.progreso >= 90 ? 'completed' : (route.progreso >= 50 ? 'active' : '')}">
-              <div class="checkpoint-icon">${route.progreso >= 90 ? '✓' : '●'}</div>
+              <div class="checkpoint-icon">${route.progreso >= 90 ? '' : '●'}</div>
               <div class="checkpoint-texts">
                 <span class="checkpoint-title">Llegada a Destino y Descarga</span>
                 <span class="checkpoint-desc">Arribo estimado: ${route.eta}</span>
               </div>
             </div>
             <div class="checkpoint-item ${route.progreso === 100 ? 'completed' : ''}">
-              <div class="checkpoint-icon">${route.progreso === 100 ? '✓' : '○'}</div>
+              <div class="checkpoint-icon">${route.progreso === 100 ? '' : '○'}</div>
               <div class="checkpoint-texts">
                 <span class="checkpoint-title">Recepción Conforme y Rendición</span>
                 <span class="checkpoint-desc">Firma digital de remito y liquidación</span>
@@ -1177,10 +1957,10 @@ function openRouteDetailModal(routeId) {
 
         <div style="margin-top:20px; display:flex; gap:10px;">
           <button class="btn-primary" style="flex:1;" onclick="avanzarProgresoDetalle('${route.id}')">
-            ⚡ Avanzar Progreso (+20%)
+            Avanzar Progreso (+20%)
           </button>
           <button class="btn-secondary" onclick="verRemitoDeRuta('${route.id}'); document.getElementById('routeDetailModal').classList.remove('active');">
-            📄 Emitir Remito Oficial
+            Emitir Remito Oficial
           </button>
         </div>
       </div>
@@ -1208,7 +1988,7 @@ function openRouteDetailModal(routeId) {
 
         <a href="https://wa.me/5491123974066?text=Hola%20${encodeURIComponent(route.chofer)},%20te%20escribo%20desde%20la%20central%20Baddgroup%20por%20la%20hoja%20de%20ruta%20${route.id}" 
            target="_blank" class="btn-whatsapp-direct">
-          💬 Contactar al Conductor por WhatsApp
+          Contactar por WhatsApp
         </a>
       </div>
     </div>
@@ -1226,9 +2006,9 @@ function avanzarProgresoDetalle(routeId) {
   if (route.progreso >= 100) {
     route.estado = 'completada';
     route.eta = 'Entregado Conforme';
-    showToast(`Despacho ${route.id} completado y entregado con éxito`, '🎉');
+    showToast(`Despacho ${route.id} completado y entregado con éxito`);
   } else {
-    showToast(`Progreso de ${route.id} avanzado al ${route.progreso}%`, '⚡');
+    showToast(`Progreso de ${route.id} avanzado al ${route.progreso}%`);
   }
 
   openRouteDetailModal(routeId);
@@ -1368,13 +2148,13 @@ function renderFleetCardsHtml(vehicles) {
           <span style="font-size:10.5px; font-weight:800; color:var(--text-subtle); display:block; margin-bottom:6px;">CAMBIAR ESTADO OPERATIVO (1 CLIC):</span>
           <div class="quick-status-group">
             <button class="btn-quick-status en-ruta ${isRuta ? 'active' : ''}" onclick="setQuickVehicleStatus('${v.id}', 'ocupado')" title="Marcar como En Ruta Activa">
-              🟢 En Ruta
+              En Ruta
             </button>
             <button class="btn-quick-status disponible ${isDisp ? 'active' : ''}" onclick="setQuickVehicleStatus('${v.id}', 'disponible')" title="Marcar como Disponible en Base">
-              🔵 En Base
+              En Base
             </button>
             <button class="btn-quick-status taller ${isTaller ? 'active' : ''}" onclick="setQuickVehicleStatus('${v.id}', 'mantenimiento')" title="Marcar como En Taller / Service">
-              🟡 En Taller
+              En Taller
             </button>
           </div>
         </div>
@@ -1390,7 +2170,7 @@ function setQuickVehicleStatus(vehId, newStatus) {
 
   veh.estado = newStatus;
   const statusLabels = { ocupado: 'En Ruta Activa', disponible: 'Disponible en Base', mantenimiento: 'En Taller / Service' };
-  showToast(`Móvil ${veh.patente}: marcado como ${statusLabels[newStatus]}`, '🔄');
+  showToast(`Móvil ${veh.patente}: marcado como ${statusLabels[newStatus]}`);
 
   renderFleetCards();
   renderFleetStatusOverview();
@@ -1437,7 +2217,7 @@ function renderDriversCards() {
 
       <a href="https://wa.me/${ch.telefono}?text=Hola%20${encodeURIComponent(ch.nombre)},%20te%20escribo%20desde%20la%20central%20Baddgroup%20TMS" 
          target="_blank" class="btn-whatsapp-direct">
-        💬 WhatsApp Directo (+${ch.telefono.slice(0, 4)}...)
+        WhatsApp Directo (+${ch.telefono.slice(0, 4)}...)
       </a>
     </div>
   `).join('');
@@ -1491,8 +2271,8 @@ function renderMaintenanceGrid() {
 // AGENDA: CALENDARIO INTERACTIVO (SOLICITADO EXPLÍCITAMENTE)
 // =============================================================================
 function initCalendar() {
-  document.getElementById('btnPrevMonth')?.addEventListener('click', () => showToast('Visualizando histórico de Agosto 2026', '📅'));
-  document.getElementById('btnNextMonth')?.addEventListener('click', () => showToast('Planificación de Octubre 2026', '📅'));
+  document.getElementById('btnPrevMonth')?.addEventListener('click', () => showToast('Visualizando histórico de Agosto 2026'));
+  document.getElementById('btnNextMonth')?.addEventListener('click', () => showToast('Planificación de Octubre 2026'));
   document.getElementById('btnShowAllEvents')?.addEventListener('click', () => {
     currentSelectedCalendarDay = null;
     document.querySelectorAll('.calendar-day-cell').forEach(c => c.classList.remove('active-day'));
@@ -1566,7 +2346,7 @@ function renderCalendarEventsForDay(day) {
   list.innerHTML = events.map(a => `
     <div class="alert-feed-item" style="border-left:4px solid var(--accent);">
       <div class="alert-icon-box ${a.tipo === 'vtv' ? 'danger' : (a.tipo === 'taller' ? 'warning' : 'info')}">
-        ${a.tipo === 'vtv' ? '🛡️' : (a.tipo === 'taller' ? '🔧' : '📦')}
+        ${a.tipo === 'vtv' ? 'VTV' : (a.tipo === 'taller' ? 'TALLER' : 'DESPACHO')}
       </div>
       <div class="alert-texts" style="flex:1;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -1777,7 +2557,7 @@ function renderRemitoDocument(routeId) {
 function verRemitoDeRuta(routeId) {
   renderRemitoDocument(routeId);
   switchView('remitos');
-  showToast(`Remito oficial preparado para despacho ${routeId}`, '📄');
+  showToast(`Remito oficial preparado para despacho ${routeId}`);
 }
 
 // =============================================================================
@@ -1787,10 +2567,10 @@ function initThemeToggle() {
   const btn = document.getElementById('themeToggleBtn');
   btn?.addEventListener('click', () => {
     const html = document.documentElement;
-    const current = html.getAttribute('data-theme') || 'dark';
+    const current = html.getAttribute('data-theme') || 'light';
     const next = current === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
-    showToast(`Modo visual cambiado a ${next === 'dark' ? 'Oscuro' : 'Claro'}`, '🌓');
+    showToast(`Modo visual cambiado a ${next === 'dark' ? 'Oscuro' : 'Claro'}`);
   });
 }
 
@@ -1823,12 +2603,12 @@ function initSearch() {
           <td><strong>${r.cliente}</strong></td>
           <td>${r.chofer}</td>
           <td>${r.vehiculo}</td>
-          <td>${r.origen} ➔ ${r.destino}</td>
+          <td>${r.origen}  ${r.destino}</td>
           <td>${r.carga}</td>
           <td><strong>${formatARS(r.monto)}</strong></td>
           <td>${r.progreso}%</td>
           <td><span class="status-badge en_transito">● En Tránsito</span></td>
-          <td><button class="btn-table-action" onclick="openRouteDetailModal('${r.id}')">👁️ Detalle</button></td>
+          <td><button class="btn-table-action" onclick="openRouteDetailModal('${r.id}')">Detalle</button></td>
         </tr>
       `).join('');
     }
@@ -1862,6 +2642,7 @@ function initModals() {
   // Botón + Despacho en topbar
   document.getElementById('btnNuevaRuta')?.addEventListener('click', () => {
     populateRouteModalSelects();
+  renderReportsView();
     document.getElementById('newRouteModal')?.classList.add('active');
   });
 
@@ -1909,7 +2690,7 @@ function initModals() {
     renderRoutesTable();
     renderDashboardTables();
     document.getElementById('badgeRutasActivas').textContent = sector.rutas.length;
-    showToast(`Despacho ${newRoute.id} creado con éxito`, '📦');
+    showToast(`Despacho ${newRoute.id} creado con éxito`);
   });
 
   document.getElementById('newVehicleForm')?.addEventListener('submit', (e) => {
@@ -1935,7 +2716,7 @@ function initModals() {
     renderFleetCards();
     renderFleetStatusOverview();
     document.getElementById('badgeTotalFlota').textContent = sector.vehiculos.length;
-    showToast(`Móvil ${newVeh.patente} incorporado a la flota`, '🚚');
+    showToast(`Móvil ${newVeh.patente} incorporado a la flota`);
   });
 
   document.getElementById('newDriverForm')?.addEventListener('submit', (e) => {
@@ -1951,14 +2732,14 @@ function initModals() {
       estado: 'Disponible',
       moto: 'Sin asignar',
       viajes: 0,
-      calif: '5.0 ★'
+      calif: '5.0 '
     };
 
     sector.choferes.unshift(newDriver);
     document.getElementById('newDriverModal').classList.remove('active');
     renderDriversCards();
     document.getElementById('badgeChoferesCount').textContent = sector.choferes.length;
-    showToast(`Conductor ${newDriver.nombre} dado de alta`, '👨‍✈️');
+    showToast(`Conductor ${newDriver.nombre} dado de alta`);
   });
 
   document.getElementById('newAgendaEventForm')?.addEventListener('submit', (e) => {
@@ -1981,7 +2762,7 @@ function initModals() {
     document.getElementById('badgeAgendaCount').textContent = sector.agenda.length;
     renderCalendarDays();
     selectCalendarDay(dia);
-    showToast(`Turno "${newEvt.titulo}" agendado con éxito`, '📅');
+    showToast(`Turno "${newEvt.titulo}" agendado con éxito`);
   });
 }
 
@@ -2009,7 +2790,7 @@ function populateRouteModalSelects() {
 // TOAST NOTIFICACIONES FLOTANTES
 // =============================================================================
 let toastTimeout;
-function showToast(message, icon = '✅') {
+function showToast(message, icon = '') {
   const toast = document.getElementById('toastNotification');
   const iconEl = document.getElementById('toastIcon');
   const msgEl = document.getElementById('toastMessage');
@@ -2025,3 +2806,186 @@ function showToast(message, icon = '✅') {
     toast.classList.remove('show');
   }, 3200);
 }
+
+// =============================================================================
+// MÓDULO DE REPORTES & ANÁLISIS ESTRATÉGICO
+// (Rendimiento por unidad, Estructura de costos, Top clientes)
+// =============================================================================
+function renderReportsView() {
+  const sector = getActiveData();
+  renderReportRentabilidad(sector);
+  renderReportCostos(sector);
+  renderReportTopClientes(sector);
+}
+
+function renderReportRentabilidad(sector) {
+  const container = document.getElementById('reportRentabilidadChartContainer');
+  const tableBody = document.getElementById('reportRentabilidadTableBody');
+  const units = sector.reporteUnidades || [];
+
+  if (tableBody) {
+    tableBody.innerHTML = units.map(u => `
+      <tr>
+        <td><strong>${u.patente}</strong></td>
+        <td>${u.marca}</td>
+        <td style="font-family:var(--font-mono);">${u.viajes}</td>
+        <td style="font-family:var(--font-mono);">${Number(u.km).toLocaleString()} Km</td>
+        <td style="font-weight:700; color:var(--text-main);">${formatARS(u.facturado)}</td>
+        <td style="color:var(--danger);">${formatARS(u.costo)}</td>
+        <td style="font-weight:800; color:var(--success);">${formatARS(u.rentabilidad)}</td>
+        <td><span class="status-badge completada" style="font-size:10.5px;">${u.margen}%</span></td>
+        <td style="font-family:var(--font-mono); font-size:11px;">${u.consumo}</td>
+      </tr>
+    `).join('');
+  }
+
+  if (container && units.length > 0) {
+    const width = 680;
+    const height = 240;
+    const paddingBottom = 40;
+    const paddingTop = 25;
+    const paddingLeft = 50;
+    const paddingRight = 20;
+    const chartWidth = width - paddingLeft - paddingRight;
+    const chartHeight = height - paddingBottom - paddingTop;
+    const maxVal = Math.max(...units.map(u => u.facturado)) * 1.15;
+    const colWidth = chartWidth / units.length;
+
+    let barsHtml = '';
+    units.forEach((u, i) => {
+      const xCenter = paddingLeft + i * colWidth + colWidth / 2;
+      const barW = Math.min(24, colWidth * 0.38);
+      const hFact = (u.facturado / maxVal) * chartHeight;
+      const yFact = height - paddingBottom - hFact;
+      const hCosto = (u.costo / maxVal) * chartHeight;
+      const yCosto = height - paddingBottom - hCosto;
+
+      barsHtml += `
+        <g class="report-bar-group">
+          <!-- Barra Facturación -->
+          <rect x="${xCenter - barW - 2}" y="${yFact}" width="${barW}" height="${hFact}" rx="4" fill="var(--accent)" />
+          <!-- Barra Costo Operativo -->
+          <rect x="${xCenter + 2}" y="${yCosto}" width="${barW}" height="${hCosto}" rx="4" fill="#94a3b8" />
+          <!-- Label Patente -->
+          <text x="${xCenter}" y="${height - 14}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--text-subtle)">${u.patente}</text>
+          <!-- Margen % encima -->
+          <text x="${xCenter}" y="${Math.min(yFact, yCosto) - 6}" text-anchor="middle" font-size="10" font-weight="800" fill="var(--success)">${u.margen}%</text>
+        </g>
+      `;
+    });
+
+    container.innerHTML = `
+      <div style="display:flex; justify-content:flex-end; gap:16px; font-size:11px; margin-bottom:8px; font-weight:700;">
+        <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:12px; background:var(--accent); border-radius:3px; display:inline-block;"></span> Facturación Bruta</span>
+        <span style="display:flex; align-items:center; gap:6px;"><span style="width:12px; height:12px; background:#94a3b8; border-radius:3px; display:inline-block;"></span> Costo Operativo</span>
+      </div>
+      <svg viewBox="0 0 ${width} ${height}" width="100%" height="220">
+        <line x1="${paddingLeft}" y1="${height - paddingBottom}" x2="${width - paddingRight}" y2="${height - paddingBottom}" stroke="var(--border-color)" stroke-width="1" />
+        <line x1="${paddingLeft}" y1="${height - paddingBottom - chartHeight / 2}" x2="${width - paddingRight}" y2="${height - paddingBottom - chartHeight / 2}" stroke="var(--border-color)" stroke-dasharray="4 4" opacity="0.4" />
+        ${barsHtml}
+      </svg>
+    `;
+  }
+}
+
+function renderReportCostos(sector) {
+  const container = document.getElementById('reportCostosChartContainer');
+  const tableBody = document.getElementById('reportCostosTableBody');
+  const costos = sector.reporteCostos || [];
+
+  if (tableBody) {
+    tableBody.innerHTML = costos.map(c => `
+      <tr>
+        <td>
+          <span style="display:inline-block; width:10px; height:10px; border-radius:2px; background:${c.color}; margin-right:6px;"></span>
+          <strong>${c.categoria}</strong>
+        </td>
+        <td style="font-weight:700; font-family:var(--font-mono);">${formatARS(c.monto)}</td>
+        <td style="font-weight:800; color:var(--text-main);">${c.pct}%</td>
+        <td style="font-family:var(--font-mono);">${c.costoKm}</td>
+        <td style="font-weight:700; color:${c.tendencia.startsWith('+') ? 'var(--danger)' : 'var(--success)'};">${c.tendencia}</td>
+      </tr>
+    `).join('');
+  }
+
+  if (container && costos.length > 0) {
+    const cx = 110;
+    const cy = 110;
+    const r = 90;
+    const innerR = 54;
+    let startAngle = 0;
+    let paths = [];
+
+    costos.forEach(c => {
+      const angle = (c.pct / 100) * 360;
+      const endAngle = startAngle + angle;
+      const d = describeArc(cx, cy, r, innerR, startAngle, endAngle);
+      startAngle = endAngle;
+
+      paths.push(`
+        <path d="${d}" fill="${c.color}" title="${c.categoria}: ${c.pct}% (${formatARS(c.monto)})" style="transition: transform 0.2s;" />
+      `);
+    });
+
+    container.innerHTML = `
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%;">
+        <svg viewBox="0 0 220 220" width="190" height="190">
+          ${paths.join('')}
+          <text x="${cx}" y="${cy - 4}" text-anchor="middle" font-size="10.5" font-weight="800" fill="var(--text-subtle)">COSTOS</text>
+          <text x="${cx}" y="${cy + 16}" text-anchor="middle" font-size="13" font-weight="900" fill="var(--text-main)" font-family="'JetBrains Mono'">100%</text>
+        </svg>
+      </div>
+    `;
+  }
+}
+
+function renderReportTopClientes(sector) {
+  const container = document.getElementById('reportTopClientesChartContainer');
+  const tableBody = document.getElementById('reportTopClientesTableBody');
+  const clientes = sector.reporteClientes || [];
+
+  if (tableBody) {
+    tableBody.innerHTML = clientes.map(cl => `
+      <tr>
+        <td><span class="code-pill" style="font-size:10.5px;">#${cl.puesto}</span></td>
+        <td><strong>${cl.cliente}</strong></td>
+        <td style="font-family:var(--font-mono); font-size:11px;">${cl.cuit}</td>
+        <td style="font-family:var(--font-mono);">${cl.viajes}</td>
+        <td style="font-weight:800; color:var(--text-main);">${formatARS(cl.facturado)}</td>
+        <td><span class="status-badge en_transito" style="font-size:10px;">${cl.participacion}%</span></td>
+        <td style="font-weight:700; color:var(--success);">${formatARS(cl.rentabilidad)}</td>
+        <td><span class="status-badge ${cl.estado === 'Al Día' ? 'completada' : 'programado'}">${cl.estado}</span></td>
+      </tr>
+    `).join('');
+  }
+
+  if (container && clientes.length > 0) {
+    const maxVal = Math.max(...clientes.map(cl => cl.facturado));
+    container.innerHTML = `
+      <div style="display:flex; flex-direction:column; gap:12px; width:100%; padding:10px 4px;">
+        ${clientes.map(cl => {
+          const pctWidth = Math.round((cl.facturado / maxVal) * 100);
+          return `
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:4px;">
+                <span style="font-weight:700; color:var(--text-main);">#${cl.puesto} ${cl.cliente}</span>
+                <span style="font-family:var(--font-mono); font-weight:800; color:var(--accent);">${formatARS(cl.facturado)} (${cl.participacion}%)</span>
+              </div>
+              <div style="height:14px; width:100%; background:rgba(0,0,0,0.06); border-radius:999px; overflow:hidden;">
+                <div style="width:${pctWidth}%; height:100%; background:var(--accent); border-radius:999px; transition:width 0.4s ease;"></div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+}
+
+// Botones de exportación
+document.getElementById('btnExportPDF')?.addEventListener('click', () => {
+  showToast('Generando reporte ejecutivo en PDF...');
+});
+document.getElementById('btnExportExcel')?.addEventListener('click', () => {
+  showToast('Exportando planilla analítica a Excel (.xlsx)...');
+});

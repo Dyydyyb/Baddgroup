@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="dark">
+<html lang="es" data-theme="light">
 <head>
   <base href="/sistema-ejemplo-logistica/">
   <meta charset="UTF-8">
@@ -38,22 +38,30 @@
           </div>
         </div>
 
-        <!-- SELECTOR DE SECTORES (SIN NOMBRES DE EMPRESAS PRIVADAS) -->
+        <!-- SELECTOR DE SECTORES (SIN NOMBRES DE EMPRESAS PRIVADAS, SIN EMOJIS) -->
         <div class="company-switcher-pills" id="companySwitcher">
           <button class="btn-company active" data-company="motos" title="Sector: Motos & Envíos Flex">
-            <span class="company-icon">🛵</span>
+            <span class="company-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M12 17h4l3-6h-4l-2 3h-3l-2-6H4"/></svg>
+            </span>
             <span class="company-label">Motos & Flex</span>
           </button>
           <button class="btn-company" data-company="pesados" title="Sector: Pesados & Larga Distancia">
-            <span class="company-icon">🚛</span>
+            <span class="company-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            </span>
             <span class="company-label">Pesados & Larga Distancia</span>
           </button>
           <button class="btn-company" data-company="integral" title="Sector: Integral B2B / B2C">
-            <span class="company-icon">📦</span>
+            <span class="company-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </span>
             <span class="company-label">Integral B2B/B2C</span>
           </button>
           <button class="btn-company" data-company="industrial" title="Sector: Industrial & Litoral">
-            <span class="company-icon">🏭</span>
+            <span class="company-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20"/><path d="M6 20V10l6 4V8l6 4V4l4 4v12"/></svg>
+            </span>
             <span class="company-label">Industrial & Litoral</span>
           </button>
         </div>
@@ -184,12 +192,19 @@
                   <span class="nav-badge success">PDF</span>
                 </a>
               </li>
+              <li>
+                <a href="#reportes" class="nav-item" data-view="reportes">
+                  <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                  <span class="nav-text">Reportes & Análisis</span>
+                  <span class="nav-badge success">PRO</span>
+                </a>
+              </li>
             </ul>
           </nav>
 
           <div class="sidebar-footer">
             <div class="baddgroup-sign">
-              <span class="baddgroup-tag">Baddgroup Software 🧉</span>
+              <span class="baddgroup-tag">Baddgroup Software TMS</span>
               <span class="baddgroup-sub">Sistemas de Prueba · Edición 2026</span>
             </div>
           </div>
@@ -223,74 +238,34 @@
             </div>
           </div>
 
-          <!-- ===================================================================
-               NUEVA SECCIÓN: ESTADOS EN TIEMPO REAL DE LAS FLOTAS
-               =================================================================== -->
-          <div class="fleet-status-overview-section" id="fleetStatusOverviewSection">
-            <div class="fleet-status-header">
-              <div>
-                <span class="fleet-status-title">ESTADO EN TIEMPO REAL DE LA FLOTA</span>
-                <span class="fleet-status-subtitle" id="fleetDistributionSummary">14 Unidades totales registradas en el parque automotor</span>
-              </div>
-              <a href="#flota" class="table-action-link" data-view="flota">Gestionar unidades y cambiar estados →</a>
-            </div>
-
-            <!-- Barra Segmentada Visual de Distribución -->
-            <div class="fleet-distribution-bar">
-              <div class="distribution-segment en-ruta" id="barSegmentEnRuta" style="width: 60%;" title="En Ruta"></div>
-              <div class="distribution-segment disponible" id="barSegmentDisponible" style="width: 25%;" title="Disponible en Base"></div>
-              <div class="distribution-segment taller" id="barSegmentTaller" style="width: 15%;" title="En Taller / Service"></div>
-            </div>
-
-            <!-- 3 Columnas Interactivas con Unidades Activas -->
-            <div class="fleet-status-cards-grid">
-              <div class="fleet-status-col-card">
-                <div class="status-col-header">
-                  <span class="status-col-title green"><span class="pulse-dot"></span> EN RUTA ACTIVA</span>
-                  <span class="status-col-badge" id="countEnRutaBadge">8 Unidades (57%)</span>
-                </div>
-                <div class="status-chips-wrap" id="chipsEnRutaList">
-                  <!-- Inyectado por app.js -->
-                </div>
-              </div>
-
-              <div class="fleet-status-col-card">
-                <div class="status-col-header">
-                  <span class="status-col-title blue">🔵 DISPONIBLES EN BASE</span>
-                  <span class="status-col-badge" id="countDisponibleBadge">4 Unidades (29%)</span>
-                </div>
-                <div class="status-chips-wrap" id="chipsDisponibleList">
-                  <!-- Inyectado por app.js -->
-                </div>
-              </div>
-
-              <div class="fleet-status-col-card">
-                <div class="status-col-header">
-                  <span class="status-col-title yellow">🟡 EN TALLER / MANTENIMIENTO</span>
-                  <span class="status-col-badge" id="countTallerBadge">2 Unidades (14%)</span>
-                </div>
-                <div class="status-chips-wrap" id="chipsTallerList">
-                  <!-- Inyectado por app.js -->
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- SELECTOR DE PERÍODO INTERACTIVO -->
+          <!-- SELECTOR DE PERÍODO INTERACTIVO CON RANGO LIBRE DE FECHAS -->
           <div class="period-toolbar">
             <div class="period-info">
               <span class="period-label">PERÍODO OPERATIVO:</span>
               <span class="period-active-date" id="periodActiveDateLabel">Septiembre 2026 (Mes en Curso)</span>
             </div>
-            <div class="period-buttons-group" id="periodSelectorGroup">
-              <button class="btn-period" data-period="dia">Día</button>
-              <button class="btn-period" data-period="semana">Semana</button>
-              <button class="btn-period active" data-period="mes">Mes</button>
-              <button class="btn-period" data-period="anio">Año</button>
+            <div class="period-right-controls">
+              <div class="period-custom-dates">
+                <div class="date-field">
+                  <label for="periodDateFrom">Desde:</label>
+                  <input type="date" id="periodDateFrom" value="2026-09-01">
+                </div>
+                <div class="date-field">
+                  <label for="periodDateTo">Hasta:</label>
+                  <input type="date" id="periodDateTo" value="2026-09-30">
+                </div>
+                <button class="btn-apply-dates" id="btnApplyDateRange" type="button">Aplicar Rango</button>
+              </div>
+              <div class="period-buttons-group" id="periodSelectorGroup">
+                <button class="btn-period" data-period="dia">Día</button>
+                <button class="btn-period" data-period="semana">Semana</button>
+                <button class="btn-period active" data-period="mes">Mes</button>
+                <button class="btn-period" data-period="anio">Año</button>
+              </div>
             </div>
           </div>
 
-          <!-- 6 KPIS ECONÓMICOS -->
+          <!-- MÉTRICAS FINANCIERAS & RENTABILIDAD -->
           <div class="kpi-section-title">
             <span>MÉTRICAS FINANCIERAS & RENTABILIDAD</span>
             <span class="kpi-subtitle">Moneda: ARS ($) · En tiempo real</span>
@@ -299,7 +274,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">FACTURACIÓN FLETES</span>
-                <span class="kpi-icon">💰</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiFacturacionTotal">$ 18.940.000</div>
               <div class="kpi-trend positive" id="kpiFacturacionTrend">
@@ -312,7 +289,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">COMBUSTIBLE & PEAJES</span>
-                <span class="kpi-icon">⛽</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v17"/><path d="M15 10h4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1"/><circle cx="9" cy="9" r="2"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiCombustible">$ 4.280.000</div>
               <div class="kpi-trend neutral" id="kpiCombustibleTrend">
@@ -324,7 +303,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">MANTENIMIENTO & SERVICE</span>
-                <span class="kpi-icon">🔧</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiMantenimientoCosto">$ 1.840.000</div>
               <div class="kpi-trend positive">
@@ -336,7 +317,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">SEGUROS, R.U.T.A. & TASAS</span>
-                <span class="kpi-icon">🛡️</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiSeguros">$ 1.150.000</div>
               <div class="kpi-trend positive">
@@ -348,7 +331,9 @@
             <div class="kpi-card highlight-card">
               <div class="kpi-header">
                 <span class="kpi-title">BALANCE NETO DISPONIBLE</span>
-                <span class="kpi-icon">📈</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </span>
               </div>
               <div class="kpi-value text-green" id="kpiBalanceNeto">+ $ 11.670.000</div>
               <div class="kpi-trend positive">
@@ -361,7 +346,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">MARGEN OPERATIVO NETO</span>
-                <span class="kpi-icon">🎯</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </span>
               </div>
               <div class="kpi-value text-teal" id="kpiMargenPorc">61.6%</div>
               <div class="kpi-trend positive">
@@ -371,7 +358,7 @@
             </div>
           </div>
 
-          <!-- 6 KPIS OPERACIONALES -->
+          <!-- MÉTRICAS OPERATIVAS & LOGÍSTICAS -->
           <div class="kpi-section-title" style="margin-top: 20px;">
             <span>MÉTRICAS OPERATIVAS & LOGÍSTICAS</span>
             <span class="kpi-subtitle">Estado del servicio</span>
@@ -380,7 +367,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">UNIDADES EN RUTA</span>
-                <span class="kpi-icon">🧭</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiUnidadesRuta">8 / 14</div>
               <div class="kpi-trend positive">
@@ -392,7 +381,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">PUNTUALIDAD (ON-TIME)</span>
-                <span class="kpi-icon">⏱️</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
               </div>
               <div class="kpi-value text-green" id="kpiPuntualidad">98.4%</div>
               <div class="kpi-trend positive">
@@ -404,7 +395,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">VOLUMEN DESPACHADO</span>
-                <span class="kpi-icon" id="kpiVolumenIcon">📦</span>
+                <span class="kpi-icon" id="kpiVolumenIcon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiVolumenDespachado">1.480 Envíos</div>
               <div class="kpi-trend positive">
@@ -416,7 +409,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">OCUPACIÓN DE FLOTA</span>
-                <span class="kpi-icon">📊</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiOcupacionFlota">88.5%</div>
               <div class="kpi-trend positive">
@@ -428,7 +423,9 @@
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">ALERTAS DE DOCUMENTACIÓN</span>
-                <span class="kpi-icon">⚠️</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </span>
               </div>
               <div class="kpi-value text-yellow" id="kpiAlertasDoc">1 Próxima</div>
               <div class="kpi-trend neutral">
@@ -437,16 +434,34 @@
               <div class="kpi-footer-note">Seguros al día</div>
             </div>
 
+            <!-- COSTO OPERATIVO PROMEDIO POR KM -->
             <div class="kpi-card">
               <div class="kpi-header">
                 <span class="kpi-title">COSTO PROMEDIO / KM</span>
-                <span class="kpi-icon">📍</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
               </div>
               <div class="kpi-value" id="kpiCostoKm">$ 142 / Km</div>
               <div class="kpi-trend positive">
                 <span>Eficiencia óptima</span>
               </div>
               <div class="kpi-footer-note">Cálculo integral</div>
+            </div>
+
+            <!-- CONSUMO TOTAL DE FLOTA -->
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-title">CONSUMO DE FLOTA</span>
+                <span class="kpi-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v17"/><path d="M15 10h4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1"/><circle cx="9" cy="9" r="2"/></svg>
+                </span>
+              </div>
+              <div class="kpi-value" id="kpiConsumoFlota">1.840 Lts</div>
+              <div class="kpi-trend positive">
+                <span id="kpiConsumoRendimiento">11.4 Km/L prom.</span>
+              </div>
+              <div class="kpi-footer-note">Combustible verificado</div>
             </div>
           </div>
 
@@ -524,8 +539,89 @@
             </div>
           </div>
 
-          <!-- TABLA RÁPIDA DE DESPACHOS CON 'VER DETALLE' -->
-          <div class="dashboard-tables-row">
+          <!-- ===================================================================
+               ESTADO EN TIEMPO REAL DE LA FLOTA: 3 CUADROS DISTINTOS
+               (Ubicado debajo del gráfico de distribución operativa)
+               =================================================================== -->
+          <div class="fleet-realtime-section" id="fleetStatusOverviewSection">
+            <div class="section-heading-row">
+              <div>
+                <h2 class="section-title-sm">ESTADO EN TIEMPO REAL DE LA FLOTA</h2>
+                <p class="section-desc-sm" id="fleetDistributionSummary">14 Unidades totales registradas en el parque automotor</p>
+              </div>
+              <a href="#flota" class="table-action-link" data-view="flota">Gestionar parque de unidades →</a>
+            </div>
+
+            <!-- Barra Segmentada Visual de Distribución -->
+            <div class="fleet-distribution-bar" style="margin: 14px 0 16px;">
+              <div class="distribution-segment en-ruta" id="barSegmentEnRuta" style="width: 57%;" title="En Viaje"></div>
+              <div class="distribution-segment disponible" id="barSegmentDisponible" style="width: 29%;" title="Disponibles en Base"></div>
+              <div class="distribution-segment taller" id="barSegmentTaller" style="width: 14%;" title="En Taller"></div>
+            </div>
+
+            <!-- 3 Cuadros Distintos: En Viaje, Disponibles, En Taller -->
+            <div class="fleet-three-boxes-grid">
+              <!-- Cuadro 1: En Viaje -->
+              <div class="fleet-status-box box-en-viaje">
+                <div class="box-header">
+                  <div class="box-title-group">
+                    <span class="box-indicator-dot dot-green"></span>
+                    <h3 class="box-title">FLOTA EN VIAJE</h3>
+                  </div>
+                  <span class="box-count-badge badge-green" id="countEnRutaBadge">8 Unidades (57%)</span>
+                </div>
+                <div class="box-metric-row">
+                  <div class="box-metric-val" id="metricEnRutaCount">8</div>
+                  <div class="box-metric-sub">
+                    <span>Unidades rodando en ruta activa</span>
+                    <span class="box-metric-rate">100% cumplimiento de trayecto</span>
+                  </div>
+                </div>
+                <div class="box-units-list" id="chipsEnRutaList"></div>
+              </div>
+
+              <!-- Cuadro 2: Disponibles -->
+              <div class="fleet-status-box box-disponibles">
+                <div class="box-header">
+                  <div class="box-title-group">
+                    <span class="box-indicator-dot dot-blue"></span>
+                    <h3 class="box-title">FLOTA DISPONIBLE</h3>
+                  </div>
+                  <span class="box-count-badge badge-blue" id="countDisponibleBadge">4 Unidades (29%)</span>
+                </div>
+                <div class="box-metric-row">
+                  <div class="box-metric-val" id="metricDisponibleCount">4</div>
+                  <div class="box-metric-sub">
+                    <span>Móviles en base listos para asignar</span>
+                    <span class="box-metric-rate">Capacidad de respuesta inmediata</span>
+                  </div>
+                </div>
+                <div class="box-units-list" id="chipsDisponibleList"></div>
+              </div>
+
+              <!-- Cuadro 3: En Taller -->
+              <div class="fleet-status-box box-taller">
+                <div class="box-header">
+                  <div class="box-title-group">
+                    <span class="box-indicator-dot dot-amber"></span>
+                    <h3 class="box-title">FLOTA EN TALLER</h3>
+                  </div>
+                  <span class="box-count-badge badge-amber" id="countTallerBadge">2 Unidades (14%)</span>
+                </div>
+                <div class="box-metric-row">
+                  <div class="box-metric-val" id="metricTallerCount">2</div>
+                  <div class="box-metric-sub">
+                    <span>Mantenimiento preventivo & service</span>
+                    <span class="box-metric-rate">Retorno estimado: 24-48 hs</span>
+                  </div>
+                </div>
+                <div class="box-units-list" id="chipsTallerList"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TABLAS DE OPERACIÓN: RUTAS ACTIVAS Y ALERTAS ESTRUCTURADAS -->
+          <div class="dashboard-tables-row" style="margin-top: 20px;">
             <div class="table-card">
               <div class="table-card-header">
                 <span class="table-card-title">HOJAS DE RUTA EN TRÁNSITO AHORA MISMO</span>
@@ -539,7 +635,7 @@
                       <th>CLIENTE</th>
                       <th>CONDUCTOR</th>
                       <th>UNIDAD</th>
-                      <th>ORIGEN ➔ DESTINO</th>
+                      <th>ORIGEN → DESTINO</th>
                       <th>PROGRESO</th>
                       <th>ESTADO</th>
                       <th>ACCIONES</th>
@@ -550,12 +646,25 @@
               </div>
             </div>
 
-            <div class="table-card narrow-card">
+            <div class="table-card alerts-table-card">
               <div class="table-card-header">
                 <span class="table-card-title">ALERTAS & MANTENIMIENTO</span>
                 <span class="badge-alert-count" id="dashboardAlertsCount">3 Pendientes</span>
               </div>
-              <div class="alerts-feed-list" id="dashboardAlertsList"></div>
+              <div class="table-responsive">
+                <table class="data-table alerts-grid-table" id="dashboardAlertsTable">
+                  <thead>
+                    <tr>
+                      <th>PRIORIDAD</th>
+                      <th>UNIDAD</th>
+                      <th>ALERTA / MOTIVO</th>
+                      <th>VENCIMIENTO</th>
+                      <th>ACCIÓN</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardAlertsTableBody"></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </section>
@@ -820,6 +929,138 @@
 
           <div class="remito-document-container" id="remitoDocumentContainer"></div>
         </section>
+
+        <!-- =======================================================================
+             SECCIÓN 10: REPORTES & ANÁLISIS EJECUTIVO
+             ======================================================================= -->
+        <section class="view-panel" id="view-reportes">
+          <div class="section-topbar">
+            <div>
+              <h1 class="view-title">Centro de Reportes & Inteligencia Logística</h1>
+              <p class="view-desc">Métricas de rendimiento por unidad móvil, estructura de costos operativos y ranking de clientes por facturación.</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-secondary" id="btnExportPDF" type="button">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Exportar PDF
+              </button>
+              <button class="btn-primary" id="btnExportExcel" type="button">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Exportar Excel / CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- REPORTE 1: RENDIMIENTO Y RENTABILIDAD POR UNIDAD DE TRANSPORTE -->
+          <div class="report-module-card">
+            <div class="report-module-header">
+              <div class="report-module-titles">
+                <span class="report-tag">REPORTE 01 · FLOTA & RENTABILIDAD</span>
+                <h2 class="report-title">Rendimiento y Rentabilidad por Unidad de Transporte</h2>
+                <span class="report-desc">Relación entre ingresos facturados por móvil, costos operativos directos y margen neto resultante.</span>
+              </div>
+              <div class="report-summary-pills">
+                <span class="summary-pill">Unidades analizadas: <strong id="repUnidadesCount">14</strong></span>
+                <span class="summary-pill">Margen promedio: <strong class="text-green" id="repMargenPromedio">61.6%</strong></span>
+              </div>
+            </div>
+            <!-- Gráfico de Rentabilidad por Unidad -->
+            <div class="chart-body" style="margin-bottom: 20px;">
+              <div class="chart-svg-wrap full-width" id="reportRentabilidadChartContainer" style="min-height: 220px;"></div>
+            </div>
+            <!-- Tabla de Rentabilidad por Unidad -->
+            <div class="table-responsive">
+              <table class="data-table" id="reportRentabilidadTable">
+                <thead>
+                  <tr>
+                    <th>PATENTE / UNIDAD</th>
+                    <th>MODELO & CARROCERÍA</th>
+                    <th>CONDUCTOR ASIGNADO</th>
+                    <th>KM RECORRIDOS</th>
+                    <th>DESPACHOS</th>
+                    <th>FACTURACIÓN</th>
+                    <th>COSTO OPERATIVO</th>
+                    <th>MARGEN NETO ($)</th>
+                    <th>RENTABILIDAD (%)</th>
+                  </tr>
+                </thead>
+                <tbody id="reportRentabilidadTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- REPORTE 2: ESTRUCTURA DE COSTOS OPERATIVOS -->
+          <div class="report-module-card">
+            <div class="report-module-header">
+              <div class="report-module-titles">
+                <span class="report-tag">REPORTE 02 · ANÁLISIS DE COSTOS</span>
+                <h2 class="report-title">Estructura de Costos Operativos</h2>
+                <span class="report-desc">Desglose integral de egresos logísticos: combustible, neumáticos, taller, salarios, seguros y cánones.</span>
+              </div>
+              <div class="report-summary-pills">
+                <span class="summary-pill">Costo Total Período: <strong id="repCostoTotalMes">$ 7.270.000</strong></span>
+                <span class="summary-pill">Costo Promedio / Km: <strong id="repCostoKmLabel">$ 142 / Km</strong></span>
+              </div>
+            </div>
+            <div class="report-two-cols-grid">
+              <div class="report-chart-box">
+                <div class="chart-svg-wrap" id="reportCostosChartContainer" style="min-height: 240px;"></div>
+              </div>
+              <div class="table-responsive">
+                <table class="data-table" id="reportCostosTable">
+                  <thead>
+                    <tr>
+                      <th>RUBRO / CONCEPTO</th>
+                      <th>MONTO MENSUAL</th>
+                      <th>% DEL TOTAL</th>
+                      <th>COSTO / KM</th>
+                      <th>PRESUPUESTO</th>
+                      <th>DESVÍO</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reportCostosTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- REPORTE 3: TOP CLIENTES POR FACTURACIÓN -->
+          <div class="report-module-card">
+            <div class="report-module-header">
+              <div class="report-module-titles">
+                <span class="report-tag">REPORTE 03 · CARTERA CORPORATIVA</span>
+                <h2 class="report-title">Top Clientes por Facturación & Volumen</h2>
+                <span class="report-desc">Ranking de cuentas con mayor facturación bruta acumulada, despachos completados y plazo promedio de cobro.</span>
+              </div>
+              <div class="report-summary-pills">
+                <span class="summary-pill">Cuentas Analizadas: <strong id="repTopClientesCount">6 Clientes</strong></span>
+                <span class="summary-pill">Concentración Top 3: <strong class="text-teal" id="repConcentracionTop3">68.2%</strong></span>
+              </div>
+            </div>
+            <!-- Gráfico Ranking de Clientes -->
+            <div class="chart-body" style="margin-bottom: 20px;">
+              <div class="chart-svg-wrap full-width" id="reportTopClientesChartContainer" style="min-height: 200px;"></div>
+            </div>
+            <!-- Tabla de Top Clientes -->
+            <div class="table-responsive">
+              <table class="data-table" id="reportTopClientesTable">
+                <thead>
+                  <tr>
+                    <th>RANK</th>
+                    <th>CLIENTE / EMPRESA</th>
+                    <th>LOCALIDAD</th>
+                    <th>DESPACHOS</th>
+                    <th>TOTAL FACTURADO ($)</th>
+                    <th>PARTICIPACIÓN (%)</th>
+                    <th>PLAZO MEDIO</th>
+                    <th>ESTADO DE CUENTA</th>
+                  </tr>
+                </thead>
+                <tbody id="reportTopClientesTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   </div>
@@ -1006,9 +1247,9 @@
           <div class="form-group">
             <label for="nagTipo">Tipo de Evento</label>
             <select id="nagTipo" required>
-              <option value="despacho">📦 Despacho / Colecta Logística</option>
-              <option value="taller">🔧 Taller / Service Mecánico</option>
-              <option value="vtv">🛡️ Inspección VTV / R.U.T.A. / Legal</option>
+              <option value="despacho">Despacho / Colecta Logística</option>
+              <option value="taller">Taller / Service Mecánico</option>
+              <option value="vtv">Inspección VTV / R.U.T.A. / Legal</option>
             </select>
           </div>
         </div>
@@ -1045,10 +1286,10 @@
     </div>
   </div>
 
-  <!-- TOAST NOTIFICACIÓN FLOTANTE -->
+  <!-- TOAST NOTIFICACIÓN FLOTANTE (SIN EMOJIS) -->
   <div class="toast-notification" id="toastNotification">
-    <span id="toastIcon">✅</span>
-    <span id="toastMessage">Estado actualizado correctamente</span>
+    <span class="pulse-dot" id="toastIcon"></span>
+    <span id="toastMessage">Operación realizada correctamente</span>
   </div>
 
   <!-- TOOLTIP FLOTANTE -->
