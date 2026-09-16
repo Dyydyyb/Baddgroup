@@ -1182,7 +1182,7 @@ function setSector(sectorId) {
   document.body.setAttribute('data-company-theme', sector.theme);
 
   // 2. ACTUALIZAR LABELS
-  document.getElementById('currentCompanySector').textContent = sector.sectorBadge;
+  document.getElementById('currentCompanySector').textContent = `${sector.sectorTitle} · Demostración Oficial`;
   document.getElementById('sidebarSectorLabel').textContent = sector.sectorTitle;
   document.getElementById('bannerEmpresaTitle').textContent = sector.bannerTitle;
   document.getElementById('bannerEmpresaDesc').textContent = sector.bannerDesc;
