@@ -189,15 +189,58 @@ input, select, textarea {
   left: 0;
   width: 100%;
   z-index: 1000;
-  transition: background-color 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
-  background: rgba(10, 14, 20, 0.45);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+  background: rgba(10, 14, 20, 0.0);
 }
 
 .site-header.scrolled {
   background-color: var(--bg-dark);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== Header Banner Strip ===== */
+.header-banner-strip {
+  width: 100%;
+  background-color: var(--bg-darkest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 2px solid var(--brand-red);
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+  max-height: 120px;
+}
+
+.site-header.scrolled .header-banner-strip {
+  max-height: 0;
+  opacity: 0;
+  border-bottom-width: 0;
+  overflow: hidden;
+}
+
+.header-banner-img {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
+  display: block;
+  margin: 6px auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+
+/* Brand compact (shown only when banner is hidden on scroll) */
+.brand-link-compact {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.site-header.scrolled .brand-link-compact {
+  display: flex;
+  opacity: 1;
 }
 
 /* Top Announcement Bar */
@@ -409,33 +452,126 @@ input, select, textarea {
 }
 
 /* ==========================================================================
-   Hero Section (100vh Full Screen) + Quick Search Bar
+   Hero Section — Full-Screen Image Slider
    ========================================================================== */
 .hero-section {
   position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-color: var(--bg-darkest);
-  background-image: linear-gradient(180deg, rgba(6, 8, 12, 0.75) 0%, rgba(11, 14, 20, 0.88) 100%), url('../assets/hero-showroom.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
   color: #FFFFFF;
-  padding-top: 130px;
-  padding-bottom: 70px;
   overflow: hidden;
 }
 
-.hero-overlay-lighting {
+/* ===== Slider ===== */
+.hero-slider {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+/* Dark gradient overlay over each slide */
+.hero-slider-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    160deg,
+    rgba(6, 8, 12, 0.72) 0%,
+    rgba(11, 14, 20, 0.55) 55%,
+    rgba(6, 8, 12, 0.80) 100%
+  );
   pointer-events: none;
-  background: radial-gradient(circle at 50% 20%, rgba(168, 30, 36, 0.18) 0%, transparent 70%);
+}
+
+/* Slider navigation arrows */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(10, 14, 20, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+  backdrop-filter: blur(8px);
+}
+
+.slider-prev { left: 20px; }
+.slider-next { right: 20px; }
+
+.slider-arrow:hover {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* Dots */
+.slider-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast), width var(--transition-fast);
+  padding: 0;
+}
+
+.slider-dot.active {
+  background: var(--brand-red);
+  width: 28px;
+  border-radius: 5px;
+  transform: scale(1.1);
+}
+
+/* Content overlay (sits above slider) */
+.hero-content-overlay {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 160px;
+  padding-bottom: 80px;
 }
 
 .hero-content {
@@ -2598,5 +2734,71 @@ input, select, textarea {
     right: 18px;
     width: 52px;
     height: 52px;
+  }
+}
+
+/* ==========================================================================
+   Slider & Header Banner — Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 900px) {
+  .header-banner-img {
+    max-width: 640px;
+    max-height: 80px;
+  }
+
+  .header-banner-strip {
+    max-height: 90px;
+  }
+
+  .hero-content-overlay {
+    padding-top: 140px;
+    padding-bottom: 60px;
+  }
+
+  .slider-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .slider-prev { left: 10px; }
+  .slider-next { right: 10px; }
+}
+
+@media (max-width: 600px) {
+  .header-banner-img {
+    max-width: 100%;
+    max-height: 60px;
+    margin: 4px auto;
+  }
+
+  .header-banner-strip {
+    max-height: 72px;
+  }
+
+  .hero-content-overlay {
+    padding-top: 120px;
+    padding-bottom: 50px;
+    align-items: flex-end;
+    padding-bottom: 70px;
+  }
+
+  .slider-arrow {
+    width: 32px;
+    height: 32px;
+    top: 42%;
+  }
+
+  .slider-dots {
+    bottom: 18px;
+    gap: 7px;
+  }
+
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .slider-dot.active {
+    width: 22px;
   }
 }

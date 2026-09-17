@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <base href="/automotores-oscar-ejemplo/">
   <title>Automotores Os-Car | Concesionaria en Florencio Varela | 0km y Usados Seleccionados</title>
   <meta name="description" content="Más de 34 años de trayectoria en Florencio Varela. Venta de autos, camionetas, camiones y motos 0km y usados seleccionados. Amplia financiación en cuotas fijas. Av. San Martín 2180.">
   <meta name="keywords" content="automotores oscar, concesionaria florencio varela, autos usados varela, 0km florencio varela, camionetas varela, financiacion autos cuotas, os-car automotores">
@@ -67,19 +66,25 @@
   <!-- ==========================================================================
        Header & Navigation (Transparent to Dark on Scroll)
        ========================================================================== -->
+  <!-- ============================================================
+       Site Header: Banner + Navegación
+       ============================================================ -->
   <header class="site-header" id="siteHeader">
+
+    <!-- Full-width banner strip -->
+    <div class="header-banner-strip">
+      <a href="#inicio" aria-label="Automotores Os-Car - Inicio">
+        <img src="assets/banner-original.png" alt="Bienvenido a Automotores Os-Car" class="header-banner-img">
+      </a>
+    </div>
+
+    <!-- Navigation bar below the banner -->
     <div class="nav-bar">
       <div class="container nav-container">
-        
-        <!-- Brand Link with Emblem -->
-        <a href="#inicio" class="brand-link" aria-label="Automotores Os-Car - Inicio">
-          <div class="brand-emblem-wrap">
-            <img src="assets/banner-original.png" alt="Escudo oficial Automotores Os-Car" class="brand-emblem-img">
-          </div>
-          <div class="brand-typography">
-            <span class="brand-title">Automotores <span class="title-red">Os-Car</span></span>
-            <span class="brand-tagline">Florencio Varela • Desde 1990</span>
-          </div>
+
+        <!-- Brand compact (mobile only / scroll fallback) -->
+        <a href="#inicio" class="brand-link brand-link-compact" aria-label="Automotores Os-Car - Inicio">
+          <span class="brand-title">Automotores <span class="title-red">Os-Car</span></span>
         </a>
 
         <!-- Desktop Navigation Menu -->
@@ -119,108 +124,140 @@
   </header>
 
   <!-- ==========================================================================
-       1. Hero Section (100vh) + Buscador Rápido
+       1. Hero Section — Full-screen Image Slider + Buscador
        ========================================================================== -->
   <section class="hero-section" id="inicio">
-    <div class="hero-overlay-lighting"></div>
-    <div class="container">
-      <div class="hero-content">
-        
-        <div class="hero-eyebrow reveal">
-          <span>Concesionaria Líder en Zona Sur</span>
-          <span>•</span>
-          <span class="accent-red">+34 Años de Experiencia</span>
-        </div>
 
-        <h1 class="hero-title reveal delay-1">
-          Más de 34 años acompañando <span class="highlight-red">tu próximo vehículo</span>
-        </h1>
+    <!-- ===== SLIDER DE IMAGENES ===== -->
+    <div class="hero-slider" id="heroSlider" aria-label="Galería de Automotores Os-Car">
 
-        <p class="hero-description reveal delay-2">
-          Venta de 0km y usados seleccionados en Florencio Varela. Autos, camionetas, camiones y motos con amplia financiación en cuotas fijas y la seriedad que nos respalda desde 1990.
-        </p>
+      <!-- Slides -->
+      <div class="hero-slide active" style="background-image:url('assets/hero-slide-4.jpg')" role="img" aria-label="Showroom Automotores Os-Car exterior"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-slide-1.jpg')" role="img" aria-label="Fachada Automotores Os-Car con autos"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-slide-2.jpg')" role="img" aria-label="Interior del salon de ventas"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-slide-5.jpg')" role="img" aria-label="Automotores Os-Car al atardecer"></div>
+      <div class="hero-slide" style="background-image:url('assets/hero-slide-3.jpg')" role="img" aria-label="Nota periodistica Automotores Os-Car"></div>
 
-        <div class="hero-cta-group reveal delay-3">
-          <a href="#catalogo" class="btn-cta-primary" id="heroCtaStock">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="5 3 19 12 5 21 5 3"></polygon>
-            </svg>
-            <span>Explorar Catálogo</span>
-          </a>
-          <a href="#wizard" class="btn-cta-secondary" id="heroCtaWizard">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            <span>Asesoramiento Guiado</span>
-          </a>
-        </div>
+      <!-- Overlay escuro gradiente -->
+      <div class="hero-slider-overlay"></div>
 
-        <!-- Quick Search Bar (Overlay) -->
-        <div class="hero-search-box reveal delay-3" id="heroSearchBox">
-          <div class="hero-search-header">
-            <span class="search-header-title">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              Búsqueda Rápida de Unidades
-            </span>
-            <span class="search-header-tag">Stock Físico Garantizado</span>
+      <!-- Flechas de navegacion -->
+      <button class="slider-arrow slider-prev" id="sliderPrev" aria-label="Slide anterior">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button class="slider-arrow slider-next" id="sliderNext" aria-label="Slide siguiente">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <!-- Dots indicadores -->
+      <div class="slider-dots" id="sliderDots" role="tablist" aria-label="Slides">
+        <button class="slider-dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Slide 1"></button>
+        <button class="slider-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Slide 2"></button>
+        <button class="slider-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Slide 3"></button>
+        <button class="slider-dot" data-slide="3" role="tab" aria-selected="false" aria-label="Slide 4"></button>
+        <button class="slider-dot" data-slide="4" role="tab" aria-selected="false" aria-label="Slide 5"></button>
+      </div>
+
+    </div>
+    <!-- ===== FIN SLIDER ===== -->
+
+    <!-- Contenido superpuesto sobre el slider -->
+    <div class="hero-content-overlay">
+      <div class="container">
+        <div class="hero-content">
+
+          <div class="hero-eyebrow reveal">
+            <span>Concesionaria Líder en Zona Sur</span>
+            <span>•</span>
+            <span class="accent-red">+34 Años de Experiencia</span>
           </div>
 
-          <form class="search-form-grid" id="quickSearchForm" onsubmit="return false;">
-            
-            <div class="search-field-wrap">
-              <label for="searchCategory" class="search-field-label">Categoría</label>
-              <select id="searchCategory" class="search-select">
-                <option value="todos">Todos los Tipos</option>
-                <option value="autos">Autos</option>
-                <option value="camionetas">Camionetas / Pick-ups</option>
-                <option value="camiones">Camiones / Utilitarios</option>
-                <option value="motos">Motos</option>
-              </select>
-            </div>
+          <h1 class="hero-title reveal delay-1">
+            Más de 34 años acompañando <span class="highlight-red">tu próximo vehículo</span>
+          </h1>
 
-            <div class="search-field-wrap">
-              <label for="searchCondition" class="search-field-label">Condición</label>
-              <select id="searchCondition" class="search-select">
-                <option value="todos">Todas las Condiciones</option>
-                <option value="0km">0km</option>
-                <option value="usado">Usados Seleccionados</option>
-              </select>
-            </div>
+          <p class="hero-description reveal delay-2">
+            Venta de 0km y usados seleccionados en Florencio Varela. Autos, camionetas, camiones y motos con amplia financiación en cuotas fijas.
+          </p>
 
-            <div class="search-field-wrap">
-              <label for="searchBrand" class="search-field-label">Marca</label>
-              <select id="searchBrand" class="search-select">
-                <option value="todos">Todas las Marcas</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Volkswagen">Volkswagen</option>
-                <option value="Ford">Ford</option>
-                <option value="Peugeot">Peugeot</option>
-                <option value="Chevrolet">Chevrolet</option>
-                <option value="Mercedes-Benz">Mercedes-Benz</option>
-                <option value="Iveco">Iveco</option>
-                <option value="Honda">Honda</option>
-                <option value="Yamaha">Yamaha</option>
-              </select>
-            </div>
-
-            <button type="button" class="btn-search-submit" id="btnQuickSearch">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <div class="hero-cta-group reveal delay-3">
+            <a href="#catalogo" class="btn-cta-primary" id="heroCtaStock">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
               </svg>
-              <span>Buscar Unidades</span>
-            </button>
+              <span>Explorar Catálogo</span>
+            </a>
+            <a href="#wizard" class="btn-cta-secondary" id="heroCtaWizard">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>Asesoramiento Guiado</span>
+            </a>
+          </div>
 
-          </form>
+          <!-- Quick Search Bar -->
+          <div class="hero-search-box reveal delay-3" id="heroSearchBox">
+            <div class="hero-search-header">
+              <span class="search-header-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                Búsqueda Rápida de Unidades
+              </span>
+              <span class="search-header-tag">Stock Físico Garantizado</span>
+            </div>
+
+            <form class="search-form-grid" id="quickSearchForm" onsubmit="return false;">
+              <div class="search-field-wrap">
+                <label for="searchCategory" class="search-field-label">Categoría</label>
+                <select id="searchCategory" class="search-select">
+                  <option value="todos">Todos los Tipos</option>
+                  <option value="autos">Autos</option>
+                  <option value="camionetas">Camionetas / Pick-ups</option>
+                  <option value="camiones">Camiones / Utilitarios</option>
+                  <option value="motos">Motos</option>
+                </select>
+              </div>
+              <div class="search-field-wrap">
+                <label for="searchCondition" class="search-field-label">Condición</label>
+                <select id="searchCondition" class="search-select">
+                  <option value="todos">Todas las Condiciones</option>
+                  <option value="0km">0km</option>
+                  <option value="usado">Usados Seleccionados</option>
+                </select>
+              </div>
+              <div class="search-field-wrap">
+                <label for="searchBrand" class="search-field-label">Marca</label>
+                <select id="searchBrand" class="search-select">
+                  <option value="todos">Todas las Marcas</option>
+                  <option value="Toyota">Toyota</option>
+                  <option value="Volkswagen">Volkswagen</option>
+                  <option value="Ford">Ford</option>
+                  <option value="Peugeot">Peugeot</option>
+                  <option value="Chevrolet">Chevrolet</option>
+                  <option value="Mercedes-Benz">Mercedes-Benz</option>
+                  <option value="Iveco">Iveco</option>
+                  <option value="Honda">Honda</option>
+                  <option value="Yamaha">Yamaha</option>
+                </select>
+              </div>
+              <button type="button" class="btn-search-submit" id="btnQuickSearch">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Buscar Unidades</span>
+              </button>
+            </form>
+          </div>
+
         </div>
-
       </div>
     </div>
+
   </section>
 
   <!-- ==========================================================================
