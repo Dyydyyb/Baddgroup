@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automotores Os-Car | ERP Sistema Integral de Gestión Concesionaria</title>
+  <meta name="description" content="Sistema de gestión integral (ERP) para Automotores Os-Car. Control de flota 0km y usados, ventas, financiación en cuotas fijas, CRM y transferencias. Florencio Varela.">
+
+  <!-- Google Fonts: Outfit, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700;800&family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos Corporativos B2B -->
+  <link rel="stylesheet" href="css/erp.css">
+</head>
+<body>
+  <div class="erp-shell">
+
+    <!-- =====================================================================
+         1. SIDEBAR CORPORATIVO (3 BLOQUES DE NAVEGACIÓN)
+         ===================================================================== -->
+    <aside class="erp-sidebar" id="erpSidebar">
+      <!-- Encabezado de Marca -->
+      <div class="sidebar-header">
+        <div class="brand-badge-row">
+          <div class="sidebar-logo-emblem">
+            <img src="assets/badge_oscar.png" alt="Logo Os-Car" onerror="this.src='assets/logo_oscar.png';">
+          </div>
+          <div class="brand-text-col">
+            <div class="brand-company-name">Automotores <span class="brand-red">Os-Car</span></div>
+            <div class="brand-erp-tag">
+              <span>Gestión Central</span>
+              <span class="brand-version-pill">ERP V1.0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegación por Bloques Operativos -->
+      <nav class="sidebar-nav">
+        <!-- BLOQUE 1: GESTIÓN COMERCIAL -->
+        <div class="nav-block">
+          <div class="nav-block-title">Gestión Comercial</div>
+          <ul class="nav-links-group">
+            <li>
+              <button type="button" class="nav-item-btn active" data-view="dashboard">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                  <span>Dashboard General</span>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="stock">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                  <span>Stock de Vehículos</span>
+                </div>
+                <span class="nav-item-badge">10 u.</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="ventas">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                  <span>Ventas y Financiación</span>
+                </div>
+                <span class="nav-item-badge alert-red">3 señas</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="crm">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <span>CRM y Leads</span>
+                </div>
+                <span class="nav-item-badge alert-red">5 pend.</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="permutas">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                  <span>Toma de Usados / Permutas</span>
+                </div>
+                <span class="nav-item-badge">2 tasac.</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- BLOQUE 2: OPERACIONES Y DOCUMENTACIÓN -->
+        <div class="nav-block">
+          <div class="nav-block-title">Operaciones y Documentación</div>
+          <ul class="nav-links-group">
+            <li>
+              <button type="button" class="nav-item-btn" data-view="taller">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                  <span>Preparación y Service</span>
+                </div>
+                <span class="nav-item-badge">3 taller</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="documentacion">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                  <span>Documentación y Transferencias</span>
+                </div>
+                <span class="nav-item-badge alert-red">4 gestoría</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="publicacion">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                  <span>Fotos y Publicación Web</span>
+                </div>
+                <span class="nav-item-badge">Sync ON</span>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="agenda">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <span>Agenda de Turnos y Entregas</span>
+                </div>
+                <span class="nav-item-badge">2 hoy</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- BLOQUE 3: ADMINISTRACIÓN Y FINANZAS -->
+        <div class="nav-block">
+          <div class="nav-block-title">Administración y Finanzas</div>
+          <ul class="nav-links-group">
+            <li>
+              <button type="button" class="nav-item-btn" data-view="finanzas">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                  <span>Finanzas y Facturación</span>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="comisiones">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>Comisiones de Vendedores</span>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="reportes">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                  <span>Reportes y Rentabilidad</span>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="personal">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <span>Personal y RRHH</span>
+                </div>
+              </button>
+            </li>
+            <li>
+              <button type="button" class="nav-item-btn" data-view="configuracion">
+                <div class="nav-item-content">
+                  <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                  <span>Configuración y Auditoría</span>
+                </div>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Pie del Sidebar: Perfil de Usuario -->
+      <div class="sidebar-footer">
+        <div class="user-mini-profile">
+          <div class="user-avatar">OC</div>
+          <div class="user-info-text">
+            <div class="user-name">Dirección General</div>
+            <div class="user-role-label">Florencio Varela · 34 Años</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         2. ÁREA PRINCIPAL (HEADER GLOBAL + VISTAS SPA)
+         ===================================================================== -->
+    <div class="erp-main-wrapper">
+
+      <!-- TOPBAR / HEADER SUPERIOR -->
+      <header class="erp-topbar" id="erpHeader">
+        <!-- Toggle para versión móvil -->
+        <button type="button" class="btn-action-quick mobile-sidebar-toggle" id="mobileSidebarToggle" title="Abrir Menú">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <!-- Buscador Global Universal (Ctrl + K) -->
+        <div class="header-search-bar" id="headerSearchBar" title="Presioná Ctrl+K para buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span class="search-placeholder-text">Buscar vehículo, cliente, patente o presupuesto...</span>
+          <span class="search-kbd-shortcut">Ctrl + K</span>
+        </div>
+
+        <!-- Acciones Rápidas del Topbar -->
+        <div class="topbar-actions">
+          <button type="button" class="btn-action-quick" id="btnQuickLead">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            <span>+ Lead</span>
+          </button>
+          <button type="button" class="btn-action-quick btn-primary-red" id="btnQuickSale">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>+ Venta</span>
+          </button>
+          <button type="button" class="btn-action-quick" id="btnQuickVehicle">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            <span>+ Vehículo</span>
+          </button>
+          
+          <button type="button" class="btn-action-quick btn-sync-landing" title="Sincronizar stock con automotoresoscar.com.ar">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span>Sincronizar Web</span>
+          </button>
+
+          <!-- Selector de Modo Oscuro / Modo Claro -->
+          <button type="button" class="theme-toggle-btn" id="btnThemeToggle" title="Alternar Modo Oscuro / Claro">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- CONTENEDOR DE VISTAS (SPA CONTENT) -->
+      <main class="erp-content-area">
+
+        <!-- ===================================================================
+             VISTA 1: DASHBOARD GENERAL (MÓDULO PRIORITARIO)
+             =================================================================== -->
+        <section class="view-pane active" id="view-dashboard">
+          <!-- Cabecera del Dashboard -->
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Panel de Control General</h1>
+              <p>Gestión comercial y operativa de Automotores Os-Car · Florencio Varela</p>
+            </div>
+            <div class="header-controls-group">
+              <!-- Selector de Período -->
+              <div class="segmented-control">
+                <button type="button" class="segmented-btn" data-period="dia">Día</button>
+                <button type="button" class="segmented-btn" data-period="semana">Semana</button>
+                <button type="button" class="segmented-btn active" data-period="mes">Mes</button>
+                <button type="button" class="segmented-btn" data-period="ano">Año</button>
+              </div>
+
+              <button type="button" class="btn-action-quick" onclick="window.print()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Exportar Informe</span>
+              </button>
+              <button type="button" class="btn-action-quick btn-primary-red" onclick="window.erpApp.openModal('modalNewSale')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>+ Nueva Venta</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Grilla de 6 KPIs Principales de Dirección -->
+          <div class="kpi-cards-grid">
+            <!-- KPI 1: Vehículos en Stock -->
+            <div class="kpi-card" style="border-left: 4px solid #1D4ED8;">
+              <div class="kpi-header">
+                <span class="kpi-label">Vehículos en Stock</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              </div>
+              <div class="kpi-value-main">10 <span style="font-size:0.95rem; font-weight:700; color:var(--text-muted);">unidades</span></div>
+              <div class="kpi-subtext">
+                <span style="font-weight:700; color:var(--text-main);">6</span> disponibles · <span style="font-weight:700; color:var(--status-warning-text);">2</span> reservados · <span style="font-weight:700; color:var(--brand-red);">2</span> en preparación
+              </div>
+            </div>
+
+            <!-- KPI 2: Ventas del Período -->
+            <div class="kpi-card" style="border-left: 4px solid #166E30;">
+              <div class="kpi-header">
+                <span class="kpi-label">Ventas del Período</span>
+                <span class="badge-kpi-delta delta-positive">+18.4% vs mes ant.</span>
+              </div>
+              <div class="kpi-value-main">$159.200.000</div>
+              <div class="kpi-subtext">
+                <strong>5 operaciones cerradas</strong> (3 Usados / 2 0KM)
+              </div>
+            </div>
+
+            <!-- KPI 3: Ingresos por Financiación -->
+            <div class="kpi-card" style="border-left: 4px solid #B45309;">
+              <div class="kpi-header">
+                <span class="kpi-label">Financiación en Cuotas</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <div class="kpi-value-main">$68.400.000</div>
+              <div class="kpi-subtext">
+                <strong>43%</strong> en cuotas fijas en pesos (DNI) vs contado
+              </div>
+            </div>
+
+            <!-- KPI 4: Costos y Compras Operativas -->
+            <div class="kpi-card" style="border-left: 4px solid #64748B;">
+              <div class="kpi-header">
+                <span class="kpi-label">Costos y Compras</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              </div>
+              <div class="kpi-value-main">$128.500.000</div>
+              <div class="kpi-subtext">
+                Tomas de usados + service de ingreso + comisiones
+              </div>
+            </div>
+
+            <!-- KPI 5: Balance Neto Operativo (Destacado Os-Car) -->
+            <div class="kpi-card kpi-card-highlight">
+              <div class="kpi-header">
+                <span class="kpi-label" style="color:var(--brand-red); font-weight:800;">Balance Neto Operativo</span>
+                <span class="erp-badge badge-0km">Neto Real</span>
+              </div>
+              <div class="kpi-value-main" style="color:var(--brand-red);">$30.700.000</div>
+              <div class="kpi-subtext">
+                Margen neto libre del período tras costos y comisiones
+              </div>
+            </div>
+
+            <!-- KPI 6: Rentabilidad Media por Unidad -->
+            <div class="kpi-card" style="border-left: 4px solid #166E30;">
+              <div class="kpi-header">
+                <span class="kpi-label">Rentabilidad Media</span>
+                <span class="badge-kpi-delta delta-positive">Optimo</span>
+              </div>
+              <div class="kpi-value-main">19.3%</div>
+              <div class="kpi-subtext">
+                Promedio de margen neto por unidad vendida
+              </div>
+            </div>
+          </div>
+
+          <!-- Gráficos Principales de Analítica -->
+          <div class="dashboard-analytics-grid">
+            <!-- Gráfico Principal: Evolución de Ventas -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <div>
+                  <h3 class="analytics-title">Evolución de Ventas & Facturación</h3>
+                  <div class="analytics-subtitle">Comparativo mensual histórico de ventas 0KM vs. Usados</div>
+                </div>
+                <div class="chart-controls-row">
+                  <!-- Selector Montos vs Unidades -->
+                  <div class="segmented-control">
+                    <button type="button" class="segmented-btn active" id="btnMetricMontos">Montos ($)</button>
+                    <button type="button" class="segmented-btn" id="btnMetricUnidades">Unidades</button>
+                  </div>
+                  <!-- Selector Tipo de Gráfico -->
+                  <div class="chart-type-selector">
+                    <button type="button" class="chart-type-btn active" data-type="bar" title="Barras">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    </button>
+                    <button type="button" class="chart-type-btn" data-type="line" title="Líneas">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </button>
+                    <button type="button" class="chart-type-btn" data-type="area" title="Área">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Contenedor del Gráfico SVG -->
+              <div id="salesChartContainer" class="chart-canvas-container"></div>
+            </div>
+
+            <!-- Gráfico Lateral: Composición del Stock -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <div>
+                  <h3 class="analytics-title">Composición del Stock</h3>
+                  <div class="analytics-subtitle">Distribución de flota en playa de Florencio Varela</div>
+                </div>
+                <!-- Selector Dona: Categoría vs Condición -->
+                <div class="segmented-control">
+                  <button type="button" class="segmented-btn active" id="btnDonutCategory">Categoría</button>
+                  <button type="button" class="segmented-btn" id="btnDonutCondition">Condición</button>
+                </div>
+              </div>
+              <div id="stockDonutContainer" class="donut-chart-container"></div>
+              <div id="stockDonutLegend" class="donut-legend-wrap"></div>
+            </div>
+          </div>
+
+          <!-- Fila Inferior: Aging Stock + Leads Funnel -->
+          <div class="dashboard-bottom-grid">
+            <!-- Panel: Vehículos con Mayor Tiempo en Stock (Alerta Comercial) -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <div>
+                  <h3 class="analytics-title">Vehículos con Mayor Tiempo en Stock</h3>
+                  <div class="analytics-subtitle">Unidades prioritarias para rotación, ofertas o destacado web</div>
+                </div>
+                <button type="button" class="btn-action-quick" onclick="window.erpApp.navigateTo('stock')">
+                  <span>Ver Flota</span>
+                </button>
+              </div>
+              <div class="erp-table-responsive">
+                <table class="erp-data-table">
+                  <thead>
+                    <tr>
+                      <th>Vehículo / Ficha</th>
+                      <th>Días en Salón</th>
+                      <th>Precio Lista</th>
+                      <th>Acción Prioritaria</th>
+                    </tr>
+                  </thead>
+                  <tbody id="agingStockTableBody">
+                    <!-- Filas inyectadas por app.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Panel: Leads y Consultas del Período -->
+            <div class="analytics-card">
+              <div class="analytics-header">
+                <div>
+                  <h3 class="analytics-title">Consultas & Leads del Período</h3>
+                  <div class="analytics-subtitle">Canales de captación y tasa de conversión efectiva</div>
+                </div>
+                <span class="erp-badge badge-0km">18 Consultas</span>
+              </div>
+              <div id="leadsChannelsBreakdown">
+                <!-- Breakdown inyectado por app.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VISTA 2: STOCK DE VEHÍCULOS (MÓDULO PRIORITARIO)
+             =================================================================== -->
+        <section class="view-pane" id="view-stock">
+          <!-- Cabecera del Stock -->
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Stock de Flota & Catálogo Web</h1>
+              <p>Inventario general de unidades 0KM y usados · Control de publicación sincronizada</p>
+            </div>
+            <div class="header-controls-group">
+              <button type="button" class="btn-action-quick btn-sync-landing">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                <span>Sincronizar con Landing</span>
+              </button>
+              <button type="button" class="btn-action-quick btn-primary-red" onclick="window.erpApp.openModal('modalNewVehicle')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>+ Nuevo Vehículo</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Filtros Multifunción -->
+          <div class="stock-filter-toolbar">
+            <div class="filter-search-box">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="stockSearchInput" placeholder="Filtrar por marca, modelo, patente o VIN...">
+            </div>
+
+            <div class="filter-selectors-group">
+              <select id="stockFilterCategory">
+                <option value="todos">Todas las Categorías</option>
+                <option value="auto">Autos</option>
+                <option value="camioneta">Camionetas / Pick-Ups</option>
+                <option value="camion">Camiones</option>
+                <option value="moto">Motos</option>
+              </select>
+
+              <select id="stockFilterCondition">
+                <option value="todos">Todas las Condiciones</option>
+                <option value="0km">0KM</option>
+                <option value="usado">Usados Seleccionados</option>
+              </select>
+
+              <select id="stockFilterStatus">
+                <option value="todos">Todos los Estados</option>
+                <option value="disponible">Disponible</option>
+                <option value="reservado">Reservado</option>
+                <option value="en_preparacion">En Taller / Prep</option>
+                <option value="vendido">Vendido</option>
+              </select>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px; margin-left:auto;">
+              <span id="stockFilterCountBadge" class="erp-badge badge-0km" style="font-size:0.78rem;">10 unidades</span>
+              <!-- Selector de Vista (Tabla vs Tarjetas) -->
+              <div class="segmented-control">
+                <button type="button" class="segmented-btn active" id="btnStockViewTable" title="Vista de Tabla">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                </button>
+                <button type="button" class="segmented-btn" id="btnStockViewGrid" title="Vista de Grilla">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vista de Tabla de Flota -->
+          <div id="stockTableViewWrap" class="erp-table-responsive" style="background:var(--bg-surface); border-radius:12px; border:1px solid var(--border-subtle); box-shadow:var(--shadow-xs);">
+            <table class="erp-data-table" id="stockTable">
+              <thead>
+                <tr>
+                  <th>Vehículo / Identificador</th>
+                  <th>Condición</th>
+                  <th>Segmento & Mecánica</th>
+                  <th>Precio de Lista</th>
+                  <th>Estado Físico</th>
+                  <th>Catálogo Web</th>
+                  <th>Acción</th>
+                </tr>
+              </thead>
+              <tbody id="stockTableBody">
+                <!-- Filas renderizadas por app.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Vista de Tarjetas de Flota (Oculta por defecto) -->
+          <div id="stockCardsGridContainer" class="kpi-cards-grid" style="display:none; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); margin-top:20px;">
+            <!-- Renderizado dinámico -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VISTA 3: VENTAS Y FINANCIACIÓN (MÓDULO PRIORITARIO)
+             =================================================================== -->
+        <section class="view-pane" id="view-ventas">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Ventas, Financiación & Permutas</h1>
+              <p>Liquidación de operaciones comerciales, cálculo de cuotas fijas en pesos y liquidación de comisiones</p>
+            </div>
+            <div class="header-controls-group">
+              <button type="button" class="btn-action-quick btn-primary-red" onclick="window.erpApp.openModal('modalNewSale')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>+ Nueva Operación de Venta</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Simulador Interactivo de Financiación (Solo con DNI) -->
+          <div class="sales-calculator-card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+              <div>
+                <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:800;">Simulador Oficial de Financiación Os-Car</h3>
+                <p style="font-size:0.82rem; color:var(--text-muted);">Línea exclusiva: Cuotas fijas en pesos solo con DNI · Aprobación inmediata</p>
+              </div>
+              <span class="erp-badge badge-0km">Línea Prendaria</span>
+            </div>
+
+            <div class="calc-grid">
+              <div class="calc-input-group">
+                <label for="calcVehiclePrice">Precio del Vehículo (ARS)</label>
+                <input type="number" id="calcVehiclePrice" value="34500000" step="500000">
+              </div>
+              <div class="calc-input-group">
+                <label for="calcAdvance">Anticipo / Permuta Tomada (ARS)</label>
+                <input type="number" id="calcAdvance" value="13800000" step="500000">
+              </div>
+              <div class="calc-input-group">
+                <label for="calcInstallments">Cantidad de Cuotas</label>
+                <select id="calcInstallments">
+                  <option value="12">12 Cuotas Fijas</option>
+                  <option value="24" selected>24 Cuotas Fijas</option>
+                  <option value="36">36 Cuotas Fijas</option>
+                  <option value="48">48 Cuotas Fijas</option>
+                </select>
+              </div>
+              <div class="calc-input-group">
+                <label for="calcAnnualRate">Tasa Nominal Anual (TNA %)</label>
+                <input type="number" id="calcAnnualRate" value="38" step="1">
+              </div>
+            </div>
+
+            <!-- Banner de Resultado de Cuota Mensual -->
+            <div class="calc-result-banner">
+              <div>
+                <span style="font-size:0.75rem; font-weight:800; text-transform:uppercase; color:var(--text-muted); letter-spacing:0.8px;">Valor Estimado de Cuota Mensual Fija</span>
+                <div class="calc-installment-number" id="calcResultMonthly">$1.518.000</div>
+                <div style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Plazo fijo no indexado · Sin gastos ocultos</div>
+              </div>
+              <div style="display:flex; gap:28px; text-align:right;">
+                <div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Capital a Financiar:</span>
+                  <div style="font-family:var(--font-mono); font-weight:800; font-size:1.05rem;" id="calcResultCapital">$20.700.000</div>
+                </div>
+                <div>
+                  <span style="font-size:0.74rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Total Devengado:</span>
+                  <div style="font-family:var(--font-mono); font-weight:800; font-size:1.05rem; color:var(--brand-red);" id="calcResultTotalRepay">$36.432.000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabla de Ventas y Liquidaciones Realizadas -->
+          <div class="analytics-card" style="margin-top:24px;">
+            <div class="analytics-header">
+              <div>
+                <h3 class="analytics-title">Operaciones de Venta Recientes</h3>
+                <div class="analytics-subtitle">Registro transaccional, comisiones asignadas y comprobantes de entrega</div>
+              </div>
+            </div>
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>N° Operación / Fecha</th>
+                    <th>Adquiriente / DNI</th>
+                    <th>Unidad Vendida</th>
+                    <th>Condición & Liquidación</th>
+                    <th>Vendedor / Comisión</th>
+                    <th>Estado de Trámite</th>
+                    <th>Comprobante</th>
+                  </tr>
+                </thead>
+                <tbody id="salesTableBody">
+                  <!-- Filas inyectadas por app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             VISTAS 4 A 13: MÓDULOS OPERATIVOS RESTANTES
+             =================================================================== -->
+        <!-- CRM y Leads -->
+        <section class="view-pane" id="view-crm">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>CRM & Gestión de Leads Entrantes</h1>
+              <p>Consultas ingresadas desde el filtro web de Os-Car, WhatsApp y visitas al salón</p>
+            </div>
+            <button type="button" class="btn-action-quick btn-primary-red" onclick="window.erpApp.openModal('modalNewLead')">+ Nuevo Lead</button>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Prospecto / Contacto</th>
+                    <th>Canal de Origen</th>
+                    <th>Vehículo de Interés</th>
+                    <th>Asignado a</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Estado Comercial</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Mariano Gómez</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">mariano.g@gmail.com · 11-5421-9988</span></td>
+                    <td><span class="erp-badge badge-web-sync">Filtro Web Os-Car</span></td>
+                    <td>Honda HR-V EX CVT (0KM)</td>
+                    <td>Esteban Morales</td>
+                    <td style="font-family:var(--font-mono); font-size:0.8rem;">17/09/2026</td>
+                    <td><span class="erp-badge badge-status-reservado">En Negociación</span></td>
+                    <td><button type="button" class="btn-action-quick" style="padding:4px 8px;" onclick="window.erpApp.showToast('Abriendo conversación de WhatsApp')">WhatsApp</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Carlos Benítez</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">11-6321-4477 · Florencio Varela</span></td>
+                    <td><span class="erp-badge badge-0km">WhatsApp Directo</span></td>
+                    <td>Toyota SW4 SRX 2012</td>
+                    <td>Nicolás Ferrero</td>
+                    <td style="font-family:var(--font-mono); font-size:0.8rem;">16/09/2026</td>
+                    <td><span class="erp-badge badge-status-disponible">Contactado</span></td>
+                    <td><button type="button" class="btn-action-quick" style="padding:4px 8px;" onclick="window.erpApp.showToast('Abriendo conversación de WhatsApp')">WhatsApp</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Valeria Mansilla</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">11-4123-0099 · Berazategui</span></td>
+                    <td><span class="erp-badge" style="background:#F1F5F9;">Salón Central</span></td>
+                    <td>Peugeot 208 Feline 2023</td>
+                    <td>Esteban Morales</td>
+                    <td style="font-family:var(--font-mono); font-size:0.8rem;">15/09/2026</td>
+                    <td><span class="erp-badge badge-status-preparacion">Prueba de Manejo</span></td>
+                    <td><button type="button" class="btn-action-quick" style="padding:4px 8px;" onclick="window.erpApp.showToast('Reasignando vendedor')">Reasignar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Toma de Usados / Permutas -->
+        <section class="view-pane" id="view-permutas">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Toma de Usados & Permutas en Parte de Pago</h1>
+              <p>Tasaciones peritadas, checklist de documentación y vinculación con ventas 0KM / Usados</p>
+            </div>
+            <button type="button" class="btn-action-quick btn-primary-red" onclick="window.erpApp.showToast('Abriendo formulario de tasación')">+ Nueva Tasación</button>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Unidad Ofrecida en Permuta</th>
+                    <th>Patente / Año</th>
+                    <th>Tasación Peritada</th>
+                    <th>Operación Destino</th>
+                    <th>Estado de Peritaje</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ford Fiesta Kinetic Titanium</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">85.000 KM · Gris Plata</span></td>
+                    <td style="font-family:var(--font-mono);">AB-941-CD (2018)</td>
+                    <td style="font-family:var(--font-mono); font-weight:800; color:var(--brand-red);">$10.200.000</td>
+                    <td>V-2026-003 (Peugeot 208)</td>
+                    <td><span class="erp-badge badge-status-disponible">Aprobada e Ingresada</span></td>
+                    <td><button type="button" class="btn-action-quick" style="padding:4px 8px;" onclick="window.erpApp.navigateTo('taller')">Ver en Taller</button></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Chevrolet Tracker Premier 1.2T</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">34.000 KM · Blanco Nácar</span></td>
+                    <td style="font-family:var(--font-mono);">AF-552-RT (2021)</td>
+                    <td style="font-family:var(--font-mono); font-weight:800; color:var(--brand-red);">$23.500.000</td>
+                    <td>En Negociación (Toyota SW4)</td>
+                    <td><span class="erp-badge badge-status-reservado">Pendiente de Aprobación</span></td>
+                    <td><button type="button" class="btn-action-quick" style="padding:4px 8px;" onclick="window.erpApp.showToast('Tasación confirmada por Dirección')">Aprobar</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Preparación y Service de Ingreso -->
+        <section class="view-pane" id="view-taller">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Taller & Preparación de Ingreso</h1>
+              <p>Checklist mecánico, detallado estético y registro de gastos para determinación de costo real</p>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Unidad en Taller</th>
+                    <th>Patente</th>
+                    <th>Tareas Pendientes</th>
+                    <th>Gastos Acumulados</th>
+                    <th>Técnico Responsable</th>
+                    <th>Estado de Ingreso</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Toyota SW4 SRX 4x4</strong></td>
+                    <td style="font-family:var(--font-mono);">LKV-892</td>
+                    <td>Cambio de amortiguadores delanteros + Pulido 3M</td>
+                    <td style="font-family:var(--font-mono); font-weight:800;">$1.150.000</td>
+                    <td>Taller Os-Car (Marcelo R.)</td>
+                    <td><span class="erp-badge badge-status-preparacion">En Proceso (75%)</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Chevrolet Onix Premier</strong></td>
+                    <td style="font-family:var(--font-mono);">AE-812-ZZ</td>
+                    <td>Service preventivo 40.000km + Tratamiento acrílico</td>
+                    <td style="font-family:var(--font-mono); font-weight:800;">$480.000</td>
+                    <td>Service Oficial</td>
+                    <td><span class="erp-badge badge-status-preparacion">En Taller (40%)</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Documentación y Transferencias -->
+        <section class="view-pane" id="view-documentacion">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Gestoría, Documentación & Transferencias</h1>
+              <p>Monitoreo de informes de dominio, verificación policial 012, grabado de autopartes y cédulas</p>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Trámite / Unidad</th>
+                    <th>Comprador / Titular</th>
+                    <th>Registro Seccional</th>
+                    <th>Documentos Verificados</th>
+                    <th>Estado DNRPA</th>
+                    <th>Vencimiento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>V-2026-001 (Honda HR-V)</strong></td>
+                    <td>Roberto Alejandro Rossi</td>
+                    <td>Registro Automotor N° 2 Quilmes</td>
+                    <td>Título Digital · Form 08D · Verif. Policial</td>
+                    <td><span class="erp-badge badge-status-disponible">Inscripto</span></td>
+                    <td style="font-family:var(--font-mono);">24/09/2026</td>
+                  </tr>
+                  <tr>
+                    <td><strong>V-2026-004 (Fiat Cronos)</strong></td>
+                    <td>Luciana Beatriz Fernández</td>
+                    <td>Registro N° 1 Florencio Varela</td>
+                    <td>Form 08D firmado · Pendiente 13A Multas</td>
+                    <td><span class="erp-badge badge-status-reservado">En Trámite</span></td>
+                    <td style="font-family:var(--font-mono);">19/09/2026</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Fotos y Publicación Web -->
+        <section class="view-pane" id="view-publicacion">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Publicación & Sincronización Web</h1>
+              <p>Control de unidades publicadas en el catálogo público de automotoresoscar.com.ar</p>
+            </div>
+            <button type="button" class="btn-action-quick btn-primary-red btn-sync-landing">Sincronizar Todo el Catálogo</button>
+          </div>
+          <div class="analytics-card">
+            <p style="margin-bottom:14px; color:var(--text-muted); font-size:0.88rem;">
+              Las unidades marcadas con el switch "Web ON" alimentan directamente el catálogo y el wizard de la landing pública. Al realizar un alta o cambio de precio en el stock, el cambio se replica en la base de datos de la web en tiempo real.
+            </p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <span class="erp-badge badge-web-sync">10 Vehículos en Base de Datos</span>
+              <span class="erp-badge badge-0km">9 Unidades con Visibilidad Pública</span>
+              <span class="erp-badge" style="background:var(--brand-red); color:#fff;">3 Unidades en Carrusel Destacado</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Agenda de Turnos y Entregas -->
+        <section class="view-pane" id="view-agenda">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Agenda de Turnos & Entregas</h1>
+              <p>Test drives coordinados, peritajes de usados y ceremonia de entrega en salón de ventas</p>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Horario</th>
+                    <th>Tipo de Turno</th>
+                    <th>Cliente</th>
+                    <th>Vehículo Asociado</th>
+                    <th>Vendedor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-family:var(--font-mono); font-weight:800;">Hoy · 11:30 hs</td>
+                    <td><span class="erp-badge badge-0km">Entrega de Unidad 0KM</span></td>
+                    <td>Roberto Alejandro Rossi</td>
+                    <td>Honda HR-V EX CVT</td>
+                    <td>Esteban Morales</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--font-mono); font-weight:800;">Hoy · 16:00 hs</td>
+                    <td><span class="erp-badge badge-status-reservado">Tasación de Permuta</span></td>
+                    <td>Carlos Benítez</td>
+                    <td>Toyota SW4 SRX 2012</td>
+                    <td>Nicolás Ferrero</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--font-mono); font-weight:800;">Mañana · 10:00 hs</td>
+                    <td><span class="erp-badge badge-status-disponible">Prueba de Manejo (Test Drive)</span></td>
+                    <td>Valeria Mansilla</td>
+                    <td>Peugeot 208 Feline</td>
+                    <td>Esteban Morales</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Finanzas y Facturación -->
+        <section class="view-pane" id="view-finanzas">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Finanzas, Facturación & Flujo de Fondos</h1>
+              <p>Control de cobros en efectivo, cheques de clientes, desembolsos bancarios y gastos fijos</p>
+            </div>
+          </div>
+          <div class="kpi-cards-grid" style="margin-bottom:20px;">
+            <div class="kpi-card">
+              <span class="kpi-label">Facturado Mes en Curso</span>
+              <div class="kpi-value-main">$159.200.000</div>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Cobranzas Percibidas</span>
+              <div class="kpi-value-main" style="color:var(--status-success-text);">$90.800.000</div>
+            </div>
+            <div class="kpi-card">
+              <span class="kpi-label">Financiación a Percibir (Cuotas)</span>
+              <div class="kpi-value-main" style="color:var(--brand-red);">$68.400.000</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Comisiones de Vendedores -->
+        <section class="view-pane" id="view-comisiones">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Liquidación de Comisiones</h1>
+              <p>Escala por volumen de unidades y porcentaje sobre utilidad neta de cada operación</p>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Vendedor</th>
+                    <th>Unidades Vendidas</th>
+                    <th>Monto Comercial Operado</th>
+                    <th>Comisión Devengada</th>
+                    <th>Estado de Liquidación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Esteban Morales</strong></td>
+                    <td>3 unidades</td>
+                    <td style="font-family:var(--font-mono);">$99.200.000</td>
+                    <td style="font-family:var(--font-mono); font-weight:800; color:var(--status-success-text);">$1.760.000</td>
+                    <td><span class="erp-badge badge-status-disponible">Al Día</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Nicolás Ferrero</strong></td>
+                    <td>2 unidades</td>
+                    <td style="font-family:var(--font-mono);">$60.000.000</td>
+                    <td style="font-family:var(--font-mono); font-weight:800; color:var(--status-success-text);">$1.020.000</td>
+                    <td><span class="erp-badge badge-status-disponible">Al Día</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Reportes y Rentabilidad -->
+        <section class="view-pane" id="view-reportes">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Reportes Ejecutivos & Business Intelligence</h1>
+              <p>Rotación de flota por segmento, rentabilidad neta por marca y análisis predictivo</p>
+            </div>
+            <button type="button" class="btn-action-quick" onclick="window.print()">Exportar PDF</button>
+          </div>
+          <div class="analytics-card">
+            <div style="padding:16px 0;">
+              <h4 style="font-size:1rem; font-weight:800; margin-bottom:8px;">Rotación de Stock por Categoría (Días Promedio de Venta):</h4>
+              <ul style="list-style:none; display:flex; gap:20px; flex-wrap:wrap; font-size:0.88rem;">
+                <li>Autos: <strong>21 días</strong></li>
+                <li>Camionetas Pick-Up: <strong>16 días (Mayor demanda)</strong></li>
+                <li>Camiones: <strong>38 días</strong></li>
+                <li>Motos: <strong>12 días</strong></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Personal y RRHH -->
+        <section class="view-pane" id="view-personal">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Personal & Equipo de Salón</h1>
+              <p>Ventas, peritos de taller, gestoría y administración de Automotores Os-Car</p>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Empleado</th>
+                    <th>Rol en Concesionaria</th>
+                    <th>Sucursal</th>
+                    <th>Antigüedad</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Esteban Morales</strong></td>
+                    <td>Asesor Comercial Senior</td>
+                    <td>Salón San Martín</td>
+                    <td>6 años</td>
+                    <td><span class="erp-badge badge-0km">Activo</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Nicolás Ferrero</strong></td>
+                    <td>Asesor Comercial & Peritajes</td>
+                    <td>Salón San Martín</td>
+                    <td>4 años</td>
+                    <td><span class="erp-badge badge-0km">Activo</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Marcelo Rodríguez</strong></td>
+                    <td>Jefe de Taller y Service de Ingreso</td>
+                    <td>Área Técnica Varela</td>
+                    <td>11 años</td>
+                    <td><span class="erp-badge badge-0km">Activo</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Configuración y Auditoría -->
+        <section class="view-pane" id="view-configuracion">
+          <div class="view-header-row">
+            <div class="view-title-wrap">
+              <h1>Auditoría del Sistema & Seguridad</h1>
+              <p>Registro inmutable de transacciones, cambios de precios y control de accesos por rol</p>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="erp-table-responsive">
+              <table class="erp-data-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Usuario</th>
+                    <th>Acción Registrada</th>
+                    <th>Entidad Modificada</th>
+                    <th>IP / Terminal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-family:var(--font-mono); font-size:0.8rem;">17/09/2026 19:10</td>
+                    <td>Dirección Os-Car</td>
+                    <td>Actualización de precio de lista (-4% oferta)</td>
+                    <td>Peugeot 208 Feline (AF-321-XY)</td>
+                    <td style="font-family:var(--font-mono); font-size:0.75rem;">192.168.1.102</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--font-mono); font-size:0.8rem;">17/09/2026 18:45</td>
+                    <td>Esteban Morales</td>
+                    <td>Registro de Seña y Comprobante V-2026-004</td>
+                    <td>Fiat Cronos Precision</td>
+                    <td style="font-family:var(--font-mono); font-size:0.75rem;">192.168.1.108</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family:var(--font-mono); font-size:0.8rem;">17/09/2026 17:30</td>
+                    <td>Marcelo Rodríguez</td>
+                    <td>Carga de factura de service amortiguadores ($1.150.000)</td>
+                    <td>Toyota SW4 SRX (LKV-892)</td>
+                    <td style="font-family:var(--font-mono); font-size:0.75rem;">192.168.1.115</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       3. DRAWER LATERAL DE INSPECCIÓN Y LIBRO DE COSTOS DE LA UNIDAD
+       ======================================================================= -->
+  <div class="drawer-backdrop" id="vehicleDrawerBackdrop">
+    <div class="vehicle-drawer">
+      <div class="drawer-header">
+        <div class="drawer-title-row">
+          <span style="font-size:0.72rem; font-weight:800; text-transform:uppercase; color:var(--brand-red); letter-spacing:0.8px;">Ficha Técnica & Libro de Costos</span>
+          <h2 id="drawerVehicleTitle" style="font-size:1.25rem;">Detalle de Unidad</h2>
+        </div>
+        <button type="button" class="drawer-close-btn" id="btnVehicleDrawerClose" title="Cerrar Ficha">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="drawer-body" id="drawerVehicleBody">
+        <!-- Renderizado dinámico desde app.js: openVehicleDrawer() -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       4. COMMAND PALETTE (CTRL + K) BUSCADOR UNIVERSAL
+       ======================================================================= -->
+  <div class="cmd-palette-backdrop" id="cmdPaletteBackdrop">
+    <div class="cmd-palette-box">
+      <div class="cmd-input-row">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--brand-red);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="cmdSearchInput" placeholder="Buscar vehículo, patente, cliente o DNI..." autocomplete="off">
+        <span class="search-kbd-shortcut">ESC para salir</span>
+      </div>
+      <div class="cmd-results-list" id="cmdResultsContainer">
+        <!-- Resultados en tiempo real inyectados por app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       5. MODAL: REGISTRAR NUEVA VENTA / OPERACIÓN
+       ======================================================================= -->
+  <div class="erp-modal-backdrop" id="modalNewSale">
+    <div class="erp-modal-dialog">
+      <div class="erp-modal-header">
+        <div class="erp-modal-title">Registrar Nueva Operación de Venta</div>
+        <div class="erp-modal-close" onclick="window.erpApp.closeModal('modalNewSale')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+      </div>
+      <div class="erp-modal-body">
+        <form id="formNewSale" onsubmit="event.preventDefault(); window.erpApp.showToast('Operación de venta guardada exitosamente'); window.erpApp.closeModal('modalNewSale');">
+          <div class="modal-form-grid">
+            <div class="form-field-group form-field-full">
+              <label for="newSaleVehicleSelect">Seleccionar Unidad del Stock *</label>
+              <select id="newSaleVehicleSelect" required>
+                <option value="">Seleccionar de flota disponible...</option>
+                <option value="honda-hrv-ex-cvt">Honda HR-V EX CVT 1.8 140cv (0KM) · $34.500.000</option>
+                <option value="fiat-cronos-precision">Fiat Cronos Precision 1.3 GSE (0KM) · $26.800.000</option>
+                <option value="peugeot-208-feline">Peugeot 208 Feline Tiptronic 2023 · $22.400.000</option>
+                <option value="toyota-sw4-srx-2012">Toyota SW4 SRX 3.0 TDI 4x4 2012 · $38.500.000</option>
+                <option value="chevrolet-onix-premier">Chevrolet Onix Premier 1.0 Turbo 2022 · $18.900.000</option>
+                <option value="renault-alaskan-iconic">Renault Alaskan Iconic 4x4 AT (0KM) · $46.200.000</option>
+              </select>
+            </div>
+
+            <div class="form-field-group">
+              <label for="saleClientName">Nombre Completo del Cliente *</label>
+              <input type="text" id="saleClientName" placeholder="Ej: Roberto Alejandro Rossi" required>
+            </div>
+            <div class="form-field-group">
+              <label for="saleClientDni">DNI o CUIT *</label>
+              <input type="text" id="saleClientDni" placeholder="Ej: 28.941.552" required>
+            </div>
+
+            <div class="form-field-group">
+              <label for="saleClientPhone">Teléfono de Contacto</label>
+              <input type="tel" id="saleClientPhone" placeholder="Ej: 11-4521-9988">
+            </div>
+            <div class="form-field-group">
+              <label for="saleSellerSelect">Vendedor Interviniente *</label>
+              <select id="saleSellerSelect" required>
+                <option value="Esteban Morales">Esteban Morales</option>
+                <option value="Nicolás Ferrero">Nicolás Ferrero</option>
+              </select>
+            </div>
+
+            <div class="form-field-group">
+              <label for="salePaymentMethod">Modalidad de Pago *</label>
+              <select id="salePaymentMethod">
+                <option value="contado">Contado Efectivo / Transferencia</option>
+                <option value="financiado">Financiación Fija en Pesos (DNI)</option>
+                <option value="permuta">Permuta de Usado + Saldo</option>
+              </select>
+            </div>
+            <div class="form-field-group">
+              <label for="saleTotalAmount">Monto Total Acordado (ARS) *</label>
+              <input type="number" id="saleTotalAmount" placeholder="34500000" required>
+            </div>
+
+            <div class="form-field-group">
+              <label for="saleAdvanceAmount">Anticipo / Seña Recibida</label>
+              <input type="number" id="saleAdvanceAmount" placeholder="13800000">
+            </div>
+            <div class="form-field-group">
+              <label for="saleInstallmentsCount">Cuotas Financiadas</label>
+              <select id="saleInstallmentsCount">
+                <option value="0">Sin Financiación (100% Contado)</option>
+                <option value="12">12 Cuotas</option>
+                <option value="24" selected>24 Cuotas</option>
+                <option value="36">36 Cuotas</option>
+                <option value="48">48 Cuotas</option>
+              </select>
+            </div>
+          </div>
+          <div class="erp-modal-footer">
+            <button type="button" class="btn-action-quick" onclick="window.erpApp.closeModal('modalNewSale')">Cancelar</button>
+            <button type="submit" class="btn-action-quick btn-primary-red">Confirmar y Emitir Recibo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       6. MODAL: REGISTRAR NUEVO LEAD / CONSULTA
+       ======================================================================= -->
+  <div class="erp-modal-backdrop" id="modalNewLead">
+    <div class="erp-modal-dialog">
+      <div class="erp-modal-header">
+        <div class="erp-modal-title">Registrar Nuevo Lead Comercial</div>
+        <div class="erp-modal-close" onclick="window.erpApp.closeModal('modalNewLead')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+      </div>
+      <div class="erp-modal-body">
+        <form onsubmit="event.preventDefault(); window.erpApp.showToast('Lead registrado y asignado a vendedor'); window.erpApp.closeModal('modalNewLead');">
+          <div class="modal-form-grid">
+            <div class="form-field-group">
+              <label>Nombre y Apellido *</label>
+              <input type="text" placeholder="Ej: Santiago Varela" required>
+            </div>
+            <div class="form-field-group">
+              <label>Teléfono / WhatsApp *</label>
+              <input type="tel" placeholder="Ej: 11-4512-8822" required>
+            </div>
+            <div class="form-field-group">
+              <label>Canal de Origen</label>
+              <select>
+                <option value="web">Filtro / Wizard Web</option>
+                <option value="whatsapp">WhatsApp Directo</option>
+                <option value="salon">Visita Espontánea al Salón</option>
+                <option value="redes">Redes Sociales</option>
+              </select>
+            </div>
+            <div class="form-field-group">
+              <label>Vehículo de Interés</label>
+              <input type="text" placeholder="Ej: Fiat Cronos o Pick-up">
+            </div>
+            <div class="form-field-group form-field-full">
+              <label>Asignar Asesor Comercial</label>
+              <select>
+                <option value="Esteban Morales">Esteban Morales</option>
+                <option value="Nicolás Ferrero">Nicolás Ferrero</option>
+              </select>
+            </div>
+          </div>
+          <div class="erp-modal-footer">
+            <button type="button" class="btn-action-quick" onclick="window.erpApp.closeModal('modalNewLead')">Cancelar</button>
+            <button type="submit" class="btn-action-quick btn-primary-red">Guardar Lead</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       7. MODAL: NUEVO VEHÍCULO
+       ======================================================================= -->
+  <div class="erp-modal-backdrop" id="modalNewVehicle">
+    <div class="erp-modal-dialog">
+      <div class="erp-modal-header">
+        <div class="erp-modal-title">Alta de Vehículo en Stock</div>
+        <div class="erp-modal-close" onclick="window.erpApp.closeModal('modalNewVehicle')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+      </div>
+      <div class="erp-modal-body">
+        <form onsubmit="event.preventDefault(); window.erpApp.showToast('Vehículo ingresado al stock'); window.erpApp.closeModal('modalNewVehicle');">
+          <div class="modal-form-grid">
+            <div class="form-field-group">
+              <label>Marca & Modelo *</label>
+              <input type="text" placeholder="Ej: Volkswagen Amarok V6" required>
+            </div>
+            <div class="form-field-group">
+              <label>Versión Completa</label>
+              <input type="text" placeholder="Ej: Extreme 3.0 4Motion AT">
+            </div>
+            <div class="form-field-group">
+              <label>Categoría</label>
+              <select>
+                <option value="auto">Auto</option>
+                <option value="camioneta">Camioneta / Pick-Up</option>
+                <option value="camion">Camión</option>
+                <option value="moto">Moto</option>
+              </select>
+            </div>
+            <div class="form-field-group">
+              <label>Condición</label>
+              <select>
+                <option value="0km">0KM</option>
+                <option value="usado">Usado Seleccionado</option>
+              </select>
+            </div>
+            <div class="form-field-group">
+              <label>Año de Fabricación</label>
+              <input type="number" placeholder="2024" value="2024">
+            </div>
+            <div class="form-field-group">
+              <label>Patente (si aplica)</label>
+              <input type="text" placeholder="Ej: AG-123-ZZ">
+            </div>
+            <div class="form-field-group">
+              <label>Precio de Costo / Toma (ARS)</label>
+              <input type="number" placeholder="Ej: 38000000">
+            </div>
+            <div class="form-field-group">
+              <label>Precio de Lista Público (ARS) *</label>
+              <input type="number" placeholder="Ej: 46500000" required>
+            </div>
+          </div>
+          <div class="erp-modal-footer">
+            <button type="button" class="btn-action-quick" onclick="window.erpApp.closeModal('modalNewVehicle')">Cancelar</button>
+            <button type="submit" class="btn-action-quick btn-primary-red">Dar de Alta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       8. MODAL: VISTA PREVIA DE RECIBO / COMPROBANTE OFICIAL
+       ======================================================================= -->
+  <div class="erp-modal-backdrop" id="modalReceiptPreview">
+    <div class="erp-modal-dialog" style="width:740px;">
+      <div class="erp-modal-header">
+        <div class="erp-modal-title">Comprobante Oficial de Reserva / Venta</div>
+        <div class="erp-modal-close" onclick="window.erpApp.closeModal('modalReceiptPreview')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+      </div>
+      <div class="erp-modal-body" id="receiptPreviewContent">
+        <!-- Renderizado dinámico desde app.js: printSaleReceipt() -->
+      </div>
+      <div class="erp-modal-footer">
+        <button type="button" class="btn-action-quick" onclick="window.erpApp.closeModal('modalReceiptPreview')">Cerrar</button>
+        <button type="button" class="btn-action-quick btn-primary-red" onclick="window.print()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          <span>Imprimir Comprobante</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts del ERP: Modelos de Datos, Motor SVG de Gráficos y Controlador SPA -->
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
