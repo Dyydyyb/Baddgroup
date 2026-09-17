@@ -2,6 +2,31 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/automotores-oscar-ejemplo",
+      "destination": "/automotores-oscar-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/os-car-ejemplo",
+      "destination": "/automotores-oscar-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/os-car",
+      "destination": "/automotores-oscar-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/automotores-oscar",
+      "destination": "/automotores-oscar-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/automotores-os-car",
+      "destination": "/automotores-oscar-ejemplo/",
+      "permanent": false
+    },
+    {
       "source": "/eam",
       "destination": "/eam-ejemplo/",
       "permanent": false
@@ -402,6 +427,22 @@
     {
       "source": "/veni-a-clase",
       "destination": "/veni-a-clase-ejemplo/index.html"
+    },
+    {
+      "source": "/automotores-oscar-ejemplo",
+      "destination": "/automotores-oscar-ejemplo/index.html"
+    },
+    {
+      "source": "/automotores-oscar-ejemplo/",
+      "destination": "/automotores-oscar-ejemplo/index.html"
+    },
+    {
+      "source": "/os-car-ejemplo",
+      "destination": "/automotores-oscar-ejemplo/index.html"
+    },
+    {
+      "source": "/os-car",
+      "destination": "/automotores-oscar-ejemplo/index.html"
     }
   ]
 }
