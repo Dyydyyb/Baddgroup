@@ -101,7 +101,7 @@ const VEHICLES_DATA = [
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     },
@@ -199,7 +199,7 @@ const VEHICLES_DATA = [
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     },
@@ -277,7 +277,7 @@ const VEHICLES_DATA = [
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     },
@@ -396,7 +396,7 @@ const VEHICLES_DATA = [
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     }
@@ -500,7 +500,7 @@ const VEHICLES_DATA = [
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     },
@@ -517,65 +517,75 @@ const VEHICLES_DATA = [
     "priceNote": "Financiación disponible con cuotas fijas en pesos",
     "isFinanced": true,
     "financeNote": "Amplia financiación en cuotas fijas solo con DNI",
-    "image": "assets/vehicles/ford-ranger.jpg",
+    "image": "assets/vehicles/renault-alaskan.png",
     "gallery": [
-      "assets/vehicles/ford-ranger.jpg"
+      "assets/vehicles/renault-alaskan.png"
     ],
     "km": "0 km",
     "engine": "2.3 dCi Turbo Diesel 160 CV",
     "transmission": "Manual 6 vel.",
     "fuel": "Diesel",
     "traction": "4x2 Trasera",
-    "color": "Blanco Glaciar",
-    "moreInfo": "AMPLIA FINANCIACIÓN CUOTAS FIJAS EN PESOS SOLO CON DNI - Podes ver nuestra gran variedad de vehiculos 0km y usados en www.automotoresoscar.com.ar . O también podes Comunicarte a nuestros tel. 4275-1489/ 4275-0302 - 4255-3571/5364-0401 facebook os-car automotores",
+    "color": "Plata Metalizado",
+    "moreInfo": "AMPLIA FINANCIACION CUOTAS FIJAS EN PESOS SOLO CON DNI - Podes ver nuestra gran variedad de vehiculos 0km y usados en www.automotoresoscar.com.ar . O también podes Comunicarte a nuestros tel. 4275-1489/ 4275-0302 - 4255-3571/5364-0401 facebook os-car automotores",
     "equipamiento": {
       "confort": [
-        "Aire acondicionado de alto rendimiento",
-        "Cierre centralizado con mando a distancia",
-        "Computadora de abordo multifunción",
-        "Control de velocidad crucero con limitador",
-        "Vidrios eléctricos delanteros y traseros",
+        "Aire acondicionado",
+        "Alarma de luces encendidas",
+        "Apertura remota de baúl",
         "Asiento conductor regulable en altura",
-        "Volante regulable en altura",
-        "Dirección asistida hidráulica"
+        "Asiento trasero rebatible",
+        "Cierre centralizado con mando a distancia",
+        "Cierre centralizado de puertas",
+        "Computadora de abordo",
+        "Control de velocidad crucero",
+        "Espejos exteriores eléctricos",
+        "Faros regulables desde el interior",
+        "Vidrios eléctricos delanteros",
+        "Vidrios eléctricos delanteros y traseros",
+        "Volante regulable",
+        "Dirección Hidráulica"
       ],
       "seguridad": [
-        "Airbags frontales conductor y acompañante",
-        "Frenos ABS con distribución electrónica de frenado (EBD)",
-        "Asistente de frenado de emergencia (AFU)",
-        "Control de estabilidad (ESP)",
-        "Control de tracción (ASR)",
-        "Asistente de arranque en pendientes (HSA)",
-        "Anclajes ISOFIX en plazas traseras",
-        "Inmovilizador de motor"
+        "Airbag acompañante",
+        "Airbag conductor",
+        "Alarma",
+        "Faros antiniebla delanteros",
+        "Faros antiniebla traseros",
+        "Frenos ABS",
+        "Inmovilizador de motor",
+        "Isofix",
+        "Tercer luz de stop"
       ],
       "exterior": [
-        "Caja de carga con ganchos de sujeción",
-        "Paragolpes delantero color carrocería",
-        "Protector de cárter de alta resistencia",
-        "Llantas de acero 16 pulgadas de trabajo pesado"
+        "Paragolpes color carrocería"
       ],
       "multimedia": [
-        "Sistema de audio con radio AM/FM y reproductor MP3",
-        "Conexión Bluetooth para telefonía y audio streaming",
-        "Entrada auxiliar y puerto USB",
-        "Comandos de audio al volante"
+        "Bluetooth",
+        "Cargador de CD",
+        "Comando satelital de stereo",
+        "Entrada auxiliar",
+        "Entrada USB",
+        "Manos libres",
+        "Radio AM/FM",
+        "Reproduce MP3",
+        "Volante multi-función"
       ]
     },
     "features": [
-      "Motor 2.3 dCi Turbo Diesel 160 CV con 403 Nm de torque",
+      "Motor 2.3 dCi Turbo Diesel 160 CV con gran torque de trabajo",
       "Capacidad de carga superior a 1 tonelada",
-      "Suspensión trasera multilink de 5 brazos con resortes helicoidales",
-      "Control de estabilidad (ESP) y tracción (ASR)",
-      "Asistente de arranque en pendientes (HSA)",
-      "Conectividad Bluetooth, USB y comandos al volante"
+      "Control de velocidad crucero",
+      "Doble airbag frontal y frenos ABS con anclajes ISOFIX",
+      "Cierre centralizado con mando a distancia y vidrios en las 4 puertas",
+      "Conectividad Bluetooth, USB, Auxiliar y comando satelital de audio"
     ],
-    "description": "La pick-up mediana de 1 tonelada fabricada en Córdoba. Robusta, confiable y con la exclusiva suspensión trasera multilink que brinda el mejor andar de su clase sin resignar capacidad de carga de trabajo.",
+    "description": "La pick-up mediana de trabajo de Renault. Fuerte, confiable y con excelente capacidad de carga útil. Ideal tanto para labores intensivas de campo o industria como para el uso particular diario.",
     "contact": {
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     },
@@ -592,65 +602,81 @@ const VEHICLES_DATA = [
     "priceNote": "Financiación disponible con cuotas fijas en pesos",
     "isFinanced": true,
     "financeNote": "Amplia financiación en cuotas fijas solo con DNI",
-    "image": "assets/vehicles/peugeot-208.jpg",
+    "image": "assets/vehicles/peugeot-2008.png",
     "gallery": [
-      "assets/vehicles/peugeot-208.jpg"
+      "assets/vehicles/peugeot-2008.png"
     ],
     "km": "0 km",
     "engine": "1.6 VTi 115 CV",
     "transmission": "Manual 5 vel.",
     "fuel": "Nafta",
     "traction": "Delantera",
-    "color": "Gris Artense",
+    "color": "Blanco Banquise",
     "moreInfo": "AMPLIA FINANCIACIÓN CUOTAS FIJAS EN PESOS SOLO CON DNI - Podes ver nuestra gran variedad de vehiculos 0km y usados en www.automotoresoscar.com.ar . O también podes Comunicarte a nuestros tel. 4275-1489/ 4275-0302 - 4255-3571/5364-0401 facebook os-car automotores",
     "equipamiento": {
       "confort": [
-        "Aire acondicionado digital bizona",
-        "Dirección asistida eléctrica variable",
+        "Aire acondicionado",
+        "Alarma de luces encendidas",
+        "Apertura remota de baúl",
+        "Asiento conductor regulable en altura",
+        "Asiento trasero rebatible",
         "Cierre centralizado con mando a distancia",
-        "Levantavidrios eléctricos en las 4 puertas",
+        "Cierre centralizado de puertas",
+        "Computadora de abordo",
+        "Control de velocidad crucero",
         "Espejos exteriores eléctricos",
-        "Computadora de abordo i-Cockpit",
-        "Control de velocidad crucero y limitador",
-        "Volante regulable en altura y profundidad",
-        "Asiento conductor regulable en altura"
+        "Faros regulables desde el interior",
+        "Vidrios eléctricos delanteros",
+        "Vidrios eléctricos delanteros y traseros",
+        "Volante regulable",
+        "Dirección Hidráulica"
       ],
       "seguridad": [
-        "4 Airbags (frontales y laterales delanteros)",
-        "Frenos ABS con repartidor electrónico (REF)",
-        "Asistencia al frenado de urgencia (AFU)",
+        "Airbag acompañante",
+        "Airbag conductor",
+        "Alarma",
+        "Apoya cabeza en asientos traseros",
+        "Cierre de puertas automático en movimiento",
         "Control de estabilidad (ESP)",
-        "Faros antiniebla delanteros y traseros",
-        "Anclajes ISOFIX para sillas de niños",
-        "Cierre automático de puertas en rodaje"
+        "Faros antiniebla delanteros",
+        "Faros antiniebla traseros",
+        "Frenos ABS",
+        "Inmovilizador de motor",
+        "Isofix",
+        "Regulador de velocidad",
+        "Repartidor electrónico de frenado",
+        "Sensor de estacionamiento",
+        "Tercer luz de stop"
       ],
       "exterior": [
-        "Llantas de aleación de 16 pulgadas",
-        "Barras de techo longitudinales cromadas",
-        "Faros con guía de luz LED diurna",
-        "Paragolpes y espejos en color carrocería"
+        "Barra porta equipaje",
+        "Limpia/lava luneta",
+        "Paragolpes color carrocería"
       ],
       "multimedia": [
-        "Pantalla táctil de 7 pulgadas",
-        "Conectividad Apple CarPlay y Android Auto",
-        "Bluetooth para llamadas y audio",
-        "Puertos USB y entrada auxiliar",
-        "Mandos al volante ergonómico"
+        "Bluetooth",
+        "Cargador de CD",
+        "Comando satelital de stereo",
+        "Entrada auxiliar",
+        "Entrada USB",
+        "Manos libres",
+        "Radio AM/FM",
+        "Volante multi-función"
       ]
     },
     "features": [
-      "Puesto de conducción Peugeot i-Cockpit",
-      "Pantalla multimedia táctil con Apple CarPlay y Android Auto",
-      "Control de estabilidad ESP y 4 airbags",
-      "Llantas de aleación de 16 pulgadas y barras de techo",
-      "Faros con firma lumínica LED"
+      "Control de estabilidad (ESP) y sensor de estacionamiento",
+      "Control de velocidad crucero con regulador de velocidad",
+      "Airbags frontales y frenos ABS con repartidor electrónico (REF)",
+      "Barras porta equipaje en el techo y faros antiniebla delanteros y traseros",
+      "Conectividad Bluetooth, USB, manos libres y volante multifunción"
     ],
-    "description": "El crossover compacto de Peugeot con el inconfundible puesto de conducción i-Cockpit. Estilo elegante, despeje del suelo ideal para caminos urbanos o rurales y conectividad smartphone total.",
+    "description": "El crossover compacto urbano de Peugeot en versión Allure. Diseño dinámico con barras de techo, despeje del suelo ideal para la ciudad o viajes familiares, conectividad completa y elevado equipamiento de seguridad.",
     "contact": {
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     }
@@ -666,66 +692,81 @@ const VEHICLES_DATA = [
     "priceNote": "Financiación disponible con cuotas fijas en pesos",
     "isFinanced": true,
     "financeNote": "Amplia financiación en cuotas fijas solo con DNI",
-    "image": "assets/vehicles/chevrolet-cruze.jpg",
+    "image": "assets/vehicles/citroen-c4.png",
     "gallery": [
-      "assets/vehicles/chevrolet-cruze.jpg"
+      "assets/vehicles/citroen-c4.png"
     ],
     "km": "0 km",
     "engine": "1.6 VTi 115 CV",
     "transmission": "Manual 5 vel.",
     "fuel": "Nafta",
     "traction": "Delantera",
-    "color": "Gris Moondust",
-    "moreInfo": "AMPLIA FINANCIACIÓN CUOTAS FIJAS EN PESOS SOLO CON DNI - Podes ver nuestra gran variedad de vehiculos 0km y usados en www.automotoresoscar.com.ar . O también podes Comunicarte a nuestros tel. 4275-1489/ 4275-0302 - 4255-3571/5364-0401 facebook os-car automotores",
+    "color": "Plata Metalizado",
+    "moreInfo": "AMPLIA FINANCIACION CUOTAS FIJAS EN PESOS SOLO CON DNI - Podes ver nuestra gran variedad de vehiculos 0km y usados en www.automotoresoscar.com.ar . O también podes Comunicarte a nuestros tel. 4275-1489/ 4275-0302 - 4255-3571/5364-0401 facebook os-car automotores",
     "equipamiento": {
       "confort": [
-        "Climatizador automático bizona con función REST",
-        "Asientos anatómicos de alto confort",
-        "Cierre centralizado y selectivo a distancia",
-        "Levantavidrios eléctricos en 4 puertas antipinzamiento",
-        "Retrovisores exteriores con comando eléctrico",
-        "Computadora de abordo multifunción",
-        "Control de velocidad crucero y regulador programable",
-        "Volante forrado en cuero regulable en altura y profundidad",
-        "Guantera refrigerada e iluminada"
+        "Aire acondicionado",
+        "Alarma de luces encendidas",
+        "Apertura remota de baúl",
+        "Asiento conductor regulable en altura",
+        "Asiento trasero rebatible",
+        "Cierre centralizado con mando a distancia",
+        "Cierre centralizado de puertas",
+        "Computadora de abordo",
+        "Control de velocidad crucero",
+        "Espejos exteriores eléctricos",
+        "Faros regulables desde el interior",
+        "Tapizado de cuero",
+        "Vidrios eléctricos delanteros",
+        "Vidrios eléctricos delanteros y traseros",
+        "Volante regulable",
+        "Dirección Hidráulica"
       ],
       "seguridad": [
-        "Doble airbag frontal de inflado en dos etapas",
-        "Frenos a disco en las 4 ruedas con sistema ABS",
-        "Repartidor electrónico de frenado (REF)",
-        "Ayuda al frenado de urgencia (AFU)",
-        "Control de estabilidad (ESP) desconectable",
-        "Control de tracción (ASR)",
-        "Anclajes ISOFIX y Top Tether",
-        "Luces diurnas LED"
+        "Airbag acompañante",
+        "Airbag conductor",
+        "Airbag laterales",
+        "Alarma",
+        "Apoya cabeza en asientos traseros",
+        "Cierre de puertas automático en movimiento",
+        "Control de estabilidad (ESP)",
+        "Faros antiniebla delanteros",
+        "Faros antiniebla traseros",
+        "Frenos ABS",
+        "Inmovilizador de motor",
+        "Isofix",
+        "Tercer luz de stop"
       ],
       "exterior": [
-        "Llantas de aleación de 16 pulgadas",
-        "Detalles cromados en parrilla y molduras",
-        "Ópticas traseras 3D LED",
-        "Paragolpes integrados al color de la carrocería"
+        "Llantas de aleación",
+        "Paragolpes color carrocería"
       ],
       "multimedia": [
-        "Central multimedia con pantalla táctil de 7 pulgadas",
-        "Navegación GPS satelital integrada",
-        "Mirror Screen con Apple CarPlay y Android Auto",
-        "Conexión Bluetooth y streaming de audio",
-        "Puerto USB y toma auxiliar"
+        "Bluetooth",
+        "Cargador de CD",
+        "Comando satelital de stereo",
+        "Entrada auxiliar",
+        "Entrada USB",
+        "Manos libres",
+        "Radio AM/FM",
+        "Reproduce CD",
+        "Volante multi-función"
       ]
     },
     "features": [
-      "El sedán mediano con la marcha más confortable del segmento",
-      "Gran baúl de 450 litros de capacidad",
-      "Central multimedia de 7 pulgadas con Mirror Screen y GPS",
-      "Frenos a disco en las 4 ruedas con ABS, REF y ESP",
-      "Climatizador automático digital bizona"
+      "Tapizado de cuero exclusivo",
+      "Control de estabilidad (ESP)",
+      "Airbags frontales y laterales",
+      "Llantas de aleación",
+      "Control de velocidad crucero y computadora de abordo",
+      "Bluetooth, USB, manos libres y volante multifunción"
     ],
-    "description": "El sedán familiar por excelencia de Citroën, célebre por su insonorización de categoría premium y la comodidad de su suspensión Advanced Comfort. Ideal para viajes en ruta con máximo espacio y seguridad.",
+    "description": "El sedán familiar por excelencia de Citroën con tapizado de cuero, gran insonorización de habitáculo, el confort de marcha característico de la marca y financiación accesible solo con DNI.",
     "contact": {
       "address": "Av. Gral. José de San Martín 2180 (Florencio Varela)",
       "email": "automotoresos-car@hotmail.com",
       "phone": "4287-1431",
-      "phoneAlt": "4275-1489 / 4275-0302 / 4255-3571 / 5364-0401",
+      "phoneAlt": "4275-1489 / 4275-0302 - 4255-3571 / 5364-0401",
       "cell": "15-6248-4394",
       "whatsapp": "5491562484394"
     }
