@@ -8,5 +8,7 @@ Disallow: /kioscos-uva-erp/
 Disallow: /kioscos-uva/
 Disallow: /kioscos-uva-erp-prueba/
 Disallow: /kioscos-uva-prueba/
+Disallow: /os-cars-ejemplo/
+Disallow: /automotores-oscar-ejemplo/
 
 Sitemap: https://www.baddgroup.com/sitemap.xml
