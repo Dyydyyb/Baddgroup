@@ -2,6 +2,16 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/veni-a-clase",
+      "destination": "/veni-a-clase-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/veni-a-clase-ejemplo",
+      "destination": "/veni-a-clase-ejemplo/",
+      "permanent": false
+    },
+    {
       "source": "/gtl-ingenieria-muestra",
       "destination": "/GTL-Ingenieria-muestra/",
       "permanent": false
@@ -365,6 +375,18 @@
     {
       "source": "/ivarra-logistica-muestra",
       "destination": "/sistema-ejemplo-logistica/index.html"
+    },
+    {
+      "source": "/veni-a-clase-ejemplo",
+      "destination": "/veni-a-clase-ejemplo/index.html"
+    },
+    {
+      "source": "/veni-a-clase-ejemplo/",
+      "destination": "/veni-a-clase-ejemplo/index.html"
+    },
+    {
+      "source": "/veni-a-clase",
+      "destination": "/veni-a-clase-ejemplo/index.html"
     }
   ]
 }
