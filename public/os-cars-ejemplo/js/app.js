@@ -245,7 +245,7 @@ function renderVehicles(vehicles) {
 
   vehicles.forEach(vehicle => {
     const card = document.createElement('article');
-    card.className = 'vehicle-card reveal';
+    card.className = 'vehicle-card revealed active';
     card.setAttribute('data-id', vehicle.id);
 
     const is0km = vehicle.condition === '0km';

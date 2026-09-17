@@ -211,6 +211,13 @@ input, select, textarea {
   max-height: 120px;
 }
 
+.header-banner-strip a {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .site-header.scrolled .header-banner-strip {
   max-height: 0;
   opacity: 0;
@@ -2406,6 +2413,13 @@ input, select, textarea {
   transform: translateY(0);
 }
 
+/* Ensure dynamic vehicle cards in catalog are always visible and never blank */
+.vehicles-grid .vehicle-card {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
 .reveal-left {
   opacity: 0;
   transform: translateX(-30px);
@@ -2645,32 +2659,33 @@ input, select, textarea {
     justify-content: center;
   }
 
-  /* Catalog Mobile — Horizontal Scrollable Pill Tabs */
+  /* Catalog Mobile — 2x2 Grid Tabs (Never Cut Off) */
   .catalog-section {
     padding: 50px 0;
   }
 
   .catalog-filter-tabs {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    padding: 4px 2px 10px 2px;
+    padding: 0;
     margin-bottom: 22px;
-    scrollbar-width: none;
-  }
-
-  .catalog-filter-tabs::-webkit-scrollbar {
-    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
   }
 
   .tab-filter-btn {
-    flex-shrink: 0;
-    padding: 8px 16px;
-    font-size: 0.82rem;
-    border-radius: 50px;
+    width: 100%;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 0.84rem;
+    border-radius: 12px;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-sizing: border-box;
   }
 
   .vehicles-grid {
@@ -3070,18 +3085,36 @@ input, select, textarea {
    Slider & Header Banner — Responsive Adjustments
    ========================================================================== */
 @media (max-width: 900px) {
-  .header-banner-img {
-    max-width: 640px;
-    max-height: 80px;
+  .header-banner-strip {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
   }
 
-  .header-banner-strip {
-    max-height: 90px;
+  .header-banner-strip a {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .header-banner-img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    display: block !important;
+    margin: 0 !important;
   }
 
   .hero-content-overlay {
-    padding-top: 140px;
-    padding-bottom: 60px;
+    padding-top: 110px;
+    padding-bottom: 50px;
+    min-height: auto;
   }
 
   .slider-arrow {
@@ -3094,21 +3127,39 @@ input, select, textarea {
 }
 
 @media (max-width: 600px) {
-  .header-banner-img {
-    max-width: 100%;
-    max-height: 60px;
-    margin: 4px auto;
+  /* Banner Header — 100% Full Width De Punta a Punta */
+  .header-banner-strip {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-bottom: 2px solid var(--brand-red) !important;
+    display: block !important;
   }
 
-  .header-banner-strip {
-    max-height: 72px;
+  .header-banner-strip a {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .header-banner-img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    margin: 0 !important;
+    display: block !important;
   }
 
   .hero-content-overlay {
-    padding-top: 120px;
-    padding-bottom: 50px;
-    align-items: flex-end;
-    padding-bottom: 70px;
+    padding-top: 95px;
+    padding-bottom: 40px;
+    min-height: auto;
+    align-items: center;
   }
 
   .slider-arrow {
@@ -3118,7 +3169,7 @@ input, select, textarea {
   }
 
   .slider-dots {
-    bottom: 18px;
+    bottom: 14px;
     gap: 7px;
   }
 
