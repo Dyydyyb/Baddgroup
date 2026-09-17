@@ -193,38 +193,49 @@ a {
 }
 
 .sidebar-header {
-  height: var(--header-height);
-  padding: 0 20px;
+  height: 74px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-sidebar);
   flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
 }
 
 .brand-badge-row {
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
+}
+
+.sidebar-logo-img {
+  height: 42px;
+  max-width: 130px;
+  object-fit: contain;
+  display: block;
 }
 
 .sidebar-logo-emblem {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
   background: #000000;
   border: 1.5px solid var(--brand-red);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  padding: 2px;
 }
 
 .sidebar-logo-emblem img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .brand-text-col {
@@ -1500,3 +1511,384 @@ a {
     display: none;
   }
 }
+
+/* ==========================================================================
+   TOOLBAR DE RANGO DE FECHAS PERSONALIZADO (DASHBOARD GENERAL)
+   ========================================================================== */
+.date-range-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+.date-range-toolbar label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.date-range-input {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: var(--text-main);
+  outline: none;
+}
+
+.date-range-input:focus {
+  border-color: var(--brand-red);
+}
+
+/* ==========================================================================
+   PESTAÑAS DE ESTADO DE STOCK & FLOTA
+   ========================================================================== */
+.stock-tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 2px solid var(--border-subtle);
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.stock-tab-btn {
+  padding: 10px 16px;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all var(--trans-fast);
+}
+
+.stock-tab-btn:hover {
+  color: var(--text-main);
+}
+
+.stock-tab-btn.active {
+  color: var(--brand-red);
+  border-bottom-color: var(--brand-red);
+}
+
+.stock-tab-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: 12px;
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+}
+
+.stock-tab-btn.active .stock-tab-badge {
+  background: var(--brand-red-soft);
+  color: var(--brand-red);
+}
+
+/* ==========================================================================
+   TARJETAS DE GRILLA DE VEHÍCULOS REDISEÑADAS (B2B HIGH-END)
+   ========================================================================== */
+.stock-cards-luxury-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.vehicle-card-luxury {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--trans-fast), box-shadow var(--trans-fast), border-color var(--trans-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.vehicle-card-luxury:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+.vehicle-card-media-box {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.vehicle-card-media-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.vehicle-card-luxury:hover .vehicle-card-media-box img {
+  transform: scale(1.04);
+}
+
+.vehicle-media-badges-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.vehicle-card-info-content {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.vehicle-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.vehicle-card-vin-patente {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vehicle-card-specs-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  background: var(--bg-subtle);
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.78rem;
+}
+
+.spec-matrix-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-matrix-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.spec-matrix-val {
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vehicle-card-price-row {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.vehicle-card-price-number {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--brand-red);
+  line-height: 1;
+}
+
+.vehicle-card-cost-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.vehicle-card-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   TARJETA DEDICADA PARA VEHÍCULOS VENDIDOS (RENTABILIDAD & OPERACIÓN)
+   ========================================================================== */
+.sold-vehicle-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--status-success-text);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.sold-ribbon-bar {
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
+  padding: 6px 14px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--status-success-border);
+}
+
+.sold-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sold-financial-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: var(--bg-subtle);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.sold-metric-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.sold-metric-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.sold-metric-val {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   MÓDULO DE FINANZAS & COMISIONES: CARDS & MOVIMIENTOS
+   ========================================================================== */
+.finance-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.finance-movement-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+.badge-mov-ingreso {
+  background: var(--status-success-bg);
+  color: var(--status-success-text);
+  border: 1px solid var(--status-success-border);
+}
+
+.badge-mov-egreso {
+  background: var(--status-danger-bg);
+  color: var(--status-danger-text);
+  border: 1px solid var(--status-danger-border);
+}
+
+/* Ranking de Vendedores */
+.seller-ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.seller-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.seller-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.seller-big-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #0B0E14;
+  border: 2px solid var(--brand-red);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.target-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 6px 0 12px 0;
+}
+
+.target-progress-fill {
+  height: 100%;
+  background: var(--brand-red);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+

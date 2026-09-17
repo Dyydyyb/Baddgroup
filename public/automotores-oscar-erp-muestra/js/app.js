@@ -1,5 +1,5 @@
 /**
- * Automotores Os-Car — ERP Application Controller
+ * Automotores Os-Car — ERP Application Controller (Enterprise Edition)
  * Controlador de Vistas, Enrutador SPA, Estado Transaccional, Command Palette (Ctrl+K)
  * Florencio Varela, Buenos Aires · 34 Años de Trayectoria
  */
@@ -10,17 +10,33 @@ class ERPApp {
     this.theme = localStorage.getItem('oscar_erp_theme') || 'light';
     this.activePeriod = 'mes';
     this.vehicles = [...window.ERP_DATA.vehicles];
+    this.soldVehicles = [...window.ERP_DATA.soldVehicles];
     this.sales = [...window.ERP_DATA.sales];
     this.leads = [...window.ERP_DATA.leads];
     this.tradeIns = [...window.ERP_DATA.tradeIns];
+    this.financeMovements = [...window.ERP_DATA.financeMovements];
+    this.sellerCommissions = [...window.ERP_DATA.sellerCommissions];
+
+    this.activeStockTab = 'todos'; // 'todos' | 'disponible' | 'reservado' | 'en_preparacion' | 'vendidos'
     this.stockFilter = {
       search: '',
       category: 'todos',
       condition: 'todos',
       status: 'todos'
     };
-    this.stockViewMode = 'table'; // 'table' | 'grid'
+    this.stockViewMode = 'grid'; // 'grid' (por defecto) | 'table'
     this.selectedVehicle = null;
+
+    this.dateRange = {
+      from: '2026-09-01',
+      to: '2026-09-17'
+    };
+
+    // Asegurar que los gráficos arranquen obligatoriamente en tipo DONA
+    if (window.erpCharts) {
+      window.erpCharts.salesType = 'dona';
+      window.erpCharts.stockChartType = 'dona';
+    }
   }
 
   init() {
@@ -31,6 +47,8 @@ class ERPApp {
     this.initDashboard();
     this.initStockModule();
     this.initSalesModule();
+    this.initFinanceModule();
+    this.initCommissionsModule();
     this.initSyncEngine();
     this.initDrawer();
 
@@ -53,10 +71,8 @@ class ERPApp {
         : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
     }
 
-    // Re-renderizar gráficos si están visibles
     if (this.currentView === 'dashboard' && window.erpCharts) {
-      window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
-      window.erpCharts.renderStockDonut('stockDonutContainer', 'stockDonutLegend', window.ERP_DATA);
+      this.refreshDashboardCharts();
     }
   }
 
@@ -74,7 +90,6 @@ class ERPApp {
       });
     });
 
-    // Mobile sidebar toggle
     const mobileMenuBtn = document.getElementById('mobileSidebarToggle');
     const sidebar = document.getElementById('erpSidebar');
     if (mobileMenuBtn && sidebar) {
@@ -87,7 +102,6 @@ class ERPApp {
   navigateTo(viewId) {
     this.currentView = viewId;
 
-    // Actualizar botones de navegación activa
     document.querySelectorAll('.nav-item-btn').forEach(btn => {
       if (btn.dataset.view === viewId) {
         btn.classList.add('active');
@@ -96,7 +110,6 @@ class ERPApp {
       }
     });
 
-    // Cambiar paneles visibles
     document.querySelectorAll('.view-pane').forEach(pane => {
       pane.classList.remove('active');
     });
@@ -109,43 +122,45 @@ class ERPApp {
     // Acciones específicas por vista
     if (viewId === 'dashboard') {
       setTimeout(() => {
-        if (window.erpCharts) {
-          window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
-          window.erpCharts.renderStockDonut('stockDonutContainer', 'stockDonutLegend', window.ERP_DATA);
-        }
+        this.refreshDashboardCharts();
       }, 50);
     } else if (viewId === 'stock') {
       this.renderStockList();
     } else if (viewId === 'ventas') {
       this.renderSalesList();
+    } else if (viewId === 'finanzas') {
+      this.renderFinanceLedger();
+    } else if (viewId === 'comisiones') {
+      this.renderCommissionsModule();
     }
 
-    // Cerrar sidebar en móvil tras click
     const sidebar = document.getElementById('erpSidebar');
     if (sidebar) sidebar.classList.remove('mobile-open');
+  }
+
+  refreshDashboardCharts() {
+    if (!window.erpCharts) return;
+    window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
+    window.erpCharts.renderStockDonut('stockDonutContainer', 'stockDonutLegend', window.ERP_DATA);
+    window.erpCharts.renderSalesRhythmChart('salesRhythmChartContainer', window.ERP_DATA, this.dateRange.from, this.dateRange.to);
   }
 
   // =========================================================================
   // Acciones Rápidas del Topbar
   // =========================================================================
   initTopbarActions() {
-    // Theme toggle
-    const themeBtn = document.getElementById('btnThemeToggle');
-    themeBtn?.addEventListener('click', () => {
+    document.getElementById('btnThemeToggle')?.addEventListener('click', () => {
       this.applyTheme(this.theme === 'light' ? 'dark' : 'light');
     });
 
-    // + Nuevo Lead
     document.getElementById('btnQuickLead')?.addEventListener('click', () => {
       this.openModal('modalNewLead');
     });
 
-    // + Nueva Venta
     document.getElementById('btnQuickSale')?.addEventListener('click', () => {
       this.openModal('modalNewSale');
     });
 
-    // + Nuevo Vehículo
     document.getElementById('btnQuickVehicle')?.addEventListener('click', () => {
       this.openModal('modalNewVehicle');
     });
@@ -157,7 +172,6 @@ class ERPApp {
   initCommandPalette() {
     const paletteBackdrop = document.getElementById('cmdPaletteBackdrop');
     const searchInput = document.getElementById('cmdSearchInput');
-    const resultsContainer = document.getElementById('cmdResultsContainer');
 
     const openPalette = () => {
       paletteBackdrop?.classList.add('open');
@@ -170,7 +184,6 @@ class ERPApp {
       paletteBackdrop?.classList.remove('open');
     };
 
-    // Atajo de teclado universal Ctrl+K / Cmd+K
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -185,15 +198,12 @@ class ERPApp {
       }
     });
 
-    // Click en la barra del header
     document.getElementById('headerSearchBar')?.addEventListener('click', openPalette);
 
-    // Cerrar al clickear afuera
     paletteBackdrop?.addEventListener('click', (e) => {
       if (e.target === paletteBackdrop) closePalette();
     });
 
-    // Filtrado en tiempo real
     searchInput?.addEventListener('input', (e) => {
       this.renderCommandResults(e.target.value.trim().toLowerCase());
     });
@@ -205,7 +215,6 @@ class ERPApp {
 
     let html = '';
 
-    // Filtrar vehículos
     const matchedVehicles = this.vehicles.filter(v => 
       !query || 
       v.name.toLowerCase().includes(query) || 
@@ -214,19 +223,11 @@ class ERPApp {
       v.vin.toLowerCase().includes(query)
     ).slice(0, 5);
 
-    // Filtrar clientes/ventas
     const matchedSales = this.sales.filter(s =>
       !query ||
       s.clientName.toLowerCase().includes(query) ||
       s.clientDni.includes(query) ||
       s.id.toLowerCase().includes(query)
-    ).slice(0, 3);
-
-    // Filtrar leads
-    const matchedLeads = this.leads.filter(l =>
-      !query ||
-      l.fullName.toLowerCase().includes(query) ||
-      l.vehicleInterest.toLowerCase().includes(query)
     ).slice(0, 3);
 
     if (matchedVehicles.length > 0) {
@@ -284,47 +285,101 @@ class ERPApp {
   }
 
   // =========================================================================
-  // MÓDULO 1: Dashboard General
+  // MÓDULO 1: Dashboard General con Filtro Libre de Fechas y Gráficos Ampliados
   // =========================================================================
   initDashboard() {
-    // Selector de Período (Día / Semana / Mes / Año)
+    // Selector de Período Rápido (Día / Semana / Mes / Año)
     const periodButtons = document.querySelectorAll('.segmented-btn[data-period]');
     periodButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         periodButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         this.activePeriod = btn.dataset.period;
+
+        // Auto-calcular fechas para el rango
+        if (this.activePeriod === 'dia') {
+          this.dateRange.from = '2026-09-17';
+          this.dateRange.to = '2026-09-17';
+        } else if (this.activePeriod === 'semana') {
+          this.dateRange.from = '2026-09-11';
+          this.dateRange.to = '2026-09-17';
+        } else if (this.activePeriod === 'mes') {
+          this.dateRange.from = '2026-09-01';
+          this.dateRange.to = '2026-09-17';
+        } else if (this.activePeriod === 'ano') {
+          this.dateRange.from = '2026-01-01';
+          this.dateRange.to = '2026-12-31';
+        }
+
+        const fromInput = document.getElementById('dashDateFrom');
+        const toInput = document.getElementById('dashDateTo');
+        if (fromInput) fromInput.value = this.dateRange.from;
+        if (toInput) toInput.value = this.dateRange.to;
+
         this.updateDashboardMetrics();
       });
     });
 
+    // Selector Libre de Rango de Fechas
+    const fromInput = document.getElementById('dashDateFrom');
+    const toInput = document.getElementById('dashDateTo');
+    const btnApplyDates = document.getElementById('btnApplyDateRange');
+
+    if (fromInput) fromInput.value = this.dateRange.from;
+    if (toInput) toInput.value = this.dateRange.to;
+
+    const applyDates = () => {
+      if (fromInput && toInput) {
+        this.dateRange.from = fromInput.value;
+        this.dateRange.to = toInput.value;
+        periodButtons.forEach(b => b.classList.remove('active'));
+        this.updateDashboardMetrics();
+        this.showToast(`Rango de fechas aplicado: ${this.dateRange.from} al ${this.dateRange.to}`);
+      }
+    };
+
+    fromInput?.addEventListener('change', applyDates);
+    toInput?.addEventListener('change', applyDates);
+    btnApplyDates?.addEventListener('click', applyDates);
+
     // Selector de Métrica de Ventas (Montos vs Cantidad)
-    document.getElementById('btnMetricMontos')?.addEventListener('click', (e) => {
+    document.getElementById('btnMetricMontos')?.addEventListener('click', () => {
       document.getElementById('btnMetricMontos').classList.add('active');
       document.getElementById('btnMetricUnidades').classList.remove('active');
       window.erpCharts.salesMetric = 'montos';
       window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
     });
 
-    document.getElementById('btnMetricUnidades')?.addEventListener('click', (e) => {
+    document.getElementById('btnMetricUnidades')?.addEventListener('click', () => {
       document.getElementById('btnMetricUnidades').classList.add('active');
       document.getElementById('btnMetricMontos').classList.remove('active');
       window.erpCharts.salesMetric = 'unidades';
       window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
     });
 
-    // Selector de Tipo de Gráfico (Barras / Líneas / Área)
-    const chartTypeButtons = document.querySelectorAll('.chart-type-btn');
-    chartTypeButtons.forEach(btn => {
+    // Selector de Tipo de Gráfico de Ventas (DONA [default], TORTA, LÍNEA, ÁREA, BARRA)
+    const salesTypeButtons = document.querySelectorAll('.chart-sales-type-btn');
+    salesTypeButtons.forEach(btn => {
       btn.addEventListener('click', () => {
-        chartTypeButtons.forEach(b => b.classList.remove('active'));
+        salesTypeButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        window.erpCharts.salesType = btn.dataset.type;
+        window.erpCharts.salesType = btn.dataset.salesType;
         window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
       });
     });
 
-    // Selector de Vista de Dona (Categoría vs Condición)
+    // Selector de Tipo de Gráfico de Stock (DONA [default], TORTA, BARRA, LÍNEA)
+    const stockTypeButtons = document.querySelectorAll('.chart-stock-type-btn');
+    stockTypeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        stockTypeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        window.erpCharts.stockChartType = btn.dataset.stockType;
+        window.erpCharts.renderStockDonut('stockDonutContainer', 'stockDonutLegend', window.ERP_DATA);
+      });
+    });
+
+    // Selector de Vista de Stock (Categoría vs Condición)
     document.getElementById('btnDonutCategory')?.addEventListener('click', () => {
       document.getElementById('btnDonutCategory').classList.add('active');
       document.getElementById('btnDonutCondition').classList.remove('active');
@@ -339,20 +394,12 @@ class ERPApp {
       window.erpCharts.renderStockDonut('stockDonutContainer', 'stockDonutLegend', window.ERP_DATA);
     });
 
-    // Renderizar Aging Stock Table
     this.renderAgingStock();
-
-    // Renderizar Leads Funnel Summary
     this.renderLeadsFunnel();
   }
 
   updateDashboardMetrics() {
-    const { kpis } = window.ERP_DATA;
-    this.showToast(`Actualizado panel al período: ${this.activePeriod.toUpperCase()}`);
-    // Recalcular dinámicamente si cambia período
-    if (window.erpCharts) {
-      window.erpCharts.renderSalesChart('salesChartContainer', window.ERP_DATA);
-    }
+    this.refreshDashboardCharts();
   }
 
   renderAgingStock() {
@@ -426,7 +473,7 @@ class ERPApp {
   }
 
   // =========================================================================
-  // MÓDULO 2: Stock de Vehículos
+  // MÓDULO 2: Stock de Vehículos & Pestañas de Estado (Vendidos Incluidos)
   // =========================================================================
   initStockModule() {
     const searchInput = document.getElementById('stockSearchInput');
@@ -454,7 +501,18 @@ class ERPApp {
       this.renderStockList();
     });
 
-    // View mode toggle (Table / Grid)
+    // Pestañas de estado (Todos, Disponibles, Reservados, En Preparación, Vendidos)
+    const tabButtons = document.querySelectorAll('.stock-tab-btn');
+    tabButtons.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabButtons.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        this.activeStockTab = tab.dataset.tab;
+        this.renderStockList();
+      });
+    });
+
+    // Toggle de Vista (Tabla vs Grilla)
     document.getElementById('btnStockViewTable')?.addEventListener('click', () => {
       this.stockViewMode = 'table';
       document.getElementById('btnStockViewTable').classList.add('active');
@@ -474,10 +532,105 @@ class ERPApp {
     const tableBody = document.getElementById('stockTableBody');
     const gridContainer = document.getElementById('stockCardsGridContainer');
     const countBadge = document.getElementById('stockFilterCountBadge');
+    const isVendidosTab = this.activeStockTab === 'vendidos';
 
-    if (!tableBody && !gridContainer) return;
+    // Si la pestaña seleccionada es "VENDIDOS"
+    if (isVendidosTab) {
+      const soldList = this.soldVehicles;
+      if (countBadge) countBadge.textContent = `${soldList.length} unidades vendidas`;
 
-    // Filtrar flota
+      if (this.stockViewMode === 'table') {
+        document.getElementById('stockTableViewWrap').style.display = 'block';
+        if (gridContainer) gridContainer.style.display = 'none';
+
+        let html = '';
+        soldList.forEach(v => {
+          html += `
+            <tr style="cursor:pointer;" onclick="window.erpApp.printSaleReceipt('${v.comprobanteId}')">
+              <td>
+                <div class="vehicle-cell-title">
+                  <img src="${v.image}" alt="${v.name}" class="vehicle-table-thumb">
+                  <div>
+                    <div class="vehicle-name-strong">${v.name}</div>
+                    <div class="vehicle-subinfo-cell">Patente: <strong>${v.patente}</strong> · ${v.year}</div>
+                  </div>
+                </div>
+              </td>
+              <td><span class="erp-badge ${v.condition === '0km' ? 'badge-0km' : 'badge-usado'}">${v.conditionLabel}</span></td>
+              <td>
+                <div style="font-weight:700;">${v.clienteNombre}</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Vendedor: ${v.vendedor}</div>
+              </td>
+              <td>
+                <div style="font-family:var(--font-mono); font-weight:900; color:var(--text-main); font-size:0.95rem;">${this.formatCurrency(v.precioVenta)}</div>
+                <div style="font-size:0.72rem; color:var(--status-success-text); font-weight:700;">Ganancia: ${this.formatCurrency(v.gananciaNeta)} (${v.margenRentabilidad})</div>
+              </td>
+              <td><span class="erp-badge badge-status-disponible">Cerrada & Entregada</span></td>
+              <td><span style="font-family:var(--font-mono); font-size:0.8rem;">${v.fechaVenta}</span></td>
+              <td>
+                <button type="button" class="btn-action-quick" style="padding:5px 9px;" onclick="event.stopPropagation(); window.erpApp.printSaleReceipt('${v.comprobanteId}')">
+                  Recibo
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+        tableBody.innerHTML = html;
+      } else {
+        // Tarjetas Grilla para Vendidos
+        document.getElementById('stockTableViewWrap').style.display = 'none';
+        if (gridContainer) {
+          gridContainer.style.display = 'grid';
+          let gridHtml = '';
+          soldList.forEach(v => {
+            gridHtml += `
+              <div class="sold-vehicle-card" onclick="window.erpApp.printSaleReceipt('${v.comprobanteId}')">
+                <div class="sold-ribbon-bar">
+                  <span>Operación Cerrada · ${v.fechaVenta}</span>
+                  <span>${v.comprobanteId}</span>
+                </div>
+                <div style="height:150px; overflow:hidden; position:relative;">
+                  <img src="${v.image}" style="width:100%; height:100%; object-fit:cover;">
+                  <div style="position:absolute; top:8px; left:8px;">
+                    <span class="erp-badge ${v.condition === '0km' ? 'badge-0km' : 'badge-usado'}">${v.conditionLabel}</span>
+                  </div>
+                </div>
+                <div class="sold-card-body">
+                  <h4 style="font-size:0.98rem; font-weight:800; line-height:1.2;">${v.name}</h4>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Adquiriente: <strong>${v.clienteNombre}</strong> (DNI ${v.clienteDni})</div>
+                  <div style="font-size:0.76rem; color:var(--text-muted);">Asesor: <strong>${v.vendedor}</strong></div>
+
+                  <div class="sold-financial-metrics">
+                    <div class="sold-metric-box">
+                      <span class="sold-metric-label">Precio Venta</span>
+                      <span class="sold-metric-val" style="color:var(--brand-red); font-size:0.85rem;">${this.formatCurrency(v.precioVenta)}</span>
+                    </div>
+                    <div class="sold-metric-box">
+                      <span class="sold-metric-label">Costo + Taller</span>
+                      <span class="sold-metric-val" style="font-size:0.82rem;">${this.formatCurrency(v.precioCosto + v.gastosTaller)}</span>
+                    </div>
+                    <div class="sold-metric-box">
+                      <span class="sold-metric-label">Utilidad</span>
+                      <span class="sold-metric-val" style="color:var(--status-success-text); font-size:0.85rem;">${v.margenRentabilidad}</span>
+                    </div>
+                  </div>
+
+                  <div style="margin-top:4px;">
+                    <button type="button" class="btn-action-quick" style="width:100%; justify-content:center; padding:7px;" onclick="event.stopPropagation(); window.erpApp.printSaleReceipt('${v.comprobanteId}')">
+                      Ver Comprobante Oficial
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+          gridContainer.innerHTML = gridHtml;
+        }
+      }
+      return;
+    }
+
+    // Filtrar flota activa (Disponibles, Reservados, En Preparación)
     const filtered = this.vehicles.filter(v => {
       const matchSearch = !this.stockFilter.search || 
         v.name.toLowerCase().includes(this.stockFilter.search) ||
@@ -487,9 +640,15 @@ class ERPApp {
 
       const matchCat = (this.stockFilter.category === 'todos') || (v.category === this.stockFilter.category);
       const matchCond = (this.stockFilter.condition === 'todos') || (v.condition === this.stockFilter.condition);
+      
+      let matchTab = true;
+      if (this.activeStockTab === 'disponible') matchTab = v.status === 'disponible';
+      else if (this.activeStockTab === 'reservado') matchTab = v.status === 'reservado';
+      else if (this.activeStockTab === 'en_preparacion') matchTab = v.status === 'en_preparacion';
+
       const matchStatus = (this.stockFilter.status === 'todos') || (v.status === this.stockFilter.status);
 
-      return matchSearch && matchCat && matchCond && matchStatus;
+      return matchSearch && matchCat && matchCond && matchTab && matchStatus;
     });
 
     if (countBadge) {
@@ -524,9 +683,7 @@ class ERPApp {
                 </div>
               </div>
             </td>
-            <td>
-              <span class="erp-badge ${condBadgeClass}">${v.conditionLabel}</span>
-            </td>
+            <td><span class="erp-badge ${condBadgeClass}">${v.conditionLabel}</span></td>
             <td>
               <div style="font-size:0.84rem; font-weight:700;">${v.categoryLabel}</div>
               <div style="font-size:0.76rem; color:var(--text-muted);">${v.year} · ${v.fuel}</div>
@@ -535,21 +692,18 @@ class ERPApp {
               <div style="font-family:var(--font-mono); font-weight:800; font-size:0.94rem; color:var(--text-main);">${this.formatCurrency(v.precioLista)}</div>
               <div style="font-size:0.74rem; color:var(--text-muted);">Costo: ${this.formatCurrency(v.precioCosto)}</div>
             </td>
-            <td>
-              <span class="erp-badge ${statusBadgeClass}">${statusText}</span>
-            </td>
+            <td><span class="erp-badge ${statusBadgeClass}">${statusText}</span></td>
             <td>
               <div style="display:flex; align-items:center; gap:6px;">
                 ${v.publishedWeb 
-                  ? `<span class="erp-badge badge-web-sync" title="Publicado en automotoresoscar.com.ar">Web ON</span>` 
+                  ? `<span class="erp-badge badge-web-sync">Web ON</span>` 
                   : `<span class="erp-badge" style="background:#E2E8F0; color:#64748B;">Web OFF</span>`}
                 ${v.featuredWeb ? `<span class="erp-badge" style="background:var(--brand-red); color:#fff;">Destacado</span>` : ''}
               </div>
             </td>
             <td>
               <button type="button" class="btn-action-quick" style="padding:5px 8px;" onclick="event.stopPropagation(); window.erpApp.openVehicleDrawer('${v.id}')">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                <span>Ficha</span>
+                Ficha
               </button>
             </td>
           </tr>
@@ -557,22 +711,71 @@ class ERPApp {
       });
       tableBody.innerHTML = html;
     } else {
-      // Modo Tarjetas Grid
+      // Modo Grilla Rediseñada (High-End Luxury)
       document.getElementById('stockTableViewWrap').style.display = 'none';
       if (gridContainer) {
         gridContainer.style.display = 'grid';
         let gridHtml = '';
         filtered.forEach(v => {
+          const totalGastosPrep = (v.prepExpenses || []).reduce((sum, item) => sum + item.cost, 0);
+          const costoTotal = v.precioCosto + totalGastosPrep;
+          const margenNeto = v.precioLista - costoTotal;
+          const margenPorc = ((margenNeto / v.precioLista) * 100).toFixed(1);
+
           gridHtml += `
-            <div class="kpi-card" style="cursor:pointer;" onclick="window.erpApp.openVehicleDrawer('${v.id}')">
-              <img src="${v.image}" style="width:100%; height:130px; object-fit:cover; border-radius:8px; margin-bottom:10px;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
-                <span class="erp-badge ${v.condition === '0km' ? 'badge-0km' : 'badge-usado'}">${v.conditionLabel}</span>
-                <span class="erp-badge badge-status-${v.status}">${v.status.toUpperCase()}</span>
+            <div class="vehicle-card-luxury" onclick="window.erpApp.openVehicleDrawer('${v.id}')">
+              <div class="vehicle-card-media-box">
+                <img src="${v.image}" alt="${v.name}">
+                <div class="vehicle-media-badges-overlay">
+                  <span class="erp-badge ${v.condition === '0km' ? 'badge-0km' : 'badge-usado'}">${v.conditionLabel}</span>
+                  <span class="erp-badge badge-status-${v.status}">${v.status.toUpperCase()}</span>
+                </div>
               </div>
-              <h4 style="font-size:0.95rem; font-weight:800; margin-bottom:4px;">${v.name}</h4>
-              <div style="font-size:0.78rem; color:var(--text-muted); margin-bottom:8px;">${v.year} · ${v.km} · ${v.engine}</div>
-              <div style="font-family:var(--font-mono); font-weight:900; font-size:1.15rem; color:var(--brand-red); margin-top:auto;">${this.formatCurrency(v.precioLista)}</div>
+              <div class="vehicle-card-info-content">
+                <h3 class="vehicle-card-title">${v.name}</h3>
+                <div class="vehicle-card-vin-patente">
+                  <span>PAT: <strong>${v.patente}</strong></span>
+                  <span>VIN: ${v.vin.slice(0, 10)}...</span>
+                </div>
+
+                <div class="vehicle-card-specs-matrix">
+                  <div class="spec-matrix-item">
+                    <span class="spec-matrix-label">Año & Modelo</span>
+                    <span class="spec-matrix-val">${v.year}</span>
+                  </div>
+                  <div class="spec-matrix-item">
+                    <span class="spec-matrix-label">Kilometraje</span>
+                    <span class="spec-matrix-val">${v.km}</span>
+                  </div>
+                  <div class="spec-matrix-item">
+                    <span class="spec-matrix-label">Motorización</span>
+                    <span class="spec-matrix-val">${v.engine}</span>
+                  </div>
+                  <div class="spec-matrix-item">
+                    <span class="spec-matrix-label">Transmisión</span>
+                    <span class="spec-matrix-val">${v.transmission.slice(0, 16)}</span>
+                  </div>
+                </div>
+
+                <div class="vehicle-card-price-row">
+                  <div>
+                    <div class="vehicle-card-price-number">${this.formatCurrency(v.precioLista)}</div>
+                    <div class="vehicle-card-cost-sub">Costo: ${this.formatCurrency(costoTotal)} · Margen: <strong style="color:var(--status-success-text);">${margenPorc}%</strong></div>
+                  </div>
+                  <div>
+                    ${v.publishedWeb ? `<span class="erp-badge badge-web-sync">Web ON</span>` : ''}
+                  </div>
+                </div>
+
+                <div class="vehicle-card-actions-row">
+                  <button type="button" class="btn-action-quick" style="flex:1; justify-content:center; padding:7px;" onclick="event.stopPropagation(); window.erpApp.openSimulateFromVehicle('${v.id}')">
+                    Simular Cuotas
+                  </button>
+                  <button type="button" class="btn-action-quick btn-primary-red" style="flex:1; justify-content:center; padding:7px;" onclick="event.stopPropagation(); window.erpApp.openSaleModalWithVehicle('${v.id}')">
+                    Vender
+                  </button>
+                </div>
+              </div>
             </div>
           `;
         });
@@ -610,7 +813,6 @@ class ERPApp {
 
     if (titleEl) titleEl.textContent = v.name;
 
-    // Calcular costos totales y margen real
     const totalGastosPrep = (v.prepExpenses || []).reduce((sum, item) => sum + item.cost, 0);
     const costoTotalReal = v.precioCosto + totalGastosPrep;
     const gananciaEstimada = v.precioLista - costoTotalReal;
@@ -626,7 +828,6 @@ class ERPApp {
           </div>
         </div>
 
-        <!-- Ficha Técnica Resumida -->
         <div class="drawer-specs-grid">
           <div class="drawer-spec-box">
             <span class="drawer-spec-label">Precio de Lista</span>
@@ -654,7 +855,6 @@ class ERPApp {
           </div>
         </div>
 
-        <!-- Sincronización con Web de Os-Car -->
         <div style="background:var(--bg-subtle); border:1px solid var(--border-subtle); border-radius:10px; padding:14px; margin-bottom:20px;">
           <div style="font-family:var(--font-heading); font-weight:800; font-size:0.92rem; margin-bottom:10px; display:flex; align-items:center; justify-content:space-between;">
             <span>Publicación en Catálogo Web</span>
@@ -674,7 +874,6 @@ class ERPApp {
           </div>
         </div>
 
-        <!-- Libro de Gastos de Taller y Preparación -->
         <div class="prep-expenses-ledger">
           <div class="prep-ledger-title">
             <span>Gastos de Preparación y Service</span>
@@ -690,7 +889,6 @@ class ERPApp {
             </div>
           `).join('') : '<div style="font-size:0.8rem; color:var(--text-muted); padding:6px 0;">Sin gastos adicionales registrados.</div>'}
 
-          <!-- Balance de Rentabilidad por Unidad -->
           <div style="margin-top:14px; padding-top:12px; border-top:1.5px dashed var(--border-subtle); display:flex; justify-content:space-between; align-items:center;">
             <div>
               <div style="font-size:0.72rem; font-weight:800; text-transform:uppercase; color:var(--text-muted);">Costo Total Real:</div>
@@ -703,7 +901,6 @@ class ERPApp {
           </div>
         </div>
 
-        <!-- Acciones Operativas Rápidas -->
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:24px;">
           <button type="button" class="btn-action-quick" style="justify-content:center; padding:10px;" onclick="window.erpApp.openSimulateFromVehicle('${v.id}')">
             Simular Financiación
@@ -740,7 +937,6 @@ class ERPApp {
   // MÓDULO 3: Ventas y Financiación
   // =========================================================================
   initSalesModule() {
-    // Calculadora interactiva de cuotas
     const vehiclePriceInput = document.getElementById('calcVehiclePrice');
     const advanceInput = document.getElementById('calcAdvance');
     const installmentsSelect = document.getElementById('calcInstallments');
@@ -824,7 +1020,6 @@ class ERPApp {
           </td>
           <td>
             <button type="button" class="btn-action-quick" style="padding:4px 8px;" onclick="window.erpApp.printSaleReceipt('${s.id}')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
               <span>Recibo</span>
             </button>
           </td>
@@ -835,12 +1030,229 @@ class ERPApp {
     container.innerHTML = html;
   }
 
+  // =========================================================================
+  // MÓDULO 4: Finanzas, Facturación & Registro de Movimientos
+  // =========================================================================
+  initFinanceModule() {
+    const formMovement = document.getElementById('formNewFinanceMovement');
+    formMovement?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const type = document.getElementById('movType')?.value || 'ingreso';
+      const category = document.getElementById('movCategory')?.value || 'General';
+      const concept = document.getElementById('movConcept')?.value || 'Movimiento sin detalle';
+      const amount = parseFloat(document.getElementById('movAmount')?.value) || 0;
+      const paymentMethod = document.getElementById('movPaymentMethod')?.value || 'Transferencia';
+
+      const newMov = {
+        id: `MOV-2026-${String(this.financeMovements.length + 1).padStart(3, '0')}`,
+        date: new Date().toISOString().split('T')[0],
+        type,
+        category,
+        concept,
+        amount,
+        paymentMethod,
+        receipt: `MANUAL-${Date.now().toString().slice(-4)}`,
+        status: 'conciliado'
+      };
+
+      this.financeMovements.unshift(newMov);
+      this.closeModal('modalNewFinanceMovement');
+      this.renderFinanceLedger();
+      this.showToast(`Movimiento ${type.toUpperCase()} de ${this.formatCurrency(amount)} registrado exitosamente`);
+    });
+
+    const filterButtons = document.querySelectorAll('.finance-filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.renderFinanceLedger(btn.dataset.filter);
+      });
+    });
+  }
+
+  renderFinanceLedger(filterType = 'todos') {
+    const container = document.getElementById('financeTableBody');
+    if (!container) return;
+
+    let list = this.financeMovements;
+    if (filterType !== 'todos') {
+      list = list.filter(m => m.type === filterType);
+    }
+
+    let html = '';
+    list.forEach(m => {
+      const isIngreso = m.type === 'ingreso';
+      html += `
+        <tr>
+          <td>
+            <div style="font-family:var(--font-mono); font-weight:800; font-size:0.82rem;">${m.id}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${m.date}</div>
+          </td>
+          <td>
+            <span class="finance-movement-badge ${isIngreso ? 'badge-mov-ingreso' : 'badge-mov-egreso'}">
+              ${isIngreso ? '+ INGRESO' : '- EGRESO'}
+            </span>
+          </td>
+          <td>
+            <div style="font-weight:700;">${m.concept}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${m.category} · ${m.paymentMethod}</div>
+          </td>
+          <td>
+            <span style="font-family:var(--font-mono); font-size:0.78rem; background:var(--bg-subtle); padding:2px 6px; border-radius:4px;">${m.receipt}</span>
+          </td>
+          <td style="text-align:right;">
+            <div style="font-family:var(--font-mono); font-weight:900; font-size:0.98rem; color:${isIngreso ? 'var(--status-success-text)' : 'var(--brand-red)'};">
+              ${isIngreso ? '+' : '-'}${this.formatCurrency(m.amount)}
+            </div>
+          </td>
+          <td>
+            <span class="erp-badge badge-status-disponible">Conciliado</span>
+          </td>
+        </tr>
+      `;
+    });
+
+    container.innerHTML = html;
+
+    if (window.erpCharts) {
+      window.erpCharts.renderCashFlowChart('cashFlowChartContainer', window.ERP_DATA);
+    }
+  }
+
+  // =========================================================================
+  // MÓDULO 5: Comisiones de Vendedores & Liquidación Interactiva
+  // =========================================================================
+  initCommissionsModule() {
+    const formPayout = document.getElementById('formNewCommissionPayout');
+    formPayout?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const sellerId = document.getElementById('commSellerSelect')?.value || 'VEND-01';
+      const seller = window.ERP_DATA.sellers.find(s => s.id === sellerId);
+      const amount = parseFloat(document.getElementById('commAmount')?.value) || 0;
+      const period = document.getElementById('commPeriod')?.value || 'Septiembre 2026';
+
+      const newRecord = {
+        id: `COM-2026-${Date.now().toString().slice(-4)}`,
+        sellerId,
+        sellerName: seller ? seller.name : 'Asesor',
+        period,
+        closedUnits: 1,
+        totalVolume: amount * 25,
+        commissionEarned: amount,
+        paidStatus: 'pagado',
+        paidAmount: amount,
+        pendingAmount: 0,
+        targetUnits: 5,
+        targetCompletion: 100,
+        policy: 'Liquidación directa aprobada por Dirección'
+      };
+
+      this.sellerCommissions.unshift(newRecord);
+      this.closeModal('modalNewCommissionPayout');
+      this.renderCommissionsModule();
+      this.showToast(`Liquidación de ${this.formatCurrency(amount)} abonada a ${newRecord.sellerName}`);
+    });
+  }
+
+  renderCommissionsModule() {
+    const rankingGrid = document.getElementById('sellerRankingGrid');
+    const tableBody = document.getElementById('commissionSettlementsTableBody');
+
+    // Tarjetas de rendimiento por asesor comercial
+    if (rankingGrid) {
+      let gridHtml = '';
+      window.ERP_DATA.sellers.filter(s => s.ventasMes > 0).forEach(seller => {
+        const perc = ((seller.ventasMes / seller.metaMes) * 100).toFixed(0);
+        gridHtml += `
+          <div class="seller-card">
+            <div class="seller-card-header">
+              <div class="seller-big-avatar">${seller.avatar}</div>
+              <div>
+                <h4 style="font-size:1.05rem; font-weight:800;">${seller.name}</h4>
+                <div style="font-size:0.78rem; color:var(--text-muted);">${seller.role}</div>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.82rem;">
+              <span style="color:var(--text-muted);">Meta mensual (${seller.ventasMes}/${seller.metaMes} unidades)</span>
+              <span style="font-family:var(--font-mono); font-weight:800; color:var(--brand-red);">${perc}%</span>
+            </div>
+
+            <div class="target-progress-bar">
+              <div class="target-progress-fill" style="width:${Math.min(100, perc)}%;"></div>
+            </div>
+
+            <div style="background:var(--bg-subtle); padding:12px; border-radius:8px; display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
+              <div>
+                <span style="font-size:0.68rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Comisión Acumulada</span>
+                <div style="font-family:var(--font-mono); font-weight:900; color:var(--status-success-text); font-size:0.95rem;">${this.formatCurrency(seller.comisionAcumulada)}</div>
+              </div>
+              <div>
+                <span style="font-size:0.68rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Operaciones</span>
+                <div style="font-family:var(--font-mono); font-weight:800; font-size:0.95rem;">${seller.ventasMes} ventas</div>
+              </div>
+            </div>
+
+            <div style="margin-top:14px;">
+              <button type="button" class="btn-action-quick" style="width:100%; justify-content:center; padding:7px;" onclick="window.erpApp.openCommissionModalFor('${seller.id}')">
+                Liquidar Comisión
+              </button>
+            </div>
+          </div>
+        `;
+      });
+      rankingGrid.innerHTML = gridHtml;
+    }
+
+    // Tabla histórica de liquidaciones
+    if (tableBody) {
+      let tableHtml = '';
+      this.sellerCommissions.forEach(c => {
+        const isPaid = c.paidStatus === 'pagado';
+        tableHtml += `
+          <tr>
+            <td>
+              <div style="font-family:var(--font-mono); font-weight:800; font-size:0.84rem;">${c.id}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">${c.period}</div>
+            </td>
+            <td><strong>${c.sellerName}</strong></td>
+            <td>${c.closedUnits} unidades (${this.formatCurrency(c.totalVolume)})</td>
+            <td><span style="font-size:0.76rem; color:var(--text-muted);">${c.policy}</span></td>
+            <td style="font-family:var(--font-mono); font-weight:900; color:var(--status-success-text);">${this.formatCurrency(c.commissionEarned)}</td>
+            <td>
+              <span class="erp-badge ${isPaid ? 'badge-status-disponible' : 'badge-status-reservado'}">
+                ${isPaid ? 'Abonado' : 'Pendiente Pago'}
+              </span>
+            </td>
+          </tr>
+        `;
+      });
+      tableBody.innerHTML = tableHtml;
+    }
+  }
+
+  openCommissionModalFor(sellerId) {
+    this.openModal('modalNewCommissionPayout');
+    const sel = document.getElementById('commSellerSelect');
+    if (sel) sel.value = sellerId;
+  }
+
   printSaleReceipt(saleId) {
-    const s = this.sales.find(item => item.id === saleId);
+    const s = this.sales.find(item => item.id === saleId) || this.soldVehicles.find(item => item.comprobanteId === saleId);
     if (!s) return;
 
     const modal = document.getElementById('modalReceiptPreview');
     const content = document.getElementById('receiptPreviewContent');
+
+    const clientName = s.clientName || s.clienteNombre;
+    const clientDni = s.clientDni || s.clienteDni;
+    const clientPhone = s.clientPhone || '11-4275-1489';
+    const vehicleName = s.vehicleName || s.name;
+    const sellerName = s.sellerName || s.vendedor;
+    const montoTotal = s.montoTotal || s.precioVenta;
+    const receiptId = s.id || s.comprobanteId;
+    const date = s.date || s.fechaVenta || '2026-09-17';
 
     if (content) {
       content.innerHTML = `
@@ -852,17 +1264,17 @@ class ERPApp {
               <div style="font-size:0.8rem; color:#475569;">CUIT: 30-68942154-8 · IVA Responsable Inscripto</div>
             </div>
             <div style="text-align:right;">
-              <div style="font-family:var(--font-mono); font-weight:900; font-size:1.1rem; color:var(--brand-red);">${s.id}</div>
-              <div style="font-size:0.8rem; color:#64748B;">Fecha: ${s.date}</div>
+              <div style="font-family:var(--font-mono); font-weight:900; font-size:1.1rem; color:var(--brand-red);">${receiptId}</div>
+              <div style="font-size:0.8rem; color:#64748B;">Fecha: ${date}</div>
               <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; background:#F1F5F9; padding:2px 8px; border-radius:4px; display:inline-block; margin-top:4px;">Comprobante Oficial de Reserva / Venta</div>
             </div>
           </div>
 
           <div style="margin-bottom:20px; font-size:0.88rem; line-height:1.6;">
-            <div><strong>Adquiriente:</strong> ${s.clientName} · <strong>DNI/CUIT:</strong> ${s.clientDni}</div>
-            <div><strong>Teléfono:</strong> ${s.clientPhone}</div>
-            <div><strong>Unidad Adquirida:</strong> ${s.vehicleName} (${s.vehicleCondition})</div>
-            <div><strong>Vendedor Interviniente:</strong> ${s.sellerName}</div>
+            <div><strong>Adquiriente:</strong> ${clientName} · <strong>DNI/CUIT:</strong> ${clientDni}</div>
+            <div><strong>Teléfono:</strong> ${clientPhone}</div>
+            <div><strong>Unidad Adquirida:</strong> ${vehicleName}</div>
+            <div><strong>Asesor Interviniente:</strong> ${sellerName}</div>
           </div>
 
           <table style="width:100%; border-collapse:collapse; margin-bottom:24px; font-size:0.85rem;">
@@ -875,31 +1287,18 @@ class ERPApp {
             <tbody>
               <tr style="border-bottom:1px solid #E2E8F0;">
                 <td style="padding:10px 12px;">Valor Total de Venta Acordado</td>
-                <td style="padding:10px 12px; text-align:right; font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(s.montoTotal)}</td>
+                <td style="padding:10px 12px; text-align:right; font-family:var(--font-mono); font-weight:800;">${this.formatCurrency(montoTotal)}</td>
               </tr>
               <tr style="border-bottom:1px solid #E2E8F0;">
-                <td style="padding:10px 12px;">Anticipo / Pago de Contado Efectivo</td>
-                <td style="padding:10px 12px; text-align:right; font-family:var(--font-mono);">${this.formatCurrency(s.montoContado)}</td>
-              </tr>
-              ${s.montoPermutaUsado > 0 ? `
-              <tr style="border-bottom:1px solid #E2E8F0; background:#FFF5F5;">
-                <td style="padding:10px 12px; color:var(--brand-red);">Toma de Usado en Parte de Pago: ${s.permutaDetalle}</td>
-                <td style="padding:10px 12px; text-align:right; font-family:var(--font-mono); font-weight:700; color:var(--brand-red);">- ${this.formatCurrency(s.montoPermutaUsado)}</td>
-              </tr>` : ''}
-              <tr style="border-bottom:1px solid #E2E8F0;">
-                <td style="padding:10px 12px;">Financiación Otorgada (${s.cuotasCantidad} Cuotas Fijas en Pesos)</td>
-                <td style="padding:10px 12px; text-align:right; font-family:var(--font-mono);">${this.formatCurrency(s.montoFinanciado)}</td>
-              </tr>
-              <tr style="background:#F8FAFC; font-weight:800;">
-                <td style="padding:12px;">Cuota Mensual Fija Resultante (TNA ${s.tasaInteresAnual}%)</td>
-                <td style="padding:12px; text-align:right; font-family:var(--font-mono); font-size:1.1rem; color:var(--brand-red);">${this.formatCurrency(s.cuotaMontoFijo)} / mes</td>
+                <td style="padding:10px 12px;">Modalidad de Pago</td>
+                <td style="padding:10px 12px; text-align:right; font-family:var(--font-mono);">${s.formaPago || 'Contado / Financiación Cuotas Fijas'}</td>
               </tr>
             </tbody>
           </table>
 
           <div style="font-size:0.75rem; color:#64748B; border-top:1px solid #CBD5E1; padding-top:12px; display:flex; justify-content:space-between;">
-            <span>Automotores Os-Car · Salón y Administración</span>
-            <span>Firma y Aclaración del Titular Comprador</span>
+            <span>Automotores Os-Car · Salón y Administración Central</span>
+            <span>Firma y Aclaración del Titular Adquiriente</span>
           </div>
         </div>
       `;
@@ -937,12 +1336,8 @@ class ERPApp {
     const priceInput = document.getElementById('calcVehiclePrice');
     const advanceInput = document.getElementById('calcAdvance');
 
-    if (priceInput) {
-      priceInput.value = v.precioLista;
-    }
-    if (advanceInput) {
-      advanceInput.value = Math.round(v.precioLista * 0.4);
-    }
+    if (priceInput) priceInput.value = v.precioLista;
+    if (advanceInput) advanceInput.value = Math.round(v.precioLista * 0.4);
 
     const event = new Event('input');
     priceInput?.dispatchEvent(event);
@@ -952,9 +1347,7 @@ class ERPApp {
     document.getElementById('vehicleDrawerBackdrop')?.classList.remove('open');
     this.openModal('modalNewSale');
     const select = document.getElementById('newSaleVehicleSelect');
-    if (select) {
-      select.value = vehicleId;
-    }
+    if (select) select.value = vehicleId;
   }
 
   // =========================================================================
@@ -1002,7 +1395,6 @@ class ERPApp {
   }
 }
 
-// Inicialización en DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   window.erpApp = new ERPApp();
   window.erpApp.init();
