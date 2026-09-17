@@ -2802,3 +2802,60 @@ input, select, textarea {
     width: 22px;
   }
 }
+
+/* ==========================================================================
+   Official Brand Logo Emblem Styling
+   ========================================================================== */
+.site-header .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.site-header .brand-emblem-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  overflow: hidden;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.site-header .brand-link:hover .brand-emblem-wrap {
+  transform: scale(1.06);
+  border-color: var(--brand-red);
+}
+
+.footer-brand .brand-emblem-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .site-header .brand-emblem-wrap {
+    width: 36px;
+    height: 36px;
+    padding: 2px;
+  }
+  .site-header .brand-title {
+    font-size: 1rem;
+  }
+  .site-header .brand-tagline {
+    display: none;
+  }
+}
+

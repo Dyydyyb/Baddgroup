@@ -257,7 +257,7 @@ function renderVehicles(vehicles) {
       : '';
 
     card.innerHTML = `
-      <div class="vehicle-photo-wrap" style="cursor: pointer;">
+      <div class="vehicle-photo-wrap" style="cursor: pointer;" title="Hacé clic para ver todos los detalles de ${vehicle.name}">
         <img 
           src="${vehicle.image}" 
           alt="${vehicle.name} en exhibición en Automotores Os-Car" 
@@ -276,7 +276,9 @@ function renderVehicles(vehicles) {
           <span>Año ${vehicle.year}</span>
         </div>
 
-        <h3 class="vehicle-card-name">${vehicle.name}</h3>
+        <h3 class="vehicle-card-name">
+          <a href="vehiculo.html?id=${vehicle.id}" style="color:inherit; text-decoration:none;">${vehicle.name}</a>
+        </h3>
 
         <div class="vehicle-card-specs">
           <div class="card-spec-item">
@@ -299,23 +301,21 @@ function renderVehicles(vehicles) {
             <span class="card-price-value">${vehicle.price}</span>
           </div>
 
-          <button type="button" class="btn-card-detail" aria-label="Ver ficha técnica de ${vehicle.name}">
+          <a href="vehiculo.html?id=${vehicle.id}" class="btn-card-detail" aria-label="Ver ficha técnica completa de ${vehicle.name}">
             <span>Ver Ficha</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
-          </button>
+          </a>
         </div>
       </div>
     `;
 
-    // Click triggers
+    // Click triggers: clicking the photo wrap enters the vehicle page
     const photoWrap = card.querySelector('.vehicle-photo-wrap');
-    const detailBtn = card.querySelector('.btn-card-detail');
-    const openHandler = () => openVehicleModal(vehicle.id);
-
-    photoWrap?.addEventListener('click', openHandler);
-    detailBtn?.addEventListener('click', openHandler);
+    photoWrap?.addEventListener('click', () => {
+      window.location.href = `vehiculo.html?id=${vehicle.id}`;
+    });
 
     grid.appendChild(card);
   });
