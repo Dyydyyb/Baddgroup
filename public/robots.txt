@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /GTL-Ingenieria-muestra/
-Disallow: /gtl-ingenieria-muestra/
 Disallow: /GTL-ERP-muestra/
 Disallow: /gtl-erp-muestra/
 Disallow: /kioscos-uva-erp/
