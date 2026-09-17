@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vení a Clase | Escuela de Manejo en Florencio Varela - Casa Central y Cruce Varela</title>
   <base href="/veni-a-clase-ejemplo/">
+  <title>Vení a Clase | Escuela de Manejo en Florencio Varela - Casa Central y Cruce Varela</title>
   
   <!-- SEO & Social Meta Tags -->
   <meta name="description" content="Aprendé a manejar con confianza en Vení a Clase. Escuela de manejo en Florencio Varela con 2 sucursales: Casa Central (Monteagudo 2788) y Cruce Varela (Finochietto 2284). Autos doble comando y acompañamiento al examen.">
@@ -23,55 +23,63 @@
 </head>
 <body>
 
-  <!-- Top Announcement Bar (Clean, no emojis) -->
-  <div style="background-color: var(--brand-red-darker); color: #ffffff; text-align: center; font-size: 0.82rem; padding: 7px 16px; font-weight: 600; letter-spacing: 0.3px;">
-    <strong>Inscripciones abiertas:</strong> Clases prácticas y teóricas en Florencio Varela • Casa Central y Cruce Varela • Lunes a Viernes de 8:00 a 19:30 hs.
-  </div>
-
-  <!-- Site Header / Navbar (Transparent to Solid Red on scroll) -->
+  <!-- Site Header / Navbar (Unified Header with Integrated Announcement Bar) -->
   <header class="site-header" id="navbar">
-    <div class="container header-container">
-      
-      <!-- Brand Logo (Redondo) -->
-      <a href="#inicio" class="brand-logo-link" aria-label="Ir al inicio de Vení a Clase">
-        <img src="assets/logo.png" alt="Logo Vení a Clase" class="brand-logo-img">
-        <div class="brand-text-block">
-          <span class="brand-name">Vení a Clase</span>
-          <span class="brand-slogan">Compartiendo juntos desde el 2014</span>
-        </div>
-      </a>
+    
+    <!-- Top Announcement Bar (Clean, integrated, no overlapping) -->
+    <div class="top-announcement-bar">
+      <div class="container announcement-inner">
+        <span class="announcement-pill">Inscripciones Abiertas</span>
+        <span class="announcement-text">Clases en Florencio Varela • Casa Central y Cruce Varela</span>
+        <span class="announcement-time">Lun a Vie 8:00 a 19:30 hs</span>
+      </div>
+    </div>
 
-      <!-- Navigation Menu -->
-      <nav aria-label="Navegación principal">
-        <ul class="nav-menu">
-          <li><a href="#inicio" class="nav-link">Inicio</a></li>
-          <li><a href="#semaforo-interactivo" class="nav-link">El Método</a></li>
-          <li><a href="#sobre-nosotros" class="nav-link">Nosotros</a></li>
-          <li><a href="#servicios" class="nav-link">Qué Incluye</a></li>
-          <li><a href="#sucursales" class="nav-link">Sucursales</a></li>
-          <li><a href="#testimonios" class="nav-link">Alumnos</a></li>
-          <li><a href="#faq" class="nav-link">Preguntas</a></li>
-          <li><a href="#consulta" class="nav-link" style="color: #FFD2D1; font-weight: 700;">Consultar</a></li>
-        </ul>
-      </nav>
-
-      <!-- Header Actions -->
-      <div class="header-actions">
-        <a href="#consulta" class="btn-header-cta" id="btnHeaderConsulta">
-          <span>Elegí tu Sucursal</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.17-1.32C8.61 21.49 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm.08 17.5c-1.57 0-3.08-.43-4.39-1.2l-.31-.18-3.07.78.82-2.99-.2-.33C4.1 14.22 3.6 12.65 3.6 11.08c0-4.69 3.8-8.5 8.48-8.5 4.67 0 8.47 3.81 8.47 8.5 0 4.68-3.8 8.42-8.47 8.42z"/>
-          </svg>
+    <!-- Main Navigation Bar -->
+    <div class="main-header-bar">
+      <div class="container header-container">
+        
+        <!-- Brand Logo (Redondo) -->
+        <a href="#inicio" class="brand-logo-link" aria-label="Ir al inicio de Vení a Clase">
+          <img src="assets/logo.png" alt="Logo Vení a Clase" class="brand-logo-img">
+          <div class="brand-text-block">
+            <span class="brand-name">Vení a Clase</span>
+            <span class="brand-slogan">Compartiendo juntos desde el 2014</span>
+          </div>
         </a>
 
-        <!-- Mobile Toggle Button -->
-        <button class="mobile-nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+        <!-- Navigation Menu -->
+        <nav aria-label="Navegación principal">
+          <ul class="nav-menu">
+            <li><a href="#inicio" class="nav-link">Inicio</a></li>
+            <li><a href="#semaforo-interactivo" class="nav-link">El Método</a></li>
+            <li><a href="#sobre-nosotros" class="nav-link">Nosotros</a></li>
+            <li><a href="#servicios" class="nav-link">Qué Incluye</a></li>
+            <li><a href="#sucursales" class="nav-link">Sucursales</a></li>
+            <li><a href="#testimonios" class="nav-link">Alumnos</a></li>
+            <li><a href="#faq" class="nav-link">Preguntas</a></li>
+            <li><a href="#consulta" class="nav-link" style="color: #FFD2D1; font-weight: 700;">Consultar</a></li>
+          </ul>
+        </nav>
 
+        <!-- Header Actions -->
+        <div class="header-actions">
+          <a href="#consulta" class="btn-header-cta" id="btnHeaderConsulta">
+            <span>Elegí tu Sucursal</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.17-1.32C8.61 21.49 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm.08 17.5c-1.57 0-3.08-.43-4.39-1.2l-.31-.18-3.07.78.82-2.99-.2-.33C4.1 14.22 3.6 12.65 3.6 11.08c0-4.69 3.8-8.5 8.48-8.5 4.67 0 8.47 3.81 8.47 8.5 0 4.68-3.8 8.42-8.47 8.42z"/>
+            </svg>
+          </a>
+
+          <!-- Mobile Toggle Button -->
+          <button class="mobile-nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+
+      </div>
     </div>
   </header>
 
@@ -80,9 +88,9 @@
        ========================================================================== -->
   <section class="hero-section" id="inicio">
     
-    <!-- Real Video Background -->
+    <!-- Real Video Background (Sin imagen artificial previa) -->
     <div class="hero-video-container">
-      <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-bg.jpg">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto">
         <source src="assets/hero-video.mp4" type="video/mp4">
       </video>
       <div class="hero-video-overlay"></div>
@@ -93,74 +101,74 @@
     <div class="container">
       <div class="hero-content">
         
-        <div class="hero-badge-container">
+        <div class="hero-badge-container reveal">
           <div class="hero-badge">
             <span class="pulse-dot"></span>
             <span>Compartiendo juntos desde el 2014 • Florencio Varela</span>
           </div>
         </div>
 
-        <h1 class="hero-title">
+        <h1 class="hero-title reveal delay-1">
           Aprendé a manejar con confianza y <span class="text-gradient-red">sacá tu registro</span>
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-description reveal delay-2">
           Escuela de manejo líder en Florencio Varela con <strong>dos sucursales estratégicas</strong> para tu comodidad. Te preparamos en tránsito real y en circuito de examen con vehículos propios de doble comando e instructores matriculados.
         </p>
 
-        <!-- Branch Pills -->
-        <div class="hero-branch-pills">
+        <!-- Branch Pills (Distribución Horizontal) -->
+        <div class="hero-branch-pills reveal delay-3">
           <div class="hero-branch-pill">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--brand-red-light);">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
               <circle cx="12" cy="9" r="2.5"/>
             </svg>
-            <span><strong>Casa Central:</strong> Bernardo de Monteagudo 2788</span>
+            <span><strong>Casa Central:</strong> Monteagudo 2788</span>
           </div>
           <div class="hero-branch-pill">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--brand-red-light);">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
               <circle cx="12" cy="9" r="2.5"/>
             </svg>
-            <span><strong>Cruce Varela:</strong> Dr. Enrique Finochietto 2284</span>
+            <span><strong>Cruce Varela:</strong> Finochietto 2284</span>
           </div>
         </div>
 
-        <!-- CTA Buttons -->
-        <div class="hero-actions">
+        <!-- CTA Buttons (Distribución Horizontal) -->
+        <div class="hero-actions reveal delay-4">
           <a href="#consulta" class="btn-cta-primary" id="heroBtnWizard">
-            <span>Armá tu Consulta por WhatsApp</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <span>Armá tu Consulta</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
 
           <a href="#sucursales" class="btn-cta-secondary" id="heroBtnSucursales">
-            <span>Ver Sucursales y Horarios</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <span>Ver Sucursales</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
               <circle cx="12" cy="9" r="2.5"/>
             </svg>
           </a>
         </div>
 
-        <!-- Trust Stats (Clean SVG Icons) -->
-        <div class="hero-stats-row">
+        <!-- Trust Stats (Distribución Horizontal 3 Columnas) -->
+        <div class="hero-stats-row reveal delay-5">
           <div class="hero-stat-item">
             <div class="hero-stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="8" r="7"/>
                 <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
               </svg>
             </div>
             <div class="hero-stat-text">
               <strong>+10 Años</strong>
-              <span>Enseñando en Varela</span>
+              <span>Florencio Varela</span>
             </div>
           </div>
           <div class="hero-stat-item">
             <div class="hero-stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
             </div>
@@ -171,7 +179,7 @@
           </div>
           <div class="hero-stat-item">
             <div class="hero-stat-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                 <line x1="16" y1="2" x2="16" y2="6"/>
                 <line x1="8" y1="2" x2="8" y2="6"/>
@@ -203,13 +211,13 @@
   <section class="traffic-light-section" id="semaforo-interactivo">
     <div class="container">
 
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal">
         <span class="pill-badge light">Dinámica de Aprendizaje</span>
         <h2 class="section-title light">El semáforo de tu registro: de cero al volante</h2>
         <p class="section-subtitle light">Hacé scroll y descubrí cómo transformamos tus nervios en autonomía y seguridad vial paso a paso.</p>
       </div>
 
-      <div class="traffic-light-wrapper state-red">
+      <div class="traffic-light-wrapper state-red reveal-scale">
         
         <!-- Left Col: SVG Traffic Light Component -->
         <div class="traffic-light-visual-col">
@@ -293,7 +301,7 @@
       <div class="about-grid">
         
         <!-- Left: Trajectory Metric Showcase Card (Sin Logo, Confiable y Limpio) -->
-        <div class="about-badge-card">
+        <div class="about-badge-card reveal-left">
           <div class="about-metric-big">+10</div>
           <div class="about-metric-label">Años formando conductores</div>
           <p class="about-metric-desc">
@@ -321,7 +329,7 @@
         </div>
 
         <!-- Right: Story & Values -->
-        <div class="about-content">
+        <div class="about-content reveal-right">
           <span class="pill-badge">Nuestra Filosofía</span>
           <h3>La escuela de manejo donde aprender a conducir es una experiencia amigable</h3>
           <p>
@@ -400,7 +408,7 @@
   <section class="services-section" id="servicios">
     <div class="container">
 
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal">
         <span class="pill-badge">Formación Integral</span>
         <h2 class="section-title">Todo lo que incluye <span class="highlight">nuestro curso</span></h2>
         <p class="section-subtitle">
@@ -420,7 +428,7 @@
       <div class="services-grid">
 
         <!-- Card 1 -->
-        <article class="service-card">
+        <article class="service-card reveal delay-1">
           <div class="service-icon-box">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
@@ -439,7 +447,7 @@
         </article>
 
         <!-- Card 2 -->
-        <article class="service-card">
+        <article class="service-card reveal delay-2">
           <div class="service-icon-box">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -456,7 +464,7 @@
         </article>
 
         <!-- Card 3 -->
-        <article class="service-card">
+        <article class="service-card reveal delay-3">
           <div class="service-icon-box">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
@@ -474,7 +482,7 @@
         </article>
 
         <!-- Card 4 -->
-        <article class="service-card">
+        <article class="service-card reveal delay-4">
           <div class="service-icon-box">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
@@ -493,7 +501,7 @@
         </article>
 
         <!-- Card 5 -->
-        <article class="service-card">
+        <article class="service-card reveal delay-5">
           <div class="service-icon-box">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="1" y="3" width="15" height="13"/>
@@ -513,7 +521,7 @@
         </article>
 
         <!-- Card 6 -->
-        <article class="service-card">
+        <article class="service-card reveal delay-1">
           <div class="service-icon-box">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -543,7 +551,7 @@
   <section class="branches-section" id="sucursales">
     <div class="container">
 
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal">
         <span class="pill-badge">Dos Sedes en Florencio Varela</span>
         <h2 class="section-title">Elegí la sucursal más <span class="highlight">cercana para vos</span></h2>
         <p class="section-subtitle">
@@ -554,7 +562,7 @@
       <div class="branches-grid">
 
         <!-- SUCURSAL 1: FLORENCIO VARELA CASA CENTRAL -->
-        <div class="branch-card" id="sucursal-central">
+        <div class="branch-card reveal-left" id="sucursal-central">
           
           <div class="branch-header">
             <div class="branch-header-info">
@@ -636,11 +644,11 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.17-1.32C8.61 21.49 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm.08 17.5c-1.57 0-3.08-.43-4.39-1.2l-.31-.18-3.07.78.82-2.99-.2-.33C4.1 14.22 3.6 12.65 3.6 11.08c0-4.69 3.8-8.5 8.48-8.5 4.67 0 8.47 3.81 8.47 8.5 0 4.68-3.8 8.42-8.47 8.42z"/>
                 </svg>
-                <span>WhatsApp Sucursal Centro</span>
+                <span>WhatsApp Centro</span>
               </a>
 
               <a href="https://instagram.com/veniaclasefv" target="_blank" rel="noopener noreferrer" class="btn-branch-instagram">
-                <span>Seguir en Instagram @veniaclasefv</span>
+                <span>Instagram @veniaclasefv</span>
               </a>
             </div>
 
@@ -649,7 +657,7 @@
         </div>
 
         <!-- SUCURSAL 2: CRUCE VARELA -->
-        <div class="branch-card" id="sucursal-cruce">
+        <div class="branch-card reveal-right" id="sucursal-cruce">
           
           <div class="branch-header">
             <div class="branch-header-info">
@@ -731,11 +739,11 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2C6.48 2 2 6.48 2 12c0 1.82.49 3.53 1.34 5L2 22l5.17-1.32C8.61 21.49 10.26 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm.08 17.5c-1.57 0-3.08-.43-4.39-1.2l-.31-.18-3.07.78.82-2.99-.2-.33C4.1 14.22 3.6 12.65 3.6 11.08c0-4.69 3.8-8.5 8.48-8.5 4.67 0 8.47 3.81 8.47 8.5 0 4.68-3.8 8.42-8.47 8.42z"/>
                 </svg>
-                <span>WhatsApp Sucursal Cruce Varela</span>
+                <span>WhatsApp Cruce</span>
               </a>
 
               <a href="https://instagram.com/veniaclasecrucevarela" target="_blank" rel="noopener noreferrer" class="btn-branch-instagram">
-                <span>Seguir en Instagram @veniaclasecrucevarela</span>
+                <span>Instagram @veniaclasecrucevarela</span>
               </a>
             </div>
 
@@ -754,7 +762,7 @@
   <section class="testimonials-section" id="testimonios">
     <div class="container">
 
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal">
         <span class="pill-badge">Historias Reales</span>
         <h2 class="section-title">Ellos ya tienen su <span class="highlight">registro de conducir</span></h2>
         <p class="section-subtitle">
@@ -765,7 +773,7 @@
       <div class="testimonials-grid">
 
         <!-- Foto Real 1 -->
-        <article class="testi-card">
+        <article class="testi-card reveal delay-1">
           <div class="testi-photo-container">
             <img src="assets/alumno-real-1.png" alt="Alumnos de Vení a Clase celebrando con cartel de principiante" class="testi-photo" loading="lazy">
             <div class="testi-badge-approved">
@@ -795,7 +803,7 @@
         </article>
 
         <!-- Foto Real 2 -->
-        <article class="testi-card">
+        <article class="testi-card reveal delay-2">
           <div class="testi-photo-container">
             <img src="assets/alumno-real-2.png" alt="Alumna aprobada de Vení a Clase posando con licencia" class="testi-photo" loading="lazy">
             <div class="testi-badge-approved">
@@ -825,7 +833,7 @@
         </article>
 
         <!-- Foto Real 3 -->
-        <article class="testi-card">
+        <article class="testi-card reveal delay-3">
           <div class="testi-photo-container">
             <img src="assets/alumno-real-3.png" alt="Alumnos aprobados sonriendo en la sede de Vení a Clase" class="testi-photo" loading="lazy">
             <div class="testi-badge-approved">
@@ -856,6 +864,17 @@
 
       </div>
 
+      <!-- Mobile Horizontal Swipe Indicator -->
+      <div class="swipe-hint-mobile">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Deslizá para ver las historias</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
     </div>
   </section>
 
@@ -865,7 +884,7 @@
   <section class="wizard-section" id="consulta">
     <div class="container">
 
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal">
         <span class="pill-badge">Asistente Paso a Paso</span>
         <h2 class="section-title">Armá tu consulta personalizada por <span class="highlight">WhatsApp</span></h2>
         <p class="section-subtitle">
@@ -873,7 +892,7 @@
         </p>
       </div>
 
-      <div class="wizard-card" id="wizardConsultation">
+      <div class="wizard-card reveal-scale" id="wizardConsultation">
         
         <!-- Header with Progress Bar -->
         <div class="wizard-header">
@@ -1036,7 +1055,7 @@
   <section class="faq-section" id="faq">
     <div class="container">
 
-      <div class="section-title-wrap">
+      <div class="section-title-wrap reveal">
         <span class="pill-badge">Dudas Habituales</span>
         <h2 class="section-title">Preguntas Frecuentes</h2>
         <p class="section-subtitle">Respuestas claras a las consultas más comunes antes de comenzar tu curso de manejo.</p>
@@ -1045,7 +1064,7 @@
       <div class="faq-accordion">
 
         <!-- FAQ 1 -->
-        <div class="faq-item active">
+        <div class="faq-item active reveal delay-1">
           <button class="faq-question-btn" type="button">
             <span>¿A partir de qué edad puedo empezar a hacer las clases?</span>
             <span class="faq-chevron">▼</span>
@@ -1056,7 +1075,7 @@
         </div>
 
         <!-- FAQ 2 -->
-        <div class="faq-item">
+        <div class="faq-item reveal delay-2">
           <button class="faq-question-btn" type="button">
             <span>¿Qué pasa si tengo mucho miedo o nunca toqué un volante?</span>
             <span class="faq-chevron">▼</span>
@@ -1067,7 +1086,7 @@
         </div>
 
         <!-- FAQ 3 -->
-        <div class="faq-item">
+        <div class="faq-item reveal delay-3">
           <button class="faq-question-btn" type="button">
             <span>¿Puedo rendir el examen municipal con el auto de Vení a Clase?</span>
             <span class="faq-chevron">▼</span>
@@ -1078,7 +1097,7 @@
         </div>
 
         <!-- FAQ 4 -->
-        <div class="faq-item">
+        <div class="faq-item reveal delay-4">
           <button class="faq-question-btn" type="button">
             <span>¿Cuáles son los horarios de las clases prácticas?</span>
             <span class="faq-chevron">▼</span>
@@ -1089,7 +1108,7 @@
         </div>
 
         <!-- FAQ 5 -->
-        <div class="faq-item">
+        <div class="faq-item reveal delay-5">
           <button class="faq-question-btn" type="button">
             <span>¿Cómo elijo entre la sucursal Centro y Cruce Varela?</span>
             <span class="faq-chevron">▼</span>
