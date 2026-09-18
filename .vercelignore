@@ -1,4 +1,22 @@
-# Ignore local development server and leftover scripts from Vercel deployment
+# Servidores y scripts locales
 server.mjs
 local-server.mjs
 index.js
+
+# Build artifacts no necesarios en deployment estático
+dist/
+
+# Excluir sistemas y demos pesados de prueba de public/
+# (Se conservan 100% intactos en tu computadora local y en Git)
+public/briceno-realty-muestra/
+public/propuesta_ingemah/
+public/kioscos-uva-erp-prueba/
+public/veni-a-clase-ejemplo/
+public/automotores-oscar-ejemplo/
+public/os-cars-ejemplo/
+public/automotores-oscar-erp-muestra/
+public/dp-ingenieria-arquitectura/
+public/dp-sistema-ejemplo/
+public/eam-ejemplo/
+public/GTL-ERP-muestra/
+public/sistema-ejemplo-logistica/
