@@ -35,6 +35,21 @@
       "source": "/automotores-os-car",
       "destination": "https://automotores-oscar.vercel.app/erp/",
       "permanent": false
+    },
+    {
+      "source": "/eam",
+      "destination": "/eam-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/eam-escuela-manejo",
+      "destination": "/eam-ejemplo/",
+      "permanent": false
+    },
+    {
+      "source": "/veni-a-clase",
+      "destination": "/veni-a-clase-ejemplo/",
+      "permanent": false
     }
   ]
 }
