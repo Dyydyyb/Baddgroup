@@ -47,6 +47,21 @@
       "permanent": false
     },
     {
+      "source": "/eam-crm",
+      "destination": "/eam-gestion/admin/dashboard/",
+      "permanent": false
+    },
+    {
+      "source": "/eam-panel",
+      "destination": "/eam-gestion/admin/dashboard/",
+      "permanent": false
+    },
+    {
+      "source": "/crm-eam",
+      "destination": "/eam-gestion/admin/dashboard/",
+      "permanent": false
+    },
+    {
       "source": "/veni-a-clase",
       "destination": "/veni-a-clase-ejemplo/",
       "permanent": false
