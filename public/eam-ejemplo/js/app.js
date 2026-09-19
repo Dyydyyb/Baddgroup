@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGearbox();
   initWizard();
   initScrollAnimations();
+  initTurnero();
 });
 
 /* ==========================================================================
@@ -251,23 +252,28 @@ function initGearbox() {
 }
 
 /* ==========================================================================
-   5. WhatsApp Consultation Wizard (3 Steps + Live Message Generator)
+   5. Asistente Inteligente de Turnos y Consulta (4 Pasos + Generador WhatsApp)
    ========================================================================== */
 function initWizard() {
   const wizardData = {
     step: 1,
     level: 'Nunca manejé / soy principiante',
     interest: 'Información sobre precios',
-    name: ''
+    schedule: 'Turno Mañana (08:00 a 12:00 hs)',
+    startDate: '',
+    name: '',
+    phone: ''
   };
 
   const step1Pane = document.getElementById('wizardStep1');
   const step2Pane = document.getElementById('wizardStep2');
   const step3Pane = document.getElementById('wizardStep3');
+  const step4Pane = document.getElementById('wizardStep4');
 
   const tab1 = document.getElementById('stepTab1');
   const tab2 = document.getElementById('stepTab2');
   const tab3 = document.getElementById('stepTab3');
+  const tab4 = document.getElementById('stepTab4');
 
   const progressFill = document.getElementById('wizardProgressFill');
   const btnBack = document.getElementById('wizardBtnBack');
@@ -275,16 +281,60 @@ function initWizard() {
   const btnSubmit = document.getElementById('wizardBtnSubmit');
 
   const nameInput = document.getElementById('wizardInputName');
+  const phoneInput = document.getElementById('wizardInputPhone');
   const messagePreview = document.getElementById('wizardGeneratedMessage');
+  const dateContainer = document.getElementById('wizardDateSelector');
 
-  // Option cards click handlers for Step 1 & Step 2
+  // Inicializar selector dinámico de fechas en Paso 3
+  function initDateSelector() {
+    if (!dateContainer) return;
+    dateContainer.innerHTML = '';
+
+    const daysNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const monthsNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const today = new Date();
+
+    for (let i = 1; i <= 7; i++) {
+      const d = new Date();
+      d.setDate(today.getDate() + i);
+
+      const dayName = daysNames[d.getDay()];
+      const dayNum = d.getDate();
+      const monthName = monthsNames[d.getMonth()];
+      const formattedDate = `${String(dayNum).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+
+      const isSelected = i === 1;
+      if (isSelected && !wizardData.startDate) {
+        wizardData.startDate = formattedDate;
+      }
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `date-pill-btn ${isSelected ? 'selected' : ''}`;
+      btn.innerHTML = `
+        <span class="date-pill-day">${dayName}</span>
+        <span class="date-pill-num">${dayNum}</span>
+        <span style="font-size: 0.72rem; opacity: 0.8;">${monthName}</span>
+      `;
+
+      btn.addEventListener('click', () => {
+        dateContainer.querySelectorAll('.date-pill-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        wizardData.startDate = formattedDate;
+        updateMessage();
+      });
+
+      dateContainer.appendChild(btn);
+    }
+  }
+
+  // Click handlers para las tarjetas de opciones de Pasos 1, 2 y 3
   const optionCards = document.querySelectorAll('.wizard-option-card');
   optionCards.forEach(card => {
     card.addEventListener('click', () => {
       const type = card.getAttribute('data-name');
       const val = card.getAttribute('data-value');
 
-      // Unselect siblings
       const parent = card.closest('.wizard-options-grid');
       if (parent) {
         parent.querySelectorAll('.wizard-option-card').forEach(c => {
@@ -293,7 +343,6 @@ function initWizard() {
         });
       }
 
-      // Select this
       card.classList.add('selected');
       card.setAttribute('aria-checked', 'true');
 
@@ -301,12 +350,13 @@ function initWizard() {
         wizardData.level = val;
       } else if (type === 'interest') {
         wizardData.interest = val;
+      } else if (type === 'schedule') {
+        wizardData.schedule = val;
       }
 
       updateMessage();
     });
 
-    // Keyboard support for option cards
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -315,7 +365,7 @@ function initWizard() {
     });
   });
 
-  // Name input listener
+  // Listener para inputs de Nombre y Teléfono en Paso 4
   if (nameInput) {
     nameInput.addEventListener('input', (e) => {
       wizardData.name = e.target.value.trim();
@@ -323,16 +373,20 @@ function initWizard() {
     });
   }
 
-  // Update dynamic message preview and WhatsApp submit link
-  function updateMessage() {
-    let text = '';
-    const phone = '5491136373331';
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (e) => {
+      wizardData.phone = e.target.value.trim();
+      updateMessage();
+    });
+  }
 
-    if (wizardData.name) {
-      text = `Hola EAM, soy ${wizardData.name}. Mi nivel actual es: ${wizardData.level}. Me interesa: ${wizardData.interest}. ¿Podrían darme más información sobre los cursos y aranceles?`;
-    } else {
-      text = `Hola EAM, mi nivel actual es: ${wizardData.level}. Me interesa: ${wizardData.interest}. ¿Podrían darme más información sobre los cursos y aranceles?`;
-    }
+  // Actualizar mensaje en vivo para WhatsApp
+  function updateMessage() {
+    let greeting = wizardData.name ? `Hola EAM, soy ${wizardData.name}.` : `Hola EAM,`;
+    let contactPart = wizardData.phone ? ` Mi WhatsApp de contacto es: ${wizardData.phone}.` : ``;
+    let datePart = wizardData.startDate ? ` a partir del día ${wizardData.startDate}` : ``;
+
+    const text = `${greeting} Mi nivel actual es: ${wizardData.level}. Me interesa: ${wizardData.interest}.${contactPart} Me gustaría coordinar para cursar en el ${wizardData.schedule}${datePart}. ¿Tienen disponibilidad para reservar mi lugar?`;
 
     if (messagePreview) {
       messagePreview.textContent = `"${text}"`;
@@ -340,11 +394,11 @@ function initWizard() {
 
     if (btnSubmit) {
       const encoded = encodeURIComponent(text);
-      btnSubmit.href = `https://wa.me/${phone}?text=${encoded}`;
+      btnSubmit.href = `https://wa.me/5491136373331?text=${encoded}`;
     }
   }
 
-  // Switch steps visually
+  // Cambio de pasos visuales
   function goToStep(step) {
     wizardData.step = step;
 
@@ -352,25 +406,28 @@ function initWizard() {
     if (step1Pane) step1Pane.classList.toggle('active', step === 1);
     if (step2Pane) step2Pane.classList.toggle('active', step === 2);
     if (step3Pane) step3Pane.classList.toggle('active', step === 3);
+    if (step4Pane) step4Pane.classList.toggle('active', step === 4);
 
     // Tabs
     if (tab1) tab1.classList.toggle('active', step === 1);
     if (tab2) tab2.classList.toggle('active', step === 2);
     if (tab3) tab3.classList.toggle('active', step === 3);
+    if (tab4) tab4.classList.toggle('active', step === 4);
 
-    // Progress Bar Fill
+    // Barra de progreso (4 pasos)
     if (progressFill) {
-      if (step === 1) progressFill.style.width = '33.33%';
-      if (step === 2) progressFill.style.width = '66.66%';
-      if (step === 3) progressFill.style.width = '100%';
+      if (step === 1) progressFill.style.width = '25%';
+      if (step === 2) progressFill.style.width = '50%';
+      if (step === 3) progressFill.style.width = '75%';
+      if (step === 4) progressFill.style.width = '100%';
     }
 
-    // Action buttons display logic
+    // Botones de acción
     if (btnBack) {
       btnBack.style.visibility = step === 1 ? 'hidden' : 'visible';
     }
 
-    if (step === 3) {
+    if (step === 4) {
       if (btnNext) btnNext.style.display = 'none';
       if (btnSubmit) btnSubmit.style.display = 'inline-flex';
     } else {
@@ -381,10 +438,10 @@ function initWizard() {
     updateMessage();
   }
 
-  // Next / Back button clicks
+  // Botones Siguiente y Volver
   if (btnNext) {
     btnNext.addEventListener('click', () => {
-      if (wizardData.step < 3) {
+      if (wizardData.step < 4) {
         goToStep(wizardData.step + 1);
       }
     });
@@ -398,12 +455,34 @@ function initWizard() {
     });
   }
 
-  // Tabs direct clicks
+  // Clic directo en pestañas
   if (tab1) tab1.addEventListener('click', () => goToStep(1));
   if (tab2) tab2.addEventListener('click', () => goToStep(2));
   if (tab3) tab3.addEventListener('click', () => goToStep(3));
+  if (tab4) tab4.addEventListener('click', () => goToStep(4));
 
-  // Initialize initial message
+  // Registrar lead / reserva preventiva en el CRM al hacer clic en enviar
+  if (btnSubmit) {
+    btnSubmit.addEventListener('click', () => {
+      try {
+        fetch('http://localhost:3000/api/bookings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            client_name: wizardData.name || 'Alumno Web EAM',
+            client_phone: wizardData.phone || '1136373331',
+            service_name: wizardData.interest,
+            date: wizardData.startDate || '2026-09-20',
+            time_slot: wizardData.schedule,
+            comments: `Nivel: ${wizardData.level} - Generado desde Asistente Inteligente Web`
+          })
+        }).catch(() => {});
+      } catch (e) {}
+    });
+  }
+
+  // Inicializar selector de fechas y mensaje inicial
+  initDateSelector();
   updateMessage();
 }
 
@@ -428,3 +507,4 @@ function initScrollAnimations() {
 
   revealElements.forEach(el => observer.observe(el));
 }
+

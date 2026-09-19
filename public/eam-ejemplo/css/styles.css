@@ -2499,3 +2499,512 @@ button {
     height: 54px;
   }
 }
+
+/* ==========================================================================
+   10. Sistema de Turnos Online Integrado (EAM Gestión)
+   ========================================================================== */
+
+/* Header Admin Button */
+.btn-header-admin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  color: #E2E8F0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-header-admin:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.nav-link-turnos {
+  color: #00A3FF !important;
+  font-weight: 700 !important;
+}
+
+/* Dual Mode Selector (Turnero vs WhatsApp) */
+.booking-mode-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.mode-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  color: #94A3B8;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.96rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.mode-tab-btn:hover {
+  color: #FFFFFF;
+  border-color: rgba(0, 163, 255, 0.4);
+  background: rgba(15, 23, 42, 0.85);
+  transform: translateY(-2px);
+}
+
+.mode-tab-btn.active {
+  background: linear-gradient(135deg, #03387E 0%, #0284C7 100%);
+  color: #FFFFFF;
+  border-color: #00A3FF;
+  box-shadow: 0 8px 24px rgba(0, 163, 255, 0.35);
+}
+
+.mode-badge-live {
+  background: #22C55E;
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  animation: pulse-live 2s infinite;
+}
+
+@keyframes pulse-live {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Turnero Stepper Nav */
+.turnero-stepper-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 26px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 16px;
+}
+
+.turnero-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  color: #64748B;
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.turnero-step-item.active {
+  background: rgba(0, 163, 255, 0.12);
+  border-color: rgba(0, 163, 255, 0.4);
+  color: #00A3FF;
+}
+
+.turnero-step-item.completed {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: #22C55E;
+}
+
+.turnero-step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.turnero-step-item.active .turnero-step-num {
+  background: #00A3FF;
+  color: #03142B;
+}
+
+.turnero-step-item.completed .turnero-step-num {
+  background: #22C55E;
+  color: #FFFFFF;
+}
+
+/* Step 1: Services Grid */
+.services-turnero-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.service-card-select {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+  position: relative;
+}
+
+.service-card-select:hover {
+  border-color: rgba(0, 163, 255, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  transform: translateY(-3px);
+}
+
+.service-card-select.selected {
+  border-color: #00A3FF;
+  background: rgba(3, 56, 126, 0.35);
+  box-shadow: 0 6px 20px rgba(0, 163, 255, 0.2);
+}
+
+.service-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.service-card-price {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #38BDF8;
+}
+
+.service-card-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(0, 163, 255, 0.15);
+  color: #38BDF8;
+  border: 1px solid rgba(0, 163, 255, 0.3);
+}
+
+.service-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+}
+
+.service-card-desc {
+  font-size: 0.84rem;
+  color: #94A3B8;
+  line-height: 1.45;
+}
+
+/* Step 2: Date & Slots Grid */
+.date-selector-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-top: 14px;
+}
+
+.date-pill-btn {
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: #CBD5E1;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.date-pill-btn:hover {
+  border-color: rgba(0, 163, 255, 0.4);
+  color: #FFFFFF;
+}
+
+.date-pill-btn.selected {
+  background: #00A3FF;
+  border-color: #00A3FF;
+  color: #03142B;
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(0, 163, 255, 0.4);
+}
+
+.date-pill-day {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.date-pill-num {
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.slots-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.slot-card {
+  padding: 14px 12px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.slot-card.available:hover {
+  border-color: #00A3FF;
+  background: rgba(0, 163, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.slot-card.selected {
+  border-color: #22C55E;
+  background: rgba(34, 197, 94, 0.18);
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.25);
+}
+
+.slot-card.occupied {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+.slot-time {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.slot-status-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+.slot-card.available .slot-status-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ADE80;
+}
+
+.slot-card.selected .slot-status-badge {
+  background: #22C55E;
+  color: #FFFFFF;
+}
+
+.slot-card.occupied .slot-status-badge {
+  background: rgba(239, 68, 68, 0.15);
+  color: #F87171;
+}
+
+.slot-details-tiny {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  margin-top: 6px;
+}
+
+/* Step 3: Hold Timer Alert & Student Form */
+.hold-timer-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #FCD34D;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hold-timer-clock {
+  font-family: 'Outfit', monospace;
+  font-weight: 800;
+  font-size: 1.05rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.booking-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
+}
+
+.booking-input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  font-size: 0.92rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.booking-input:focus {
+  outline: none;
+  border-color: #00A3FF;
+  box-shadow: 0 0 0 3px rgba(0, 163, 255, 0.2);
+}
+
+.booking-input-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #CBD5E1;
+  margin-bottom: 6px;
+}
+
+.booking-selected-summary-box {
+  padding: 14px 18px;
+  background: rgba(3, 56, 126, 0.2);
+  border: 1px solid rgba(0, 163, 255, 0.25);
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+/* Step 4: Confirmation Card */
+.confirmation-card-wrap {
+  padding: 28px 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(3, 56, 126, 0.4) 0%, rgba(15, 23, 42, 0.9) 100%);
+  border: 1.5px solid rgba(34, 197, 94, 0.4);
+  text-align: center;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.confirm-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: #22C55E;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.confirm-token-number {
+  font-family: 'Outfit', monospace;
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #38BDF8;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.confirm-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 18px;
+  border-radius: 14px;
+  margin: 18px 0;
+}
+
+.confirm-detail-item strong {
+  display: block;
+  font-size: 0.76rem;
+  color: #94A3B8;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.confirm-detail-item span {
+  font-size: 0.92rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.btn-confirm-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 24px;
+  background: #25D366;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  margin-top: 10px;
+}
+
+.btn-confirm-whatsapp:hover {
+  background: #20BA56;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+}
+
+@media (max-width: 768px) {
+  .services-turnero-grid,
+  .booking-form-grid,
+  .confirm-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .slots-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .turnero-stepper-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
