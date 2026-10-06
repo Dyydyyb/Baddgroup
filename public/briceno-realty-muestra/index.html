@@ -6,8 +6,23 @@
   <title>Briceño Realty Group | Bienes Raíces con Visión Estratégica · Inversiones Internacionales</title>
   <meta name="description" content="Firma boutique de asesoría en inversiones inmobiliarias internacionales liderada por Daniel Briceño. Portafolios de alto rendimiento y residencia legal en Dubái, Florida, Panamá y República Dominicana.">
   
-  <!-- Base de enrutamiento para baddgroup.com -->
-  <base href="/briceno-realty-muestra/">
+  <script>
+    if (window.location.pathname.includes('/briceno-realty-muestra')) {
+      document.write('<base href="/briceno-realty-muestra/">');
+    }
+    // Instant theme check to prevent flash of unstyled theme
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('briceno_theme');
+        if (savedTheme === 'light') {
+          document.documentElement.classList.add('theme-light');
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/logo.png">
@@ -18,7 +33,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body id="top">
 
@@ -39,12 +54,32 @@
         <a href="#inicio" class="nav-link">Inicio</a>
         <a href="#mercados" class="nav-link">Mercados</a>
         <a href="#por-que-invertir" class="nav-link">Por qué invertir</a>
-        <a href="#daniel-briceno" class="nav-link">Sobre Daniel Briceño</a>
+        <a href="#daniel-briceno" class="nav-link">Daniel Briceño</a>
+        <a href="#testimonios" class="nav-link">Testimonios</a>
         <a href="#comparativa" class="nav-link">Comparativa</a>
-        <a href="#asesoria" class="nav-link">Asesoría</a>
       </nav>
 
       <div class="header-actions">
+        <button class="btn-theme-toggle" id="themeToggleBtn" onclick="App.toggleTheme()" aria-label="Alternar Modo Claro / Oscuro" title="Alternar Modo Claro / Oscuro">
+          <span class="theme-toggle-icon">
+            <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+          <span class="theme-toggle-text sr-only" id="themeToggleText">Modo Claro</span>
+        </button>
+
         <a href="#asesoria" class="btn-header-cta">
           <span>Agendá tu asesoría</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -65,33 +100,28 @@
 
   <main>
     <!-- =========================================================================
-         2. HERO SECTION CON VIDEO BURJ KHALIFA A PANTALLA COMPLETA
+         2. HERO SECTION CON VIDEO BRICEÑO A PANTALLA COMPLETA
          ========================================================================= -->
     <section class="hero-section" id="inicio">
       <div class="hero-video-wrap">
-        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/images/dubai-hero.jpg">
-          <source src="assets/videos/hero-burj-khalifa.mp4" type="video/mp4">
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/images/hero-poster.jpg?v=2">
+          <source src="assets/videos/hero-briceno.mp4?v=2" type="video/mp4">
         </video>
       </div>
 
       <div class="hero-overlay"></div>
 
       <div class="hero-content">
-        <div class="hero-pill">
-          <span class="hero-pill-dot"></span>
-          <span>Bienes Raíces con Visión Estratégica</span>
-        </div>
-
-        <h1 class="hero-title">
+        <h1 class="hero-title hero-animate-item hero-anim-1">
           Cuatro mercados.<br>
           <em>Una misma visión de inversión.</em>
         </h1>
 
-        <p class="hero-subtitle">
+        <p class="hero-subtitle hero-animate-item hero-anim-2">
           Asesoría patrimonial y de inversión inmobiliaria internacional. Acceso preferencial a proyectos de alto rendimiento en Dubái, Florida, Panamá y República Dominicana.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-actions hero-animate-item hero-anim-3">
           <a href="#asesoria" class="btn-primary-gold">
             <span>Agendá tu asesoría</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -108,7 +138,7 @@
         </div>
       </div>
 
-      <a href="#mercados" class="hero-scroll-indicator" aria-label="Desplazarse hacia los mercados">
+      <a href="#mercados" class="hero-scroll-indicator hero-animate-item hero-anim-4" aria-label="Desplazarse hacia los mercados">
         <span>Descubrir mercados</span>
         <div class="scroll-line">
           <div class="scroll-line-thumb"></div>
@@ -122,26 +152,136 @@
          ========================================================================= -->
     <div class="markets-container" id="mercados">
 
+      <!-- Panorama Horizontal de Acceso Directo a Mercados -->
+      <div class="markets-quick-deck-wrap reveal-on-scroll">
+        <div class="markets-deck-header">
+          <span class="section-subtitle-pill">Destinos Estratégicos</span>
+          <h3 class="markets-deck-title">Plazas Inmobiliarias Internacionales</h3>
+          <p class="markets-deck-sub">Acceso preferencial y asesoría en las 4 jurisdicciones de mayor solidez patrimonial y crecimiento en dólares.</p>
+        </div>
+        
+        <div class="markets-quick-grid">
+          <!-- Quick Card 1: Panamá -->
+          <div class="market-quick-card" onclick="document.getElementById('mercado-panama').scrollIntoView({behavior:'smooth'})">
+            <div class="market-quick-thumb">
+              <img src="assets/images/panama-hero.jpg" alt="Panamá" loading="lazy">
+              <span class="market-quick-num">01</span>
+            </div>
+            <div class="market-quick-body">
+              <span class="market-quick-region">América Central</span>
+              <h4 class="market-quick-name">Panamá</h4>
+              <div class="market-quick-specs">
+                <span class="market-spec-roi">ROI 7.5% — 9.5%</span>
+                <span class="market-spec-detail">USD 160K min · 30 días Residencia</span>
+              </div>
+              <div class="market-quick-btn">
+                <span>Ver mercado</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Card 2: República Dominicana -->
+          <div class="market-quick-card" onclick="document.getElementById('mercado-dom-rep').scrollIntoView({behavior:'smooth'})">
+            <div class="market-quick-thumb">
+              <img src="assets/images/dom-rep-hero.jpg" alt="República Dominicana" loading="lazy">
+              <span class="market-quick-num">02</span>
+            </div>
+            <div class="market-quick-body">
+              <span class="market-quick-region">Caribe</span>
+              <h4 class="market-quick-name">Rep. Dominicana</h4>
+              <div class="market-quick-specs">
+                <span class="market-spec-roi">ROI 9.0% — 12.0%</span>
+                <span class="market-spec-detail">CONFOTUR · 15 años 0% Impuestos</span>
+              </div>
+              <div class="market-quick-btn">
+                <span>Ver mercado</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Card 3: Florida -->
+          <div class="market-quick-card" onclick="document.getElementById('mercado-florida').scrollIntoView({behavior:'smooth'})">
+            <div class="market-quick-thumb">
+              <img src="assets/images/florida-hero.jpg" alt="Florida" loading="lazy">
+              <span class="market-quick-num">03</span>
+            </div>
+            <div class="market-quick-body">
+              <span class="market-quick-region">Norteamérica</span>
+              <h4 class="market-quick-name">Florida (EE.UU.)</h4>
+              <div class="market-quick-specs">
+                <span class="market-spec-roi">ROI 6.5% — 8.5%</span>
+                <span class="market-spec-detail">Crédito en USD · 0% Tax Estatal</span>
+              </div>
+              <div class="market-quick-btn">
+                <span>Ver mercado</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Card 4: Dubái -->
+          <div class="market-quick-card" onclick="document.getElementById('mercado-dubai').scrollIntoView({behavior:'smooth'})">
+            <div class="market-quick-thumb">
+              <img src="assets/images/dubai-hero.jpg" alt="Dubái" loading="lazy">
+              <span class="market-quick-num">04</span>
+            </div>
+            <div class="market-quick-body">
+              <span class="market-quick-region">Medio Oriente</span>
+              <h4 class="market-quick-name">Dubái (EAU)</h4>
+              <div class="market-quick-specs">
+                <span class="market-spec-roi">ROI 8.5% — 11.5%</span>
+                <span class="market-spec-detail">0% Tax Total · Golden Visa 10 Años</span>
+              </div>
+              <div class="market-quick-btn">
+                <span>Ver mercado</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- MERCADO 1: PANAMÁ -->
       <section class="market-block" id="mercado-panama" data-market-id="panama">
         <div class="market-bg-parallax" style="background-image: url('assets/images/panama-hero.jpg');"></div>
         <div class="market-content reveal-on-scroll">
-          <div class="market-meta-top">
-            <span class="market-number">01 / 04</span>
-            <div class="market-badge">
-              <span>América Central · Hub Financiero</span>
+          <div class="market-layout-split">
+            <div class="market-col-main">
+              <div class="market-meta-top">
+                <span class="market-number">01 / 04</span>
+                <div class="market-badge">
+                  <span>América Central · Hub Financiero</span>
+                </div>
+              </div>
+              <h2 class="market-title">Panamá</h2>
+              <p class="market-tagline">Hub financiero de América Latina, con dolarización y estabilidad jurídica.</p>
+
+              <button class="btn-market-explore" onclick="App.openMarketDrawer('panama')">
+                <span>Ver oportunidad de inversión</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="market-col-kpis">
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">7.5% — 9.5%</div>
+                <div class="market-kpi-lbl">ROI Neto Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">USD 160.000</div>
+                <div class="market-kpi-lbl">Ticket Mínimo Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">30 Días</div>
+                <div class="market-kpi-lbl">Residencia Permanente</div>
+              </div>
             </div>
           </div>
-          <h2 class="market-title">Panamá</h2>
-          <p class="market-tagline">Hub financiero de América Latina, con dolarización y estabilidad jurídica.</p>
-
-          <button class="btn-market-explore" onclick="App.openMarketDrawer('panama')">
-            <span>Ver oportunidad de inversión</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
         </div>
       </section>
 
@@ -149,22 +289,41 @@
       <section class="market-block" id="mercado-dom-rep" data-market-id="dom-rep">
         <div class="market-bg-parallax" style="background-image: url('assets/images/dom-rep-hero.jpg');"></div>
         <div class="market-content reveal-on-scroll">
-          <div class="market-meta-top">
-            <span class="market-number">02 / 04</span>
-            <div class="market-badge">
-              <span>Caribe · Punta Cana & Cap Cana</span>
+          <div class="market-layout-split">
+            <div class="market-col-main">
+              <div class="market-meta-top">
+                <span class="market-number">02 / 04</span>
+                <div class="market-badge">
+                  <span>Caribe · Punta Cana & Cap Cana</span>
+                </div>
+              </div>
+              <h2 class="market-title">República Dominicana</h2>
+              <p class="market-tagline">El epicentro turístico y de inversión del Caribe con exenciones fiscales de vanguardia.</p>
+
+              <button class="btn-market-explore" onclick="App.openMarketDrawer('dom-rep')">
+                <span>Ver oportunidad de inversión</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="market-col-kpis">
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">9.0% — 12.0%</div>
+                <div class="market-kpi-lbl">ROI Neto Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">USD 140.000</div>
+                <div class="market-kpi-lbl">Ticket Mínimo Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">15 Años</div>
+                <div class="market-kpi-lbl">Ley CONFOTUR 0% Impuestos</div>
+              </div>
             </div>
           </div>
-          <h2 class="market-title">República Dominicana</h2>
-          <p class="market-tagline">El epicentro turístico y de inversión del Caribe con exenciones fiscales de vanguardia.</p>
-
-          <button class="btn-market-explore" onclick="App.openMarketDrawer('dom-rep')">
-            <span>Ver oportunidad de inversión</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
         </div>
       </section>
 
@@ -172,22 +331,41 @@
       <section class="market-block" id="mercado-florida" data-market-id="florida">
         <div class="market-bg-parallax" style="background-image: url('assets/images/florida-hero.jpg');"></div>
         <div class="market-content reveal-on-scroll">
-          <div class="market-meta-top">
-            <span class="market-number">03 / 04</span>
-            <div class="market-badge">
-              <span>Norteamérica · Miami & Orlando</span>
+          <div class="market-layout-split">
+            <div class="market-col-main">
+              <div class="market-meta-top">
+                <span class="market-number">03 / 04</span>
+                <div class="market-badge">
+                  <span>Norteamérica · Miami & Orlando</span>
+                </div>
+              </div>
+              <h2 class="market-title">Estados Unidos (Florida)</h2>
+              <p class="market-tagline">Seguridad jurídica global, revalorización sostenida y alta demanda de rentas en dólares.</p>
+
+              <button class="btn-market-explore" onclick="App.openMarketDrawer('florida')">
+                <span>Ver oportunidad de inversión</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="market-col-kpis">
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">6.5% — 8.5%</div>
+                <div class="market-kpi-lbl">ROI Neto Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">USD 320.000</div>
+                <div class="market-kpi-lbl">Ticket Mínimo Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">0% Tax Estatal</div>
+                <div class="market-kpi-lbl">Apalancamiento Bancario USD</div>
+              </div>
             </div>
           </div>
-          <h2 class="market-title">Estados Unidos (Florida)</h2>
-          <p class="market-tagline">Seguridad jurídica global, revalorización sostenida y alta demanda de rentas en dólares.</p>
-
-          <button class="btn-market-explore" onclick="App.openMarketDrawer('florida')">
-            <span>Ver oportunidad de inversión</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
         </div>
       </section>
 
@@ -195,22 +373,41 @@
       <section class="market-block" id="mercado-dubai" data-market-id="dubai">
         <div class="market-bg-parallax" style="background-image: url('assets/images/dubai-hero.jpg');"></div>
         <div class="market-content reveal-on-scroll">
-          <div class="market-meta-top">
-            <span class="market-number">04 / 04</span>
-            <div class="market-badge">
-              <span>Medio Oriente · Golfo Pérsico</span>
+          <div class="market-layout-split">
+            <div class="market-col-main">
+              <div class="market-meta-top">
+                <span class="market-number">04 / 04</span>
+                <div class="market-badge">
+                  <span>Medio Oriente · Golfo Pérsico</span>
+                </div>
+              </div>
+              <h2 class="market-title">Dubái (EAU)</h2>
+              <p class="market-tagline">La capital mundial de la innovación inmobiliaria: 0% de impuestos sobre la propiedad y rendimientos superiores.</p>
+
+              <button class="btn-market-explore" onclick="App.openMarketDrawer('dubai')">
+                <span>Ver oportunidad de inversión</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div class="market-col-kpis">
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">8.5% — 11.5%</div>
+                <div class="market-kpi-lbl">ROI Neto Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">USD 260.000</div>
+                <div class="market-kpi-lbl">Ticket Mínimo Estimado</div>
+              </div>
+              <div class="market-kpi-box">
+                <div class="market-kpi-val">0% Impuestos</div>
+                <div class="market-kpi-lbl">Golden Visa 10 Años</div>
+              </div>
             </div>
           </div>
-          <h2 class="market-title">Dubái (EAU)</h2>
-          <p class="market-tagline">La capital mundial de la innovación inmobiliaria: 0% de impuestos sobre la propiedad y rendimientos superiores.</p>
-
-          <button class="btn-market-explore" onclick="App.openMarketDrawer('dubai')">
-            <span>Ver oportunidad de inversión</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </button>
         </div>
       </section>
 
@@ -392,54 +589,291 @@
     </section>
 
     <!-- =========================================================================
-         6. EDITORIAL: SOBRE DANIEL BRICEÑO
+         6. EDITORIAL: SOBRE DANIEL BRICEÑO (LAYOUT HORIZONTAL MAGAZINE SPREAD)
          ========================================================================= -->
     <section class="section-advisor" id="daniel-briceno">
       <div class="advisor-editorial-frame reveal-on-scroll">
+        <div class="advisor-horizontal-grid">
+          
+          <!-- Columna Izquierda: Perfil de Autoridad & Métricas -->
+          <div class="advisor-col-profile">
+            <div class="advisor-seal-medallion">
+              <img src="assets/images/logo.png" alt="Monograma B Briceño Realty Group" class="advisor-seal-img logo-rounded">
+            </div>
+            
+            <h3 class="advisor-lead-name">Daniel Briceño</h3>
+            <span class="advisor-lead-title">Fundador & Asesor Inmobiliario Internacional</span>
+            
+            <div class="advisor-market-tags">
+              <span class="advisor-tag">Dubái</span>
+              <span class="advisor-tag">Florida</span>
+              <span class="advisor-tag">Panamá</span>
+              <span class="advisor-tag">Rep. Dominicana</span>
+            </div>
+
+            <div class="advisor-highlights">
+              <div class="advisor-stat-item">
+                <div class="advisor-stat-num">4</div>
+                <div class="advisor-stat-lbl">Mercados Clave</div>
+              </div>
+              <div class="advisor-stat-item">
+                <div class="advisor-stat-num">100%</div>
+                <div class="advisor-stat-lbl">Confidencialidad</div>
+              </div>
+              <div class="advisor-stat-item">
+                <div class="advisor-stat-num">360°</div>
+                <div class="advisor-stat-lbl">Soporte Cross-Border</div>
+              </div>
+            </div>
+
+            <div class="advisor-cta-wrap">
+              <a href="#asesoria" class="btn-primary-gold" style="width: 100%; justify-content: center;">
+                <span>Agendar sesión con Daniel</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Tesis Editorial & Visión -->
+          <div class="advisor-col-editorial">
+            <span class="section-subtitle-pill">Liderazgo & Trayectoria Patrimonial</span>
+            
+            <blockquote class="advisor-quote">
+              "El mayor lujo es tener la libertad de elegir."
+            </blockquote>
+
+            <p class="advisor-bio-text">
+              Como asesor inmobiliario internacional y fundador de <strong>Briceño Realty Group</strong>, Daniel Briceño guía a inversores sofisticados y familias en la estructuración de portafolios inmobiliarios de alto rendimiento en las plazas más dinámicas del planeta.
+            </p>
+            <p class="advisor-bio-text">
+              Su enfoque combina una lectura profunda de la macroeconomía global con el conocimiento operativo de normativas fiscales, marcos jurídicos y programas de residencia por inversión en Dubái, Estados Unidos, Panamá y República Dominicana.
+            </p>
+
+            <div class="advisor-editorial-pillars">
+              <div class="editorial-pillar-item">
+                <div class="editorial-pillar-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <strong>Blindaje Legal & Tributario</strong>
+                  <span>Estructuración en sociedades LLC, BVI o fiducia según jurisdicción.</span>
+                </div>
+              </div>
+              <div class="editorial-pillar-item">
+                <div class="editorial-pillar-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                </div>
+                <div>
+                  <strong>Análisis Cuantitativo de Rendimiento</strong>
+                  <span>Proyecciones de cash flow neto, apreciación y costos reales de cierre.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. SECCIÓN TESTIMONIOS: SLIDER DE INVERSORES (SIN NOMBRES DE CLIENTES)
+         ========================================================================= -->
+    <section class="section-testimonials" id="testimonios">
+      <div class="section-header-center reveal-on-scroll">
+        <span class="section-subtitle-pill">Trayectoria & Confianza</span>
+        <h2 class="section-title">Experiencias de Inversores</h2>
+        <p class="section-desc">
+          Testimonios de inversores privados, familias y carteras patrimoniales que blindaron y expandieron su capital con Briceño Realty Group.
+        </p>
+      </div>
+
+      <div class="testimonials-slider-container reveal-on-scroll">
         
-        <div class="advisor-seal-medallion">
-          <img src="assets/images/logo.png" alt="Monograma B Briceño Realty Group" class="advisor-seal-img logo-rounded">
-        </div>
-
-        <span class="section-subtitle-pill" style="margin-bottom: 18px;">Liderazgo & Trayectoria Patrimonial</span>
-
-        <blockquote class="advisor-quote">
-          "El mayor lujo es tener la libertad de elegir."
-        </blockquote>
-
-        <h3 class="advisor-lead-name">Daniel Briceño</h3>
-        <span class="advisor-lead-title">Fundador & Asesor Inmobiliario Internacional</span>
-
-        <p class="advisor-bio-text">
-          Como asesor inmobiliario internacional y fundador de <strong>Briceño Realty Group</strong>, Daniel Briceño guía a inversores sofisticados y familias en la estructuración de portafolios inmobiliarios de alto rendimiento en las plazas más dinámicas del planeta.
-        </p>
-        <p class="advisor-bio-text">
-          Su enfoque combina una lectura profunda de la macroeconomía global con el conocimiento operativo de normativas fiscales, marcos jurídicos y programas de residencia por inversión en Dubái, Estados Unidos, Panamá y República Dominicana.
-        </p>
-
-        <div class="advisor-highlights">
-          <div>
-            <div class="advisor-stat-num">4</div>
-            <div class="advisor-stat-lbl">Mercados Clave</div>
-          </div>
-          <div>
-            <div class="advisor-stat-num">100%</div>
-            <div class="advisor-stat-lbl">Confidencialidad</div>
-          </div>
-          <div>
-            <div class="advisor-stat-num">360°</div>
-            <div class="advisor-stat-lbl">Soporte Cross-Border</div>
-          </div>
-        </div>
-
-        <div style="margin-top: 38px;">
-          <a href="#asesoria" class="btn-primary-gold">
-            <span>Agendar sesión estratégica con Daniel</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+        <!-- Controls: Prev / Next buttons -->
+        <div class="testimonials-nav-ctrls">
+          <button class="btn-testimonial-nav prev" id="btnPrevTestimonial" onclick="App.prevTestimonial()" aria-label="Testimonio anterior">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-          </a>
+          </button>
+          <button class="btn-testimonial-nav next" id="btnNextTestimonial" onclick="App.nextTestimonial()" aria-label="Testimonio siguiente">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="testimonials-viewport" id="testimonialsViewport">
+          <div class="testimonials-track" id="testimonialsTrack">
+
+            <!-- Slide 1: Dubái Marina -->
+            <div class="testimonial-card" data-index="0">
+              <div class="testimonial-card-top">
+                <div class="testimonial-stars">
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="testimonial-market-badge badge-dubai">Dubái · EAU</span>
+              </div>
+              <blockquote class="testimonial-quote">
+                "La estructuración tributaria y la gestión remota para la Golden Visa de 10 años superaron cualquier expectativa. Logramos ingresar en pozo en Dubái Marina con 0% de impuestos y un plan de pagos vinculado al avance de obra. La transparencia analítica de Briceño Realty Group es impecable."
+              </blockquote>
+              <div class="testimonial-card-footer">
+                <div class="testimonial-profile">
+                  <div class="testimonial-avatar-seal">
+                    <span>FO</span>
+                  </div>
+                  <div class="testimonial-meta">
+                    <strong class="testimonial-role">Inversor Patrimonial · Family Office</strong>
+                    <span class="testimonial-tx">Adquisición Off-Plan · Dubái Marina</span>
+                  </div>
+                </div>
+                <div class="testimonial-metric-chip">
+                  <span>Golden Visa · 11.2% Plusvalía</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Cap Cana -->
+            <div class="testimonial-card" data-index="1">
+              <div class="testimonial-card-top">
+                <div class="testimonial-stars">
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="testimonial-market-badge badge-dom">Rep. Dominicana</span>
+              </div>
+              <blockquote class="testimonial-quote">
+                "Buscábamos flujo constante en dólares respaldado por el turismo de lujo en el Caribe. Nos guiaron en todo el encuadre bajo Ley CONFOTUR, asegurando 15 años sin impuesto inmobiliario ni de transferencia, y coordinaron la administración de rentas vacacionales. Rigor total."
+              </blockquote>
+              <div class="testimonial-card-footer">
+                <div class="testimonial-profile">
+                  <div class="testimonial-avatar-seal">
+                    <span>IR</span>
+                  </div>
+                  <div class="testimonial-meta">
+                    <strong class="testimonial-role">Inversor Residencial · Renta Vacacional</strong>
+                    <span class="testimonial-tx">Condominio Turístico · Cap Cana</span>
+                  </div>
+                </div>
+                <div class="testimonial-metric-chip">
+                  <span>CONFOTUR · 10.4% Retorno Neto</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Panamá -->
+            <div class="testimonial-card" data-index="2">
+              <div class="testimonial-card-top">
+                <div class="testimonial-stars">
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="testimonial-market-badge badge-panama">Panamá</span>
+              </div>
+              <blockquote class="testimonial-quote">
+                "La economía dolarizada y la territorialidad tributaria en Panamá era justo lo que necesitábamos para blindar capital familiar. La coordinación con los abogados locales para la residencia permanente tomó menos de 30 días y los cobros de alquileres son 100% directos."
+              </blockquote>
+              <div class="testimonial-card-footer">
+                <div class="testimonial-profile">
+                  <div class="testimonial-avatar-seal">
+                    <span>IC</span>
+                  </div>
+                  <div class="testimonial-meta">
+                    <strong class="testimonial-role">Inversor Corporativo · Blindaje Patrimonial</strong>
+                    <span class="testimonial-tx">Apartamentos en Costa del Este · Panamá</span>
+                  </div>
+                </div>
+                <div class="testimonial-metric-chip">
+                  <span>Residencia 30 Días · 8.2% ROI USD</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4: Florida -->
+            <div class="testimonial-card" data-index="3">
+              <div class="testimonial-card-top">
+                <div class="testimonial-stars">
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="testimonial-market-badge badge-florida">Florida · EE.UU.</span>
+              </div>
+              <blockquote class="testimonial-quote">
+                "Pudimos concretar la compra mediante una LLC con financiamiento hipotecario para extranjeros a tasas muy convenientes. Daniel desglosó con exactitud matemática el rendimiento neto tras HOA, seguros y property management. Seguridad jurídica absoluta."
+              </blockquote>
+              <div class="testimonial-card-footer">
+                <div class="testimonial-profile">
+                  <div class="testimonial-avatar-seal">
+                    <span>IE</span>
+                  </div>
+                  <div class="testimonial-meta">
+                    <strong class="testimonial-role">Inversionista Privado · Crédito Internacional</strong>
+                    <span class="testimonial-tx">Condominio Multifamiliar · Miami & Orlando</span>
+                  </div>
+                </div>
+                <div class="testimonial-metric-chip">
+                  <span>Crédito Hipotecario USD · 0% Tax Estatal</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 5: Multijurisdiccional -->
+            <div class="testimonial-card" data-index="4">
+              <div class="testimonial-card-top">
+                <div class="testimonial-stars">
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="star-icon" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="testimonial-market-badge badge-global">Multijurisdiccional</span>
+              </div>
+              <blockquote class="testimonial-quote">
+                "La atención directa de Daniel Briceño es incomparable. No comercializan inmuebles al azar: analizan la residencia fiscal, los objetivos de liquidez y diseñan un portafolio equilibrado entre renta inmediata y plusvalía en pozo. Absoluta seriedad profesional."
+              </blockquote>
+              <div class="testimonial-card-footer">
+                <div class="testimonial-profile">
+                  <div class="testimonial-avatar-seal">
+                    <span>GP</span>
+                  </div>
+                  <div class="testimonial-meta">
+                    <strong class="testimonial-role">Grupo Inversionista · Portafolio Diversificado</strong>
+                    <span class="testimonial-tx">Estrategia Combinada Dubái & Caribe</span>
+                  </div>
+                </div>
+                <div class="testimonial-metric-chip">
+                  <span>Asesoría 360° · Trato Confidencial</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Pagination Dots -->
+        <div class="testimonials-dots" id="testimonialsDots">
+          <button class="testimonial-dot active" data-index="0" onclick="App.goToTestimonial(0)" aria-label="Ir al testimonio 1"></button>
+          <button class="testimonial-dot" data-index="1" onclick="App.goToTestimonial(1)" aria-label="Ir al testimonio 2"></button>
+          <button class="testimonial-dot" data-index="2" onclick="App.goToTestimonial(2)" aria-label="Ir al testimonio 3"></button>
+          <button class="testimonial-dot" data-index="3" onclick="App.goToTestimonial(3)" aria-label="Ir al testimonio 4"></button>
+          <button class="testimonial-dot" data-index="4" onclick="App.goToTestimonial(4)" aria-label="Ir al testimonio 5"></button>
         </div>
 
       </div>
@@ -961,43 +1395,27 @@
         <!-- PANTALLA DE RESUMEN FINAL -->
         <div class="wizard-step-pane" id="wizardSummaryPane">
           <h3 class="wizard-pane-title">Resumen de tu Consulta Estratégica</h3>
-          <p class="wizard-pane-desc">Tu mensaje ha sido compilado. Seleccioná el canal preferido para enviárnoslo directamente o copialo al portapapeles.</p>
+          <p class="wizard-pane-desc">Tu solicitud ha sido estructurada y registrada automáticamente en nuestra cartera de atención exclusiva. Enviá la consulta directamente por WhatsApp para coordinar tu llamada con Daniel Briceño.</p>
 
           <div class="wizard-summary-card">
             <div class="summary-card-header">
               <span class="summary-card-title">Mensaje Estructurado para Daniel Briceño</span>
-              <span class="summary-card-badge">Listo para enviar</span>
+              <span class="summary-card-badge">✓ Registrado en Leads</span>
             </div>
             <div class="summary-message-text" id="summaryMessageOutput"></div>
           </div>
 
-          <!-- Canales de Envío -->
-          <div class="dispatch-channels-grid">
-            <!-- WhatsApp -->
-            <a href="#" id="btnSendWhatsApp" target="_blank" rel="noopener noreferrer" class="btn-dispatch-whatsapp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <!-- Canal de Envío Exclusivo: WhatsApp -->
+          <div style="max-width: 480px; margin: 0 auto; text-align: center;">
+            <a href="#" id="btnSendWhatsApp" target="_blank" rel="noopener noreferrer" class="btn-dispatch-whatsapp" style="width: 100%; justify-content: center; padding: 16px 28px; font-size: 15px; border-radius: var(--radius-sm); display: inline-flex; align-items: center; gap: 12px; background: #25d366; color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; transition: var(--transition-smooth);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.077-1.924-.46-1.503-.626-2.483-2.148-2.558-2.249-.075-.1-1.025-1.365-1.025-2.605 0-1.24.646-1.85.875-2.106.23-.255.5-.319.667-.319.167 0 .333.001.479.008.154.007.362-.058.567.433.21.503.717 1.745.779 1.872.063.127.104.275.02.441-.083.167-.125.27-.249.416-.125.146-.263.327-.376.438-.125.124-.255.259-.11.508.146.249.646 1.066 1.388 1.727.954.851 1.758 1.114 2.008 1.239.25.125.396.104.542-.063.146-.167.625-.729.791-.979.167-.25.334-.208.563-.125.229.084 1.458.687 1.708.812.25.125.417.188.479.292.063.104.063.604-.081 1.009z"/>
               </svg>
-              <span>Enviar por WhatsApp</span>
+              <span>Enviar Consulta por WhatsApp</span>
             </a>
-
-            <!-- Email -->
-            <a href="#" id="btnSendEmail" class="btn-dispatch-email">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <span>Enviar por Email</span>
-            </a>
-
-            <!-- Copiar -->
-            <button class="btn-dispatch-copy" onclick="App.copySummaryMessage()">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span id="btnCopyLabel">Copiar Mensaje</span>
-            </button>
+            <p style="margin-top: 14px; font-size: 12px; color: var(--text-muted);">
+              Tu solicitud ha sido guardada en nuestra cartera de Leads y se enviará al WhatsApp privado de Daniel Briceño (+1 617 515-5518).
+            </p>
           </div>
 
           <div style="margin-top: 24px; text-align: center;">
@@ -1065,14 +1483,29 @@
                 <a href="https://instagram.com/bricenorealtygroup" target="_blank" rel="noopener noreferrer" class="contact-item-val">@bricenorealtygroup</a>
               </div>
             </div>
+
+            <!-- Modalidad de Atención -->
+            <div class="contact-item-row">
+              <div class="contact-item-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Sesiones Estratégicas</div>
+                <span class="contact-item-val" style="color: var(--text-primary); font-size: 14px;">Virtual (Zoom/Meet) & Presencial</span>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="contact-form-col reveal-on-scroll delay-200" style="display: flex; flex-direction: column; justify-content: center;">
-          <div style="background: var(--bg-surface); border: 1px solid var(--gold-border); border-radius: var(--radius-md); padding: 36px; text-align: center;">
+          <div class="contact-cta-card">
             <img src="assets/images/logo.png" alt="Logo Briceño Realty Group" class="logo-rounded" style="width: 58px; height: 58px; margin: 0 auto 20px; object-fit: cover;">
-            <h4 style="font-family: var(--font-serif); font-size: 22px; color: #ffffff; margin-bottom: 12px;">¿Listo para dar el siguiente paso?</h4>
-            <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 26px; line-height: 1.6;">
+            <h4 class="contact-cta-title">¿Listo para dar el siguiente paso?</h4>
+            <p class="contact-cta-desc">
               La inversión inmobiliaria internacional requiere un análisis preciso de tiempos, impuestos y plusvalías proyectadas.
             </p>
             <a href="#asesoria" class="btn-primary-gold" style="width: 100%; justify-content: center;">
@@ -1106,6 +1539,7 @@
         <div class="footer-bottom">
           <span>&copy; 2026 Briceño Realty Group. Todos los derechos reservados.</span>
           <span>Bienes raíces con visión estratégica · Inversión más allá de las fronteras</span>
+          <a href="admin.html" class="admin-portal-link" style="opacity: 0.5; font-size: 11px; text-decoration: none; color: var(--gold-light); transition: opacity 0.3s ease;">• Acceso Asesores / CRM</a>
         </div>
       </footer>
     </section>
@@ -1134,7 +1568,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="data/markets.js"></script>
-  <script src="app.js"></script>
+  <script src="data/markets.js?v=2"></script>
+  <script src="app.js?v=2"></script>
 </body>
 </html>

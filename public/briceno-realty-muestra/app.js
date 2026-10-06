@@ -27,6 +27,12 @@
     currentMarketId: null,
     carouselSlide: 0,
     carouselTotal: 0,
+    theme: 'dark',
+    testimonials: {
+      currentIndex: 0,
+      totalSlides: 5,
+      autoPlayTimer: null
+    },
     wizard: {
       currentStep: 1,
       totalSteps: 5,
@@ -455,21 +461,51 @@
       const messageOutput = document.getElementById('summaryMessageOutput');
       messageOutput.textContent = message;
 
-      // 1. WhatsApp Button Configuration
-      // Number: +1 617 515 5518
+      // WhatsApp Button Configuration exclusively (Number: +1 617 515 5518)
       const encodedMsg = encodeURIComponent(message);
       const waBtn = document.getElementById('btnSendWhatsApp');
-      waBtn.href = `https://wa.me/16175155518?text=${encodedMsg}`;
+      if (waBtn) {
+        waBtn.href = `https://wa.me/16175155518?text=${encodedMsg}`;
+      }
 
-      // 2. Email Button Configuration
-      const emailBtn = document.getElementById('btnSendEmail');
-      const emailSubject = encodeURIComponent(`Consulta de inversión — ${marketsText}`);
-      const emailBody = encodeURIComponent(
-        `${message}\n\nDatos de contacto:\nNombre: ${name}\nEmail: ${email}${phone ? '\nTeléfono: ' + phone : ''}`
-      );
-      emailBtn.href = `mailto:inversiones@bricenorealtygroup.com?subject=${emailSubject}&body=${emailBody}`;
+      // -------------------------------------------------------------
+      // AUTOMATIC LEAD REGISTRATION IN CRM
+      // -------------------------------------------------------------
+      const newLead = {
+        id: `LEAD-${Date.now().toString().slice(-4)}`,
+        name: name,
+        email: email,
+        phone: phone || 'No provisto',
+        market: marketsText || 'Multi-mercado',
+        investment_range: rangeText || 'Por definir',
+        objective: objectiveText || 'Asesoría general',
+        horizon: horizonText || 'A coordinar',
+        status: 'Nuevo',
+        source: 'Asistente Web',
+        notes: `Consulta estructurada desde la web: "${message}"`,
+        created_at: new Date().toISOString()
+      };
 
-      // Show Summary Pane (step 6 conceptually)
+      // 1. Save to client localStorage
+      try {
+        const stored = localStorage.getItem('briceno_leads');
+        const leads = stored ? JSON.parse(stored) : [];
+        leads.unshift(newLead);
+        localStorage.setItem('briceno_leads', JSON.stringify(leads));
+      } catch (e) {
+        console.warn('Error saving to localStorage:', e);
+      }
+
+      // 2. Persist to API backend (serve.js & Vercel)
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newLead)
+      }).catch((err) => {
+        console.warn('Error sending lead to /api/leads:', err);
+      });
+
+      // Show Summary Pane
       App.goToStep(6);
     },
 
@@ -519,7 +555,167 @@
     },
 
     // -------------------------------------------------------------
-    // 10. GLOBAL KEYBOARD & RESIZE LISTENERS
+    // 10. THEME CONTROLLER (MODO CLARO / MODO OSCURO)
+    // -------------------------------------------------------------
+    initTheme: function () {
+      let saved = 'dark';
+      try {
+        saved = localStorage.getItem('briceno_theme') || 'dark';
+      } catch (e) {}
+      App.applyTheme(saved);
+    },
+
+    applyTheme: function (theme) {
+      const isLight = theme === 'light';
+      AppState.theme = theme;
+
+      const html = document.documentElement;
+      const body = document.body;
+
+      if (isLight) {
+        html.classList.add('theme-light');
+        html.setAttribute('data-theme', 'light');
+        if (body) {
+          body.classList.add('theme-light');
+          body.setAttribute('data-theme', 'light');
+        }
+      } else {
+        html.classList.remove('theme-light');
+        html.setAttribute('data-theme', 'dark');
+        if (body) {
+          body.classList.remove('theme-light');
+          body.setAttribute('data-theme', 'dark');
+        }
+      }
+
+      const label = document.getElementById('themeToggleText');
+      if (label) {
+        label.textContent = isLight ? 'Modo Oscuro' : 'Modo Claro';
+      }
+
+      try {
+        localStorage.setItem('briceno_theme', theme);
+      } catch (e) {}
+    },
+
+    toggleTheme: function () {
+      const current = AppState.theme || (document.documentElement.classList.contains('theme-light') ? 'light' : 'dark');
+      const next = current === 'light' ? 'dark' : 'light';
+      App.applyTheme(next);
+      App.showToast('Modo ' + (next === 'light' ? 'Claro' : 'Oscuro') + ' activado');
+    },
+
+    // -------------------------------------------------------------
+    // 11. TESTIMONIAL SLIDER CONTROLLER
+    // -------------------------------------------------------------
+    initTestimonialSlider: function () {
+      const track = document.getElementById('testimonialsTrack');
+      const viewport = document.getElementById('testimonialsViewport');
+      if (!track || !viewport) return;
+
+      const cards = track.querySelectorAll('.testimonial-card');
+      AppState.testimonials.totalSlides = cards.length || 5;
+      AppState.testimonials.currentIndex = 0;
+
+      // Update on window resize
+      window.addEventListener('resize', () => {
+        App.updateTestimonialSlider();
+      });
+
+      // Pause on hover
+      viewport.addEventListener('mouseenter', () => {
+        App.stopTestimonialAutoplay();
+      });
+      viewport.addEventListener('mouseleave', () => {
+        App.startTestimonialAutoplay();
+      });
+
+      // Touch / pointer swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      viewport.addEventListener('touchstart', (e) => {
+        App.stopTestimonialAutoplay();
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            App.nextTestimonial();
+          } else {
+            App.prevTestimonial();
+          }
+        }
+        App.startTestimonialAutoplay();
+      }, { passive: true });
+
+      App.updateTestimonialSlider();
+      App.startTestimonialAutoplay();
+    },
+
+    startTestimonialAutoplay: function () {
+      App.stopTestimonialAutoplay();
+      AppState.testimonials.autoPlayTimer = setInterval(() => {
+        App.nextTestimonial();
+      }, 5500);
+    },
+
+    stopTestimonialAutoplay: function () {
+      if (AppState.testimonials.autoPlayTimer) {
+        clearInterval(AppState.testimonials.autoPlayTimer);
+        AppState.testimonials.autoPlayTimer = null;
+      }
+    },
+
+    updateTestimonialSlider: function () {
+      const track = document.getElementById('testimonialsTrack');
+      const viewport = document.getElementById('testimonialsViewport');
+      if (!track || !viewport) return;
+
+      const cards = track.querySelectorAll('.testimonial-card');
+      if (!cards.length) return;
+
+      const card = cards[0];
+      const gap = 24;
+      const cardWidth = card.offsetWidth + gap;
+      const maxOffset = Math.max(0, track.scrollWidth - viewport.clientWidth);
+
+      let offset = AppState.testimonials.currentIndex * cardWidth;
+      if (offset > maxOffset) {
+        offset = maxOffset;
+      }
+
+      track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+
+      // Update dots
+      const dots = document.querySelectorAll('#testimonialsDots .testimonial-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === AppState.testimonials.currentIndex);
+      });
+    },
+
+    nextTestimonial: function () {
+      const total = AppState.testimonials.totalSlides || 5;
+      AppState.testimonials.currentIndex = (AppState.testimonials.currentIndex + 1) % total;
+      App.updateTestimonialSlider();
+    },
+
+    prevTestimonial: function () {
+      const total = AppState.testimonials.totalSlides || 5;
+      AppState.testimonials.currentIndex = (AppState.testimonials.currentIndex - 1 + total) % total;
+      App.updateTestimonialSlider();
+    },
+
+    goToTestimonial: function (index) {
+      AppState.testimonials.currentIndex = index;
+      App.updateTestimonialSlider();
+    },
+
+    // -------------------------------------------------------------
+    // 12. GLOBAL KEYBOARD & RESIZE LISTENERS
     // -------------------------------------------------------------
     initGlobalListeners: function () {
       // Escape key closes market drawer
@@ -550,7 +746,7 @@
         // Close on nav link click
         nav.querySelectorAll('.nav-link').forEach((link) => {
           link.addEventListener('click', () => {
-            if (window.innerWidth <= 860) {
+            if (window.innerWidth <= 1040) {
               nav.style.display = 'none';
               toggle.setAttribute('aria-expanded', 'false');
             }
@@ -573,18 +769,54 @@
     },
 
     // -------------------------------------------------------------
-    // 11. BOOTSTRAP
+    // 13. BOOTSTRAP
     // -------------------------------------------------------------
     init: function () {
       App.initHeaderAndParallax();
       App.initScrollReveal();
+      App.initTheme();
+      App.initTestimonialSlider();
       App.initGlobalListeners();
 
-      // Ensure hero video autoplays smoothly
+      // Ensure hero video autoplays seamlessly on desktop and mobile
       const video = document.getElementById('heroVideo');
       if (video) {
-        video.play().catch(() => {
-          // Autoplay policy fallback (browser policy)
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', '');
+
+        const triggerPlay = () => {
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              video.muted = true;
+              video.play().catch(() => {});
+            });
+          }
+        };
+
+        triggerPlay();
+
+        // Resume playback if tab becomes visible
+        document.addEventListener('visibilitychange', () => {
+          if (!document.hidden && video.paused) {
+            triggerPlay();
+          }
+        });
+
+        // Fallback for mobile devices in low-power mode or requiring initial touch
+        const onFirstInteraction = () => {
+          if (video.paused) {
+            triggerPlay();
+          }
+          ['touchstart', 'pointerdown', 'scroll', 'click'].forEach((evt) => {
+            window.removeEventListener(evt, onFirstInteraction, { passive: true });
+          });
+        };
+        ['touchstart', 'pointerdown', 'scroll', 'click'].forEach((evt) => {
+          window.addEventListener(evt, onFirstInteraction, { passive: true, once: true });
         });
       }
     }
